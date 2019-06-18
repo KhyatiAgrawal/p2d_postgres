@@ -1,0 +1,177 @@
+{% extends 'base_rest.html' %}
+
+{% block title %}Edit Dress{% endblock %}
+{% block content %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+ <script type="text/javascript" >
+      function validateForm() {
+        var price = $("#price").val();
+        var brand = $("#brand").val();
+        var title = $("#desc").val();
+        var size = $("#size").val();
+        // var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        // var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
+
+        if (price == '') {
+          document.getElementById('content-p').innerHTML = "Please enter a price!";
+          document.getElementById("price").style.border = "thin solid #ff0000";
+          return false;
+        }
+        else if (price < 0) {
+          document.getElementById('content-p').innerHTML = "Please enter a valid price!";
+          document.getElementById("price").style.border = "thin solid #ff0000";
+          return false;
+        }
+        else {
+          document.getElementById('content-p').innerHTML = "";
+          document.getElementById("price").style.border = "1px solid #91DDDA";
+        }
+        if (brand == '') {
+          document.getElementById('content-b').innerHTML = "Please enter a brand!";
+          document.getElementById("brand").style.border = "thin solid #ff0000";
+          return false;
+        }
+        else {
+          document.getElementById('content-b').innerHTML = "";
+          document.getElementById("brand").style.border = "thin solid #91DDDA";
+        }
+        // if (!checkedOne) {
+        //     document.getElementById('content-o').innerHTML = "Please enter atleast one occasion";
+        //     document.getElementById("occasions").style.border = "thin solid #ff0000";
+        //     return false;
+        // }
+        // else {
+        //     document.getElementById('content-o').innerHTML = "";
+        //     document.getElementById("occasions").style.border = "thin solid #91DDDA";
+        // }
+
+        if (title == '') {
+          document.getElementById('content-d').innerHTML = "Please give your dress a title!";
+          document.getElementById("desc").style.border = "thin solid #ff0000";
+          return false;
+        }
+        else {
+          document.getElementById('content-d').innerHTML = "";
+          document.getElementById("desc").style.border = "thin solid #91DDDA";
+        }
+      }
+    </script>
+  <h1 style="text-align: center; font-size: 28px; color:#5FC1BD; line-height: 60px; font-family: 'Raleway', sans-serif; padding-top:80px;">Edit your dress</h1>
+  {% for dress in dress_info %}
+  <form method="post" onsubmit="return validateForm()" action="/dressedited/" enctype="multipart/form-data" >
+    {% csrf_token %}
+    <p><img style="width: 300px; height: 400px;" src="/media/{{dress.photo.name}}">
+
+    <div class="form_group">
+      <h1 style="text-align: left; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif; ">Price:</h1>
+      <input type="number" class="form-control" id="price" name="price" value="{{dress.price}}" placeholder= "Price ($X)" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px; top:80%">
+      <h1 id = "content-p" style="text-align: center; font-size: 12px; color:#ff0000; font-family: 'Raleway', sans-serif;"></h1>
+    </div>
+
+    <div class="form_group">
+      <h1 style="text-align: left; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif; ">Brand:</h1>
+      <input type="text" class="form-control" id="brand" name="brand" value="{{dress.brand}}"placeholder= "Brand (eg. H&M, Mango etc)" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px;">
+      <h1 id = "content-b" style="text-align: center; font-size: 12px; color:#ff0000; font-family: 'Raleway', sans-serif;"></h1>
+    </div>
+    <h1 style="text-align: left; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif; ">Size:</h1>
+    <select name="size" class="form-control" value="{{dress.size}}" id="size" name="size" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px;">
+     {% if dress.size == 'XS' %}
+        <option value="XS" selected="selected">XS</option>
+     {% else %}
+        <option value="XS">XS</option>
+     {% endif %}
+
+     {% if dress.size == 'S' %}
+        <option value="S" selected="selected">S</option>
+     {% else %}
+        <option value="S">S</option>
+     {% endif %}
+
+     {% if dress.size == 'M' %}
+        <option value="M" selected="selected">M</option>
+     {% else %}
+        <option value="M">M</option>
+     {% endif %}
+
+     {% if dress.size == 'L' %}
+        <option value="L" selected="selected">L</option>
+     {% else %}
+        <option value="L">L</option>
+     {% endif %}
+
+     {% if dress.size == 'XL' %}
+        <option value="XL" selected="selected">XL</option>
+     {% else %}
+        <option value="XL">XL</option>
+     {% endif %}
+
+     {% if dress.size == 'XXL' %}
+        <option value="XXL" selected="selected">XXL</option>
+     {% else %}
+        <option value="XXL">XXL</option>
+     {% endif %}
+
+    </select>
+    <h1 style="text-align: left; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif; ">For sale or for rent?:</h1>
+    <select name="saleorrent" class="form-control" value="{{dress.for_sale}}" id="size" name="size" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px;">
+     {% if dress.for_sale %}
+        <option value="{{True}}" selected="selected">Sale</option>
+        <option value="{{False}}">Rent</option>
+
+     {% else %}
+        <option value="{{False}}" selected="selected">Rent</option>
+        <option value="{{True}}">Sale</option>
+
+     {% endif %}
+    </select>
+    <h1 style="text-align: left; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif; ">Occasions:</h1>
+    <div align="left" id = "occ">
+    <fieldset id="occasions">
+    {% if 'Lawnparties' in dress.occasions %}
+      <input type="checkbox" name="occasions[]" value="Lawnparties" checked>
+      {% else %}
+       <input type="checkbox" name="occasions[]" value="Lawnparties">
+       {% endif %}
+      <label style="font-family: 'Raleway', sans-serif;">Lawnparties</label>
+      <br>
+      {% if 'Semi-formals' in dress.occasions %}
+      <input type="checkbox" name="occasions[]" value="Semi-formals" checked>
+      {% else %}
+       <input type="checkbox" name="occasions[]" value="Semi-formals">
+        {% endif %}
+      <label style="font-family: 'Raleway', sans-serif;">Semi-formals</label>
+      <br>
+      {% if  'Formals' in dress.occasions %}
+      <input type="checkbox" name="occasions[]" value="Formals" checked>
+      {% else %}
+      <input type="checkbox" name="occasions[]" value="Formals">
+      {% endif %}
+      <label style="font-family: 'Raleway', sans-serif;">Formals</label>
+      <br>
+      {% if 'Interviews' in dress.occasions%}
+      <input type="checkbox" name="occasions[]" value="Interviews" checked>
+      {% else %}
+      <input type="checkbox" name="occasions[]" value="Interviews">
+      {% endif %}
+      <label style="font-family: 'Raleway', sans-serif;">Interviews</label>
+      <br>
+      {% if 'Theme nights' in dress.occasions%}
+      <input type="checkbox" name="occasions[]" value="Theme nights" checked>
+      {% else %}
+      <input type="checkbox" name="occasions[]" value="Theme nights">
+      {% endif %}
+      <label style="font-family: 'Raleway', sans-serif;">Theme nights</label>
+    </fieldset>
+    </div>
+    <div class="form-group">
+      <h1 style="text-align: left; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif; ">Title:</h1>
+      <input type="text" class="form-control" value="{{dress.title}}" id="desc" name="desc" placeholder= "Title (strappy floral dress, classic LBD, etc)" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px;">
+      <h1 id = "content-d" style="text-align: center; font-size: 12px; color:#ff0000; font-family: 'Raleway', sans-serif;"></h1>
+    </div>
+    <button class="btn" type="submit" id="change" name="change" value="{{dress.id}}" style="background-color: #ffffff; border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px; width: 150px; color: #666666; font-size: 16px;">Save Changes</button>
+  </form>
+  <br>
+  <br>
+  {% endfor %}
+{% endblock %}
+

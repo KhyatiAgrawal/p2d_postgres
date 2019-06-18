@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Sign Up{% endblock %}
+{% block content %}
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" >
+      function validateForm() {
+        var gender = $("#gender").val();
+        var email = $("#email").val();
+        var phone = $("#phone").val();
+
+        if (gender == '') {
+          document.getElementById('content-g').innerHTML = "Please enter a gender!";
+          document.getElementById("gender").style.border = "thin solid #ff0000";
+          return false;
+        }
+        else {
+          document.getElementById('content-g').innerHTML = "";
+          document.getElementById("gender").style.border = "1px solid #91DDDA";
+        }
+        if (email == '') {
+          document.getElementById('content-e').innerHTML = "Please enter an email!";
+          document.getElementById("email").style.border = "thin solid #ff0000";
+          return false;
+        }
+        else {
+          document.getElementById('content-e').innerHTML = "";
+          document.getElementById("email").style.border = "1px solid #91DDDA";
+        }
+      }
+    </script>
+  <h1 style="text-align: center; font-size: 28px; color:#5FC1BD; line-height: 60px; font-family: 'Raleway', sans-serif; padding-top:20px;">Step 1: Personal information</h1>
+  <form method="post" action="/uploaddresses/" onsubmit="return validateForm()">
+    {% csrf_token %}
+    <div class="form_group">
+      <input type="text" class="form-control" id="gender" name="gender" placeholder= "Gender*" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px;">
+      <h1 id = "content-g" style="text-align: center; font-size: 12px; color:#ff0000; font-family: 'Raleway', sans-serif;"></h1>
+    </div>
+    <h1 style="text-align: left; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif; margin-top: 10px;">Sizes (select as many)*:</h1>
+    <div class="sizes" align="center">
+      <input type="checkbox" id="id_subject" name="sizes[]" value="XS">
+      <label style="font-family: 'Raleway', sans-serif;">XS</label>
+      <input type="checkbox" id="id_subject" name="sizes[]" value="S">
+      <label style="font-family: 'Raleway', sans-serif;">S</label>
+      <input type="checkbox" id="id_subject" name="sizes[]" value="M">
+      <label style="font-family: 'Raleway', sans-serif;">M</label>
+    </div>
+    <br>
+    <div class="sizes" align="center">
+      <input type="checkbox" id="id_subject" name="sizes[]" value="L">
+      <label style="font-family: 'Raleway', sans-serif;">L</label>
+      <input type="checkbox" id="id_subject" name="sizes[]" value="XL">
+      <label style="font-family: 'Raleway', sans-serif;">XL</label>
+      <input type="checkbox" id="id_subject" name="sizes[]" value="XXL">
+      <label style="font-family: 'Raleway', sans-serif;">XXL</label>
+    </div>
+    <div class="form-group">
+      <input type="email" class="form-control" id="email" name="email" placeholder= "Preferred Email*" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px;">
+      <h1 id = "content-e" style="text-align: center; font-size: 12px; color:#ff0000; font-family: 'Raleway', sans-serif;"></h1>
+    </div>
+    <div class="form-group">
+      <input type="text" pattern = "[0-9]+" class="form-control" id="phone" name="phone" placeholder= "Preferred Mobile Number" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px;">
+      <h1 id = "content-p" style="text-align: center; font-size: 12px; color:#ff0000; font-family: 'Raleway', sans-serif;"></h1>
+    </div>
+    <input class="btn" type="submit" id="register" name="register" value="Next" ;" style="background-color: #ffffff; border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px; width: 150px; color: #666666; font-size: 20px;">
+  </form>
+{% endblock %}

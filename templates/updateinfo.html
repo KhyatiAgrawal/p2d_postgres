@@ -1,0 +1,102 @@
+{% extends 'base_rest.html' %}
+{% load static %}
+
+{% block title %}Update Info{% endblock %}
+{% block content %}
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" >
+      function validateForm() {
+        var gender = $("#gender").val();
+        var email = $("#email").val();
+        var phone = $("#phone").val();
+
+        if (gender == '') {
+          document.getElementById('content-g').innerHTML = "Please enter a gender!";
+          document.getElementById("gender").style.border = "thin solid #ff0000";
+          return false;
+        }
+        else {
+          document.getElementById('content-g').innerHTML = "";
+          document.getElementById("gender").style.border = "1px solid #91DDDA";
+        }
+        if (email == '') {
+          document.getElementById('content-e').innerHTML = "Please enter an email!";
+          document.getElementById("email").style.border = "thin solid #ff0000";
+          return false;
+        }
+        else {
+          document.getElementById('content-e').innerHTML = "";
+          document.getElementById("email").style.border = "1px solid #91DDDA";
+        }
+      }
+    </script>
+  <h1 style="text-align: center; font-size: 28px; color:#5FC1BD; line-height: 60px; font-family: 'Raleway', sans-serif; padding-top:80px;">Update Information</h1>
+  <form method="post" action="/updateinfo/" onsubmit="return validateForm()">
+    {% csrf_token %}
+    <h1 style="text-align: left; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif; margin-top: 10px;">Gender*:</h1>
+    <div class="form_group">
+      <input type="text" class="form-control" value="{{user.gender}}" id="gender" name="gender" placeholder= "Gender*" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px;" />
+      <h1 id = "content-g" style="text-align: center; font-size: 12px; color:#ff0000; font-family: 'Raleway', sans-serif;"></h1>
+    </div>
+    <h1 style="text-align: left; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif; margin-top: 10px;">Sizes (select all applicable)*:</h1>
+    <div class="sizes" align="center">
+    {% if 'XS' in user.size %}
+      <input type="checkbox" id="id_subject" name="sizes[]" value="XS" style="padding-right: 30px" checked>
+    {% else %}
+      <input type="checkbox" id="id_subject" name="sizes[]" value="XS">
+    {% endif %}
+      <label style="font-family: 'Raleway', sans-serif;">XS</label>
+
+    {% if 'S' in user.size %}
+      <input type="checkbox" id="id_subject" name="sizes[]" value="S" checked>
+    {% else %}
+      <input type="checkbox" id="id_subject" name="sizes[]" value="S">
+    {% endif %}
+      <label style="font-family: 'Raleway', sans-serif;">S</label>
+
+    {% if 'M' in user.size %}
+      <input type="checkbox" id="id_subject" name="sizes[]" value="M" checked>
+    {% else %}
+      <input type="checkbox" id="id_subject" name="sizes[]" value="M">
+    {% endif %}
+      <label style="font-family: 'Raleway', sans-serif;">M</label>
+    </div>
+    <br>
+    <div class="sizes" align="center">
+
+    {% if 'L' in user.size %}
+      <input type="checkbox" id="id_subject" name="sizes[]" value="L" checked>
+    {% else %}
+      <input type="checkbox" id="id_subject" name="sizes[]" value="L">
+    {% endif %}
+      <label style="font-family: 'Raleway', sans-serif;">L</label>
+
+    {% if 'XL' in user.size %}
+      <input type="checkbox" id="id_subject" name="sizes[]" value="XL" checked>
+    {% else %}
+      <input type="checkbox" id="id_subject" name="sizes[]" value="XL">
+    {% endif %}
+      <label style="font-family: 'Raleway', sans-serif;">XL</label>
+
+    {% if 'XXL' in user.size %}
+      <input type="checkbox" id="id_subject" name="sizes[]" value="XXL" checked>
+    {% else %}
+     <input type="checkbox" id="id_subject" name="sizes[]" value="XXL">
+    {% endif %}
+      <label style="font-family: 'Raleway', sans-serif;">XXL</label>
+    </div>
+
+    <h1 style="text-align: left; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif; margin-top: 10px;">Preferred Email*:</h1>
+    <div class="form-group">
+      <input type="email" class="form-control" value="{{user.email}}" id="email" name="email" placeholder= "Preferred Email*" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px;" />
+      <h1 id = "content-e" style="text-align: center; font-size: 12px; color:#ff0000; font-family: 'Raleway', sans-serif;"></h1>
+    </div>
+
+    <h1 style="text-align: left; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif; margin-top: 10px;">Preferred Mobile Number:</h1>
+    <div class="form-group">
+      <input type="text" pattern="[\d]{10}" title="Enter numbers only!" class="form-control" value="{{user.phone}}" id="phone" name="phone" placeholder= "Preferred Mobile Number" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px;">
+      <h1 id = "content-p" style="text-align: center; font-size: 12px; color:#ff0000; font-family: 'Raleway', sans-serif;"></h1>
+    </div>
+    <input class="btn" type="submit" id="register" name="register" value="Save Changes" ;" style="background-color: #ffffff; border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px; width: 150px; color: #666666; font-size: 16px;">
+  </form>
+{% endblock %}

@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block title %}Upload{% endblock %}
+{% block content %}
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+ <script type="text/javascript" >
+      function validateForm() {
+        var file = document.getElementById("fileupload").files.length;
+        var price = $("#price").val();
+        var brand = $("#brand").val();
+        var title = $("#desc").val();
+        var size = $("#size").val();
+
+        if (file === 0) {
+          document.getElementById('content-f').innerHTML = "Please upload a photo!";
+          document.getElementById("fileupload").style.border = "thin solid #ff0000";
+          return false;
+        }
+        else {
+          document.getElementById('content-f').innerHTML = "";
+          document.getElementById("fileupload").style.border = "1px solid #91DDDA";
+        }
+        if (price == '') {
+          document.getElementById('content-p').innerHTML = "Please enter a price!";
+          document.getElementById("price").style.border = "thin solid #ff0000";
+          return false;
+        }
+        else if (price < 0) {
+          document.getElementById('content-p').innerHTML = "Please enter a valid price!";
+          document.getElementById("price").style.border = "thin solid #ff0000";
+          return false;
+        }
+        else {
+          document.getElementById('content-p').innerHTML = "";
+          document.getElementById("price").style.border = "1px solid #91DDDA";
+        }
+        if (brand == '') {
+          document.getElementById('content-b').innerHTML = "Please enter a brand!";
+          document.getElementById("brand").style.border = "thin solid #ff0000";
+          return false;
+        }
+        else {
+          document.getElementById('content-b').innerHTML = "";
+          document.getElementById("brand").style.border = "thin solid #91DDDA";
+        }
+        if (title == '') {
+          document.getElementById('content-d').innerHTML = "Please give your dress a title!";
+          document.getElementById("desc").style.border = "thin solid #ff0000";
+          return false;
+        }
+        else {
+          document.getElementById('content-d').innerHTML = "";
+          document.getElementById("desc").style.border = "thin solid #91DDDA";
+        }
+      }
+    </script>
+
+  <h1 style="text-align: center; font-size: 28px; color:#5FC1BD; padding-top: 40px; font-family: 'Raleway', sans-serif;">Step 2: Upload a dress!</h1>
+  <form method="post" action="feed/" enctype="multipart/form-data" onsubmit="return validateForm()">
+    {% csrf_token %}
+    <h1 style="text-align: left; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif; padding-top:10px ">Upload a picture (jpg or jpeg):</h1>
+    <div class="form-group">
+        <input type="file" accept = "image/jpeg" class="form-control" name="dressupload" value="dressupload" id="fileupload" placeholder= "Picture of dress" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px;">
+        <h1 id = "content-f" style="text-align: center; font-size: 12px; color:#ff0000; font-family: 'Raleway', sans-serif;"></h1>
+    </div>
+    <h1 style="text-align: left; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif; ">Price:</h1>
+    <div class="form_group">
+      <input type="number" pattern="\d+" max="100" min="0" step="1" class="form-control" id="price" name="price" placeholder= "Price" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px; top:80%;">
+      <h1 id = "content-p" style="text-align: center; font-size: 12px; color:#ff0000; font-family: 'Raleway', sans-serif;"></h1>
+    </div>
+    <h1 style="text-align: left; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif; ">Brand:</h1>
+    <div class="form_group">
+      <input type="text" class="form-control" maxlength="20" id="brand" name="brand" placeholder= "Brand (H&M, Mango etc)" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px;">
+      <h1 id = "content-b" style="text-align: center; font-size: 12px; color:#ff0000; font-family: 'Raleway', sans-serif;"></h1>
+    </div>
+    <h1 style="text-align: left; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif; ">Size:</h1>
+    <select name="size" class="form-control" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px;">
+     <option value="">Select</option>
+     <option value="XS">XS</option>
+     <option value="S">S</option>
+     <option value="M">M</option>
+     <option value="L">L</option>
+     <option value="XL">XL</option>
+     <option value="XXL">XXL</option>
+    </select>
+    <h1 style="text-align: left; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif; padding-top:10px;">For sale or for rent?:</h1>
+    <select name="saleorrent" class="form-control" id="size" name="size" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px;">
+        <option value="{{False}}">Rent</option>
+        <option value="{{True}}">Sale</option>
+    </select>
+    <h1 style="text-align: left; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif; padding-top:10px">Occasions:</h1>
+    <div align="left">
+    <fieldset id="occasions">
+      <input type="checkbox" name="occasions[]" value="Lawnparties">
+      <label style="font-family: 'Raleway', sans-serif;">Lawnparties</label>
+      <br>
+      <input type="checkbox" name="occasions[]" value="Semi-formals">
+      <label style="font-family: 'Raleway', sans-serif;">Semi-formals</label>
+      <br>
+      <input type="checkbox" name="occasions[]" value="Formals">
+      <label style="font-family: 'Raleway', sans-serif;">Formals</label>
+      <br>
+      <input type="checkbox" name="occasions[]" value="Interviews">
+      <label style="font-family: 'Raleway', sans-serif;">Interviews</label>
+      <br>
+      <input type="checkbox" name="occasions[]" value="Theme nights">
+      <label style="font-family: 'Raleway', sans-serif;">Theme nights</label>
+      <h1 id = "content-o" style="text-align: center; font-size: 12px; color:#ff0000; font-family: 'Raleway', sans-serif;"></h1>
+    </fieldset>
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="desc" name="desc" placeholder= "Title (strappy floral dress, classic LBD, etc)" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px;">
+      <h1 id = "content-d" style="text-align: center; font-size: 12px; color:#ff0000; font-family: 'Raleway', sans-serif;"></h1>
+    </div>
+    <a href="feed/"><button type="submit" class="btn btn-success";" style="background-color: #ffffff; border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px; width: 320px; color: #666666; font-size: 16px;">Upload dress and take me to my feed!</button></a>
+    <h1 style="text-align: center; font-size: 14px; color:#666666; font-family: 'Raleway', sans-serif; margin-top: 3%">Don't have a dress? <a href="/feed/"><u>Skip this step</u></h1></a></h1>
+  </form>
+{% endblock %}
+

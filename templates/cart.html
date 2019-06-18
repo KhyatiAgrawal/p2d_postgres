@@ -1,0 +1,56 @@
+{% extends 'base_feed.html' %}
+
+{% block content %}
+<style>
+ .half-rule {
+    margin-left: 0;
+    text-align: left;
+    width: 850px;
+ }
+</style>
+
+<h1 style="text-align: center; font-size: 28px; color:#5FC1BD; line-height: 60px; font-family: 'Raleway', sans-serif; padding-top:80px;">My Cart</h1>
+{% if filter|length == 0 %}
+    <h1 style="text-align: center; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif;">There are currently no dresses in your cart.</h1>
+{% endif %}
+<div class="col-md-6 col-md-6" style="width: 900px; left: 80px; float: left; display: inline-block; top: 20px; padding-left:8%;">
+<ul class="list-unstyled">
+  {% for dress in filter %}
+    <div class="col-md-6 col-md-6" style="width: 330px;">
+      <li><p><img style="width: 300px; height: 400px;" src="/media/{{dress.dressInfo.photo.name}}"></li>
+      <hr class="half-rule"/>
+    </div>
+    <div class="col-md-6 col-md-6" style="padding-bottom: 200px;">
+      <b style="font-size:18px;">{{dress.dressInfo.title}}</b>
+      <br><b>Size</b>: {{dress.dressInfo.size}}
+      {% if dress.dressInfo.for_sale %}
+        <br><b>Selling Price</b>: ${{dress.dressInfo.price}}
+      {% else %}
+        <br><b>Rental Price</b>: ${{dress.dressInfo.price}}
+      {% endif %}
+      <br><b>Brand</b>: {{dress.dressInfo.brand}}
+      <br><b>Occasion</b>: {{dress.dressInfo.occasions}}
+      <br></li></p>
+      <hr />
+      {% if dress.dressInfo.for_sale %}
+      <form method="post" action="/buy/?dress={{dress.dressInfo.id}}" data-ajax="false">
+        {% csrf_token %}
+        <button class="btn" type="submit" id="dressInfo_id" name="dressInfo_id" value="{{dress.dressInfo.id}}"style="border: 1px solid #91DDDA; width:100px">Buy</button>
+      </form>
+      {% else %}
+      <form method="post" action="/rent/?dress={{dress.dressInfo.id}}" data-ajax="false">
+         {% csrf_token %}
+        <button class="btn" type="submit" id="dressInfo_id" name="dressInfo_id" value="{{dress.dressInfo.id}}"style="border: 1px solid #91DDDA; width:100px">Rent</button>
+      </form>
+     {% endif %}
+      <br>
+      <form method="post" action="/deletefromcart/" data-ajax="false">
+        {% csrf_token %}
+        <button class="btn" type="submit" id="dress_id" name="dress_id" value="{{dress.id}}"style="border: 1px solid #91DDDA; width:100px;">Delete</button>
+      </form>
+    </div>
+  {% endfor %}
+  </ul>
+</div>
+
+{% endblock %}

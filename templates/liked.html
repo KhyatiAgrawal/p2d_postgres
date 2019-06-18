@@ -1,0 +1,97 @@
+{% extends 'base_feed.html' %}
+
+{% block content %}
+<style>
+ .half-rule {
+    margin-left: 0;
+    text-align: left;
+    width: 950px;
+ }
+ .homebtn {
+    font-family: 'Raleway', sans-serif;
+    position: fixed;
+    font-style: normal;
+    border-radius: 10px;
+    background-color: #ffffff;
+    width: 250px;
+    height: 60px;
+    border: 2px solid #91DDDA;
+    font-size: 18px;
+    padding: 0px;
+    text-align:center;
+    vertical-align:middle;
+    line-height: 60px;
+    margin-left:35%;margin-right:0%;display:block;margin-top:10%;margin-bottom:0%;
+    z-index: 100;
+    visibility: hidden;
+    }
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" >
+      function added() {
+          document.getElementById('container').style.opacity = "0.4";
+          document.getElementById('popup_box').style.visibility = "visible";
+          document.getElementById('popup_box').innerHTML = "Added to Cart!"
+          setTimeout(swapback, 1200);
+      }
+
+      function swapback() {
+          document.getElementById('container').style.opacity = "1.0";
+          document.getElementById('popup_box').style.visibility = "hidden";
+      }
+      function inuse() {
+          document.getElementById('container').style.opacity = "0.4";
+          document.getElementById('popup_box').style.visibility = "visible";
+          document.getElementById('popup_box').innerHTML = "This dress is currently in use!"
+          setTimeout(swapback, 1200);
+      }
+
+    </script>
+<h1 style="text-align: center; font-size: 28px; color:#5FC1BD; line-height: 60px; font-family: 'Raleway', sans-serif; padding-top:80px;">Liked Dresses</h1>
+{% for dress in filter %}
+{% empty %}
+    <h1 style="text-align: center; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif;">There are currently no dresses in your favorites.</h1>
+{% endfor %}
+<div class="col-md-6 col-md-6" id = "container" style="width: 800px; left: 80px; float: left; display: inline-block; top: 20px; margin-left: 4%;">
+<ul class="list-unstyled">
+  {% for dress in filter %}
+    <div class="col-md-6 col-md-6" style="width: 330px;">
+      <li><p><img style="width: 300px; height: 400px;" src="/media/{{dress.photo.name}}"></li>
+      <hr class="half-rule"/>
+    </div>
+    <div class="col-md-6 col-md-6" style="padding-bottom: 220px;">
+      <b style="font-size:18px;">{{dress.title}}</b>
+      <br>
+      <b>Size</b>: {{dress.size}}
+      {% if dress.for_sale %}
+        <br><b>Selling Price</b>: ${{dress.price}}
+      {% else %}
+        <br><b>Rental Price</b>: ${{dress.price}}
+      {% endif %}
+      <br><b>Brand</b>: {{dress.brand}}
+      <br><b>Occasion</b>: {{dress.occasions}}
+      {% if dress.in_use %}
+      <br><b>Status: </b>In-use
+      {% else %}
+      <br><b>Status: </b>Available
+      {% endif %}
+      <br></li></p>
+      <hr />
+      <form method="post" action="/unlike/" data-ajax="false">
+        {% csrf_token %}
+      <button class="btn" type="submit" id="dress_title" name="dress_title"  value="{{dress.title}}" style="border: 1px solid #91DDDA; width:100px; margin-bottom: 10px;">Unlike</button>
+      </form>
+      {% if dress.in_use %}
+        <button class="btn" onclick="inuse()" type="submit" id="dress_id" name="dress_id" value="{{dress.id}}"style="border: 1px solid #91DDDA; width:100px">Add to Cart</button>
+      {% else %}
+      <form method="post" action="/addtocart/" data-ajax="false">
+        {% csrf_token %}
+        <button class="btn" onclick="added()" type="submit" id="dress_id" name="dress_id" value="{{dress.id}}"style="border: 1px solid #91DDDA; width:100px">Add to Cart</button>
+      </form>
+      {% endif %}
+    </div>
+  {% endfor %}
+  </ul>
+</div>
+<div class="homebtn" id="popup_box"></div>
+{% endblock %}

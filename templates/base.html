@@ -1,0 +1,42 @@
+{% load static %}<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" rel='stylesheet'>
+    <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" id="bootstrap-css">
+    <style>
+      body {
+        padding-top: 80px;
+        background: #ffffff;
+      }
+
+      .occasions{
+        width: 25%;
+        -webkit-column-count: 2; /* Chrome, Safari, Opera */
+        -moz-column-count: 2; /* Firefox */
+        column-count: 2
+      }
+
+      .topleft {
+        position: absolute;
+        top: 15%;
+        left: 4.5%;
+        width:50px;
+        height:50px;
+      }
+    </style>
+   </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="height:80px; background-color: #91DDDA;">
+      <div class="container">
+        <a href="/temp/"><img class = "topleft" src="/media/logo.png"></a>
+        <label class="navbar-brand" style = "color:#ffffff; font-size:180%;  position: absolute; left: 9%; top: 17%; font-family: 'Raleway', sans-serif">PRESS TO DRESS</label>
+      </div>
+    </nav>
+    <div class="container" style="text-align: center; top: 300px; font-size: 100%; width: 40%;">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </body>
+</html>

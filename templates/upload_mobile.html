@@ -1,0 +1,63 @@
+{% extends 'base_mobile.html' %}
+
+{% block content %}
+  <h1 style="text-align: center; font-size: 28px; color:#5FC1BD; line-height: 60px; font-family: 'Raleway', sans-serif; padding-top: 55px;">Upload a dress!</h1>
+  <form method="post" action="/picuploaded/" data-ajax="false" enctype="multipart/form-data">
+      {% csrf_token %}
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+    <div class="form-group">
+      <input required type="file" accept = "image/jpeg" name="dressupload" id="dressupload" placeholder= "none" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px; width: 100%; color: #666666; ">
+    </div>
+     <div class="form-group">
+        <input required type="number" pattern="\d+" maxlength="number" min="0" step="1" max = "100" class="form-control" id="price" name="price" placeholder= "Price" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px; top:80%; width: 100%;">
+      </div>
+    <div class="form-group">
+      <input required type="text" maxlength="20" class="form-control" id="id_subject" name="brand" placeholder= "Brand (Forever21, Express)" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px; width: 100%;">
+    </div>
+    <h1 style="text-align: left; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif; margin-top: 10px;">Size:</h1>
+    <select name = "size" id="size">
+     <option value="XS" id= "size" style="font-family: 'Raleway', sans-serif;">XS</option>
+     <option value="S" id= "size" style="font-family: 'Raleway', sans-serif;">S</option>
+     <option value="M" id= "size" style="font-family: 'Raleway', sans-serif;">M</option>
+     <option value="L" id= "size" style="font-family: 'Raleway', sans-serif;">L</option>
+     <option value="XL" id= "size" style="font-family: 'Raleway', sans-serif;">XL</option>
+     <option value="XXL" id="size" style="font-family: 'Raleway', sans-serif;">XXL</option>
+    </select>
+    <select name="saleorrent" id="size" name="size">
+        <option value="{{False}}">For rent</option>
+        <option value="{{True}}">For sale</option>
+    </select>
+    <div align="left">
+    <fieldset id="occasions">
+      <label class="container">Lawnparties
+     <input type="checkbox" id="id_subject" name="occ[]" value="Lawnparties">
+     <span class="checkmark"></span>
+    </label>
+
+    <label class="container">Formals/Semiformals
+        <input type="checkbox" id="id_subject" name="occ[]" value="Formals/Semiformals">
+     <span class="checkmark"></span>
+    </label>
+
+    <label class="container">Interviews
+      <input type="checkbox" id="id_subject" name="occ[]" value="Interviews">
+      <span class="checkmark"></span>
+    </label>
+
+    <label class="container">Theme Nights
+      <input type="checkbox" id="id_subject" name="occ[]" value="Theme">
+      <span class="checkmark"></span>
+    </label>
+    </fieldset>
+    </div>
+    <div class="form-group">
+      <input required type="text" class="form-control" id="desc" name="desc" placeholder= "Title (strappy floral dress, classic LBD, etc)" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px;">
+    </div>
+    <button type="submit" class="btn btn-success";" value = "Upload" style="background-color: #ffffff; border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px; width: 100%; color: #666666; font-size: 16px">Upload!</button>
+  </form>
+{% endblock %}
+

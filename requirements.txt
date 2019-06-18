@@ -1,0 +1,16 @@
+certifi==2019.6.16
+chardet==3.0.4
+Django==2.0.13
+django-cas-ng==3.6.0
+django-cas-server==1.1.0
+django-filter==2.1.0
+idna==2.8
+lxml==4.3.4
+Pillow==6.0.0
+psycopg2==2.8.3
+python-cas==1.4.0
+pytz==2019.1
+requests==2.22.0
+requests-futures==1.0.0
+six==1.12.0
+urllib3==1.25.3

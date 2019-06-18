@@ -1,0 +1,69 @@
+{% extends 'base_feed.html' %}
+
+{% block content %}
+<style>
+ .half-rule {
+    margin-left: 0;
+    text-align: left;
+    width: 850px;
+ }
+</style>
+
+<h1 style="text-align: center; font-size: 28px; color:#5FC1BD; line-height: 60px; font-family: 'Raleway', sans-serif; padding-top:80px;">My Dresses</h1>
+{% if filter|length == 0 %}
+    <h1 style="text-align: center; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif;">It looks like you haven't uploaded a dress yet!</h1>
+    <h1 style="text-align: center; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif;">Press <a href = "/uploadanother/"><b>here</b></a> to try it out!</h1>
+{% endif %}
+<div class="col-md-6 col-md-6" style="width: 850px; left: 80px; float: left; display: inline-block; top: 20px; padding-left:6%">
+<ul class="list-unstyled">
+  {% for dress in filter %}
+    <div class="col-md-6 col-md-6" style="width: 330px;">
+      <li><p><img style="width: 300px; height: 400px;" src="/media/{{dress.photo.name}}"></li>
+      <hr class="half-rule"/>
+    </div>
+    <div class="col-md-6 col-md-6" style="padding-bottom: 220px;">
+      <b style="font-size:18px;">{{dress.title}}</b>
+      <a type="button" href="/editdress/?dress={{dress.id}}" class="btn btn-default" aria-label="Edit" style="font-size:18px; border: 0.001px solid #ffffff; background-color: transparent; color: #91DDDA;">
+                <span class="glyphicon glyphicon-pencil"></span>
+      </a>
+      <br>
+      {% if dress.in_use%}
+        <b>Status</b>: In-use
+      {% else %}
+        <b>Status</b>: Available
+      {% endif %}
+      <br>
+      <b>Size</b>: {{dress.size}}
+      {% if dress.for_sale %}
+        <br><b>Selling Price</b>: ${{dress.price}}
+      {% else %}
+        <br><b>Rental Price</b>: ${{dress.price}}
+      {% endif %}
+      <br><b>Brand</b>: {{dress.brand}}
+      <br><b>Occasion</b>: {{dress.occasions}}
+      <br><b>For</b>:
+      {% if dress.for_sale %}
+      Sale
+      {% else %}
+        Rent
+      {% endif %}
+      <br></li></p>
+      <hr />
+      <form method="post" action="/markavailable/" data-ajax="false">
+        {% csrf_token %}
+        <button class="btn" type="submit" id="dress_id" name="dress_id" value="{{dress.id}}"style="border: 1px solid #91DDDA; width:150px; margin-bottom: 10px; background-color: #ffffff">Mark available</button>
+      </form>
+      <form method="post" action="/markunavailable/" data-ajax="false">
+        {% csrf_token %}
+        <button class="btn" type="submit" id="dress_id" name="dress_id" value="{{dress.id}}"style="border: 1px solid #91DDDA; width:150px; margin-bottom: 10px; background-color: #ffffff">Mark in-use</button>
+      </form>
+      <form method="post" action="/deletefromcollection/" data-ajax="false">
+        {% csrf_token %}
+        <button class="btn" type="submit" id="dress_id" name="dress_id" value="{{dress.id}}"style="border: 1px solid #91DDDA; width:150px; background-color: #ffffff" align ="center">Delete</button>
+      </form>
+    </div>
+  {% endfor %}
+  </ul>
+</div>
+
+{% endblock %}

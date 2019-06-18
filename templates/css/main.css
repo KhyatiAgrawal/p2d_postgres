@@ -1,0 +1,25 @@
+@font-face {
+  font-family: "Montserrat";
+  src: url("https://fonts.googleapis.com/css?family=Montserrat"),
+}
+
+.body {
+    background-image: url("images/homepage.jpg");
+
+}
+
+#images{
+    text-align:center;
+}
+
+#homebtn {
+	font-family: 'Montserrat';
+	position: absolute;
+	font-style: normal;
+	border-radius: 10px;
+	background-color: #e5f4f9;
+	width: 200px;
+	height: 60px;
+	border: 1px solid #37cecc;
+	font-size: 14px;
+}

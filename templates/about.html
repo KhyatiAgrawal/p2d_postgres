@@ -1,0 +1,512 @@
+{% load static %}<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" rel='stylesheet'>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" id="bootstrap-css">-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <style>
+    body {
+        /*padding-top: 80px;*/
+        background: #ffffff;
+      }
+
+      .occasions{
+        width: 25%;
+        -webkit-column-count: 2; /* Chrome, Safari, Opera */
+        -moz-column-count: 2; /* Firefox */
+        column-count: 2
+      }
+
+      .topleft {
+        position: absolute;
+        top: 15%;
+        left: 4.5%;
+        width:50px;
+        height:50px;
+      }
+
+      .propic {
+          width: 200px;
+          height: 200px;
+          border-radius: 120px;
+          border: solid 5px #5FC1BD;
+          }
+
+
+.container:
+{
+  position: relative;
+}
+
+.textbox {
+    display: table;
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 120px;
+    vertical-align: middle;
+    color: #33373f;
+    opacity: 0;
+    transition: .5s ease;
+    border: 20px solid red;
+
+}
+
+.container:hover #alice{
+    transition: .5s ease;
+    opacity: 0.2;
+}
+
+.container:hover #alicetext {
+    transition: .5s ease;
+    opacity: 1;
+    z-index: 1;
+
+}
+      .row:before, row:after {
+          display: inline-block;
+      }
+      .text {
+        font-size: 16px;
+        color:#666666;
+        font-family: 'Raleway', sans-serif;
+        margin-bottom:10px;
+        padding-left: 2px;
+      }
+      .topleft {
+        position: absolute;
+        top: 15%;
+        left: 4.5%;
+        width:50px;
+        height:50px;
+      }
+      .left {
+        position: absolute;
+        left: 5%;
+      }
+      .container2 {
+        position: relative;
+        width: 50%;
+      }
+      .image {
+        position: relative;
+        opacity: 1;
+        display: block;
+        width: 100%;
+        height: auto;
+        transition: .5s ease;
+        backface-visibility: hidden;
+        z-index: -1;
+        margin-left: 40%;
+      }
+      .middle {
+        transition: .5s ease;
+        opacity: 0;
+        position: absolute;
+        top: 5%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+        z-index: auto;
+      }
+      .container1 {
+        position: absolute;
+        z-index: -2;
+      }
+      .container2:hover .image {
+        opacity: 0.15;
+      }
+      .container2:hover .middle {
+        opacity: 1;
+      }
+      .popup {
+        position: absolute;
+        background-color: #ffffff;
+        border: 1px solid #91DDDA;
+        color: black;
+        font-size: 24px;
+        height: 450px;
+        width: 750px;
+        z-index: auto;
+      }
+      .container3 {
+          margin-left:550px;
+          width: 400px;
+      }
+      .navbar-default .dropdown-menu.notify-drop {
+          min-width: 330px;
+          background-color: #fff;
+          min-height: 100px;
+          max-height: 360px;
+      }
+      .navbar-default .dropdown-menu.notify-drop .notify-drop-title {
+          border-bottom: 1px solid #e2e2e2;
+          padding: 5px 15px 10px 15px;
+      }
+      .navbar-default .dropdown-menu.notify-drop .drop-content {
+          min-height: 50px;
+          max-height: 250px;
+          overflow-y: scroll;
+      }
+      .navbar-default .dropdown-menu.notify-drop .drop-content::-webkit-scrollbar-track {
+          background-color: #F5F5F5;
+      }
+
+.navbar-default .dropdown-menu.notify-drop .drop-content::-webkit-scrollbar
+{
+  width: 8px;
+  background-color: #F5F5F5;
+}
+
+.navbar-default .dropdown-menu.notify-drop .drop-content::-webkit-scrollbar-thumb
+{
+  background-color: #ccc;
+}
+.navbar-default .dropdown-menu.notify-drop .drop-content > li {
+  border-bottom: 1px solid #e2e2e2;
+  padding: 10px 0px 5px 0px;
+}
+.navbar-default .dropdown-menu.notify-drop .drop-content > li:nth-child(2n+0) {
+  background-color: #fafafa;
+}
+.navbar-default .dropdown-menu.notify-drop .drop-content > li:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+.navbar-default .dropdown-menu.notify-drop .drop-content > li:hover {
+  background-color: #fcfcfc;
+}
+.navbar-default .dropdown-menu.notify-drop .drop-content > li:last-child {
+  border-bottom: none;
+}
+.navbar-default .dropdown-menu.notify-drop .drop-content > li .notify-img {
+  float: left;
+  display: inline-block;
+  width: 45px;
+  height: 45px;
+  margin: 0px 0px 8px 0px;
+}
+.navbar-default .dropdown-menu.notify-drop .allRead {
+  margin-right: 7px;
+}
+.navbar-default .dropdown-menu.notify-drop .rIcon {
+  float: right;
+  color: #999;
+}
+.navbar-default .dropdown-menu.notify-drop .rIcon:hover {
+  color: #333;
+}
+.navbar-default .dropdown-menu.notify-drop .drop-content > li a {
+  font-size: 12px;
+  font-weight: normal;
+}
+.navbar-default .dropdown-menu.notify-drop .drop-content > li {
+  font-weight: bold;
+  font-size: 11px;
+}
+.navbar-default .dropdown-menu.notify-drop .drop-content > li hr {
+  margin: 5px 0;
+  width: 70%;
+  border-color: #e2e2e2;
+}
+.navbar-default .dropdown-menu.notify-drop .drop-content .pd-l0 {
+  padding-left: 0;
+}
+.navbar-default .dropdown-menu.notify-drop .drop-content > li p {
+  font-size: 11px;
+  color: #666;
+  font-weight: normal;
+  margin: 3px 0;
+}
+.navbar-default .dropdown-menu.notify-drop .drop-content > li p.time {
+  font-size: 10px;
+  font-weight: 600;
+  top: -6px;
+  margin: 8px 0px 0px 0px;
+  padding: 0px 3px;
+  border: 1px solid #e2e2e2;
+  position: relative;
+  background-image: linear-gradient(#fff,#f2f2f2);
+  display: inline-block;
+  border-radius: 2px;
+  color: #B97745;
+}
+.navbar-default .dropdown-menu.notify-drop .drop-content > li p.time:hover {
+  background-image: linear-gradient(#fff,#fff);
+}
+.navbar-default .dropdown-menu.notify-drop .notify-drop-footer {
+  border-top: 1px solid #e2e2e2;
+  bottom: 0;
+  position: relative;
+  padding: 8px 15px;
+}
+.navbar-default .dropdown-menu.notify-drop .notify-drop-footer a {
+  color: #777;
+  text-decoration: none;
+}
+.navbar-default .dropdown-menu.notify-drop .notify-drop-footer a:hover {
+  color: #333;
+}
+
+    </style>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+     $(document).ready(function(){
+     $(".dropdown").hover(
+        function() {
+            $('.dropdown-menu', this).not('.in .dropdown-menu').stop( true, true ).slideDown("fast");
+            $(this).toggleClass('open');
+        },
+        function() {
+            $('.dropdown-menu', this).not('.in .dropdown-menu').stop( true, true ).slideUp("fast");
+            $(this).toggleClass('open');
+          }
+        );
+      });
+    </script>
+
+  <!--  <nav class="navbar navbar-default navbar-fixed-top" style="height:80px; background-color: #91DDDA;" role="navigation">-->
+    <!--<div class="container" style="padding-top: 1%;">-->
+
+  <!--  <div class="container">-->
+  <!--    <a href="/about/"><img class = "topleft" src="/media/logo.png"></a>-->
+  <!--    <label class="navbar-brand" style = "color:#ffffff; font-size:180%;  position: absolute; left: 9%; top: 17%; font-family: 'Raleway', sans-serif">PRESS TO DRESS</label>-->
+  <!--  </div>-->
+      <!-- Collect the nav links, forms, and other content for toggling -->
+  <!--  <div class="collapse navbar-collapse" id="bs-slide-dropdown">-->
+  <!--      <ul class="nav navbar-nav navbar-right">-->
+  <!--        <li style="margin-top:2.75%; right: -6%;"><a type="button" href="/feed/" class="btn btn-default" aria-label="Likes" style="font-size:20px; border: 1px solid #91DDDA; background-color: transparent; color: white;" >-->
+  <!--              <span class="glyphicon glyphicon-home"></span></a>-->
+  <!--        </li>-->
+  <!--        <li style="margin-top: 2.75%; right: -5%;"><a type="button" href="/viewliked/" class="btn btn-default" aria-label="Likes" style="font-size:20px; border: 1px solid #91DDDA; background-color: transparent; color: white;">-->
+  <!--              <span class="glyphicon glyphicon glyphicon-heart"></span></a>-->
+  <!--        </li>-->
+  <!--        <li class="dropdown" style="margin-top: 2.75%; right: -3.5%;">-->
+  <!--          <a type="button" href="/seen/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" aria-label="Notifications" style="font-size:20px; border: 1px solid #91DDDA; background-color: transparent; color: white;">-->
+  <!--              <span class="glyphicon glyphicon glyphicon-bell"></span></a>-->
+  <!--        <ul class="dropdown-menu notify-drop">-->
+            <!-- end notify title -->
+            <!-- notify content -->
+  <!--          <div class="drop-content">-->
+  <!--            {% for n in notifications %}-->
+  <!--            {% if n.seen == False %}-->
+  <!--            <li class="text" style="font-size: 14px; padding-left: 10px; color:#5FC1BD">-->
+  <!--          		{{n.text}}-->
+  <!--            </li>-->
+  <!--            {% else %}-->
+  <!--            <li class="text" style="font-size: 14px; padding-left: 10px;">-->
+  <!--          		{{n.text}}-->
+  <!--            </li>-->
+  <!--            {% endif %}-->
+  <!--            {% empty %}-->
+  <!--              <li class="text" style="font-size: 16px; padding-left: 10px; text-align:center;">-->
+  <!--          		No notifications!-->
+  <!--          	</li>-->
+  <!--            {% endfor %}-->
+  <!--          </div>-->
+  <!--        </ul>-->
+  <!--      </li>-->
+  <!--      <li style="margin-top: 3.25%; right: 3.5%;"><a class="text" aria-label="num_notif" style="font-size:16px; background-color: transparent; color: white;">-->
+  <!--          ({{ unseen|length }})-->
+  <!--      </li>-->
+  <!--        <li style="margin-top: -7.25%; right: 6.2%;"><a type="button" href="/viewcart/" class="btn btn-default" aria-label="Cart" style="font-size:20px; border: none; background-color: #91DDDA; color: white;">-->
+  <!--              <span class="glyphicon glyphicon-shopping-cart"></span></a>-->
+  <!--        </li>-->
+  <!--        <li class="dropdown">-->
+  <!--          <a href="#" class="dropdown-toggle text" data-toggle="dropdown" style="color:#ffffff; margin-top: 9%; right: 28%; background-color: #91DDDA;">My Account<span class="caret"></span></a>-->
+  <!--          <ul class="dropdown-menu" role="menu">-->
+  <!--          <li><a class="text" href="/mydresses/">My Dresses</a></li>-->
+  <!--          <li><a class="text" href="/uploadanother/">Add a Dress</a></li>-->
+  <!--          <li><a class="text" href="/updateinfo/">Update Information</a></li>-->
+  <!--          <li class="divider"></li>-->
+  <!--          <li><a class="text" href="/accounts/logout/">Logout</a></li>-->
+  <!--          </ul>-->
+  <!--        </li>-->
+  <!--      </ul>-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <!--</nav>-->
+      <nav class="navbar navbar-default navbar-fixed-top" style="height:80px; background-color: #91DDDA;" role="navigation">
+    <!--<div class="container" style="padding-top: 1%;">-->
+
+    <div class="container">
+      <a href="/about/"><img class = "topleft" src="/media/logo.png"></a>
+      <label class="navbar-brand" style = "color:#ffffff; font-size:180%;  position: absolute; left: 9%; top: 17%; font-family: 'Raleway', sans-serif">PRESS TO DRESS</label>
+    </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-slide-dropdown" style="display:inline;">
+        <ul class="nav navbar-nav navbar-right">
+          <li style="margin-top:2.75%; right: -6%;"><a type="button" href="/feed/" class="btn btn-default" aria-label="Likes" style="font-size:20px; border: 1px solid #91DDDA; background-color: transparent; color: white;" >
+                <span class="glyphicon glyphicon-home"></span></a>
+          </li>
+          <li style="margin-top: 2.75%; right: -5%;"><a type="button" href="/viewliked/" class="btn btn-default" aria-label="Likes" style="font-size:20px; border: 1px solid #91DDDA; background-color: transparent; color: white;">
+                <span class="glyphicon glyphicon glyphicon-heart"></span></a>
+          </li>
+          <li style="margin-top: 2.75%; right: -3.5%;"><a type="button" href="/viewcart/" class="btn btn-default" aria-label="Cart" style="font-size:20px; border: none; background-color: #91DDDA; color: white;">
+                <span class="glyphicon glyphicon-shopping-cart"></span></a>
+          </li>
+          <li class="dropdown" style="margin-top: 2.75%; right: -2%;">
+            <a type="button" href="/seen/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" aria-label="Notifications" style="font-size:20px; border: 1px solid #91DDDA; background-color: transparent; color: white;">
+                <span class="glyphicon glyphicon glyphicon-bell"></span></a>
+          <ul class="dropdown-menu notify-drop">
+            <!-- end notify title -->
+            <!-- notify content -->
+            <div class="drop-content">
+              {% for n in notifications %}
+              {% if n.seen == False %}
+              <li class="text" style="font-size: 14px; padding-left: 10px; color:#5FC1BD">
+            		{{n.text}}
+              </li>
+              {% else %}
+              <li class="text" style="font-size: 14px; padding-left: 10px;">
+            		{{n.text}}
+              </li>
+              {% endif %}
+              {% empty %}
+                <li class="text" style="font-size: 16px; padding-left: 10px; text-align:center;">
+            		No notifications!
+            	</li>
+              {% endfor %}
+            </div>
+          </ul>
+        </li>
+
+        <li style="margin-top: 3.25%; right: 3.5%;"><a class="text" aria-label="num_notif" style="font-size:16px; background-color: transparent; color: white;">
+            ({{ unseen|length }})
+        </li>
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle text" data-toggle="dropdown" style="color:#ffffff; margin-top: -23%; right: -12%; background-color: #91DDDA;">My Account<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+            <li><a class="text" href="/mydresses/">My Dresses</a></li>
+            <li><a class="text" href="/uploadanother/">Add a Dress</a></li>
+            <li><a class="text" href="/updateinfo/">Update Information</a></li>
+            <li class="divider"></li>
+            <li><a class="text" href="/accounts/logout/">Logout</a></li>
+            </ul>
+          </li>
+          </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container text">
+<h1 style="text-align: center; font-size: 28px; color:#5FC1BD; line-height: 60px; font-family: 'Raleway', sans-serif; padding-top:80px;">About Us</h1>
+<h3 align="center" style="padding-bottom:10px;"><b>The PressToDress Team</b></h3>
+<table align="center">
+    <tr>
+        <td align="center"><img class="propic" hspace="15px" src="/media/dresses/alice.jpg" ></img></td>
+        <td align="center"><img class="propic" hspace="15px" src="/media/dresses/binita.jpg" ></img></td>
+        <td align="center"><img class="propic" hspace="15px" src="/media/dresses/khyati.jpg" ></img></td>
+        <td align="center"><img class="propic" hspace="15px" src="/media/dresses/jorina.jpg" ></img></td>
+        <td align="center"><img class="propic" hspace="15px" src="/media/dresses/urvashi.jpg" ></img></td>
+    </tr>
+    <tr>
+        <td align="center">Alice Xue</td>
+        <td align="center">Binita Gupta</td>
+        <td align="center">Khyati Agrawal</td>
+        <td align="center">Jorina Kardhashi</td>
+        <td align="center">Urvashi Uberoy</td>
+    </tr>
+    <tr>
+        <td align="center"><i>HTML, CSS, JavaScript</i></td>
+        <td align="center"><i>HTML, CSS, JavaScript</i></td>
+        <td align="center"><i>Python, Django, JavaScript</i></td>
+        <td align="center"><i>Servers, Python, SQL</i></td>
+        <td align="center"><i>Python, Django, JavaScript</i></td>
+    </tr>
+</table>
+<br>
+<br>
+<h3 align="center"><b>What is PressToDress?<b></h3>
+<table align="center">
+    <tr>
+        <td align="center">While lawnparties and formals are two of the most looked-forward-to events at Princeton,
+        they can also be two of the most stressful events of the year. Trying to find the perfect outfit that’s affordable, available,
+        and accessible is a daunting task, but it shouldn’t have to be. We present PressToDress, the one-stop mobile-friendly website
+        for Princeton students to buy, rent, and sell dresses. PressToDress users can make some extra money simply by posting info
+        and photos of their clothes that they want to rent or sell. All of these pictures will then appear on the site’s newsfeed, where
+        students can scroll through images of clothes, add anything they like to their list of favorites, and reach out to the seller
+        if they’re interested in purchasing. With PressToDress, you can painlessly find the perfect outfits at the best prices within
+        walking distance, and you’ll never have to worry about what to wear again. <br><br>Don’t stress: just Press to Dress.</td>
+    </tr>
+</table>
+<br>
+</div>
+
+  <h2 style="text-align: center; font-size: 28px; color:#5FC1BD; line-height: 60px; font-family: 'Raleway', sans-serif; padding-top:5px;">A couple of pointers before you start:</h2>
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-right: 4%">
+    <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+                <li data-target="#myCarousel" data-slide-to="3"></li>
+
+            </ol>
+
+    <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+            <img src="/media/filter.png" style="width:80%; padding-left: 25%">
+             <div class="carousel-caption">
+                 <h3 style="text-align:center; font-size: 20px; margin-left: 8%; background-color:rgba(0,0,0,0.4)">Filter dresses by size, price, brand, occasion, buy/rent, and keyword!</h3>
+                </div>
+            </div>
+
+            <div class="item">
+            <img src="/media/like.png" style="width:80%; padding-left:25%">
+            <div class="carousel-caption">
+                 <h3 style="text-align:center; font-size: 20px; margin-left: 8%; background-color:rgba(0,0,0,0.4)">Add dresses you like to your "Favorites"!</h3>
+                </div>
+            </div>
+
+            <div class="item">
+            <img src="/media/rent.png" style="width:80%; padding-left:25%">
+            <div class="carousel-caption">
+                 <h3 style="text-align:center; font-size: 20px; margin-left: 8%; background-color:rgba(0,0,0,0.4)">When you want to rent a dress, enter a rental period, and we'll automatically generate and send an email for you!</h3>
+                </div>
+            </div>
+
+            <div class="item">
+            <img src="/media/inuse.png" style="width:80%; padding-left:25%">
+            <div class="carousel-caption">
+                 <h3 style="text-align:center; font-size: 20px; margin-left: 8%; background-color:rgba(0,0,0,0.4)">Be sure to mark a dress as in-use or available manually once it's been taken or returned!</h3>
+                </div>
+            </div>
+        </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+    </div>
+    <br><br>
+    <h3 align="center" style="font-size:16px;"><b>Have feedback?<b><br>
+<a align="center" style="font-size:16px; text-align: center;" href="https://docs.google.com/forms/d/e/1FAIpQLSfco1R_iKvJZ1QUK0kS-xzCKMydFLw4Dyt-Rv-ikzqrzNoYUg/viewform?usp=sf_link" align="center">Let us know what you think here!</a>
+</h3>
+    <br><br><br>
+    <!--</div>-->
+    <!--</div>-->
+</body>
+</html>

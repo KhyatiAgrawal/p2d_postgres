@@ -1,0 +1,76 @@
+{% extends 'base_feed.html' %}
+
+{% block title %}Upload{% endblock %}
+{% block content %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" >
+      function validateForm() {
+         // need to validate the dates and whether the end date is later than the start date.
+        // Should also check that the interval between the dates is reasonable (not like 1 year or something)
+        var bought = $("#pickupdate").val();
+
+        if (bought == '') {
+          document.getElementById('content-rs').innerHTML = "Please choose a start date!";
+          document.getElementById("pickupdate").style.border = "thin solid #ff0000";
+          return false;
+        }
+        else {
+          document.getElementById('content-rs').innerHTML = "";
+          document.getElementById("pickupdate").style.border = "1px solid #91DDDA";
+        }
+
+      function validateEmail() {
+          var email = $("#template").val();
+
+          if (email == '') {
+          document.getElementById('content-t').innerHTML = "Please don't send a blank email!";
+          document.getElementById("template").style.border = "thin solid #ff0000";
+          return false;
+          }
+          else {
+          document.getElementById('content-t').innerHTML = "";
+          document.getElementById("template").style.border = "1px solid #91DDDA";
+        }
+      }
+    </script>
+
+<h1 style="text-align: center; font-size: 28px; color:#5FC1BD; line-height: 60px; font-family: 'Raleway', sans-serif; padding-top: 80px;">Buy this dress</h1>
+     {% for d in object %}
+     <div align="center">
+        <p><img style="width: 300px; height: 400px;" src="/media/{{d.photo.name}}">
+     </div>
+     <div class="container" align="center" style="width: 700px; padding-left: 50px;">
+         <div class="col-md-6" align="center" style="text-align: center; width: 300px;">
+                <form name="upload" method="post" action="/maketemplatebuy/" enctype="multipart/form-data" onsubmit="return validateForm()">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <h1 style="text-align: center; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif; padding-top: 10px;">Pickup Date:</h1>
+                        <input type="date" class="form-control" name="pickupdate" id="pickupdate" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px;">
+                        <h1 id = "content-rs" style="text-align: center; font-size: 12px; color:#ff0000; font-family: 'Raleway', sans-serif;"></h1>
+                    </div>
+                    <div class = "form-group">
+                        <h1 style="text-align: center; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif; padding-top: 10px;">Additional information:</h1>
+                        <textarea rows="3" class="form-control" name="extrainfo"  id="extrainfo" placeholder="Any questions, concerns or comments for the seller?" style="height: 255px; border: 1px solid #91DDDA;"></textarea>
+                        <h1 id = "content-a" style="text-align: center; font-size: 12px; color:#ff0000; font-family: 'Raleway', sans-serif;"></h1>
+                    </div>
+                    <!--<input type="text" class="form-control" id="dress_id"  style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 1px; visibility: hidden">-->
+                    <button type="submit" value="{{d.id}}" name="dress_id" class="btn btn-success" style="background-color: #ffffff; border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px; width: 200px; color: #666666; font-size: 14px;">Generate email template!</button>
+                  <br><br>
+              </form>
+        </div>
+
+    <!--<div class="col-md-6" style="width: 300px;" align="center" style="border: 20px solid green;">-->
+        <div class="col-md-6" align="center" style="text-align: center; width: 300px;">
+                <form name="upload" method="post" action="/sendemail/" enctype="multipart/form-data" onsubmit="validateEmail()" align="center">
+                {% csrf_token %}
+                <h1 style="text-align: center; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif; padding-top: 8.5px;">Email Template:</h1>
+                <textarea rows="3" class="form-control" name="template" style="height: 360px; border: 1px solid #91DDDA;">{{text}}</textarea>
+                <h1 id = "content-t" style="text-align: center; font-size: 12px; color:#ff0000; font-family: 'Raleway', sans-serif;"></h1>
+               <button type="submit" value="{{d.id}}" name="dress_id" class="btn btn-success" style="background-color: #ffffff; border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px; width: 200px; color: #666666; font-size: 14px;">Send email!</button>
+                </form>
+        </div>
+    </div>
+    <!--</div>-->
+  {% endfor %}
+{% endblock %}
+

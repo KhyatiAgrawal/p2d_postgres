@@ -1,0 +1,130 @@
+{% extends 'base_rest.html' %}
+
+{% block title %}Upload{% endblock %}
+{% block content %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+ <script type="text/javascript" >
+      function validateForm() {
+        var file = $('#fileupload').get(0).files.length;
+        var price = $("#price").val();
+        var brand = $("#brand").val();
+        var title = $("#desc").val();
+        var size = $("#size").val();
+        // var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        // var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
+        // var okay = document.upload.c1.checked || document.upload.c2.checked||document.upload.c3.checked|| document.upload.c4.checked || document.upload.c5.checked;
+
+        if (file === 0) {
+          document.getElementById('content-f').innerHTML = "Please upload a photo!";
+          document.getElementById("fileupload").style.border = "thin solid #ff0000";
+          return false;
+        }
+        else {
+          document.getElementById('content-f').innerHTML = "";
+          document.getElementById("fileupload").style.border = "1px solid #91DDDA";
+        }
+        if (price == '') {
+          document.getElementById('content-p').innerHTML = "Please enter a price!";
+          document.getElementById("price").style.border = "thin solid #ff0000";
+          return false;
+        }
+        else if (price < 0) {
+          document.getElementById('content-p').innerHTML = "Please enter a valid price!";
+          document.getElementById("price").style.border = "thin solid #ff0000";
+          return false;
+        }
+        else {
+          document.getElementById('content-p').innerHTML = "";
+          document.getElementById("price").style.border = "1px solid #91DDDA";
+        }
+        if (brand == '') {
+          document.getElementById('content-b').innerHTML = "Please enter a brand!";
+          document.getElementById("brand").style.border = "thin solid #ff0000";
+          return false;
+        }
+        else {
+          document.getElementById('content-b').innerHTML = "";
+          document.getElementById("brand").style.border = "thin solid #91DDDA";
+        }
+        // if (!okay) {
+        //     document.getElementById('content-o').innerHTML = "Please enter atleast one occasion";
+        //     document.getElementById("occasions").style.border = "thin solid #ff0000";
+        //     return false;
+        // }
+        // else {
+        //     document.getElementById('content-o').innerHTML = "";
+        //     document.getElementById("occasions").style.border = "thin solid #91DDDA";
+        // }
+        if (title == '') {
+          document.getElementById('content-d').innerHTML = "Please give your dress a title!";
+          document.getElementById("desc").style.border = "thin solid #ff0000";
+          return false;
+        }
+        else {
+          document.getElementById('content-d').innerHTML = "";
+          document.getElementById("desc").style.border = "thin solid #91DDDA";
+        }
+      }
+    </script>
+
+<h1 style="text-align: center; font-size: 28px; color:#5FC1BD; line-height: 60px; font-family: 'Raleway', sans-serif; padding-top: 80px;">Add a dress</h1>
+<h3 style="text-align: center; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif; padding-top:-10px; padding-bottom: 10px;">To upload directly from your phone, please go to: presstodress.pythonanywhere.com/mobileupload</h3>
+  <form name="upload" method="post" action="feed/" enctype="multipart/form-data" onsubmit="return validateForm()">
+    {% csrf_token %}
+    <div class="form-group">
+        <h1 style="text-align: left; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif; ">*Upload an Image:</h1>
+        <input type="file" class="form-control" name="dressupload" value="dressupload" id="fileupload" accept = "image/jpeg" placeholder= "Picture of dress" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px;">
+        <h1 id = "content-f" style="text-align: center; font-size: 12px; color:#ff0000; font-family: 'Raleway', sans-serif;"></h1>
+    </div>
+    <div class="form_group">
+        <h1 style="text-align: left; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif; ">*Price:</h1>
+        <input type="number" pattern="\d+" maxlength="number" min="0" max="100" step="1" class="form-control" id="price" name="price" placeholder= "Price" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px; top:80%">
+        <h1 id = "content-p" style="text-align: center; font-size: 12px; color:#ff0000; font-family: 'Raleway', sans-serif;"></h1>
+    </div>
+    <div class="form_group">
+        <h1 style="text-align: left; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif; ">*Brand:</h1>
+        <input type="text" class="form-control" maxlength="20" id="brand" name="brand" placeholder= "Brand (H&M, Mango etc)" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px;">
+        <h1 id = "content-b" style="text-align: center; font-size: 12px; color:#ff0000; font-family: 'Raleway', sans-serif;"></h1>
+    </div>
+    <h1 style="text-align: left; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif; ">*Size:</h1>
+    <select name="size" class="form-control" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px;">
+     <option value="XS">XS</option>
+     <option value="S">S</option>
+     <option value="M">M</option>
+     <option value="L">L</option>
+     <option value="XL">XL</option>
+     <option value="XXL">XXL</option>
+    </select>
+    <h1 style="text-align: left; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif; ">For sale or for rent?:</h1>
+    <select name="saleorrent" class="form-control" id="size" name="size" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px;">
+        <option value="{{False}}">Rent</option>
+        <option value="{{True}}">Sale</option>
+    </select>
+    <h1 style="text-align: left; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif; ">Occasions:</h1>
+    <div align="left">
+      <input type="checkbox" id="id_subject" name="occasions[]" value="Lawnparties">
+      <label style="font-family: 'Raleway', sans-serif;">Lawnparties</label>
+      <br>
+      <input type="checkbox" id="id_subject" name="occasions[]" value="Semi-formals">
+      <label style="font-family: 'Raleway', sans-serif;">Semi-formals</label>
+      <br>
+      <input type="checkbox" id="id_subject" name="occasions[]" value="Formals">
+      <label style="font-family: 'Raleway', sans-serif;">Formals</label>
+      <br>
+      <input type="checkbox" id="id_subject" name="occasions[]" value="Interviews">
+      <label style="font-family: 'Raleway', sans-serif;">Interviews</label>
+      <br>
+      <input type="checkbox" id="id_subject" name="occasions[]" value="Theme nights">
+      <label style="font-family: 'Raleway', sans-serif;">Theme nights</label>
+    </div>
+    <br>
+    <div class="form-group">
+        <h1 style="text-align: left; font-size: 18px; color:#5FC1BD; font-family: 'Raleway', sans-serif; ">*Title:</h1>
+        <input type="text" class="form-control" id="desc" name="desc" placeholder= "Title (strappy floral dress, classic LBD, etc)" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px;">
+        <h1 id = "content-d" style="text-align: center; font-size: 12px; color:#ff0000; font-family: 'Raleway', sans-serif;"></h1>
+    </div>
+    <button type="submit" class="btn btn-success" style="background-color: #ffffff; border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px; width: 55%; color: #666666; font-size: 16px;">Upload</button>
+  <br><br>
+  </form>
+{% endblock %}
+

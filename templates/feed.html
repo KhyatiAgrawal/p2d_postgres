@@ -1,0 +1,285 @@
+{% extends 'base_feed.html' %}
+
+{% block content %}
+<style>
+
+.list-inline-item:
+{
+  position: relative;
+}
+
+.textbox {
+    display: table;
+    position: absolute;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 4%;
+    padding-bottom: 7%;
+    width: 300px;
+    height: 400px;
+    vertical-align: middle;
+    color: #33373f;
+    opacity: 0;
+    transition: .5s ease;
+}
+
+.list-inline-item:hover .dresspic{
+    transition: .5s ease;
+    opacity: 0.2;
+}
+
+.list-inline-item:hover .textbox {
+    transition: .5s ease;
+    opacity: 1;
+    z-index: 1;
+
+}
+
+.sidenav {
+    width: 270px;
+    height: 600px;
+    position: fixed;
+    z-index: 1;
+    top: 80px;
+    left: 0px;
+    background: #ffffff;
+    overflow-x: hidden;
+    padding: 8px 0;
+}
+
+.homebtn {
+    font-family: 'Raleway', sans-serif;
+    position: fixed;
+    font-style: normal;
+    border-radius: 10px;
+    background-color: #ffffff;
+    width: 250px;
+    height: 60px;
+    border: 2px solid #91DDDA;
+    font-size: 18px;
+    padding: 0px;
+    text-align:center;
+    vertical-align:middle;
+    line-height: 60px;
+    margin-left:47.5%;margin-right:0%;display:block;margin-top:27%;margin-bottom:0%;
+    z-index: 100;
+    visibility: hidden;
+    }
+
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" >
+
+    // $(document).ready(function () {
+    // // Check if user saw the modal
+    // var key = 'hadModal',
+    //     hadModal = localStorage.getItem(key);
+
+    // // Show the modal only if new user
+    // if (!hadModal) {
+    //      $('#tutorial').modal('show');
+
+    // }
+
+    // // If modal is displayed, store that in localStorage
+    // $('#tutorial').on('shown.bs.modal', function () {
+    //     localStorage.setItem(key, true);
+    // })
+    // });
+
+//      $(document).ready(function(){
+//   $('#myModal').modal('show');
+//     });
+
+      function added() {
+          document.getElementById('img_container').style.opacity = "0.2";
+          document.getElementById('popup_box').style.visibility = "visible";
+          document.getElementById('popup_box').innerHTML = "Added to Cart!"
+          setTimeout(swapback, 1200);
+      }
+
+      function swapback() {
+          document.getElementById('img_container').style.opacity = "1.0";
+          document.getElementById('popup_box').style.visibility = "hidden";
+      }
+
+      function liked() {
+          document.getElementById('img_container').style.opacity = "0.2";
+          document.getElementById('popup_box').style.visibility = "visible";
+          document.getElementById('popup_box').innerHTML = "Added to Favorites!"
+          setTimeout(swapback, 1200);
+      }
+      function owndress() {
+          document.getElementById('img_container').style.opacity = "0.2";
+          document.getElementById('popup_box').style.visibility = "visible";
+          document.getElementById('popup_box').innerHTML = "This is your dress!"
+          setTimeout(swapback, 1200);
+      }
+      function inuse() {
+          document.getElementById('img_container').style.opacity = "0.2";
+          document.getElementById('popup_box').style.visibility = "visible";
+          document.getElementById('popup_box').innerHTML = "This dress is currently in use!"
+          setTimeout(swapback, 1200);
+      }
+
+    </script>
+
+ <!--<div id="tutorial" class="w3-modal">-->
+ <!--   <div class="w3-modal-content w3-animate-top w3-card-4">-->
+ <!--     <header class="w3-container w3-teal">-->
+ <!--       <span onclick="document.getElementById('id01').style.display='none'"-->
+ <!--       class="w3-button w3-display-topright">&times;</span>-->
+ <!--       <h2>Modal Header</h2>-->
+ <!--     </header>-->
+ <!--     <div class="w3-container">-->
+ <!--       <p>Some text..</p>-->
+ <!--       <p>Some text..</p>-->
+ <!--     </div>-->
+ <!--     <footer class="w3-container w3-teal">-->
+ <!--       <p>Modal Footer</p>-->
+ <!--     </footer>-->
+ <!--   </div>-->
+ <!-- </div>-->
+
+
+
+<!--<body onLoad="$('#my-modal').modal('show');">-->
+<!--    <div id="my-modal" class="modal fade">-->
+<!--        <div class="modal-dialog">-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header">-->
+<!--                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+<!--                <h4 class="modal-title">Title</h4>-->
+<!--                </div>-->
+<!--                <div class="modal-body">-->
+<!--                    Hello World!-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</body>-->
+
+    <div class="sidenav" style="text-align: center; padding-left: 20px;">
+      <div class="col-md-6" style="z-index: 1; float: left; width: 250px; display: inline-block; background-color: #ffffff; align-content: center;">
+      <h1 style = "font-size: 24px; text-align: center;">FILTER BY:</h1>
+      <form method="post" action="/search/" data-ajax="false">
+          {% csrf_token %}
+      <div class = "form_group">
+        <select class="form-control" name="size" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 40px;">
+            <option selected = "selected" disabled>Size</option>
+            <option value="XS" name="XS">XS</option>
+            <option value="S" name="S">S</option>
+            <option value="M" name="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL</option>
+        </select>
+        <br>
+        <select class="form-control" name="brand" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 40px;">
+            <option selected = "selected" disabled>Brand</option>
+            {% for b in brands %}
+            <option value = "{{b}}">{{b}}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <select class="form-control" name="occasions" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 40px;">
+            <option selected = "selected" disabled>Occasion</option>
+            <option value = "Lawnparties">Lawnparties</option>
+            <option value = "Formals">Formals/Semiformals</option>
+            <option value = "Theme Nights">Theme Nights</option>
+            <option value = "Interviews">Interviews</option>
+        </select>
+        <br>
+        <select class="form-control" name="price" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 40px; background-color: #ffffff">
+            <option selected = "selected" disabled>Max Price</option>
+            <option value = "10">$10</option>
+            <option value = "20">$20</option>
+            <option value = "30">$30</option>
+            <option value = "40">$40</option>
+            <option value = "50">$50</option>
+        </select>
+        <br>
+        <select class="form-control"  name="for_sale" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 45px;">
+            <option selected = "selected" disabled>Buy or rent</option>
+            <option value="{{True}}">Buy</option>
+            <option value="{{False}}">Rent</option>
+        </select>
+        <br>
+        <input type="text" class="form-control" name="title" placeholder="Keyword (floral, etc)" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 40px;">
+        <br>
+        </div>
+        <br>
+        <button class="btn" type="submit" style="border: 1px solid #91DDDA; background-color:#ffffff;">Search</button>
+      </form>
+    </div>
+    </div>
+
+<div class="row container1" style="text-align: center; font-size: 16px; background-color: #FFFFFF;">
+    <div class="col-md-6" id="img_container" style="width: 1000px; left: 220px; float: left; display: inline-block; top: 20px; padding-left: 30px;">
+      <ul class="list-inline" style="padding-top: 120px;">
+      {% for dress in filter %}
+        <li class="list-inline-item pull-left" id="alldresses" style="height: 450px;"><img class="dresspic" style="align: center; margin-left: auto; margin-right: auto; width: 300px; height: 400px; float: left;" src="/media/{{dress.photo.name}}" />
+            <div>
+                <div class="textbox" style="width: 300px; align: center">
+                    <b>{{dress.title}}</b>
+                    <br><b>Size</b>: {{dress.size}}
+                    {% if dress.for_sale %}
+                    <br><b>Selling Price</b>: ${{dress.price}}
+                    {% else %}
+                    <br><b>Rental Price</b>: ${{dress.price}}
+                    {% endif %}
+                    <br><b>Brand</b>: {{dress.brand}}
+                    <br><b>Occasion</b>: {{dress.occasions}}<br>
+                    {% if dress.in_use %}
+                        <b>Status</b>: In-use
+                    {% else %}
+                        <b>Status</b>: Available
+                    {% endif %}
+                    <br>
+                    <br>
+                    {% if dress.seller.username != request.user.username %}
+                    <form method="post" action="/like/" data-ajax="false" onsubmit="liked()">
+                        {% csrf_token %}
+                        <button type="submit" id="like" name="dress_id" value = "{{dress.id}}" class="btn" aria-label="Heart" style="border: 1px solid #666666; background-color: transparent; color: black; width:140px;">
+                            <span class="glyphicon glyphicon-heart pull-left" id="liked"></span> Like
+                        </button>
+                    </form>
+                    {% else %}
+                        <button type="submit" id="like" onclick="owndress()" name="dress_id" value = "{{dress.id}}" class="btn" aria-label="Heart" style="border: 1px solid #666666; background-color: transparent; color: black; width:140px;">
+                            <span class="glyphicon glyphicon-heart pull-left" id="liked"></span> Like
+                        </button>
+                    {% endif %}
+                    {% if dress.seller.username != request.user.username %}
+                    {% if dress.in_use %}
+                    <button type="submit" class="btn" id="add" onclick="inuse()" name="dress_id" value = "{{dress.id}}" aria-label="Heart" style="border: 1px solid #666666; background-color: transparent; color: black; margin-top: 3%; width:140px;">
+                        <span class="glyphicon glyphicon-plus pull-left" id="added"></span>   Add to Cart
+                    </button>
+                    {% else %}
+                    <form method="post" action="/addtocart/" data-ajax="false">
+                        {% csrf_token %}
+                        <button type="submit" class="btn" onclick="added()" id="add" name="dress_id" value = "{{dress.id}}" aria-label="Heart" style="border: 1px solid #666666; background-color: transparent; color: black; margin-top: 3%; width:140px;">
+                            <span class="glyphicon glyphicon-plus pull-left" id="added"></span>   Add to Cart
+                        </button>
+                    </form>
+                    {% endif %}
+                    {% else %}
+                    <button type="submit" class="btn" id="add" onclick="owndress()" name="dress_id" value = "{{dress.id}}" aria-label="Heart" style="border: 1px solid #666666; background-color: transparent; color: black; margin-top: 3%; width:140px;">
+                        <span class="glyphicon glyphicon-plus pull-left" id="added"></span>   Add to Cart
+                      </button>
+                    {% endif %}
+
+                </div>
+            </div>
+        </li>
+              {% empty %}
+            <li>Sorry, there are no dresses that match your search!</li>
+      {% endfor %}
+
+
+      </ul>
+    </div>
+    <div class="homebtn" id="popup_box"></div>
+</div>
+
+
+{% endblock %}

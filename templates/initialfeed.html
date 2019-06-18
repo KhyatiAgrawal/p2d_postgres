@@ -1,0 +1,118 @@
+{% extends 'base_feed.html' %}
+
+{% block content %}
+<style>
+
+.list-inline-item:
+{
+  position: relative;
+}
+
+.textbox {
+    display: table;
+    position: absolute;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 10%;
+    padding-bottom: 7%;
+    width: 300px;
+    height: 400px;
+    vertical-align: middle;
+    color: #33373f;
+    opacity: 0;
+    transition: .5s ease;
+}
+
+.list-inline-item:hover .dresspic{
+    transition: .5s ease;
+    opacity: 0.2;
+}
+
+.list-inline-item:hover .textbox {
+    transition: .5s ease;
+    opacity: 1;
+    z-index: 1;
+
+}
+
+.sidenav {
+    width: 240px;
+    height: 300px;
+    position: fixed;
+    z-index: 1;
+    top: 80px;
+    left: 0px;
+    background: #ffffff;
+    overflow-x: hidden;
+    padding: 8px 0;
+}
+
+</style>
+    <div class="sidenav" style="text-align: center; padding-left: 30px;">
+      <div class="col-md-6" style="z-index: 1; float: left; width: 200px; display: inline-block; background-color: #ffffff; align-content: center;">
+      <h1 style = "font-size: 24px; text-align: center;">FILTER BY:</h1>
+      <form method="get" action="/search/" data-ajax="false">
+      <div class = "form_group">
+        <select class="form-control" name="size" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 40px;">
+            <option selected = "selected" disabled>Size</option>
+            <option value="XS" name="XS">XS</option>
+            <option value="S" name="S">S</option>
+            <option value="M" name="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL</option>
+        </select>
+        <br>
+        <input type="text" class="form-control" name="brand" placeholder="Brand" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 40px;">
+        <br>
+        <select class="form-control" name="occasions" style="border: 1px solid #91DDDA; font-family: 'Raleway', sans-serif; height: 40px;">
+            <option selected = "selected" disabled>Occasion</option>
+            <option value = "Lawnparties">Lawnparties</option>
+            <option value = "Formals">Formals/Semiformals</option>
+            <option value = "Theme Nights">Theme Nights</option>
+            <option value = "Interviews">Interviews</option>
+        </select>
+        </div>
+        <br>
+        <button class="btn" type="submit" style="border: 1px solid #91DDDA;">Search</button>
+      </form>
+    </div>
+    </div>
+
+<div class="row container1" style="text-align: center; font-size: 16px; background-color: #FFFFFF;">
+    <div class="col-md-6" style="width: 1000px; left: 220px; float: left; display: inline-block; top: 20px;">
+      <ul class="list-inline" style="padding-top: 120px;">
+      {% for dress in dresses %}
+        <li class="list-inline-item pull-left" style="height: 450px;"><img class="dresspic" style="align: center; margin-left: auto; margin-right: auto; width: 300px; height: 400px; float: left;" src="/media/{{dress.photo.name}}" />
+            <div>
+                <div class="textbox" style="width: 300px; align: center;">
+                    <b>{{dress.title}}</b>
+                    <br>
+                    <b>Seller Contact Email</b>: {{dress.seller.username}}@princeton.edu
+                    <br><b>Size</b>: {{dress.size}}
+                    <br><b>Price</b>: ${{dress.price}}
+                    <br><b>Brand</b>: {{dress.brand}}
+                    <br><b>Occasion</b>: {{dress.occasions}}
+                    <br>
+                    <br>
+                    <form method="post" action="/like/" data-ajax="false">
+                        {% csrf_token %}
+                        <button type="submit" id="dress_id" name="dress_id" value = "{{dress.id}}" class="btn" aria-label="Heart" style="border: 1px solid #666666; background-color: transparent; color: black; width:140px;">
+                            <span class="glyphicon glyphicon-heart pull-left"></span> Like
+                        </button>
+                    </form>
+
+                    <form method="post" action="/addtocart/" data-ajax="false">
+                        {% csrf_token %}
+                        <button type="submit" class="btn" id="dress_id" name="dress_id" value = "{{dress.id}}" aria-label="Heart" style="border: 1px solid #666666; background-color: transparent; color: black; margin-top: 5%; width:140px;">
+                            <span class="glyphicon glyphicon-plus pull-left"></span>   Add to Cart
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </li>
+      {% endfor %}
+      </ul>
+    </div>
+</div>
+{% endblock %}
