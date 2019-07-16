@@ -1,0 +1,39 @@
+.p2d-nav {
+	margin-top: 5vh;
+  margin-left: 5vw;
+  margin-right: 5vw;
+}
+
+.p2d-nav-logo {
+  float: left;
+}
+
+.wrapper {
+  display: inline-block;
+}
+
+.p2d-nav-item {
+  height: 1.5em;
+  font-size: 1.5em;
+  color: white;
+  display: inline-block;
+  float: right;
+  margin-left: 20px;
+  opacity: 0.8;
+  vertical-align: middle;
+}
+
+.nav-svg {
+  vertical-align: middle;
+  height: 80%;
+  display: block;
+  margin: auto;
+  float: right;
+  cursor: pointer;
+}
+
+.p2d-nav-item:hover {
+  text-decoration: underline; 
+  opacity: 1;
+  cursor: grab;
+}
