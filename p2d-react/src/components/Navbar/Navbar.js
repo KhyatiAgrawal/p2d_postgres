@@ -10,18 +10,20 @@ class Navbar extends Component {
     return (
       <div className='p2d-nav'>
         <div className='p2d-nav-logo'>
-          <Logo />
+          <Logo weight={"light"} showText={true}/>
         </div>
-        <div className='p2d-nav-item'>my account</div>
-        <div className='p2d-nav-item'>my feed</div>
-        <div className='p2d-nav-item'>
-          <img src={bell} className='nav-svg' alt="logo" />
-        </div>
-        <div className='p2d-nav-item'>
-          <img src={heart} className='nav-svg' alt="logo" />
-        </div>
-        <div className='p2d-nav-item'>
-          <img src={cart} className='nav-svg' alt="logo" />
+        <div className='p2d-nav-item__container'>
+          <div className='p2d-nav-item'>my account</div>
+          <div className='p2d-nav-item'>my feed</div>
+          <div className='p2d-nav-img'>
+            <img src={bell} className='nav-svg' alt="logo" />
+          </div>
+          <div className='p2d-nav-img'>
+            <img src={heart} className='nav-svg' alt="logo" />
+          </div>
+          <div className='p2d-nav-img'>
+            <img src={cart} className='nav-svg' alt="logo" />
+          </div>
         </div>
       </div>
     );

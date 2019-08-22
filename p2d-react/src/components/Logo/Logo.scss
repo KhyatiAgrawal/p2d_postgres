@@ -1,28 +1,46 @@
+@import "../../index.scss";
+
 .p2d-logo {
-  width: 2.5em;
-  height: 2.5em;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: auto;
 }
 
 .p2d-logo-container {
-  display: inline-block;
+  display: flex;
   align-items: center;
-}
-
-.subcontainer {
-  display: inline-block;
-  vertical-align: middle;
-  align-items: center;
+  height: 100%;
+  width: auto;
 }
 
 .p2d-logo-img {
-  display: block;
-  height: 100%;
-  margin: auto;
+  fill: $p2d-reg;
+
+  &.light {
+    fill: white;
+  }
+}
+
+.p2d-logo-svg {
+  height: 100% !important;
+  width: auto;
 }
 
 .p2d-logo-text {
+  display: flex;
+  align-items: center;
   font-size: 2.5em;
-  color: white;
+  color: $p2d-reg;
   font-weight: medium;
-  margin-left: 10px;
+
+  &.light {
+    color: white;
+  }
 }
+
+/*@media only screen and (max-width: 700px) {
+  .p2d-logo-text {
+    display: none !important;
+  }
+}*/
