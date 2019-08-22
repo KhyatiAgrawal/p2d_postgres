@@ -46,18 +46,18 @@ class App extends React.Component {
           <Navbar />
         </div>
         <div className="body-container">
+          <div className="body-image">
+            <img src={closet} className="body-image__img" />
+          </div>
         	<div className="body-text">
         		<div className="main-text">Don't stress. <br/> Just press to dress.</div>
             <div className="byline-text">{this.state.text[this.state.pageNumber]}</div>
         	</div>
-          <div className="body-image">
-            <img src={closet} className="body-image__img" />
-          </div>
         </div>
         <div className="body-footer">
           <div className="dot-container">
             {this.state.text.map((item, index) => (
-              <span className={"dot" + (this.state.pageNumber === index ? ' selected' : '')} onClick={() => {this.dotHandler(index);}} />))
+              <span className={"dot" + (this.state.pageNumber === index ? ' selected' : '')} />))
             }
           </div>
         </div>

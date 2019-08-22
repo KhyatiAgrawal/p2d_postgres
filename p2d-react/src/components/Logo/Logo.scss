@@ -5,6 +5,7 @@
   align-items: center;
   height: 100%;
   width: auto;
+  margin-right: 5px;
 }
 
 .p2d-logo-container {
@@ -23,12 +24,12 @@
 }
 
 .p2d-logo-svg {
-  height: 100% !important;
-  width: auto;
+  width: 40px;
 }
 
 .p2d-logo-text {
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   font-size: 2.5em;
   color: $p2d-reg;
@@ -39,8 +40,12 @@
   }
 }
 
-/*@media only screen and (max-width: 700px) {
-  .p2d-logo-text {
-    display: none !important;
+@media only screen and (max-width: 700px) {
+  .p2d-logo-svg {
+    width: 30px;
   }
-}*/
+
+  .p2d-logo-text {
+    font-size: 2em;
+  }
+}
