@@ -1,0 +1,18 @@
+
+<svg width="369px" height="553px" viewBox="0 0 369 553" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Landing-Page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Left" transform="translate(-896.000000, -235.000000)">
+            <g id="closed_closet" transform="translate(900.000000, 238.000000)">
+                <polygon id="Path-50" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" points="0 27 0 525 319 525 319 27"></polygon>
+                <path d="M159.5,27 L159.5,525" id="Path-51" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"></path>
+                <polygon id="Path-52" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" points="131 249 131 311 140 311 140 249"></polygon>
+                <polygon id="Path-52" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" points="178 249 178 311 187 311 187 249"></polygon>
+                <polyline id="Path-53" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" points="29 525 29 546 57 546 57 525"></polyline>
+                <polyline id="Path-53" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" points="267 527 267 548 295 548 295 527"></polyline>
+                <polyline id="Path-42" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" points="319 27 361.321903 0.606411813 361.321903 500.336829 319 525"></polyline>
+                <path d="" id="Path-41" stroke="#979797" stroke-width="3"></path>
+                <polyline id="Path-43" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" points="361.321903 0.606411813 46.7688427 1.10641181 -1.13686838e-13 27"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>

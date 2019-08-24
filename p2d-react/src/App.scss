@@ -42,6 +42,18 @@
   margin-top: 10px;
 }
 
+.link-text {
+  font-size: 1em;
+  color: white;
+  margin-top: 100px;
+  font-weight: bold;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
 .body-image {
   flex-grow: 1;
   width: 50%;

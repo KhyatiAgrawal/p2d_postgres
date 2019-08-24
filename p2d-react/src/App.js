@@ -3,14 +3,18 @@ import './App.scss';
 import Navbar from './components/Navbar/Navbar.js';
 import './styles/fonts/fonts.scss'
 
-import closet from './styles/svgs/landing_page/closet.gif'
 import arrow from './styles/svgs/landing_page/down-arrow.svg'
+
+import closet1 from './styles/images/landing_page/closet1.png'
+import closet2 from './styles/images/landing_page/closet2.png'
+import closet3 from './styles/images/landing_page/closet3.png'
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       pageNumber: 0,
+      images: [closet1, closet2, closet3]
       text: ["Looking for something to wear?", "Faced with an empty closet?", "We've got you covered."]
     }
   }
@@ -47,11 +51,12 @@ class App extends React.Component {
         </div>
         <div className="body-container">
           <div className="body-image">
-            <img src={closet} className="body-image__img" />
+            <img src={{this.state.images[this.state.pageNumber]}} className="body-image__img" />
           </div>
         	<div className="body-text">
         		<div className="main-text">Don't stress. <br/> Just press to dress.</div>
             <div className="byline-text">{this.state.text[this.state.pageNumber]}</div>
+            <div className="link-text">Shop now > </div>
         	</div>
         </div>
         <div className="body-footer">
