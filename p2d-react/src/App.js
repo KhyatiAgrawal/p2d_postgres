@@ -14,7 +14,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       pageNumber: 0,
-      images: [closet1, closet2, closet3]
+      images: [closet1, closet2, closet3],
       text: ["Looking for something to wear?", "Faced with an empty closet?", "We've got you covered."]
     }
   }
@@ -51,7 +51,7 @@ class App extends React.Component {
         </div>
         <div className="body-container">
           <div className="body-image">
-            <img src={{this.state.images[this.state.pageNumber]}} className="body-image__img" />
+            <img src={this.state.images[this.state.pageNumber]} className="body-image__img" />
           </div>
         	<div className="body-text">
         		<div className="main-text">Don't stress. <br/> Just press to dress.</div>

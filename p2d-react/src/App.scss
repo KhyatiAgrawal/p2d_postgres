@@ -149,4 +149,14 @@
   .body-image__img {
     height: 40vh;
   }
+
+  .link-text {
+    text-align: center;
+    margin-top: 20px;
+
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
 }
