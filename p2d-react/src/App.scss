@@ -108,6 +108,12 @@
   z-index: 11;
 }
 
+.p2d-link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 700px) {
   .main-text {
     font-size: 2em;

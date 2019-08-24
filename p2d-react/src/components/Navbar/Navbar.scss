@@ -57,6 +57,14 @@
   opacity: 1;
 }
 
+.nav-link {
+  text-decoration: none;
+  color: inherit;
+  margin: 0;
+  height: 100%;
+  cursor: pointer;
+}
+
 .helper-text {
   width: 100%;
   visibility: hidden;
@@ -99,7 +107,6 @@
 }
 
 .hamburger-content__item {
-  margin-top: 20px;
   font-size: 1em;
   height: 100%;
   margin-right: 10px;
@@ -140,5 +147,9 @@
 
   .p2d-nav-item, .p2d-nav-img {
     margin-left: 10px;
+  }
+
+  .nav-link {
+    margin-top: 20px;
   }
 }

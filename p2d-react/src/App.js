@@ -56,13 +56,13 @@ class App extends React.Component {
         	<div className="body-text">
         		<div className="main-text">Don't stress. <br/> Just press to dress.</div>
             <div className="byline-text">{this.state.text[this.state.pageNumber]}</div>
-            <div className="link-text">Shop now > </div>
+            <a className="p2d-link" href="/feed"><div className="link-text">Shop now></div></a>
         	</div>
         </div>
         <div className="body-footer">
           <div className="dot-container">
             {this.state.text.map((item, index) => (
-              <span className={"dot" + (this.state.pageNumber === index ? ' selected' : '')} />))
+              <span className={"dot" + (this.state.pageNumber === index ? ' selected' : '')} onClick={() => {this.dotHandler(index)}}/>))
             }
           </div>
         </div>
