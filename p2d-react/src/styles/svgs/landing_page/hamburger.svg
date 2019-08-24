@@ -1,0 +1,12 @@
+
+<svg width="32px" height="17px" viewBox="0 0 32 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Sudoku" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="sudoku" transform="translate(-325.000000, -273.000000)" stroke="#FFFFFF">
+            <g id="Group" transform="translate(326.000000, 273.000000)">
+                <path d="M0,1 L30.5,1" id="Path-6"></path>
+                <path d="M0,8.5 L30.5,8.5" id="Path-7"></path>
+                <path d="M0,16 L30.5,16" id="Path-8"></path>
+            </g>
+        </g>
+    </g>
+</svg>

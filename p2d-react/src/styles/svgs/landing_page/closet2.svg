@@ -1,0 +1,35 @@
+
+<svg width="529px" height="591px" viewBox="0 0 529 591" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Landing-Page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Middle" transform="translate(-816.000000, -216.000000)">
+            <g id="open_closet" transform="translate(820.000000, 220.000000)">
+                <polyline id="Path-35" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" points="101 27 0 75.9869036 0.89380531 583 101 525.350395"></polyline>
+                <polyline id="Path-35" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" transform="translate(470.500000, 305.000000) scale(-1, 1) translate(-470.500000, -305.000000) " points="521 27 420 75.9869036 420.893805 583 521 525.350395"></polyline>
+                <path d="M101,126 L420,127" id="Path-36" stroke="#FFFFFF" stroke-width="4"></path>
+                <path d="M101,143.5 L420,143.5" id="Path-37" stroke="#FFFFFF" stroke-width="4"></path>
+                <path d="" id="Path-38" stroke="#979797" stroke-width="3"></path>
+                <polygon id="Path-50" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" points="101 27 101 525 420 525 420 27"></polygon>
+                <polyline id="Path-53" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" points="130 525 130 546 158 546 158 525"></polyline>
+                <polyline id="Path-53" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" points="368 527 368 548 396 548 396 527"></polyline>
+                <path d="" id="Path-41" stroke="#979797" stroke-width="5"></path>
+                <polyline id="Path-43" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" points="462.321903 0.606411813 147.768843 1.10641181 101 27"></polyline>
+                <polyline id="Path-44" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" points="420 27 462.321903 0.106411813 462.321903 47.0436052"></polyline>
+            </g>
+            <g id="hanger" transform="translate(938.000000, 342.000000)" stroke="#FFFFFF" stroke-width="2">
+                <path d="M47,4.52101858 C50.8635354,-1.50700619 54.3630019,-1.50700619 57.4983994,4.52101858 C58.8258666,7.0731687 58.8041132,8.92958662 58.9501163,10.7295024 C59.321389,15.3065254 57.4983994,17.805309 57.4983994,17.805309 C57.4983994,17.805309 55.3259798,20.6449177 53.2943322,21.723478 C50.5497801,23.1805047 47.7036444,22.9920388 47.446863,22.9920388" id="Path-39"></path>
+                <path d="M47,23 L47,30.1114609 C21.6556686,40.027049 7.37559456,46.4636406 4.15977777,49.4212358 C0.943960992,52.378831 -0.407307105,55.2384191 0.105973485,58 L40.5351628,58 L47,58" id="Path-40" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M94,23 L94,30.1114609 C68.6556686,40.027049 54.3755946,46.4636406 51.1597778,49.4212358 C47.943961,52.378831 46.5926929,55.2384191 47.1059735,58 L87.5351628,58 L94,58" id="Path-40" stroke-linecap="round" stroke-linejoin="round" transform="translate(70.500000, 40.500000) scale(-1, 1) translate(-70.500000, -40.500000) "></path>
+            </g>
+            <g id="hanger" transform="translate(1116.000000, 342.000000)" stroke="#FFFFFF" stroke-width="2">
+                <path d="M47,4.52101858 C51.1854967,-1.50700619 54.9765853,-1.50700619 58.373266,4.52101858 C59.8113555,7.0731687 59.7877893,8.92958662 59.9459593,10.7295024 C60.3481714,15.3065254 58.373266,17.805309 58.373266,17.805309 C58.373266,17.805309 56.0198115,20.6449177 53.8188599,21.723478 C50.8455951,23.1805047 47.7622814,22.9920388 47.4841016,22.9920388" id="Path-39"></path>
+                <path d="M48,23 L48,30.1114609 C22.1164275,40.027049 7.5325221,46.4636406 4.24828368,49.4212358 C0.964045268,52.378831 -0.415973213,55.2384191 0.10822824,58 L41.397613,58 L48,58" id="Path-40" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M95,23 L95,30.1114609 C69.1164275,40.027049 54.5325221,46.4636406 51.2482837,49.4212358 C47.9640453,52.378831 46.5840268,55.2384191 47.1082282,58 L88.397613,58 L95,58" id="Path-40" stroke-linecap="round" stroke-linejoin="round" transform="translate(71.000000, 40.500000) scale(-1, 1) translate(-71.000000, -40.500000) "></path>
+            </g>
+            <g id="hanger" transform="translate(1090.000000, 342.000000)" stroke="#FFFFFF" stroke-width="2">
+                <path d="M47,4.52101858 C50.8635354,-1.50700619 54.3630019,-1.50700619 57.4983994,4.52101858 C58.8258666,7.0731687 58.8041132,8.92958662 58.9501163,10.7295024 C59.321389,15.3065254 57.4983994,17.805309 57.4983994,17.805309 C57.4983994,17.805309 55.3259798,20.6449177 53.2943322,21.723478 C50.5497801,23.1805047 47.7036444,22.9920388 47.446863,22.9920388" id="Path-39"></path>
+                <path d="M47,23 L47,30.1114609 C21.6556686,40.027049 7.37559456,46.4636406 4.15977777,49.4212358 C0.943960992,52.378831 -0.407307105,55.2384191 0.105973485,58 L40.5351628,58 L47,58" id="Path-40" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M94,23 L94,30.1114609 C68.6556686,40.027049 54.3755946,46.4636406 51.1597778,49.4212358 C47.943961,52.378831 46.5926929,55.2384191 47.1059735,58 L87.5351628,58 L94,58" id="Path-40" stroke-linecap="round" stroke-linejoin="round" transform="translate(70.500000, 40.500000) scale(-1, 1) translate(-70.500000, -40.500000) "></path>
+            </g>
+        </g>
+    </g>
+</svg>
