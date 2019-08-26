@@ -22,6 +22,7 @@ class App extends React.Component {
   componentDidMount() {
     this.interval = setInterval(()=>{this.pageHandler(1)}, 2400);
   }
+  
   componentWillUnmount() {
     clearInterval(this.interval);
   }
