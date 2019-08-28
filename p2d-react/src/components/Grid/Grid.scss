@@ -13,13 +13,36 @@
 	flex-flow: row wrap;
 }
 
-.image-container {
+.dress-container {
 	height: 400px;
 	width: 300px;
 	flex-grow: 1;
-	background-color: #666;
-	margin: 3px;
+	margin: 15px;
 
 	display: flex;
 	flex-direction: column;
+	align-items: flex-start;
+	cursor: pointer;
+}
+
+.image-container {
+	background-color: #ccc;
+	width: 100%;
+	height: 100%;
+	&:hover {
+		opacity: 0.7;
+	}
+}
+
+.dress-title {
+	font-weight: bold;
+	margin-top: 5px;
+}
+
+.dress-retail {
+	text-decoration: line-through;
+}
+
+.dress-rental {
+	font-weight: 500;
 }

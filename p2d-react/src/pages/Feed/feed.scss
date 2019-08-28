@@ -44,6 +44,7 @@
 	align-items: center;
 	justify-content: center;
 	height: 100%;
+	cursor: pointer;
 }
 
 .filter-content__container {
@@ -57,6 +58,7 @@
 
 .grid-container {
 	margin-top: 20px;
+	position: relative;
 }
 
 .filter-content__item {
@@ -89,6 +91,39 @@
 		&:hover {
 			opacity: 1;
 		}
+	}
+}
+
+.bottom-bar {
+	width: 100%;
+	margin-top: 20px;
+	display: flex;
+	flex-shrink: 1;
+	color: $p2d-dark;
+	opacity: 1;
+
+	transition: visibility 0s, opacity 0.5s linear;;
+}
+
+.filter-title {
+	font-weight: bold;
+	color: $p2d-dark;
+}
+
+.filter-options {
+	margin-left: 10px;
+	flex-grow: 1;
+}
+
+.filter-option {
+	&:hover {
+		color: $p2d-gray;
+		cursor: pointer;
+	}
+
+	&.added {
+		color: $p2d-gray;
+		cursor: default !important;
 	}
 }
 
