@@ -11,7 +11,7 @@ class Grid extends Component {
 
 	render() {
     return (
-      <div className="grid-container">
+      <div className="grid__container">
         <div className="wrapper">
         {this.state.images.map((item, index) => (
           <div className="dress-container">

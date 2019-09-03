@@ -1,6 +1,6 @@
-.grid-container {
+.grid__container {
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: center;
 	width: 100%;
 }
@@ -15,7 +15,7 @@
 
 .dress-container {
 	height: 400px;
-	width: 300px;
+	width: 250px;
 	flex-grow: 1;
 	margin: 15px;
 

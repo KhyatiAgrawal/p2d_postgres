@@ -82,11 +82,11 @@
   display: inline-block;
   margin-left: 2px;
   margin-right: 2px;
-  background-color: white;
+  background-color: $p2d-gray;
 }
 
 .selected {
-  background-color: $p2d-gray;
+  background-color: white;
 }
 
 .body-footer {

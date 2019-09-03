@@ -52,53 +52,68 @@
 	align-items: center;
 	justify-content: flex-start;
 	overflow-x: scroll;
+	width: 100%;
 }
 
 ::-webkit-scrollbar {display:none;}
 
+.empty-filter {
+	display: flex;
+	align-items: center;
+	color: $p2d-dark;
+	font-size: 16px;
+	width: 100%;
+	justify-content: center;
+}
+
 .grid-container {
 	margin-top: 20px;
-	position: relative;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
 }
 
 .filter-content__item {
-	border: 1.5px solid $p2d-reg;
+	border: 1.5px solid $p2d-dark;
 	border-radius: 10px;
 	height: 30px;
 	min-width: 150px;
-	color: $p2d-gray;
 	margin-right: 20px;
 	margin-left: 20px;
 	font-size: 14px;
-	cursor: pointer;
+	background-color: $p2d-dark;
+	color: white;
 
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-between;
+}
+
+.filter-content__img {
+	height: 40%;
+	margin-right: 10px;
+	cursor: pointer;
 
 	&:hover {
-		border-color: $p2d-reg;
-		background-color: $p2d-reg;
-		color: white;
-		opacity: 0.9;
-	}
-
-	&.selected {
-		border-color: $p2d-dark;
-		background-color: $p2d-dark;
-		color: white;
-
-		&:hover {
-			opacity: 1;
-		}
+		outline: 1px solid white;
+		outline-style: dotted;
+		outline-offset: 4px;
 	}
 }
 
+.filter-content__text {
+	margin-left: 10px;
+}
+
 .bottom-bar {
-	width: 100%;
-	margin-top: 20px;
+	width: 20%;
+	min-width: 150px;
+	left: 0;
+	margin-top: 15px;
+	margin-right: 15px;
 	display: flex;
-	flex-shrink: 1;
+	flex-direction: column;
+	align-items: flex-start;
 	color: $p2d-dark;
 	opacity: 1;
 
@@ -106,23 +121,48 @@
 }
 
 .filter-title {
+	width: 100%;
+	background-color: $p2d-lightgray;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.filter-title__text {
+	color: black;
 	font-weight: bold;
-	color: $p2d-dark;
+	margin-left: 10px;
+}
+
+.filter-title__img {
+	height: 30%;
+	width: auto;
+	margin-right: 10px;
+	cursor: pointer;
 }
 
 .filter-options {
-	margin-left: 10px;
-	flex-grow: 1;
+	width: 100%;
+	flex-direction: column;
+	background-color: $p2d-lightgray;
+	margin-bottom: 10px;
 }
 
 .filter-option {
+	padding: 10px;
+	height: 20px;
+	border-bottom: 1px solid black;
+	display: flex;
+	color: $p2d-gray;
+	align-items: center;
 	&:hover {
-		color: $p2d-gray;
+		color: $p2d-dark;
 		cursor: pointer;
 	}
 
 	&.added {
-		color: $p2d-gray;
+		color: #ccc;
 		cursor: default !important;
 	}
 }
