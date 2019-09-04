@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="39" height="39" version="1.1" style=""><rect id="backgroundrect" width="100%" height="100%" x="0" y="0" fill="none" stroke="none"/>
+    
+<g class="currentLayer" style=""><title>Layer 1</title><g id="Landing-Page" stroke="#94ddd9" stroke-width="1" fill="none" fill-rule="evenodd" class="" stroke-opacity="1">
+        <g id="Right" stroke="#94ddd9">
+            <rect id="Rectangle" stroke-width="2" stroke-linejoin="round" x="1" y="1" width="37" height="37" stroke="#94ddd9"/>
+            <path d="M14,1 L14,38 " id="Path-61" stroke="#94ddd9"/>
+            <path d="M26,1 L26,38 " id="Path-62" stroke="#94ddd9"/>
+            <path d="M1,14 L38,14 " id="Path-63" stroke="#94ddd9"/>
+            <path d="M1,26 L38,26 " id="Path-64" stroke="#94ddd9"/>
+        </g>
+    </g></g></svg>

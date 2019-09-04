@@ -14,8 +14,9 @@
 
 .body-container {
 	color: white;
-  height: 60vh;
+  height: 72vh;
   width: 100%;
+  margin-top: calc(2vw + 30px);
   position: relative;
 }
 
@@ -82,11 +83,11 @@
   display: inline-block;
   margin-left: 2px;
   margin-right: 2px;
-  background-color: white;
+  background-color: $p2d-medgray;
 }
 
 .selected {
-  background-color: $p2d-gray;
+  background-color: white;
 }
 
 .body-footer {
