@@ -11,12 +11,26 @@ import minus from '../../styles/svgs/minus.svg'
 import black_heart from '../../styles/svgs/black-heart.svg'
 import left_arrow from '../../styles/svgs/left-arrow.svg'
 
-import Dropdown from 'react-dropdown'
-import 'react-dropdown/style.css'
+import dress1 from '../../styles/images/mock_dresses/mockdress_1.jpeg'
+import dress2 from '../../styles/images/mock_dresses/mockdress_2.jpeg'
+import dress3 from '../../styles/images/mock_dresses/mockdress_3.jpeg'
 
 class Feed extends React.Component {
 	constructor(props) {
 		super(props)
+
+		let dresses = {}
+		for (var i = 0; i < 32; i++) {
+			dresses[i] = {
+				0: dress1,
+				1: dress2,
+				2: dress3,
+				title: 'Linen Midi Dress',
+				selected: 0,
+				total: 3,
+			}
+		}
+
 		let storedItems = JSON.parse(localStorage.getItem('state'))
 		this.state = {
 			filters: storedItems ? storedItems['filters'] : [],
@@ -28,7 +42,8 @@ class Feed extends React.Component {
 				max_price: storedItems ? storedItems['showFilters']['max_price'] : false,
 				availability: storedItems ? storedItems['showFilters']['availability'] : false,
 				keyword: storedItems ? storedItems['showFilters']['keyword'] : false,
-			}
+			},
+			dresses: dresses
 		}
 	}
 
@@ -151,7 +166,7 @@ class Feed extends React.Component {
 						<div className="filter-options" style={!this.state.showFilters['keyword'] ? {display: 'none'} : {display: 'flex'}}>
 						</div>
 					</div>
-					<Grid images={new Array(20).fill(0)}/>
+					<Grid images={this.state.dresses}/>
 				</div>
 			</div>
 		);
