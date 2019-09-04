@@ -8,6 +8,7 @@ import hamburger_green from '../../styles/svgs/landing_page/hamburger-green.svg'
 import cross from '../../styles/svgs/cross.svg'
 import plus from '../../styles/svgs/plus.svg'
 import minus from '../../styles/svgs/minus.svg'
+import black_heart from '../../styles/svgs/black-heart.svg'
 
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
@@ -15,55 +16,72 @@ import 'react-dropdown/style.css'
 class Feed extends React.Component {
 	constructor(props) {
 		super(props)
+		let storedItems = JSON.parse(localStorage.getItem('state'))
 		this.state = {
-			filters: props.filters || [],
-			activeFilters: new Array(props.filters ? props.filters.length : 0).fill(false),
-			showSidebar: localStorage.getItem( 'showSidebar' ) || false,
+			filters: storedItems ? storedItems['filters'] : [],
+			activeFilters: storedItems ? storedItems['activeFilters'] : new Array(0).fill(false),
+			showSidebar: storedItems ? storedItems['showSidebar'] : true,
 			showFilters: {
-				occasion: false,
-				size: false,
-				max_price: false,
-				availability: false,
-				keyword: false
+				occasion: storedItems ? storedItems['showFilters']['occasion'] : false,
+				size: storedItems ? storedItems['showFilters']['size'] : false,
+				max_price: storedItems ? storedItems['showFilters']['max_price'] : false,
+				availability: storedItems ? storedItems['showFilters']['availability'] : false,
+				keyword: storedItems ? storedItems['showFilters']['keyword'] : false,
 			}
 		}
 	}
 
 	toggleFilter = (index) => {
-		this.state.activeFilters[index] = !this.state.activeFilters[index]
-		this.state.filters = (this.state.filters.slice(0, index)).concat(this.state.filters.slice(index+1, this.state.filters.length))
-		this.forceUpdate()
+		let newFilters = this.state.filters.slice()
+		let newActiveFilters = this.state.activeFilters.slice()
+		newActiveFilters[index] = newActiveFilters[index]
+		newFilters = (newFilters.slice(0, index)).concat(newFilters.slice(index+1, newFilters.length))
+
+		this.setState({
+			filters: newFilters,
+			activeFilters: newActiveFilters
+		})
 	}
 
 	toggleMenu = () => {
-		localStorage.setItem('showSidebar', !this.state.showSidebar);
 		this.setState({
 			showSidebar: !this.state.showSidebar,
 		})
 	}
 
 	toggleFilterDisplay = (filter) => {
-		this.state.showFilters[filter] = !this.state.showFilters[filter]
-		this.forceUpdate()
+		let newShowFilters = {}
+		Object.assign(newShowFilters, this.state.showFilters);
+		newShowFilters[filter] = !newShowFilters[filter]
+
+		this.setState({
+			showFilters: newShowFilters,
+		})
 	}
 
 	addFilter = (filter) => {
-		this.state.filters.unshift(filter)
-		this.state.activeFilters.unshift(true)
-		this.state.filters = this.state.filters.slice(0, 7)
-		this.state.activeFilters = this.state.activeFilters.slice(0, 7)
-		this.forceUpdate()
+		let newFilters = this.state.filters.slice()
+		let newActiveFilters = this.state.activeFilters.slice()
+
+		newFilters.unshift(filter)
+		newActiveFilters.unshift(true)
+		newFilters = newFilters.slice(0, 7)
+		newActiveFilters = newActiveFilters.slice(0, 7)
+
+		this.setState({
+			filters: newFilters,
+			activeFilters: newActiveFilters
+		})
 	}
 
 	render() {
-		const options = [
-		  'one', 'two', 'three'
-		]
+		localStorage.setItem('state', JSON.stringify(this.state))
 		return (
 			<div className="Feed">
 				<div><Navbar weight="heavy"/></div>
 				<div className="feed-title__container">
 					<div className="feed-title__text">Explore our custom inventory</div>
+					<img src={black_heart} className="feed-title__img" />
 				</div>
 				<div className="filter-container">
 					<div className="filter-container__item" onClick={this.toggleMenu}>
