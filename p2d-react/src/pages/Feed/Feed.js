@@ -9,6 +9,7 @@ import cross from '../../styles/svgs/cross.svg'
 import plus from '../../styles/svgs/plus.svg'
 import minus from '../../styles/svgs/minus.svg'
 import black_heart from '../../styles/svgs/black-heart.svg'
+import left_arrow from '../../styles/svgs/left-arrow.svg'
 
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
@@ -88,7 +89,10 @@ class Feed extends React.Component {
 					</div>
 					<div className="filter-content__container" >
 						{(this.state.filters.length === 0) 
-							? <div className="empty-filter">select filters from the sidebar!</div>
+							? <div className="empty-filter">
+									<img className="empty-filter__img" src={left_arrow} />
+									select filters from the sidebar!
+								</div>
 							: this.state.filters.map((item, index) => (
               <div className="filter-content__item">
 								<div className="filter-content__text">{this.state.filters[index]}</div>
