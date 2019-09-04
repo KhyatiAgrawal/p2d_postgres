@@ -65,8 +65,6 @@ class Feed extends React.Component {
 
 		newFilters.unshift(filter)
 		newActiveFilters.unshift(true)
-		newFilters = newFilters.slice(0, 7)
-		newActiveFilters = newActiveFilters.slice(0, 7)
 
 		this.setState({
 			filters: newFilters,
