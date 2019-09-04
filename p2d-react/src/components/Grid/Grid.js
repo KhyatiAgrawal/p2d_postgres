@@ -44,9 +44,7 @@ class Grid extends Component {
                   src={arrow_right}
                   className="dress-overlay__arrow dress-overlay__right"
                   onClick={() => {this.nextDress(key, 1)}}
-                />
-                <div className="dress-overlay__dot-container">
-                </div>          
+                />        
               </div>
             </div>
             <div className="dress-title">{this.state.images[index].title}</div>
