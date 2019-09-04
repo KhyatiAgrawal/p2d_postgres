@@ -46,8 +46,8 @@ class Navbar extends Component {
     const weight = this.props.weight || "light"
 
     return (
-      <div>
-        <div className='p2d-nav'>
+      <div className={"p2d-nav " + weight}>
+        <div className='p2d-nav__container'>
           <div className='p2d-nav-logo'>
             <Logo weight={this.props.weight || "light"} showText={true}/>
           </div>
