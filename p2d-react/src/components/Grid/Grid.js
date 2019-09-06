@@ -13,6 +13,10 @@ class Grid extends Component {
     for (var key in props.images) {
       images[key] = props.images[key]
       images[key].modal = false
+      images[key].size = "Medium"
+      images[key].brand = "Urban Outfitters"
+      images[key].availability = "Available"
+      images[key].occasion = "Lawnparties"
     }
     this.state = {
       images: images
@@ -43,7 +47,6 @@ class Grid extends Component {
   }
 
 	render() {
-    console.log(this.state.images[0])
     return (
       <div className="grid__container">
         <div className="wrapper">

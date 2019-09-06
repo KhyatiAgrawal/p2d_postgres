@@ -1,0 +1,38 @@
+@import '../../index.scss';
+
+.cart {
+	&__container {
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		position: absolute;
+		padding-left: 5vw;
+		padding-top: 20px;
+		padding-right: 5vw;
+		color: $p2d-gray;
+	}
+}
+
+.cart-title {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: calc(5vw + 40px);
+	
+	&__text {
+		color: $p2d-gray;
+		font-size: 32px;
+		font-weight: bold;
+	}
+}
+
+@media only screen and (max-width: 700px) {
+	.cart-title {
+		margin-top: calc(5vw + 60px);
+
+		&__text {
+			font-size: 18px;
+		}
+	}
+}

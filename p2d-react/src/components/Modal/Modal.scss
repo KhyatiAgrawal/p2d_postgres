@@ -1,3 +1,5 @@
+@import "../../index.scss";
+
 .backdrop, .modal {
 	top: 50%;
 	left: 50%;
@@ -20,8 +22,8 @@
 	padding: 1em;
 	background: white;
 	border-radius: 3px;
-	height: 35em;
-	width: 50em;
+	height: 80vh;
+	width: 60vw;
 	overflow-y: scroll;
 }
 
@@ -42,6 +44,10 @@
 	&__thumbnail-img {
 		width: 50%;
 		margin-bottom: 10px;
+
+		&.selected {
+			opacity: 0.5;
+		}
 	}
 
 	&__main {
@@ -49,11 +55,50 @@
 	}
 
 	&__text-container {
-		margin-left: 20px;
+		margin-left: 40px;
 	}
 
 	&__text {
 		font-size: 20px;
+	}
+}
+
+.circle-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	margin-right: 10px;
+
+	&__text {
+		margin-top: 10px;
+	}
+}
+
+.circle {
+    border: 1px solid $p2d-gray;
+    background-color: #FFFFFF;
+    height: 50px;
+    border-radius: 50%;
+    width: 50px;
+    margin-top: 30px;
+
+    display: flex;
+	align-items: center;
+	justify-content: center;
+
+	&:hover {
+		background-color: $p2d-lightgray;
+	}
+}
+
+.cart {
+	display: flex;
+	justify-content: flex-start;
+	font-size: 12px;
+
+	&__icon {
+		height: 40%;
 	}
 }
 
