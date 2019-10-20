@@ -6,6 +6,8 @@ import createHistory from 'history/createBrowserHistory';
 
 import App from './App';
 import Feed from './pages/Feed/Feed'
+import Cart from './pages/Cart/Cart'
+import Favorites from './pages/Favorites/Favorites'
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
@@ -18,6 +20,8 @@ ReactDOM.render(
 		<Switch>
 			<Route exact path="/" component={() => <App />} />
 			<Route exact path="/feed" component={Feed} />
+			<Route exact path="/cart" component={Cart} />
+			<Route exact path="/favorites" component={Favorites} />
 		</Switch>
   </BrowserRouter>
 , document.getElementById('root'));
