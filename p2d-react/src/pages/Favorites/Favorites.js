@@ -3,10 +3,11 @@ import './Favorites.scss';
 
 import Navbar from '../../components/Navbar/Navbar';
 import DressDisplay from '../../components/DressDisplay/DressDisplay';
+import Grid from '../../components/Grid/Grid';
 
-import dress1 from '../../styles/images/mock_dresses/mockdress_1.jpeg'
-import dress2 from '../../styles/images/mock_dresses/mockdress_2.jpeg'
-import dress3 from '../../styles/images/mock_dresses/mockdress_3.jpeg'
+import dress1 from '../../styles/images/mock_dresses/key_dresses/01.jpg'
+import dress2 from '../../styles/images/mock_dresses/key_dresses/01.jpg'
+import dress3 from '../../styles/images/mock_dresses/key_dresses/01.jpg'
 
 class Favorites extends Component {
   constructor(props) {
@@ -43,7 +44,7 @@ class Favorites extends Component {
           <div className="fav-title__text">{"My Favorites (" + this.state.total + ")"}</div>
         </div>
         <div className="fav-body">
-          <div className="fav-dresses"><DressDisplay dresses={this.state.dresses} /></div>
+          <div className="fav-dresses"><Grid images={this.state.dresses} /></div>
         </div>
       </div>
     );

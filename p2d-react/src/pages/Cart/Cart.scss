@@ -30,41 +30,42 @@
 .cart-body {
 	display: flex;
 	justify-content: center;
+	align-items: flex-start;
 	margin-top: 20px;
+	width: 100%
 }
 
 .cart-dresses {
-	flex-grow: 1;
-	max-width: 70%;
+	width: 60%;
 }
 
 .cart-summary {
 	color: $p2d-gray;
-	background-color: $p2d-lightgray;
 
 	display: flex;
-	flex: 2 0 auto;
 	flex-direction: column;
 	justify-content: flex-start;
+	width: 40%;
 
 	&__title {
 		margin-left: auto;
 		margin-right: auto;
 		margin-top: 20px;
-		font-weight: bold;
+		font-weight: bold	
 	}
 
 	&__items {
 		font-family: "Roboto";
-		margin-top: 20px;
+		padding-top: 20px;
 		margin-left: 40px;
 		margin-right: 40px;
 		padding-bottom: 10px;
 		border-bottom: 1px solid $p2d-gray;
+
 	}
 
 	&__item {
-		margin-bottom: 3px;
+		padding-bottom: 3px;
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
@@ -77,7 +78,10 @@
 	}
 
 	&__submit {
-		margin: 20px auto 0px auto;
+		margin-top: 20px;
+		margin-bottom: 20px;
+		margin-left: auto;
+		margin-right: auto;
 		background-color: $p2d-dark;
 		color: white;
 		height: 35px;
@@ -109,5 +113,27 @@
 		&__text {
 			font-size: 18px;
 		}
+	}
+
+	.cart-summary {
+		font-size: 12px;
+		width: 50%;
+
+		&__items, &__total, &__submit, &__title {
+			margin-right: 0;
+			margin-left: 0;
+		}
+
+		&__total {
+			max-width: 100px;
+		}
+	}
+
+	.cart-dresses {
+		width: 30%;
+	}
+
+	.cart-body {
+		justify-content: space-between;
 	}
 }

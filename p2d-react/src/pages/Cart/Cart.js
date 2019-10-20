@@ -4,9 +4,9 @@ import './Cart.scss';
 import Navbar from '../../components/Navbar/Navbar';
 import DressDisplay from '../../components/DressDisplay/DressDisplay';
 
-import dress1 from '../../styles/images/mock_dresses/mockdress_1.jpeg'
-import dress2 from '../../styles/images/mock_dresses/mockdress_2.jpeg'
-import dress3 from '../../styles/images/mock_dresses/mockdress_3.jpeg'
+import dress1 from '../../styles/images/mock_dresses/key_dresses/01.jpg'
+import dress2 from '../../styles/images/mock_dresses/key_dresses/01.jpg'
+import dress3 from '../../styles/images/mock_dresses/key_dresses/01.jpg'
 
 class Cart extends Component {
   constructor(props) {
@@ -58,8 +58,8 @@ class Cart extends Component {
           <div className="cart-title__text">{"My Cart (" + this.state.total + ")"}</div>
         </div>
         <div className="cart-body">
-          <div className="cart-dresses"><DressDisplay dresses={this.state.dresses} /></div>
-          <div className="cart-summary" style={{maxHeight: this.state.total * 46}}>
+          <div className="cart-dresses"><DressDisplay dresses={this.state.dresses} cart={true} /></div>
+          <div className="cart-summary" style={{maxHeight: this.state.total * 30 + 195}}>
             <div className="cart-summary__title">Your Try-On Request</div>
             <div className="cart-summary__items">
               {Object.keys(this.state.dresses).map((key, index) => (
