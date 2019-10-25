@@ -6,10 +6,16 @@
   left: 0;
   right: 0;
   position: absolute;
-  background-color: $p2d-reg;
   padding-left: 5vw;
   padding-top: 20px;
   padding-right: 5vw;
+  background-size: cover;
+  background-blend-mode: saturation;
+  background-position: top center;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  -webkit-transition: background-image 0.3s ease-in-out;
+  transition: background-image 0.3s ease-in-out;
 }
 
 .body-container {
@@ -38,8 +44,8 @@
 
 .byline-text {
   font-size: 1.5em;
-  color: $p2d-gray;
-  font-weight: bold;
+  color: white;
+  /*font-weight: bold;*/
   margin-top: 10px;
   font-family: "Roboto";
 }
@@ -122,12 +128,10 @@
   }
 
   .body-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
-  }
-
-  .body-text, .body-image {
-    width: 100%;
-    height: auto;
   }
 
   .body-image {
@@ -150,6 +154,7 @@
   }
 
   .byline-text {
+    display: none;
     font-size: 16px;
     text-align: center;
   }

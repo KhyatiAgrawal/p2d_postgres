@@ -17,9 +17,12 @@ class Grid extends Component {
       images[key].brand = "Urban Outfitters"
       images[key].availability = "Available"
       images[key].occasion = "Lawnparties"
+      images[key].price = "$14.99"
+      images[key].principal = true
+      images[key].total = 3
     }
     this.state = {
-      images: images
+      images: images,
     }
   }
 
@@ -37,10 +40,19 @@ class Grid extends Component {
     })
   }
 
-  toggleQuickView = (key) => {
-    console.log('reached function')
+  toggleQuickView = (key, index) => {
     let images = this.state.images
     images[key].modal = !images[key].modal
+    this.setState({
+      images: images
+    })
+
+    // console.log(this.state.images[key].modal)
+  }
+
+  toggleDress = (key) => {
+    let images = this.state.images
+    images[key].principal = !this.state.images[key].principal
     this.setState({
       images: images
     })
@@ -51,30 +63,23 @@ class Grid extends Component {
       <div className="grid__container">
         <div className="wrapper">
         {Object.keys(this.state.images).map((key, index) => ( 
-          <div className="dress-container">
+          <div className="dress-container" onMouseOver={() => this.toggleDress(index)}
+                onMouseOut={() => this.toggleDress(index)}>
             <div className="image-container">
               <img
-                src={this.state.images[index][this.state.images[index]['selected']]}
+                src={this.state.images[index].principal ? this.state.images[index][0] : this.state.images[index][1]}
                 className="image-container__img"
               />
-              <div className='dress-overlay' onClick={() => {this.toggleQuickView(key)}}>
-                <img
-                  src={arrow_left}
-                  className="dress-overlay__arrow"
-                  onClick={() => {this.nextDress(key, -1)}}
-                />
-                <img
-                  src={arrow_right}
-                  className="dress-overlay__arrow dress-overlay__right"
-                  onClick={() => {this.nextDress(key, 1)}}
-                />        
+              <div className='dress-overlay' onClick={() => {this.toggleQuickView(key)}}>    
               </div>
-              <div className="modal-container" style={this.state.images[index]['modal'] ? {display: 'block'} : {display: 'none'}}>
-                <Modal image={this.state.images[key]} onClick={() => {this.toggleQuickView(key)}}/>
+              <div className="modal-container" style={this.state.images[index].modal ? {display: 'block'} : {display: 'none'}} >
+                <Modal image={this.state.images[index]} onClick={() => {this.toggleQuickView(key)}}/>
               </div>
             </div>
-            <div className="dress-title">{this.state.images[index].title}</div>
-            <div className="dress-rental"> Rental Price: $14.99 </div>
+            <div className="dress-title__container">
+              <div className="dress-title">{this.state.images[index].title}</div>
+              <div className="dress-rental">{this.state.images[index].price}</div>
+            </div>
           </div>
         ))}
       </div>

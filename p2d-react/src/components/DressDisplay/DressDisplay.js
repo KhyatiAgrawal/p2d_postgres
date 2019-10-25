@@ -15,7 +15,7 @@ class DressDisplay extends Component {
       dresses[key].occasion = "Lawnparties"
     }
     this.state = {
-      dresses: dresses
+      dresses: dresses,
     }
   }
 
@@ -33,6 +33,9 @@ class DressDisplay extends Component {
                 <div>{"Occasion: " + this.state.dresses[index].occasion}</div>
                 <div>{"Brand: " + this.state.dresses[index].brand}</div>
                 <div>{"Availability: " + this.state.dresses[index].availability}</div>
+                <div className="cart-button" style={this.props.cart ? { display: 'flex'} : {display: 'none'}}>
+                  <div className="cart-button__content">Remove from cart</div>
+              </div>
               </div>
             </div>
           ))
