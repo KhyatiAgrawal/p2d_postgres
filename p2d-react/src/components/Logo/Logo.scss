@@ -1,0 +1,51 @@
+@import "../../index.scss";
+
+.p2d-logo {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: auto;
+  margin-right: 5px;
+}
+
+.p2d-logo-container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: auto;
+}
+
+.p2d-logo-img {
+  fill: $p2d-reg;
+
+  &.light {
+    fill: white;
+  }
+}
+
+.p2d-logo-svg {
+  width: 40px;
+}
+
+.p2d-logo-text {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  font-size: 2.5em;
+  color: $p2d-reg;
+  font-weight: medium;
+
+  &.light {
+    color: white;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .p2d-logo-svg {
+    width: 30px;
+  }
+
+  .p2d-logo-text {
+    font-size: 2em;
+  }
+}

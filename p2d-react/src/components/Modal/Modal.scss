@@ -1,0 +1,158 @@
+@import "../../index.scss";
+
+.backdrop, .modal {
+	top: 50%;
+	left: 50%;
+	position: fixed;
+	transform: translate(-50%, -50%);
+	z-index: 11;
+}
+
+.backdrop {
+	background: rgba(0, 0, 0, 0.6);
+	height: 100%;
+	width: 100%;
+}
+
+.modal {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 1em;
+	background: white;
+	border-radius: 3px;
+	height: 80vh;
+	width: 60vw;
+	overflow-y: scroll;
+}
+
+.image-container {
+	height: 90%;
+	width: 100%;
+	display: flex;
+	align-items: flex-start;
+
+	&__thumbnail-container {
+		width: 20%;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	&__thumbnail-img {
+		width: 50%;
+		margin-bottom: 10px;
+
+		&.selected {
+			opacity: 0.5;
+		}
+	}
+
+	&__main {
+		height: 100%;
+	}
+
+	&__text-container {
+		margin-left: 40px;
+	}
+
+	&__text {
+		font-size: 20px;
+	}
+}
+
+.circle-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	margin-right: 10px;
+
+	&__text {
+		margin-top: 10px;
+	}
+}
+
+.circle {
+    border: 1px solid $p2d-gray;
+    background-color: #FFFFFF;
+    height: 50px;
+    border-radius: 50%;
+    width: 50px;
+    margin-top: 30px;
+
+    display: flex;
+	align-items: center;
+	justify-content: center;
+
+	&:hover {
+		background-color: $p2d-lightgray;
+	}
+}
+
+.cart {
+	display: flex;
+	justify-content: flex-start;
+	font-size: 12px;
+
+	&__icon {
+		height: 40%;
+	}
+}
+
+@media only screen and (max-device-width: 480px) {
+	.modal {
+		height: 27em;
+		width: 75vw;
+	}
+}
+
+.modal-title {
+	font-family: "NYTKarnak";
+}
+
+.modal-button {
+	border-radius: 25px;
+	border: 1px solid black;
+	background: white;
+	padding: 0.5em;
+	width: 120px;
+	height: 35px;
+	font-family: "NYTFranklinBold";
+	font-size: 14px;
+}
+
+.modal-text-container {
+	text-align: left;
+	max-width: 400px;
+	font-size: 13.5px;
+	padding: 0 2.5em 0 2.5em;
+	line-height: 16px;
+}
+
+.modal-item {
+	margin: 0;
+	padding-bottom: 0.4em;
+	padding-top: 0.4em;
+}
+
+.exit {
+	position: absolute;
+	font-family: "NYTFranklinLight";
+	font-size: 24px;
+	top: 0;
+	right: 0;
+	width: 15px;
+	height: 15px;
+	margin: 0.6em 0.6em 0 0;
+}
+
+.exit:hover {
+	cursor: pointer;
+}
+
+.small-font {
+    font-size: 0.75em;
+}

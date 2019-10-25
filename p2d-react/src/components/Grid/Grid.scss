@@ -1,0 +1,73 @@
+.grid__container {
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	width: 100%;
+}
+
+.wrapper {
+	width: 100%;
+	display: flex;
+	align-items:flex-start;
+	align-content: flex-start;
+	flex-flow: row wrap;
+}
+
+.dress-container {
+	width: 250px;
+	flex-grow: 1;
+	margin: 15px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	cursor: pointer;
+}
+
+.image-container {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	position: relative;
+
+	&__img {
+		width: 100%;
+	}
+}
+
+.dress-title {
+	font-weight: bold;
+	margin-top: 5px;
+}
+
+.dress-retail {
+	text-decoration: line-through;
+}
+
+.dress-rental {
+	font-weight: 500;
+}
+
+.dress-overlay {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+
+	&__arrow {
+		margin-top: 70%;
+		height: 20px;
+		z-index: 20;
+	}
+
+	&:hover {
+		opacity: 1;
+		background-color: rgba(0, 0, 0, 0.3);
+	}
+
+	&__right {
+		float: right;
+	}
+}
