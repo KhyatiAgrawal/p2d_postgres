@@ -1,4 +1,4 @@
-from .models import Collection
+from .models import Dress
 from .models import UserInfo
 import django_filters
 
@@ -8,10 +8,10 @@ class DressFilter(django_filters.FilterSet):
  brand = django_filters.CharFilter(lookup_expr='icontains')
  title = django_filters.CharFilter(lookup_expr='icontains')
  price = django_filters.NumberFilter(lookup_expr='lte')
- for_sale = django_filters.BooleanFilter(lookup_expr='exact')
+ description = django_filters.CharFilter(lookup_expr='icontains')
  class Meta:
-     model = Collection
-     fields = ['size', 'brand', 'occasions', 'price', 'title', 'for_sale']
+     model = Dress
+     fields = ['size', 'brand', 'occasions', 'price', 'title']
 
 class UserFilter(django_filters.FilterSet):
  class Meta:

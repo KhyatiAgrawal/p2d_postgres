@@ -1,8 +1,17 @@
-from django.shortcuts import render, get_object_or_404
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from rest_framework import status
+
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import UserInfo
-from .models import Collection
+from .models import Dress
 from .models import Carts
-from .models import Notifications
+from .models import Alerts 
+from .serializers import *
+
+
+from django.shortcuts import render, get_object_or_404
+
 from django.http import HttpResponse
 from django.core.mail import send_mail, BadHeaderError
 from django.shortcuts import redirect
@@ -12,363 +21,186 @@ from django.contrib.auth.decorators import login_required
 from .filters import DressFilter
 from django.core.mail import EmailMessage
 
+
+# Confirm stuff here 
+# Make sure this works for all dresses 
 @login_required
-def create_account(request):
-    return render(request, 'signup.html', {})
-
-def table(request):
-    return render(request, 'home.html', {})
-
-def notFound(request):
-    response = render(request,'404.html', {})
-    response.status_code = 404
-    return response
-
-@login_required
-def trial(request):
-    user = UserInfo.objects.get(username = request.user.username)
-    notif_list = Notifications.objects.filter(to_notify = user)
-    notif_list = reversed(notif_list)
-    notif_unseen = Notifications.objects.filter(to_notify = user, seen = False)
-    brand_list = []
-    for dress in Collection.objects.all():
-            if dress.brand not in brand_list and dress.brand != '':
-                brand_list.append(dress.brand)
-    brand_list.sort()
-    return render(request, 'feed.html', {'filter': Collection.objects.all().order_by('price'), 'notifications': notif_list, 'unseen': notif_unseen, 'brands': brand_list})
+def dress_list(request):
+    """
+    List of dresses according to the search request passed
+    """
+    # to do
+    # Get dress list using filter and tssearch
+    # Apply other filters
+    # Serialize return query set
+    # Right now this is using old search method
+    # See if you can use tssearch for better searches
+    if request.method == 'GET':
+        dress_list = Dress.objects.all()
+    if request.method == 'PUT':
+        dress_list = DressFilter(request.data, queryset=Dress.objects.all())
+    serializer = DressesSerializer(dress_filter, context={'request': request})  
+    if serializer.is_valid():
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @login_required
-def upload_another(request):
-    user = UserInfo.objects.get(username = request.user.username)
-    notif_list = Notifications.objects.filter(to_notify = user)
-    notif_list = reversed(notif_list)
-    notif_unseen = Notifications.objects.filter(to_notify = user, seen = False)
-    return render(request, 'uploadanother.html', {'notifications': notif_list, 'unseen': notif_unseen})
-
-@login_required
-def update_info(request):
-    if request.method == 'POST':
-        user = UserInfo.objects.get(username = request.user.username)
-        user.gender = request.POST['gender']
-        user.email = request.POST['email']
-        user.phone = request.POST['phone']
-        sizes = request.POST.getlist('sizes[]')
-        s = ""
-        for c in sizes:
-            s = s  + c + " "
-        user.size = sizes
-
-        user.save()
-    user_info = UserInfo.objects.get(username = request.user.username)
-    notif_list = Notifications.objects.filter(to_notify = user_info)
-    notif_list = reversed(notif_list)
-    notif_unseen = Notifications.objects.filter(to_notify = user_info, seen = False)
-    return render(request, 'updateinfo.html', {'user': user_info, 'notifications': notif_list, 'unseen': notif_unseen})
-
-def home(request):
-    users = UserInfo.objects.all()
-    return render(request, 'homepage.html', {})
-
-@login_required
-def upload_dresses(request):
-    if request.method == 'POST':
-        u = request.user.username
-        g = request.POST['gender']
-        e = request.POST['email']
-        m = request.POST['phone']
-        sizes = request.POST.getlist('sizes[]')
-        s = ""
-        for c in sizes:
-            s = s  + c + " "
-
-        user = UserInfo.objects.create(
-            username = u,
-            size = s,
-            gender = g,
-            email = e,
-            phone = m,
-        )
-    return render(request, 'uploaddresses.html', {})
-
-@login_required
-def upload_pic(request):
-    if request.method == 'POST':
-        ni = request.user.username
-        img = request.FILES['dressupload']
-        p = request.POST['price']
-        b = request.POST['brand']
-        s = request.POST['size']
-        fs = request.POST['saleorrent']
-        occs = request.POST.getlist('occasions[]')
-        o= ""
-        for c in occs:
-            o = o  + c + " "
-        desc = request.POST['desc']
-        dress = Collection.objects.create(
-            photo = img,
-            size = s,
-            brand = b,
-            occasions = o,
-            price = p,
-            title = desc,
-            for_sale = fs,
-            condition = 'good',
-            total_likes = 0,
-            seller = UserInfo.objects.get(username__iexact = ni)
+def getOrUpdate_cart(request):
+    # The given username should exist in the cart table
+    username = request.user.username
+    try:
+        cart = Carts.objects.get(user=username)
+    except Carts.DoesNotExist:
+        # if cart doesn't exist create an empty cart object
+        cart = Carts.objects.create(
+            user = username
             )
-    user = UserInfo.objects.get(username = request.user.username)
-    notif_list = Notifications.objects.filter(to_notify = user)
-    notif_list = reversed(notif_list)
-    notif_unseen = Notifications.objects.filter(to_notify = user, seen = False)
-    brand_list = []
-    for dress in Collection.objects.all():
-        if dress.brand not in brand_list and dress.brand != '':
-            brand_list.append(dress.brand)
-        brand_list.sort()
-    return render(request, 'feed.html', {'filter':Collection.objects.all().order_by('price'), 'notifications': notif_list, 'unseen': notif_unseen, 'brands': brand_list})
+        cart.save()
+
+    # return the cart if the request is a GET request
+    if request.method == 'GET':
+        # Serialize the cart object and return
+        serializer = DressesSerializer(cart.dressesAdded, context={'request': request})
+        return Response(serializer.data)
+ 
+    # update the cart if the request is a POST request
+    elif request.method == 'PUT':
+        dressObj = Dress.objects.get(id = request.PUT['dressToAdd'])
+        cart.dressesAdded.add(dressObj)
+        cart.save()
+        serializer = DressesSerializer(cart.dressesAdded, context={'request': request})  
+        if serializer.is_valid():
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        dressObj = Dress.objects.get(id = request.DELETE['dressToDelete'])
+        cart.dressesAdded.remove(dressObj)
+        cart.save()
+        serializer = DressesSerializer(cart.dressesAdded, context={'request': request})  
+        if serializer.is_valid():
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @login_required
-def handle_new_user(request):
-    ni = request.user.username
-    if UserInfo.objects.filter(username = ni).exists():
-        user = UserInfo.objects.get(username = request.user.username)
-        notif_list = Notifications.objects.filter(to_notify = user)
-        notif_list = reversed(notif_list)
-        notif_unseen = Notifications.objects.filter(to_notify = user, seen = False)
-        brand_list = []
-        for dress in Collection.objects.all():
-            if dress.brand not in brand_list and dress.brand != '':
-                brand_list.append(dress.brand)
-        brand_list.sort()
-        return render(request, 'feed.html', {'filter': Collection.objects.all().order_by('price'), 'notifications': notif_list, 'unseen': notif_unseen, 'brands': brand_list})
-    else:
-        return render(request, 'signup.html', {})
+def getOrUpdate_favorite(request):
+    # The given username should exist in the favorites table
+    username = request.user.username
+    try:
+        userFavorites= Carts.objects.get(user=username)
+    except Carts.DoesNotExist:
+        # if no dress is liked 
+        userFavorites = Carts.objects.create(
+            user = username
+            )
+        userFavorites.save()
+
+    # return the favorites if the request is a GET request
+    if request.method == 'GET':
+        # Serialize the object and return
+        serializer = DressesSerializer(userFavorites.dressesLiked, context={'request': request})     
+        return Response(serializer.data)
+ 
+    # update the favorites if the request is a POST request
+    elif request.method == 'PUT':
+        dressObj = Dress.objects.get(id = request.PUT['dressToAdd'])
+        userFavorites.dressesLiked.add(dressObj)
+        userFavorites.save()
+        serializer = DressesSerializer(userFavorites.dressesLiked, context={'request': request})  
+        if serializer.is_valid():
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        dressObj = Dress.objects.get(id = request.DELETE['dressToDelete'])
+        userFavorites.dressesAdded.remove(dressObj)
+        userFavorites.save()
+        serializer = DressesSerializer(userFavorites.dressesLiked, context={'request': request})
+        if serializer.is_valid():
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @login_required
-def search(request):
-    dress_list = Collection.objects.order_by('price')
-    # s = request.POST['size']
-    # o = request.POST['occasions']
-    # b = request.POST['brand']
-    # p = request.POST['price']
-    # fs = request.POST['for_sale']
-    # keyword = request.POST['title']
-    dress_filter = DressFilter(request.POST, queryset=dress_list)
+def getOrUpdate_ForTrial(request):
+    # return the cart if the request is a GET request
+    uname = request.user.username
+    cart = Carts.objects.get(user=uname)
+    tentativeDresses = []
+    for DressObj in cart.dressesAdded:
+        # Change this line below
+        # Only allow a dress to appear once in the alerts table
+        # Add the first five not booked for trial dresses to
+        # the tentative trial dresses
+        existing = alerts_dressesSelected.objects.filter(dress_id=DressObj.id)
+        if len(existing) == 0:
+            tentativeDresses.append(dressObj)
+        if len(tentativeDresses) == 5:
+            break
+    serializer = DressesSerializer(tentativeDresses, context={'request': request})  
+    if serializer.is_valid():
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    user = UserInfo.objects.get(username = request.user.username)
-    notif_list = Notifications.objects.filter(to_notify = user)
-    notif_list = reversed(notif_list)
-    notif_unseen = Notifications.objects.filter(to_notify = user, seen = False)
+# @login_required
+# def getAvailableTimes(request):
+    # Here is where you need to:
+    # Pull times from google calendar labeled pressToDress pickup
+    # Show the user options for the next two days
+    
 
-    brand_list = []
-    for dress in dress_list:
-        if dress.brand not in brand_list and dress.brand != '':
-            brand_list.append(dress.brand)
-    brand_list.sort()
+# @login_required
+# def getOrUpdate_Alerts(request):
+    # here is where you input the modified date and time in the trial table
+    # The request will contain the list of dresses the user wants to book for trial
+    # The entries must be added with the specificied date and time in Alerts
+    # The entries must be removed from the users cart
+    # Allow a maximum of 5 dresses for trial per user
+    # The user must finish existing trial before starting a new one 
 
-    return render(request, 'feed.html', {'notifications': notif_list, 'filter': dress_filter.qs, 'unseen': notif_unseen, 'brands': brand_list})
 
-@login_required
-def initialfeed(request):
-    # dress_list = Collection.objects.all()
-    # dress_filter = DressFilter(request.GET, queryset=dress_list)
-    return render(request, 'feed.html', {'filter': Collection.objects.all()})
 
-@login_required
-def addtocart(request):
-    if request.method == 'POST':
-      a_by = UserInfo.objects.get(username__iexact = request.user.username)
-      i = request.POST['dress_id']
-      dress = Collection.objects.filter(id = i)[0]
-      ou = dress.seller
 
-    if Carts.objects.filter(dressInfo = dress, added_by = a_by).exists():
-        return HttpResponse(status=204)
 
-    t = a_by.username + " added " + dress.title.lower() + " to their cart!"
-    Carts.objects.create (
-        added_by = a_by,
-        owner = UserInfo.objects.get(username = ou),
-        dressInfo = dress
-    )
-    Notifications.objects.create (
-        text = t,
-        seen = False,
-        to_notify = UserInfo.objects.get(username = ou),
-    )
-    return HttpResponse(status=204)
 
 @login_required
-def deletefromcart(request):
-    if request.method == 'POST':
-      i = request.POST['dress_id']
-      Carts.objects.filter(id=i).delete()
-    return cart(request)
+def getOrUpdate_userInfo(request):
+    # The given username should exist in the favorites table
+    uname = request.user.username
+    try:
+        uInfo = UserInfo.objects.get(user=uname)
+    except UserInfo.DoesNotExist:
+        # if no dress is liked 
+        uInfo = UserInfo.objects.create(
+            username = uname
+            )
+        uInfo.save()
 
-@login_required
-def deletefromcollection(request):
-    if request.method == 'POST':
-        i = request.POST['dress_id']
-        dress = Collection.objects.get(id=i)
-        os.remove(os.path.join(settings.MEDIA_ROOT,str(dress.photo.name) ))
-        Collection.objects.filter(id=i).delete()
-        user = UserInfo.objects.get(username = request.user.username)
-        notif_list = Notifications.objects.filter(to_notify = user)
-        notif_list = reversed(notif_list)
-        notif_unseen = Notifications.objects.filter(to_notify = user, seen = False)
-    return mydresses(request)
+    # return the favorites if the request is a GET request
+    if request.method == 'GET':
+        # Serialize the object and return
+        serializer = UInfoSerializer(uInfo, context={'request': request})     
+        return Response(serializer.data)
+ 
+    # update the favorites if the request is a POST request
+    elif request.method == 'PUT':
+        uInfo.gender = request.PUT['gender']
+        uInfo.email = request.PUT['email']
+        uInfo.phone = request.PUT['phone']
+        sizes = request.PUT.getlist('sizes[]')
+        s = ""
+        for c in sizes:
+            s = s  + c + " "
+        uInfo.size = sizes
+        uInfo.save()
 
-@login_required
-def markavailable(request):
-    if request.method == 'POST':
-        i = request.POST['dress_id']
-        dress = Collection.objects.get(id=i)
-        dress.in_use = False
-        dress.save()
-    return mydresses(request)
+        serializer = UInfoSerializer(uInfo, context={'request': request})  
+        if serializer.is_valid():
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-@login_required
-def markunavailable(request):
-    if request.method == 'POST':
-        i = request.POST['dress_id']
-        dress = Collection.objects.get(id=i)
-        dress.in_use = True
-        dress.save()
-    return mydresses(request)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@login_required
-def like(request):
-    if request.method == 'POST':
-      l_by = request.user.username
-      i = request.POST['dress_id']
-      ou = Collection.objects.filter(id = i)[0].seller
-      dress = Collection.objects.filter(id = i)[0]
-      likes = dress.total_likes
-      likes = likes + 1
-      dress.total_likes = likes
-      t = l_by + " liked " + dress.title.lower() + "!"
-      if Notifications.objects.filter(text = t).exists():
-        return HttpResponse(status=204)
-      Notifications.objects.create (
-        text = t,
-        seen = False,
-        to_notify = UserInfo.objects.get(username = ou),
-    )
-    return HttpResponse(status=204)
 
-@login_required
-def cart(request):
-    u = UserInfo.objects.get(username = request.user.username)
-    this_cart = Carts.objects.filter(added_by = u)
-    notif_list = Notifications.objects.filter(to_notify = u)
-    notif_list = reversed(notif_list)
-    notif_unseen = Notifications.objects.filter(to_notify = u, seen = False)
-    return render(request, 'cart.html', {'filter': this_cart, 'notifications': notif_list, 'unseen': notif_unseen})
-
-@login_required
-def mydresses(request):
-    u = request.user.username
-    user = UserInfo.objects.get(username = u)
-    my_dresses = Collection.objects.filter(seller = user)
-    user = UserInfo.objects.get(username = request.user.username)
-    notif_list = Notifications.objects.filter(to_notify = user)
-    notif_list = reversed(notif_list)
-    notif_unseen = Notifications.objects.filter(to_notify = user, seen = False)
-    return render(request, 'mydresses.html', {'filter': my_dresses, 'notifications': notif_list, 'unseen': notif_unseen})
-
-@login_required
-def editdress(request):
-    if request.method=='GET':
-        i = request.GET['dress']
-        dress = Collection.objects.get(id=i)
-    user = UserInfo.objects.get(username = request.user.username)
-    notif_list = Notifications.objects.filter(to_notify = user)
-    notif_list = reversed(notif_list)
-    notif_unseen = Notifications.objects.filter(to_notify = user, seen = False)
-    return render(request, 'editdress.html', {'dress_info': [dress], 'notifications': notif_list, 'unseen': notif_unseen})
-
-@login_required
-def dressedited(request):
-    if request.method == 'POST':
-        i = request.POST['change']
-        # if type(i) != int or i > Collection.objects.latest('id').id:
-        #     return render(request,'404.html', {})
-        dress = Collection.objects.get(id=i)
-        # if dress.owner ==  UserInfo.objects.get(username = request.user.username):
-        dress.size = request.POST['size']
-        dress.price = request.POST['price']
-        dress.brand = request.POST['brand']
-        dress.for_sale = request.POST['saleorrent']
-        occs = request.POST.getlist('occasions[]')
-        o= ""
-        for c in occs:
-            o = o  + c + " "
-        dress.occasions = o
-        dress.title = request.POST['desc']
-        dress.save()
-        # else:
-        #     return render(request,'404.html', {})
-    return mydresses(request)
-
-@login_required
-def initial_feed(request):
-    return render('initialfeed.html', {'dresses': Collection.objects.all()})
-
-@login_required
-def get_liked(request):
-    u = UserInfo.objects.get(username = request.user.username)
-    my_liked = Notifications.objects.filter(text__contains = u.username + " liked")
-    notif_list = Notifications.objects.filter(to_notify = u)
-    notif_list = reversed(notif_list)
-    notif_unseen = Notifications.objects.filter(to_notify = u, seen = False)
-    my_dresses = [ ]
-    dresses = Collection.objects.all()
-    for d in dresses:
-        temp = my_liked.filter(text__contains = "liked " + d.title.lower() + "!")
-        for t in temp:
-            my_dresses.append(d)
-    return render(request, 'liked.html', {'filter': my_dresses, 'notifications': notif_list, 'unseen': notif_unseen})
-
-@login_required
-def rent(request):
-    r_by = request.user.username
-    i = request.GET['dress']
-    d = Collection.objects.get(id = i)
-    o = d.seller
-    context={
-      'object': [d]
-    }
-    t = r_by + " wants to rent your " + d.title.lower() + ", expect an email from them soon!"
-    if Notifications.objects.filter(text = t).exists() == False:
-        Notify = Notifications.objects.create (
-            text = t,
-            seen = False,
-            to_notify = o,
-        )
-    u = UserInfo.objects.get(username = request.user.username)
-    notif_list = Notifications.objects.filter(to_notify = u)
-    notif_list = reversed(notif_list)
-    notif_unseen = Notifications.objects.filter(to_notify = u, seen = False)
-    return render(request, 'rent.html', {'object':[d], 'notifications': notif_list, 'unseen': notif_unseen})
-
-@login_required
-def seen(request):
-    u = UserInfo.objects.get(username = request.user.username)
-    notif_list = Notifications.objects.filter(to_notify = u)
-    notif_list = reversed(notif_list)
-
-    for n in notif_list:
-        n.seen = True
-        n.save()
-
-    brand_list = []
-    for dress in Collection.objects.all():
-        if dress.brand not in brand_list and dress.brand != '':
-            brand_list.append(dress.brand)
-    brand_list.sort()
-    notif_unseen = Notifications.objects.filter(to_notify = u, seen = False)
-    #return render(request, 'feed.html', {'filter': Collection.objects.all(), 'notifications': notif_list, 'unseen': notif_unseen, 'brands': brand_list})
-    return trial(request)
 
 @login_required
 def send_email(request):
@@ -393,121 +225,4 @@ def send_email(request):
     else:
         return HttpResponse(status=204)
 
-@login_required
-def unlike(request):
-    if request.method == 'POST':
-        ul_by = request.user.username
-        title = request.POST['dress_title']
-        my_liked = Notifications.objects.filter(text__contains = ul_by + " liked")
-        to_delete = my_liked.filter(text__contains = "liked " + title.lower() + "!")
-        for t in to_delete:
-            Notifications.objects.get(id = t.id).delete()
-    return get_liked(request)
 
-
-@login_required
-def tutorial(request):
-    return render(request, 'tutorial.html', {})
-
-@login_required
-def buy(request):
-    r_by = request.user.username
-    i = request.GET['dress']
-    d = Collection.objects.get(id = i)
-    o = d.seller
-    t = r_by + " wants to buy your " + d.title.lower() + ", expect an email from them soon!"
-
-    context={
-      'object': [d]
-    }
-    if Notifications.objects.filter(text = t).exists() is False:
-        Notify = Notifications.objects.create (
-        text = t,
-        seen = False,
-        to_notify = o,
-         )
-    user = UserInfo.objects.get(username = request.user.username)
-    notif_list = Notifications.objects.filter(to_notify = user)
-    notif_list = reversed(notif_list)
-    notif_unseen = Notifications.objects.filter(to_notify = user, seen = False)
-    return render(request, 'buy.html', {'notifications': notif_list, 'unseen': notif_unseen, 'object':[d]})
-
-@login_required
-def about(request):
-    user = UserInfo.objects.get(username = request.user.username)
-    notif_list = Notifications.objects.filter(to_notify = user)
-    notif_list = reversed(notif_list)
-    notif_unseen = Notifications.objects.filter(to_notify = user, seen = False)
-    return render(request, 'about.html', {'notifications': notif_list, 'unseen': notif_unseen})
-
-@login_required
-def make_template(request):
-    if request.method == 'POST':
-        start_date = request.POST['rentalstart'][5:]
-        end_date = request.POST['rentalend'][5:]
-        extra_info = request.POST['extrainfo']
-        i = request.POST['dress_id']
-        dress = Collection.objects.get(id = i)
-        username = dress.seller.username
-
-        t = "Hi " + username+"!\n\n"  + "I want to rent your " + dress.title.lower() + " dress from " + start_date + " to " + end_date
-        t = t + ".\n\nLet me know what is a good place to pick it up from, and when I should come pick it up.\n\n" + extra_info
-        if extra_info != '':
-            t = t + "\n\n Best,\n" + request.user.username
-        else:
-            t = t + "Best,\n" + request.user.username
-
-        return render(request, 'rent.html', {'text': t, 'object':[dress]})
-    else:
-        return cart(request)
-
-@login_required
-def make_template_buy(request):
-    if request.method == 'POST':
-        pick_date = request.POST["pickupdate"][5:]
-        extra_info = request.POST['extrainfo']
-        i = request.POST['dress_id']
-        dress = Collection.objects.get(id = i)
-        username = dress.seller.username
-
-        t = "Hi " + username+"!\n\n"  + "I want to purchase your " + dress.title.lower() + " dress, and, I'd like to pick it up by " + pick_date
-        t = t + ".\n\nLet me know what is a good place to pick it up from, and when I should come pick it up.\n\n" + extra_info
-        if extra_info != '':
-            t = t + "\n\nBest,\n" + request.user.username
-        else:
-            t = t + "Best,\n" + request.user.username
-        return render(request, 'buy.html', {'text': t, 'object':[dress]})
-    else:
-        return cart(request)
-
-@login_required
-def upload_mobile(request):
-    return render(request, 'upload_mobile.html', {})
-
-@login_required
-def post_mobileupload(request):
-    if request.method == 'POST':
-        ni = request.user.username
-        img = request.FILES['dressupload']
-        p = request.POST['price']
-        b = request.POST['brand']
-        s = request.POST['size']
-        fs = request.POST['saleorrent']
-        occs = request.POST.getlist('occ[]')
-        o= ""
-        for c in occs:
-            o = o  + c + " "
-        desc = request.POST['desc']
-        dress = Collection.objects.create(
-            photo = img,
-            size = s,
-            brand = b,
-            occasions = o,
-            price = p,
-            title = desc,
-            for_sale = fs,
-            condition = 'good',
-            total_likes = 0,
-            seller = UserInfo.objects.get(username__iexact = ni)
-            )
-    return render(request, 'post_mobileupload.html', {})
