@@ -11,20 +11,32 @@ import minus from '../../styles/svgs/minus.svg'
 import black_heart from '../../styles/svgs/black-heart.svg'
 import left_arrow from '../../styles/svgs/left-arrow.svg'
 
-import dress1 from '../../styles/images/mock_dresses/mockdress_1.jpeg'
-import dress2 from '../../styles/images/mock_dresses/mockdress_2.jpeg'
-import dress3 from '../../styles/images/mock_dresses/mockdress_3.jpeg'
+import dress1 from '../../styles/images/mock_dresses/key_dresses/01.jpg'
 
 class Feed extends React.Component {
+
 	constructor(props) {
 		super(props)
 
+		const reqSvgs = require.context ( '../../styles/images/mock_dresses/key_dresses', true, /\.jpg$/ )
+		const paths = reqSvgs.keys ()
+
+		const images = paths.map( path => reqSvgs ( path ) )
+
+		const reqSvgsSecond = require.context ( '../../styles/images/mock_dresses/third_dresses', true, /\.jpg$/ )
+		const paths2 = reqSvgsSecond.keys ()
+
+		const second_dresses = paths2.map( path => reqSvgsSecond ( path ) )
+		const num_images = images.length;
 		let dresses = {}
-		for (var i = 0; i < 32; i++) {
+		for (var i = 0; i < images.length; i++) {
+			let keydress = images[i]
+			let second_dress = second_dresses[i]
+			console.log(second_dresses[i])
 			dresses[i] = {
-				0: dress1,
-				1: dress2,
-				2: dress3,
+				0: keydress,
+				1: second_dress,
+				2: keydress,
 				title: 'Linen Midi Dress',
 				selected: 0,
 				total: 3,
@@ -43,7 +55,7 @@ class Feed extends React.Component {
 				availability: storedItems ? storedItems['showFilters']['availability'] : false,
 				keyword: storedItems ? storedItems['showFilters']['keyword'] : false,
 			},
-			dresses: dresses
+			dresses: dresses,
 		}
 	}
 
@@ -123,11 +135,11 @@ class Feed extends React.Component {
 							<img src={this.state.showFilters['occasion'] ? minus : plus} className="filter-title__img" />
 						</div>
 						<div className="filter-options" style={!this.state.showFilters['occasion'] ? {display: 'none'} : {display: 'flex'}}>
-							<div className={"filter-option" + (this.state.filters.includes('lawnparties') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('lawnparties')) this.addFilter('lawnparties')}}>LAWNPARTIES</div>
-							<div className={"filter-option" + (this.state.filters.includes('formals') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('formals')) this.addFilter('formals')}}>FORMALS</div>
-							<div className={"filter-option" + (this.state.filters.includes('semi-formals') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('semi-formals')) this.addFilter('semi-formals')}}>SEMI-FORMALS</div>
-							<div className={"filter-option" + (this.state.filters.includes('interviews') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('interviews')) this.addFilter('interviews')}}>INTERVIEWS</div>
-							<div className={"filter-option" + (this.state.filters.includes('casual') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('casual')) this.addFilter('casual')}}>CASUAL</div>
+							<div className={"filter-option" + (this.state.filters.includes('lawnparties') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('lawnparties')) this.addFilter('lawnparties')}}>lawnparties</div>
+							<div className={"filter-option" + (this.state.filters.includes('formals') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('formals')) this.addFilter('formals')}}>formals</div>
+							<div className={"filter-option" + (this.state.filters.includes('semi-formals') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('semi-formals')) this.addFilter('semi-formals')}}>semi-formals</div>
+							<div className={"filter-option" + (this.state.filters.includes('interviews') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('interviews')) this.addFilter('interviews')}}>interviews</div>
+							<div className={"filter-option" + (this.state.filters.includes('casual') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('casual')) this.addFilter('casual')}}>casual</div>
 						</div>
 						<div className="filter-title" onClick={() => {this.toggleFilterDisplay('size')}}>
 							<div className="filter-title__text">SIZE</div>
@@ -166,7 +178,7 @@ class Feed extends React.Component {
 						<div className="filter-options" style={!this.state.showFilters['keyword'] ? {display: 'none'} : {display: 'flex'}}>
 						</div>
 					</div>
-					<Grid images={this.state.dresses}/>
+					<div className="feed-grid__container"><Grid images={this.state.dresses}/></div>
 				</div>
 			</div>
 		);

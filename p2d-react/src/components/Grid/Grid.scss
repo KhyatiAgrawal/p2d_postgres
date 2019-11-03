@@ -14,9 +14,9 @@
 }
 
 .dress-container {
-	width: 250px;
+	width: 300px;
 	flex-grow: 1;
-	margin: 15px;
+	margin: 0 0.5vw 0.5vw 0.5vw;
 
 	display: flex;
 	flex-direction: column;
@@ -37,17 +37,27 @@
 	}
 }
 
-.dress-title {
-	font-weight: bold;
+.dress-title__container {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	justify-content: space-between;
+}
+
+.dress-title, .dress-rental {
 	margin-top: 5px;
+	font-family: "Roboto";
+	font-weight: 200;
+	margin-right: 5px;
+	margin-left: 5px;
 }
 
 .dress-retail {
 	text-decoration: line-through;
 }
 
-.dress-rental {
-	font-weight: 500;
+.modal-container {
+	z-index: 100;
 }
 
 .dress-overlay {
@@ -55,19 +65,11 @@
 	height: 100%;
 	width: 100%;
 	opacity: 0;
-
-	&__arrow {
-		margin-top: 70%;
-		height: 20px;
-		z-index: 20;
-	}
-
-	&:hover {
-		opacity: 1;
-		background-color: rgba(0, 0, 0, 0.3);
-	}
-
-	&__right {
-		float: right;
-	}
 }
+
+/*.modal-container {
+	z-index: 100;
+	position: absolute;
+	height: 30vw;
+	width: 60vw;
+}*/
