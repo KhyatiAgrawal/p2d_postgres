@@ -1,11 +1,12 @@
 # Register your models here.
 from django.contrib import admin
 from .models import UserInfo
-from .models import Collection
+from .models import Dress
 from .models import Carts
-from .models import Notifications
+from .models import Alerts
 
 admin.site.register(UserInfo)
-admin.site.register(Collection)
+admin.site.register(Dress)
 admin.site.register(Carts)
-admin.site.register(Notifications)
+
+admin.site.register(Alerts)
