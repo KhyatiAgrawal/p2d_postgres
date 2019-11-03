@@ -22,13 +22,20 @@ class Feed extends React.Component {
 		const paths = reqSvgs.keys ()
 
 		const images = paths.map( path => reqSvgs ( path ) )
+
+		const reqSvgsSecond = require.context ( '../../styles/images/mock_dresses/third_dresses', true, /\.jpg$/ )
+		const paths2 = reqSvgsSecond.keys ()
+
+		const second_dresses = paths2.map( path => reqSvgsSecond ( path ) )
 		const num_images = images.length;
 		let dresses = {}
 		for (var i = 0; i < images.length; i++) {
 			let keydress = images[i]
+			let second_dress = second_dresses[i]
+			console.log(second_dresses[i])
 			dresses[i] = {
 				0: keydress,
-				1: dress1,
+				1: second_dress,
 				2: keydress,
 				title: 'Linen Midi Dress',
 				selected: 0,
