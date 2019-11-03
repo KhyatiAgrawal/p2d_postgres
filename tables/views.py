@@ -1,3 +1,4 @@
+from __future__ import print_function
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
@@ -21,6 +22,16 @@ from django.contrib.auth.decorators import login_required
 from .filters import DressFilter
 from django.core.mail import EmailMessage
 
+import datetime
+import pickle
+import os.path
+from googleapiclient.discovery import build
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
+
+
+# If modifying these scopes, delete the file token.pickle.
+SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 
 # Confirm stuff here 
 # Make sure this works for all dresses 
@@ -36,9 +47,9 @@ def dress_list(request):
     # Right now this is using old search method
     # See if you can use tssearch for better searches
     if request.method == 'GET':
-        dress_list = Dress.objects.all()
+        dress_filter = Dress.objects.all()
     if request.method == 'PUT':
-        dress_list = DressFilter(request.data, queryset=Dress.objects.all())
+        dress_filter = DressFilter(request.data, queryset=Dress.objects.all())
     serializer = DressesSerializer(dress_filter, context={'request': request})  
     if serializer.is_valid():
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -73,13 +84,15 @@ def getOrUpdate_cart(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    # Check if delete can be a method
+    # refer to Digital ocean link
     elif request.method == 'DELETE':
         dressObj = Dress.objects.get(id = request.DELETE['dressToDelete'])
         cart.dressesAdded.remove(dressObj)
         cart.save()
         serializer = DressesSerializer(cart.dressesAdded, context={'request': request})  
         if serializer.is_valid():
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @login_required
@@ -89,7 +102,7 @@ def getOrUpdate_favorite(request):
     try:
         userFavorites= Carts.objects.get(user=username)
     except Carts.DoesNotExist:
-        # if no dress is liked 
+        # if no dress is liked, create an empty favorites cart
         userFavorites = Carts.objects.create(
             user = username
             )
@@ -111,13 +124,15 @@ def getOrUpdate_favorite(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    # Check if delete can be a method
+    # refer to 
     elif request.method == 'DELETE':
         dressObj = Dress.objects.get(id = request.DELETE['dressToDelete'])
         userFavorites.dressesAdded.remove(dressObj)
         userFavorites.save()
         serializer = DressesSerializer(userFavorites.dressesLiked, context={'request': request})
         if serializer.is_valid():
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -125,42 +140,189 @@ def getOrUpdate_favorite(request):
 def getOrUpdate_ForTrial(request):
     # return the cart if the request is a GET request
     uname = request.user.username
-    cart = Carts.objects.get(user=uname)
-    tentativeDresses = []
-    for DressObj in cart.dressesAdded:
-        # Change this line below
-        # Only allow a dress to appear once in the alerts table
-        # Add the first five not booked for trial dresses to
-        # the tentative trial dresses
-        existing = alerts_dressesSelected.objects.filter(dress_id=DressObj.id)
-        if len(existing) == 0:
-            tentativeDresses.append(dressObj)
-        if len(tentativeDresses) == 5:
-            break
-    serializer = DressesSerializer(tentativeDresses, context={'request': request})  
-    if serializer.is_valid():
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# @login_required
-# def getAvailableTimes(request):
+    # If trial is already scheduled tell the user that the trial is scheduled
+    # and that they have an upcoming trial
+    try: 
+        alreadyScheduled = Alerts.objects.get(user=uname)
+
+        # Trial entries should expire after the trial time has been exceeded 
+        # Check format for storage for RDBMS Date time storage
+        # TO DO
+        dateTime_obj = dt.strptime(str(alreadyScheduled.trialDateAndTime), '%Y-%m-%dT%H:%M:%S-05:00')
+        
+        if  dateTime_obj > dt.now():
+            alreadyScheduled.delete()
+            # the function calls itself
+            return getOrUpdate_ForTrial(request)
+        else :
+            # send the existing trial details
+            serializer = AlertsSerializer(alreadyScheduled, context={'request': request})
+            if serializer.is_valid():
+                return return Response(serializer.data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    # If the they haven't scheduled their trial yet
+    # Show them the dresses they can reserve
+    except Alerts.DoesNotExist:
+        cart = Carts.objects.get(user=uname)
+        tentativeDresses = []
+        for DressObj in cart.dressesAdded:
+            # Only allow a dress to appear once in the alerts table
+            existing = alerts_dressesSelected.objects.filter(dress_id=DressObj.id)
+            if len(existing) == 0:
+                tentativeDresses.append(dressObj)
+
+            # Allow a maximum of 5 dresses for trial per user? (Discuss with Urvashi)
+            # if len(tentativeDresses) == 5:
+                # break
+
+        serializer = DressesSerializer(tentativeDresses, context={'request': request})  
+        if serializer.is_valid():
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@login_required
+def getAvailableTimes(request):
     # Here is where you need to:
     # Pull times from google calendar labeled pressToDress pickup
     # Show the user options for the next two days
-    
+    """Shows basic usage of the Google Calendar API.
+    Prints the start and name of the next 10 events on the user's calendar.
+    """
+    creds = None
+    # The file token.pickle stores the user's access and refresh tokens, and is
+    # created automatically when the authorization flow completes for the first
+    # time.
+    if os.path.exists('token.pickle'):
+        with open('token.pickle', 'rb') as token:
+            creds = pickle.load(token)
+    # If there are no (valid) credentials available, let the user log in.
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file(
+                'credentials.json', SCOPES)
+            creds = flow.run_local_server(port=0)
+        # Save the credentials for the next run
+        with open('token.pickle', 'wb') as token:
+            pickle.dump(creds, token)
 
-# @login_required
-# def getOrUpdate_Alerts(request):
-    # here is where you input the modified date and time in the trial table
-    # The request will contain the list of dresses the user wants to book for trial
-    # The entries must be added with the specificied date and time in Alerts
-    # The entries must be removed from the users cart
-    # Allow a maximum of 5 dresses for trial per user
-    # The user must finish existing trial before starting a new one 
+    service = build('calendar', 'v3', credentials=creds)
+
+    # Call the Calendar API
+    now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
+    print('Getting the upcoming 10 events')
+    events_result = service.events().list(calendarId='primary', timeMin=now,
+                                        maxResults=10, singleEvents=True,
+                                        orderBy='startTime').execute()
+    events = events_result.get('items', [])
+
+    for event in events:
+        startString = event['start'].get('dateTime')
+        endString = event['end'].get('dateTime')
+        eventSummary = event['summary']
+        temp = eventSummary.split("-")
+        if len(temp) == 2:
+            eventType = temp[0]
+            eventInCharge = temp[1]
+        else:
+            continue
+
+        start_time_obj = dt.strptime(startString, '%Y-%m-%dT%H:%M:%S-05:00')
+        end_time_obj = dt.strptime(endString, '%Y-%m-%dT%H:%M:%S-05:00')
+        now = dt.now().strftime("%Y-%m-%d %H:%M:%S")
+        
+        slots = []
+        if  start_time_obj <= dt.now() + datetime.timedelta(days=2) and eventType == "Pick up time":
+            slot = start_time_obj
+            while slot < end_time_obj:
+                slots.append({"DateTime": slot, "PersonIncharge": eventInCharge})
+                slot = slot + datetime.timedelta(minutes=30)
+
+        # Serialize the time slots found into json and return response
+        serializer = AvailableTimesSerializer(slots, many=True)
+        if serializer.is_valid():
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@login_required
+# here is where you input the trial date and time in the trial table
+def getOrUpdate_Alerts(request):
+    if request.method == 'GET':
+        try: 
+            trial = Alerts.objects.get(user=uname)
+            serializer = AlertsSerializer(trial, context={'request': request})
+            if serializer.is_valid():
+                return Response(serializer.data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Alerts.DoesNotExist: 
+            # return empty response
+            return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+    if request.method == 'PUT':
+
+        newTrial = Alerts.objects.create(
+            user = username
+            )
+
+        # Check format for RDBMS DateTime storage field
+        # TO DO
+        newTrial.trialDateAndTime = request.PUT['DateTime']
+
+        # Get the associated cart object
+        cart = Carts.objects.get(user=uname)
+
+        # The request will contain the list of dresses the user wants to book for trial
+        for dressId in request.PUT['dresses']:
+
+            dressObj = Dress.objects.get(id = dressId)
+
+            # The entries must be added with the specificied date and time in Alerts
+            newTrial.dressesSelected.add(dressObj)
+            # The entries must be removed from the users cart
+            cart.dressesAdded.remove(dressObj)
+
+        newTrial.save()
+
+        # Get the user info if exists
+        # Create the user info object if not
+        try:
+            uInfo = UserInfo.objects.get(user=uname)
+        except UserInfo.DoesNotExist:
+            uInfo = UserInfo.objects.create(
+            username = uname
+            email = str(uname) + "@princeton.edu"
+            )
+            uInfo.save()
+
+        emailId = uInfo.email
+
+        send_email_create(uname, emailId, newTrial, request.PUT['PersonIncharge']):
+        serializer = AlertsSerializer(newTrial, context={'request': request})
+        if serializer.is_valid():
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    # Handling cancellations
+    # User manually cancels trial
+    if request.method == 'DELETE':
+        try: 
+            trial = Alerts.objects.get(user=uname)
+        except:
+            return Response({}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Delete this trial 
+        trial.delete()
+            
+        uInfo = UserInfo.objects.get(user=uname)
+        emailId = uInfo.email
+        # Send email push to cancel the event
+        send_email(emailId, trial, request.PUT['PersonIncharge'], False)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 @login_required
@@ -173,6 +335,7 @@ def getOrUpdate_userInfo(request):
         # if no dress is liked 
         uInfo = UserInfo.objects.create(
             username = uname
+            email = str(uname) + "@princeton.edu"
             )
         uInfo.save()
 
@@ -201,28 +364,52 @@ def getOrUpdate_userInfo(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+def send_email_create(uname, userEmailId, trialObj, personIncharge):
+    # This should create a markup of the trial event
+    # The trial event should include location, username
+    # time, dresses booked for trial
+    # This event should be pushed in the form of an invite.ics
+    # to the user's preferred email
 
-@login_required
-def send_email(request):
-    if request.method == 'POST':
-        subject = "Update from PresstoDress: " + request.user.username + " wants to buy/rent your dress"
-        i = request.POST['dress_id']
-        dress = Collection.objects.get(id = i)
-        message = request.POST['template'] + "\n\nReply to this email directly to contact the buyer/renter!\nPS: please remember to mark your dress as 'in-use' in my dresses if the transaction works out!\n\nHave feedback? Send it here: https://docs.google.com/forms/d/e/1FAIpQLSfco1R_iKvJZ1QUK0kS-xzCKMydFLw4Dyt-Rv-ikzqrzNoYUg/viewform"
-        from_email = settings.DEFAULT_FROM_EMAIL
-        to_email = dress.seller.username + "@princeton.edu"
-        if subject and message and from_email:
-            try:
-                email = EmailMessage(subject, message, from_email, [to_email], reply_to = [request.user.username+"@princeton.edu"])
-                email.send(fail_silently=False)
-            except BadHeaderError:
-                return HttpResponse('Invalid header found.')
-            return render(request, 'emailsent.html', {})
-        else:
-            # In reality we'd use a form class
-            # to get proper validation errors.
-            return HttpResponse('Enter details properly')
-    else:
-        return HttpResponse(status=204)
+    # Check format here
+    # TO DO
+    start_dateTime_obj = dt.strptime(str(trialObj.trialDateAndTime), '%Y-%m-%dT%H:%M:%S-05:00')
+    end_dateTime_obj = start_dateTime_obj + datetime.timedelta(minutes = 30)
+
+
+    start_dateTime_str = start_dateTime_obj.strftime("%Y-%m-%dT%H:%M:%S-05:00")
+    end_dateTime_str = end_dateTime_obj.strftime("%Y-%m-%dT%H:%M:%S-05:00")
+
+    event = {
+    'summary': 'Press To Dress Trial for ' + str(uname),
+    'location': '34 Chamber Street, Princeton, NJ, 08544',
+    'description': 
+    'Your Press To Dress trial has been confirmed! Take a second to RSVP to this invite, so our team can assit you better. Happy Shopping!',
+    'start': {
+    'dateTime': start_dateTime_str,
+    'timeZone': 'America/New_York',
+    },
+    'end': {
+    'dateTime': end_dateTime_str,
+    'timeZone': 'America/New_York',
+    },
+    'attendees': [
+        {'email': userEmailId},
+        {'email': str(personIncharge) + '@princeton.edu'}
+    ],
+    'reminders': {
+    'useDefault': False,
+    'overrides': [
+      {'method': 'email', 'minutes': 24 * 60},
+      {'method': 'popup', 'minutes': 10},
+    ],
+    },
+    }
+    event = service.events().insert(calendarId='primary', body=event, sendNotifications= True).execute()
+    return
+
+def send_email_delete(userEmailId, eventId, personIncharge):
+    # Look up how to delete google event using calendar api
+    # Silently delete event
 
 

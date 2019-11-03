@@ -11,7 +11,7 @@ class DressFilter(django_filters.FilterSet):
  description = django_filters.CharFilter(lookup_expr='icontains')
  class Meta:
      model = Dress
-     fields = ['size', 'brand', 'occasions', 'price', 'title']
+     fields = ['size', 'brand', 'occasions', 'price', 'title', 'description']
 
 class UserFilter(django_filters.FilterSet):
  class Meta:
