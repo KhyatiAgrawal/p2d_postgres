@@ -9,11 +9,15 @@ import heart from '../../styles/svgs/heart.svg';
 import cart from '../../styles/svgs/cart.svg';
 import account from '../../styles/svgs/account.svg';
 import feed from '../../styles/svgs/feed.svg';
+import hanger from '../../styles/svgs/hanger_white.svg';
+import history from '../../styles/svgs/history.svg';
 import bell_green from '../../styles/svgs/bell-green.svg';
 import heart_green from '../../styles/svgs/heart-green.svg';
 import cart_green from '../../styles/svgs/cart-green.svg';
 import account_green from '../../styles/svgs/account-green.svg';
 import feed_green from '../../styles/svgs/feed-green.svg';
+import hanger_green from '../../styles/svgs/hanger_green.svg';
+import history_green from '../../styles/svgs/history_green.svg';
 
 class Navbar extends Component {
   constructor(props) {
@@ -22,8 +26,8 @@ class Navbar extends Component {
       showHamburger: false,
       content_icon: (this.props.weight === "heavy") ? hamburger_green : hamburger,
       icons: (this.props.weight === "heavy")
-              ? [account_green, feed_green, bell_green, heart_green, cart_green]
-              : [account, feed, bell, heart, cart]
+              ? [account_green, feed_green, history_green, heart_green, cart_green]
+              : [account, feed, history, heart, cart]
     }
   }
 
@@ -67,7 +71,7 @@ class Navbar extends Component {
             <a className="nav-link" href="/#">
               <div className='p2d-nav-img'>
                 <img src={this.state.icons[2]} className='nav-svg' alt="notifications" />
-                <div className={'helper-text ' + weight}>alerts</div>
+                <div className={'helper-text ' + weight}>orders</div>
               </div>
             </a>
             <a className="nav-link" href="/favorites">

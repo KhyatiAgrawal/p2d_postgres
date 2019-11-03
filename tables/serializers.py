@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Dress
 from .models import Alerts
+from .models import UserInfo
 
 # Basic serializer
 class DressSerializer(serializers.ModelSerializer):
@@ -43,12 +44,12 @@ class AlertsSerializer(serializers.ModelSerializer):
         fields = ('user','dressSelected', 'trialDateAndTime')
 
 class UInfoSerializer(serializers.Serializer):
-	class Meta:
-        model = UserInfo 
+    class Meta:
+        model = UserInfo
         fields = ('username','size', 'gender', 'email', 'phone')
 
 class AvailableTimesSerializer(serializers.Serializer):
     """Your data serializer, define your fields here."""
-   DateTime = serializers.DateTimeField()
-   PersonIncharge = serializers.CharField(max_length=30)()
+    DateTime = serializers.DateTimeField()
+    PersonIncharge = serializers.CharField(max_length=30)
 

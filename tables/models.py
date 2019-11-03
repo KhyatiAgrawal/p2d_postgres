@@ -13,9 +13,9 @@ class Dress(models.Model):
     id = models.IntegerField(primary_key=True)
 
     # The three views of the photos
-    view1 = models.ImageField(upload_to='../p2d-react/src/dresses/view1', blank=True)
-    view2 = models.ImageField(upload_to='../p2d-react/src/dresses/view2', blank=True)
-    view3 = models.ImageField(upload_to='../p2d-react/src/dresses/view3', blank=True)
+    view1 = models.ImageField(upload_to='./dresses/view1', blank=True)
+    view2 = models.ImageField(upload_to='./dresses/view2', blank=True)
+    view3 = models.ImageField(upload_to='./dresses/view3', blank=True)
 
     # Information about the dress
     size = models.CharField(max_length=10)
@@ -39,7 +39,7 @@ class Carts(models.Model):
 class Alerts(models.Model):
     user = models.ForeignKey(UserInfo, related_name='UserWhoBooked', on_delete=models.CASCADE)
     dressesSelected = models.ManyToManyField(Dress)
-    eventId = models.CharField(max_length=100)
+    # eventId = models.CharField(max_length=100)
     trialDateAndTime = models.DateTimeField(null=True)
 
 # Calendar stuff (Google Calender api)
