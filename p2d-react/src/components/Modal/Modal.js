@@ -8,7 +8,6 @@ import heart_gray from '../../styles/svgs/black-heart.svg';
 class Modal extends Component {
   constructor(props) {
     super(props)
-    console.log(props.image.total)
     let dresses = []
     for (var i = 0; i < props.image.total; i++) {
       dresses.push(props.image[i])

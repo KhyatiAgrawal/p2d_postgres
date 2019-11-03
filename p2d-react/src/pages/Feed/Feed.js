@@ -3,6 +3,7 @@ import './feed.scss';
 
 import Navbar from '../../components/Navbar/Navbar';
 import Grid from '../../components/Grid/Grid';
+import retrieveData from '../../components/retrieveData';
 
 import hamburger_green from '../../styles/svgs/landing_page/hamburger-green.svg'
 import cross from '../../styles/svgs/cross.svg'
@@ -12,6 +13,9 @@ import black_heart from '../../styles/svgs/black-heart.svg'
 import left_arrow from '../../styles/svgs/left-arrow.svg'
 
 import dress1 from '../../styles/images/mock_dresses/key_dresses/01.jpg'
+import axios from 'axios';
+const API_URL = 'http://127.0.0.1:8000';
+const api_endpoint = new retrieveData();
 
 class Feed extends React.Component {
 
@@ -23,20 +27,25 @@ class Feed extends React.Component {
 
 		const images = paths.map( path => reqSvgs ( path ) )
 
-		const reqSvgsSecond = require.context ( '../../styles/images/mock_dresses/third_dresses', true, /\.jpg$/ )
+		const reqSvgsSecond = require.context ( '../../styles/images/mock_dresses/second_dresses', true, /\.jpg$/ )
 		const paths2 = reqSvgsSecond.keys ()
 
 		const second_dresses = paths2.map( path => reqSvgsSecond ( path ) )
+
+		const reqSvgsThird = require.context ( '../../styles/images/mock_dresses/third_dresses', true, /\.jpg$/ )
+		const paths3 = reqSvgsThird.keys ()
+
+		const third_dresses = paths3.map( path => reqSvgsThird ( path ) )
 		const num_images = images.length;
 		let dresses = {}
 		for (var i = 0; i < images.length; i++) {
 			let keydress = images[i]
 			let second_dress = second_dresses[i]
-			console.log(second_dresses[i])
+			let third_dress = third_dresses[i]
 			dresses[i] = {
 				0: keydress,
 				1: second_dress,
-				2: keydress,
+				2: third_dress,
 				title: 'Linen Midi Dress',
 				selected: 0,
 				total: 3,
@@ -56,7 +65,35 @@ class Feed extends React.Component {
 				keyword: storedItems ? storedItems['showFilters']['keyword'] : false,
 			},
 			dresses: dresses,
+			trial_dresses: {},
 		}
+
+		this.fetchDresses = this.fetchDresses.bind(this)
+	}
+
+	fetchDresses() {
+	    // api_endpoint.getAllDresses().then(function (result) {
+	    //     this.setState({ trial_dresses:  result.data })
+	    // });
+
+	    let ex = {}
+	    async function test () {
+			try {
+			  let res = await axios.get(`${API_URL}/api/feed/`)
+			  console.log(JSON.stringify(res.data));
+			  for (let i in res.data) {
+			  	ex[i] = res.data[i]
+			  }
+			} catch (e) {
+			  console.log(e.response) // undefined
+			}
+		}
+		test()
+		this.setState({trial_dresses: ex})
+	}
+
+	componentDidMount() {
+		this.fetchDresses();
 	}
 
 	toggleFilter = (index) => {
@@ -101,6 +138,7 @@ class Feed extends React.Component {
 	}
 
 	render() {
+		console.log(this.state.trial_dresses);
 		localStorage.setItem('state', JSON.stringify(this.state))
 		return (
 			<div className="Feed">

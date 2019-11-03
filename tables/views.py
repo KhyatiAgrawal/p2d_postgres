@@ -28,14 +28,16 @@ import os.path
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
+from rest_framework.decorators import api_view, renderer_classes
 
 
 # If modifying these scopes, delete the file token.pickle.
-SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
+SCOPES = ['https://www.googleapis.com/auth/calendar.events']
 
 # Confirm stuff here 
 # Make sure this works for all dresses 
-@login_required
+# @login_required
+@api_view((['GET', 'POST']))
 def dress_list(request):
     """
     List of dresses according to the search request passed
@@ -50,10 +52,10 @@ def dress_list(request):
         dress_filter = Dress.objects.all()
     if request.method == 'PUT':
         dress_filter = DressFilter(request.data, queryset=Dress.objects.all())
-    serializer = DressesSerializer(dress_filter, context={'request': request})  
-    if serializer.is_valid():
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    serializer = DressSerializer(dress_filter, many=True, context={'request': request})
+    print(serializer.data)  
+    return Response(serializer.data, status=status.HTTP_200_OK, template_name=None)
+    # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @login_required
 def getOrUpdate_cart(request):
@@ -159,7 +161,7 @@ def getOrUpdate_ForTrial(request):
             # send the existing trial details
             serializer = AlertsSerializer(alreadyScheduled, context={'request': request})
             if serializer.is_valid():
-                return return Response(serializer.data)
+                return Response(serializer.data)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     # If the they haven't scheduled their trial yet
@@ -294,14 +296,14 @@ def getOrUpdate_Alerts(request):
             uInfo = UserInfo.objects.get(user=uname)
         except UserInfo.DoesNotExist:
             uInfo = UserInfo.objects.create(
-            username = uname
+            username = uname,
             email = str(uname) + "@princeton.edu"
             )
             uInfo.save()
 
         emailId = uInfo.email
 
-        send_email_create(uname, emailId, newTrial, request.PUT['PersonIncharge']):
+        send_email_create(uname, emailId, newTrial, request.PUT['PersonIncharge'])
         serializer = AlertsSerializer(newTrial, context={'request': request})
         if serializer.is_valid():
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -334,7 +336,7 @@ def getOrUpdate_userInfo(request):
     except UserInfo.DoesNotExist:
         # if no dress is liked 
         uInfo = UserInfo.objects.create(
-            username = uname
+            username = uname,
             email = str(uname) + "@princeton.edu"
             )
         uInfo.save()
@@ -408,7 +410,7 @@ def send_email_create(uname, userEmailId, trialObj, personIncharge):
     event = service.events().insert(calendarId='primary', body=event, sendNotifications= True).execute()
     return
 
-def send_email_delete(userEmailId, eventId, personIncharge):
+# def send_email_delete(userEmailId, eventId, personIncharge):
     # Look up how to delete google event using calendar api
     # Silently delete event
 
