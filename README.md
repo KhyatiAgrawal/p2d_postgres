@@ -3,6 +3,12 @@ Press To Dress using postgres database
 
 General instructions for using Git
 
+To dump the database on your local computer follow:
+1) Navigate to the folder containing "db.sql"
+2) Issue command
+$ pg_dump -f db.sql -U admin2 p2d_postgresdb
+3) Push when ready
+
 To migrate the database on your local computer follow the following steps:
 
 1) Navigate to the p2d_postgres directory
