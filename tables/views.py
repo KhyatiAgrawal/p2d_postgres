@@ -50,8 +50,9 @@ def dress_list(request):
     if request.method == 'GET':
         dress_filter = Dress.objects.all()
     if request.method == 'PUT':
+        print(request.data)
         dress_filter = DressFilter(request.data, queryset=Dress.objects.all())
-    serializer = DressSerializer(dress_filter, many=True, context={'request': request})
+    serializer = DressSerializer(dress_filter, many=True)
     print(serializer.data)  
     return Response(serializer.data, status=status.HTTP_200_OK, template_name=None)
     # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
