@@ -12,7 +12,6 @@ class Modal extends Component {
     for (var i = 0; i < props.image.total; i++) {
       dresses.push(props.image[i])
     }
-
     this.state = {
       dresses: dresses,
       selected: props.image.selected,
@@ -44,14 +43,13 @@ class Modal extends Component {
             <img className="modalimage-container__main" src={this.props.image[this.state.selected]} />
             <div className="modalimage-container__text-container">
               <div className="modalimage-container__text"><b>{this.props.image.title}</b></div>
-              <div><p className="dress-info">A summery, light dress perfect for lawnparties.</p></div>
-              <div><p className="dress-info">Our rental price: $15.00</p></div>
-              <br />
+              <div><p className="dress-info">{this.props.image.description}</p></div>
+              <div><p className="dress-info"><b>Our rental price: </b>${this.props.image.price}.00</p></div>
               <div className="dress-info"><b>Dress information:</b></div>
               <div className="dress-info">{"Size: " + this.props.image.size}</div>
-              <div className="dress-info">{"Occasion: " + this.props.image.occasion}</div>
+              <div className="dress-info">{"Occasion: " + this.props.image.occasion.join(" ")}</div>
               <div className="dress-info">{"Brand: " + this.props.image.brand}</div>
-              <div className="dress-info">{"Availability: " + this.props.image.availability}</div>
+              <div className="dress-info">{"Booked for: " + this.props.image.availability}</div>
               <div className="cart">
                 <div className="circle-container">
                   <div className="circle">

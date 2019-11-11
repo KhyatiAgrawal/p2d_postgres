@@ -11,6 +11,7 @@ import account from '../../styles/svgs/account.svg';
 import feed from '../../styles/svgs/feed.svg';
 import hanger from '../../styles/svgs/hanger_white.svg';
 import history from '../../styles/svgs/history.svg';
+import faq from '../../styles/svgs/faq.svg';
 import bell_green from '../../styles/svgs/bell-green.svg';
 import heart_green from '../../styles/svgs/heart-green.svg';
 import cart_green from '../../styles/svgs/cart-green.svg';
@@ -18,6 +19,7 @@ import account_green from '../../styles/svgs/account-green.svg';
 import feed_green from '../../styles/svgs/feed-green.svg';
 import hanger_green from '../../styles/svgs/hanger_green.svg';
 import history_green from '../../styles/svgs/history_green.svg';
+import faq_green from '../../styles/svgs/faq-green.svg';
 
 class Navbar extends Component {
   constructor(props) {
@@ -26,8 +28,8 @@ class Navbar extends Component {
       showHamburger: false,
       content_icon: (this.props.weight === "heavy") ? hamburger_green : hamburger,
       icons: (this.props.weight === "heavy")
-              ? [account_green, feed_green, history_green, heart_green, cart_green]
-              : [account, feed, history, heart, cart]
+              ? [account_green, feed_green, history_green, heart_green, cart_green, faq_green]
+              : [account, feed, history, heart, cart, faq]
     }
   }
 
@@ -68,7 +70,7 @@ class Navbar extends Component {
                 <div className={'helper-text ' + weight}>feed</div>
               </div>
             </a>
-            <a className="nav-link" href="/#">
+            <a className="nav-link" href="/orders">
               <div className='p2d-nav-img'>
                 <img src={this.state.icons[2]} className='nav-svg' alt="notifications" />
                 <div className={'helper-text ' + weight}>orders</div>
@@ -84,6 +86,12 @@ class Navbar extends Component {
               <div className='p2d-nav-img'>
                 <img src={this.state.icons[4]} className='nav-svg' alt="cart" />
                 <div className={'helper-text ' + weight}>cart</div>
+              </div>
+            </a>
+            <a className="nav-link" href="/#">
+              <div className='p2d-nav-img'>
+                <img src={this.state.icons[5]} className='nav-svg' alt="faq" />
+                <div className={'helper-text ' + weight}>FAQs</div>
               </div>
             </a>
           </div>

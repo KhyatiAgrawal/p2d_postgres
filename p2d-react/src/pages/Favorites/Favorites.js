@@ -5,9 +5,9 @@ import Navbar from '../../components/Navbar/Navbar';
 import DressDisplay from '../../components/DressDisplay/DressDisplay';
 import Grid from '../../components/Grid/Grid';
 
-import dress1 from '../../styles/images/mock_dresses/key_dresses/01.jpg'
-import dress2 from '../../styles/images/mock_dresses/key_dresses/01.jpg'
-import dress3 from '../../styles/images/mock_dresses/key_dresses/01.jpg'
+import dress1 from '../../styles/images/mock_dresses/key_dresses/001.jpg'
+import dress2 from '../../styles/images/mock_dresses/key_dresses/001.jpg'
+import dress3 from '../../styles/images/mock_dresses/key_dresses/001.jpg'
 
 class Favorites extends Component {
   constructor(props) {

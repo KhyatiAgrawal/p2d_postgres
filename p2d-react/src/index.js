@@ -6,6 +6,8 @@ import createHistory from 'history/createBrowserHistory';
 
 import App from './App';
 import Feed from './pages/Feed/Feed'
+import Account from './pages/Account/Account'
+import Orders from './pages/Orders/Orders'
 import Cart from './pages/Cart/Cart'
 import Favorites from './pages/Favorites/Favorites'
 
@@ -19,6 +21,8 @@ ReactDOM.render(
   <BrowserRouter history={history} basename={process.env.PUBLIC_URL}>
 		<Switch>
 			<Route exact path="/" component={() => <App />} />
+			<Route exact path="/account" component={Account} />
+			<Route exact path="/orders" component={Orders} />
 			<Route exact path="/feed" component={Feed} />
 			<Route exact path="/cart" component={Cart} />
 			<Route exact path="/favorites" component={Favorites} />
