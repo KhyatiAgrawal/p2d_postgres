@@ -37,12 +37,11 @@ SCOPES = ['https://www.googleapis.com/auth/calendar.events']
 # Confirm stuff here 
 # Make sure this works for all dresses 
 # @login_required
-@api_view((['GET', 'POST']))
+@api_view((['GET', 'PUT']))
 def dress_list(request):
     """
     List of dresses according to the search request passed
     """
-    # to do
     # Get dress list using filter and tssearch
     # Apply other filters
     # Serialize return query set
@@ -57,6 +56,7 @@ def dress_list(request):
     return Response(serializer.data, status=status.HTTP_200_OK, template_name=None)
     # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view((['GET', 'PUT', 'DELETE']))
 @login_required
 def getOrUpdate_cart(request):
     # The given username should exist in the cart table
@@ -78,9 +78,12 @@ def getOrUpdate_cart(request):
  
     # update the cart if the request is a POST request
     elif request.method == 'PUT':
-        dressObj = Dress.objects.get(id = request.PUT['dressToAdd'])
-        cart.dressesAdded.add(dressObj)
-        cart.save()
+        # Allow only 5 dresses in each user's cart
+        if cart.dressesAdded.all().count() < 5:
+            dressObj = Dress.objects.get(id = request.PUT['dressToAdd'])
+            cart.dressesAdded.add(dressObj)
+            cart.save()
+
         serializer = DressesSerializer(cart.dressesAdded, context={'request': request})  
         if serializer.is_valid():
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -97,6 +100,7 @@ def getOrUpdate_cart(request):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view((['GET', 'PUT', 'DELETE']))
 @login_required
 def getOrUpdate_favorite(request):
     # The given username should exist in the favorites table
@@ -138,8 +142,9 @@ def getOrUpdate_favorite(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@api_view((['GET']))
 @login_required
-def getOrUpdate_ForTrial(request):
+def get_AvailableForTrial(request):
     # return the cart if the request is a GET request
     uname = request.user.username
 
@@ -148,16 +153,17 @@ def getOrUpdate_ForTrial(request):
     try: 
         alreadyScheduled = Alerts.objects.get(user=uname)
 
-        # Trial entries should expire after the trial time has been exceeded 
-        # Check format for storage for RDBMS Date time storage
-        # TO DO
-        dateTime_obj = dt.strptime(str(alreadyScheduled.trialDateAndTime), '%Y-%m-%dT%H:%M:%S-05:00')
-        
+        # Convert into MM/DD/YY format
+        # Date object only
+        date_obj = dt.strptime(str(alreadyScheduled.trialDateAndTime), '%m/%d/%y %H:%M')
+
+        # Expire the trial if outdated
         if  dateTime_obj > dt.now():
             alreadyScheduled.delete()
             # the function calls itself
             return getOrUpdate_ForTrial(request)
-        else :
+        # don't let them schedule two trials for the same day
+        elif date_obj.strftime('%m/%d/%y') == userRentalDate_obj:
             # send the existing trial details
             serializer = AlertsSerializer(alreadyScheduled, context={'request': request})
             if serializer.is_valid():
@@ -165,20 +171,29 @@ def getOrUpdate_ForTrial(request):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     # If the they haven't scheduled their trial yet
-    # Show them the dresses they can reserve
+    # Show them the dresses they that are available at their specified date
     except Alerts.DoesNotExist:
+
+        # Get the three day window that they are trying to book
+        userRentalDate_obj = dt.strptime(request.GET['RentalDate'], '%m/%d/%y')
+        d1 = userRentalDate_obj.strftime('%m/%d/%y')
+        d2 = (userRentalDate_obj + datetime.timedelta(days=1)).strftime('%m/%d/%y')
+        d3 = (userRentalDate_obj + datetime.timedelta(days=-1)).strftime('%m/%d/%y')
+        dateWindow = [d1, d2, d3]
+
+        # Get the dresses they are trying to book
         cart = Carts.objects.get(user=uname)
+
         tentativeDresses = []
         for DressObj in cart.dressesAdded:
-            # Only allow a dress to appear once in the alerts table
-            existing = alerts_dressesSelected.objects.filter(dress_id=DressObj.id)
-            if len(existing) == 0:
-                tentativeDresses.append(dressObj)
+            booked = DressObj.unavailableDates
+            # if there is any overlap with existing tentative bookings for that dress
+            # don't book
+            if any(x in booked for x in dateWindow):
+                continue
+            tentativeDresses.append(DressObj)
 
-            # Allow a maximum of 5 dresses for trial per user? (Discuss with Urvashi)
-            # if len(tentativeDresses) == 5:
-                # break
-
+        # return the available dresses
         serializer = DressesSerializer(tentativeDresses, context={'request': request})  
         if serializer.is_valid():
             return Response(serializer.data)
@@ -249,9 +264,8 @@ def getAvailableTimes(request):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
+@api_view((['GET', 'PUT', 'DELETE']))
 @login_required
-# here is where you input the trial date and time in the trial table
 def getOrUpdate_Alerts(request):
     if request.method == 'GET':
         try: 
@@ -271,24 +285,29 @@ def getOrUpdate_Alerts(request):
             user = username
             )
 
-        # Check format for RDBMS DateTime storage field
-        # TO DO
+        # Request format '10/25/06 14:30'
         newTrial.trialDateAndTime = request.PUT['DateTime']
 
         # Get the associated cart object
         cart = Carts.objects.get(user=uname)
 
+
         # The request will contain the list of dresses the user wants to book for trial
         for dressId in request.PUT['dresses']:
-
             dressObj = Dress.objects.get(id = dressId)
+
+            # RentalDate must be passed in the request in MM/DD/YY format
+            dressObj.unavailableDates.append(";" + request.PUT['RentalDate'])
+            dressObj.save()
 
             # The entries must be added with the specificied date and time in Alerts
             newTrial.dressesSelected.add(dressObj)
+
             # The entries must be removed from the users cart
             cart.dressesAdded.remove(dressObj)
 
         newTrial.save()
+        cart.save()
 
         # Get the user info if exists
         # Create the user info object if not
@@ -326,7 +345,7 @@ def getOrUpdate_Alerts(request):
         send_email(emailId, trial, request.PUT['PersonIncharge'], False)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-
+@api_view((['GET', 'PUT']))
 @login_required
 def getOrUpdate_userInfo(request):
     # The given username should exist in the favorites table
@@ -365,17 +384,44 @@ def getOrUpdate_userInfo(request):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET'])
+@login_required
+def get_rentalHistory(request):
+    uname = request.user.username
+    # The given username should exist in the cart table
+    username = request.user.username
+    try:
+        cart = Carts.objects.get(user=username)
+    except Carts.DoesNotExist:
+        # if cart doesn't exist create an empty cart object
+        cart = Carts.objects.create(
+            user = username
+            )
+        cart.save()
 
+    toSerialize = []
+    history = cart.rentalHistory.split(";")
+    for entry in history:
+        temp = entry.split()
+        rentalDateObj = dt.strptime(temp[0],  '%m/%d/%y')
+        dressObj = Dress.objects.get(id = temp[1])
+        toSerialize.append({"Date": rentalDateObj, "RentedDress": dressObj})
+
+
+    serializer = AvailableTimesSerializer(toSerialize, many=True)
+    if serializer.is_valid():
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# Internal use method
 def send_email_create(uname, userEmailId, trialObj, personIncharge):
     # This should create a markup of the trial event
     # The trial event should include location, username
     # time, dresses booked for trial
     # This event should be pushed in the form of an invite.ics
     # to the user's preferred email
-
-    # Check format here
-    # TO DO
-    start_dateTime_obj = dt.strptime(str(trialObj.trialDateAndTime), '%Y-%m-%dT%H:%M:%S-05:00')
+    start_dateTime_obj = dt.strptime(str(trialObj.trialDateAndTime), '%m/%d/%y %H:%M')
     end_dateTime_obj = start_dateTime_obj + datetime.timedelta(minutes = 30)
 
 
@@ -409,9 +455,5 @@ def send_email_create(uname, userEmailId, trialObj, personIncharge):
     }
     event = service.events().insert(calendarId='primary', body=event, sendNotifications= True).execute()
     return
-
-# def send_email_delete(userEmailId, eventId, personIncharge):
-    # Look up how to delete google event using calendar api
-    # Silently delete event
 
 

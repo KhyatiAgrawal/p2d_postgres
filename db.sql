@@ -21,7 +21,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: auth_group; Type: TABLE; Schema: public; Owner: -
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: admin2
 --
 
 CREATE TABLE public.auth_group (
@@ -30,8 +30,10 @@ CREATE TABLE public.auth_group (
 );
 
 
+ALTER TABLE public.auth_group OWNER TO admin2;
+
 --
--- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: admin2
 --
 
 CREATE SEQUENCE public.auth_group_id_seq
@@ -43,15 +45,17 @@ CREATE SEQUENCE public.auth_group_id_seq
     CACHE 1;
 
 
+ALTER TABLE public.auth_group_id_seq OWNER TO admin2;
+
 --
--- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin2
 --
 
 ALTER SEQUENCE public.auth_group_id_seq OWNED BY public.auth_group.id;
 
 
 --
--- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: -
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: admin2
 --
 
 CREATE TABLE public.auth_group_permissions (
@@ -61,8 +65,10 @@ CREATE TABLE public.auth_group_permissions (
 );
 
 
+ALTER TABLE public.auth_group_permissions OWNER TO admin2;
+
 --
--- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: admin2
 --
 
 CREATE SEQUENCE public.auth_group_permissions_id_seq
@@ -74,15 +80,17 @@ CREATE SEQUENCE public.auth_group_permissions_id_seq
     CACHE 1;
 
 
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO admin2;
+
 --
--- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin2
 --
 
 ALTER SEQUENCE public.auth_group_permissions_id_seq OWNED BY public.auth_group_permissions.id;
 
 
 --
--- Name: auth_permission; Type: TABLE; Schema: public; Owner: -
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: admin2
 --
 
 CREATE TABLE public.auth_permission (
@@ -93,8 +101,10 @@ CREATE TABLE public.auth_permission (
 );
 
 
+ALTER TABLE public.auth_permission OWNER TO admin2;
+
 --
--- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: admin2
 --
 
 CREATE SEQUENCE public.auth_permission_id_seq
@@ -106,15 +116,17 @@ CREATE SEQUENCE public.auth_permission_id_seq
     CACHE 1;
 
 
+ALTER TABLE public.auth_permission_id_seq OWNER TO admin2;
+
 --
--- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin2
 --
 
 ALTER SEQUENCE public.auth_permission_id_seq OWNED BY public.auth_permission.id;
 
 
 --
--- Name: auth_user; Type: TABLE; Schema: public; Owner: -
+-- Name: auth_user; Type: TABLE; Schema: public; Owner: admin2
 --
 
 CREATE TABLE public.auth_user (
@@ -132,8 +144,10 @@ CREATE TABLE public.auth_user (
 );
 
 
+ALTER TABLE public.auth_user OWNER TO admin2;
+
 --
--- Name: auth_user_groups; Type: TABLE; Schema: public; Owner: -
+-- Name: auth_user_groups; Type: TABLE; Schema: public; Owner: admin2
 --
 
 CREATE TABLE public.auth_user_groups (
@@ -143,8 +157,10 @@ CREATE TABLE public.auth_user_groups (
 );
 
 
+ALTER TABLE public.auth_user_groups OWNER TO admin2;
+
 --
--- Name: auth_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: admin2
 --
 
 CREATE SEQUENCE public.auth_user_groups_id_seq
@@ -156,15 +172,17 @@ CREATE SEQUENCE public.auth_user_groups_id_seq
     CACHE 1;
 
 
+ALTER TABLE public.auth_user_groups_id_seq OWNER TO admin2;
+
 --
--- Name: auth_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin2
 --
 
 ALTER SEQUENCE public.auth_user_groups_id_seq OWNED BY public.auth_user_groups.id;
 
 
 --
--- Name: auth_user_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: auth_user_id_seq; Type: SEQUENCE; Schema: public; Owner: admin2
 --
 
 CREATE SEQUENCE public.auth_user_id_seq
@@ -176,15 +194,17 @@ CREATE SEQUENCE public.auth_user_id_seq
     CACHE 1;
 
 
+ALTER TABLE public.auth_user_id_seq OWNER TO admin2;
+
 --
--- Name: auth_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: auth_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin2
 --
 
 ALTER SEQUENCE public.auth_user_id_seq OWNED BY public.auth_user.id;
 
 
 --
--- Name: auth_user_user_permissions; Type: TABLE; Schema: public; Owner: -
+-- Name: auth_user_user_permissions; Type: TABLE; Schema: public; Owner: admin2
 --
 
 CREATE TABLE public.auth_user_user_permissions (
@@ -194,8 +214,10 @@ CREATE TABLE public.auth_user_user_permissions (
 );
 
 
+ALTER TABLE public.auth_user_user_permissions OWNER TO admin2;
+
 --
--- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: admin2
 --
 
 CREATE SEQUENCE public.auth_user_user_permissions_id_seq
@@ -207,15 +229,17 @@ CREATE SEQUENCE public.auth_user_user_permissions_id_seq
     CACHE 1;
 
 
+ALTER TABLE public.auth_user_user_permissions_id_seq OWNER TO admin2;
+
 --
--- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin2
 --
 
 ALTER SEQUENCE public.auth_user_user_permissions_id_seq OWNED BY public.auth_user_user_permissions.id;
 
 
 --
--- Name: django_admin_log; Type: TABLE; Schema: public; Owner: -
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: admin2
 --
 
 CREATE TABLE public.django_admin_log (
@@ -231,8 +255,10 @@ CREATE TABLE public.django_admin_log (
 );
 
 
+ALTER TABLE public.django_admin_log OWNER TO admin2;
+
 --
--- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: admin2
 --
 
 CREATE SEQUENCE public.django_admin_log_id_seq
@@ -244,15 +270,17 @@ CREATE SEQUENCE public.django_admin_log_id_seq
     CACHE 1;
 
 
+ALTER TABLE public.django_admin_log_id_seq OWNER TO admin2;
+
 --
--- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin2
 --
 
 ALTER SEQUENCE public.django_admin_log_id_seq OWNED BY public.django_admin_log.id;
 
 
 --
--- Name: django_cas_ng_proxygrantingticket; Type: TABLE; Schema: public; Owner: -
+-- Name: django_cas_ng_proxygrantingticket; Type: TABLE; Schema: public; Owner: admin2
 --
 
 CREATE TABLE public.django_cas_ng_proxygrantingticket (
@@ -265,8 +293,10 @@ CREATE TABLE public.django_cas_ng_proxygrantingticket (
 );
 
 
+ALTER TABLE public.django_cas_ng_proxygrantingticket OWNER TO admin2;
+
 --
--- Name: django_cas_ng_proxygrantingticket_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: django_cas_ng_proxygrantingticket_id_seq; Type: SEQUENCE; Schema: public; Owner: admin2
 --
 
 CREATE SEQUENCE public.django_cas_ng_proxygrantingticket_id_seq
@@ -278,15 +308,17 @@ CREATE SEQUENCE public.django_cas_ng_proxygrantingticket_id_seq
     CACHE 1;
 
 
+ALTER TABLE public.django_cas_ng_proxygrantingticket_id_seq OWNER TO admin2;
+
 --
--- Name: django_cas_ng_proxygrantingticket_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: django_cas_ng_proxygrantingticket_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin2
 --
 
 ALTER SEQUENCE public.django_cas_ng_proxygrantingticket_id_seq OWNED BY public.django_cas_ng_proxygrantingticket.id;
 
 
 --
--- Name: django_cas_ng_sessionticket; Type: TABLE; Schema: public; Owner: -
+-- Name: django_cas_ng_sessionticket; Type: TABLE; Schema: public; Owner: admin2
 --
 
 CREATE TABLE public.django_cas_ng_sessionticket (
@@ -296,8 +328,10 @@ CREATE TABLE public.django_cas_ng_sessionticket (
 );
 
 
+ALTER TABLE public.django_cas_ng_sessionticket OWNER TO admin2;
+
 --
--- Name: django_cas_ng_sessionticket_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: django_cas_ng_sessionticket_id_seq; Type: SEQUENCE; Schema: public; Owner: admin2
 --
 
 CREATE SEQUENCE public.django_cas_ng_sessionticket_id_seq
@@ -309,15 +343,17 @@ CREATE SEQUENCE public.django_cas_ng_sessionticket_id_seq
     CACHE 1;
 
 
+ALTER TABLE public.django_cas_ng_sessionticket_id_seq OWNER TO admin2;
+
 --
--- Name: django_cas_ng_sessionticket_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: django_cas_ng_sessionticket_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin2
 --
 
 ALTER SEQUENCE public.django_cas_ng_sessionticket_id_seq OWNED BY public.django_cas_ng_sessionticket.id;
 
 
 --
--- Name: django_content_type; Type: TABLE; Schema: public; Owner: -
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: admin2
 --
 
 CREATE TABLE public.django_content_type (
@@ -327,8 +363,10 @@ CREATE TABLE public.django_content_type (
 );
 
 
+ALTER TABLE public.django_content_type OWNER TO admin2;
+
 --
--- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: admin2
 --
 
 CREATE SEQUENCE public.django_content_type_id_seq
@@ -340,15 +378,17 @@ CREATE SEQUENCE public.django_content_type_id_seq
     CACHE 1;
 
 
+ALTER TABLE public.django_content_type_id_seq OWNER TO admin2;
+
 --
--- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin2
 --
 
 ALTER SEQUENCE public.django_content_type_id_seq OWNED BY public.django_content_type.id;
 
 
 --
--- Name: django_migrations; Type: TABLE; Schema: public; Owner: -
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: admin2
 --
 
 CREATE TABLE public.django_migrations (
@@ -359,8 +399,10 @@ CREATE TABLE public.django_migrations (
 );
 
 
+ALTER TABLE public.django_migrations OWNER TO admin2;
+
 --
--- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: admin2
 --
 
 CREATE SEQUENCE public.django_migrations_id_seq
@@ -372,15 +414,17 @@ CREATE SEQUENCE public.django_migrations_id_seq
     CACHE 1;
 
 
+ALTER TABLE public.django_migrations_id_seq OWNER TO admin2;
+
 --
--- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin2
 --
 
 ALTER SEQUENCE public.django_migrations_id_seq OWNED BY public.django_migrations.id;
 
 
 --
--- Name: django_session; Type: TABLE; Schema: public; Owner: -
+-- Name: django_session; Type: TABLE; Schema: public; Owner: admin2
 --
 
 CREATE TABLE public.django_session (
@@ -390,8 +434,10 @@ CREATE TABLE public.django_session (
 );
 
 
+ALTER TABLE public.django_session OWNER TO admin2;
+
 --
--- Name: tables_alerts; Type: TABLE; Schema: public; Owner: -
+-- Name: tables_alerts; Type: TABLE; Schema: public; Owner: admin2
 --
 
 CREATE TABLE public.tables_alerts (
@@ -401,8 +447,10 @@ CREATE TABLE public.tables_alerts (
 );
 
 
+ALTER TABLE public.tables_alerts OWNER TO admin2;
+
 --
--- Name: tables_alerts_dressesSelected; Type: TABLE; Schema: public; Owner: -
+-- Name: tables_alerts_dressesSelected; Type: TABLE; Schema: public; Owner: admin2
 --
 
 CREATE TABLE public."tables_alerts_dressesSelected" (
@@ -412,8 +460,10 @@ CREATE TABLE public."tables_alerts_dressesSelected" (
 );
 
 
+ALTER TABLE public."tables_alerts_dressesSelected" OWNER TO admin2;
+
 --
--- Name: tables_alerts_dressesSelected_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tables_alerts_dressesSelected_id_seq; Type: SEQUENCE; Schema: public; Owner: admin2
 --
 
 CREATE SEQUENCE public."tables_alerts_dressesSelected_id_seq"
@@ -425,15 +475,17 @@ CREATE SEQUENCE public."tables_alerts_dressesSelected_id_seq"
     CACHE 1;
 
 
+ALTER TABLE public."tables_alerts_dressesSelected_id_seq" OWNER TO admin2;
+
 --
--- Name: tables_alerts_dressesSelected_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tables_alerts_dressesSelected_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin2
 --
 
 ALTER SEQUENCE public."tables_alerts_dressesSelected_id_seq" OWNED BY public."tables_alerts_dressesSelected".id;
 
 
 --
--- Name: tables_alerts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tables_alerts_id_seq; Type: SEQUENCE; Schema: public; Owner: admin2
 --
 
 CREATE SEQUENCE public.tables_alerts_id_seq
@@ -445,26 +497,31 @@ CREATE SEQUENCE public.tables_alerts_id_seq
     CACHE 1;
 
 
+ALTER TABLE public.tables_alerts_id_seq OWNER TO admin2;
+
 --
--- Name: tables_alerts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tables_alerts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin2
 --
 
 ALTER SEQUENCE public.tables_alerts_id_seq OWNED BY public.tables_alerts.id;
 
 
 --
--- Name: tables_carts; Type: TABLE; Schema: public; Owner: -
+-- Name: tables_carts; Type: TABLE; Schema: public; Owner: admin2
 --
 
 CREATE TABLE public.tables_carts (
     id integer NOT NULL,
     "dressAdded_id" integer NOT NULL,
-    user_id integer NOT NULL
+    user_id integer NOT NULL,
+    "rentalHistory" character varying(1000) NOT NULL
 );
 
 
+ALTER TABLE public.tables_carts OWNER TO admin2;
+
 --
--- Name: tables_carts_dressesAdded; Type: TABLE; Schema: public; Owner: -
+-- Name: tables_carts_dressesAdded; Type: TABLE; Schema: public; Owner: admin2
 --
 
 CREATE TABLE public."tables_carts_dressesAdded" (
@@ -474,8 +531,10 @@ CREATE TABLE public."tables_carts_dressesAdded" (
 );
 
 
+ALTER TABLE public."tables_carts_dressesAdded" OWNER TO admin2;
+
 --
--- Name: tables_carts_dressesAdded_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tables_carts_dressesAdded_id_seq; Type: SEQUENCE; Schema: public; Owner: admin2
 --
 
 CREATE SEQUENCE public."tables_carts_dressesAdded_id_seq"
@@ -487,15 +546,17 @@ CREATE SEQUENCE public."tables_carts_dressesAdded_id_seq"
     CACHE 1;
 
 
+ALTER TABLE public."tables_carts_dressesAdded_id_seq" OWNER TO admin2;
+
 --
--- Name: tables_carts_dressesAdded_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tables_carts_dressesAdded_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin2
 --
 
 ALTER SEQUENCE public."tables_carts_dressesAdded_id_seq" OWNED BY public."tables_carts_dressesAdded".id;
 
 
 --
--- Name: tables_carts_dressesLiked; Type: TABLE; Schema: public; Owner: -
+-- Name: tables_carts_dressesLiked; Type: TABLE; Schema: public; Owner: admin2
 --
 
 CREATE TABLE public."tables_carts_dressesLiked" (
@@ -505,8 +566,10 @@ CREATE TABLE public."tables_carts_dressesLiked" (
 );
 
 
+ALTER TABLE public."tables_carts_dressesLiked" OWNER TO admin2;
+
 --
--- Name: tables_carts_dressesLiked_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tables_carts_dressesLiked_id_seq; Type: SEQUENCE; Schema: public; Owner: admin2
 --
 
 CREATE SEQUENCE public."tables_carts_dressesLiked_id_seq"
@@ -518,15 +581,17 @@ CREATE SEQUENCE public."tables_carts_dressesLiked_id_seq"
     CACHE 1;
 
 
+ALTER TABLE public."tables_carts_dressesLiked_id_seq" OWNER TO admin2;
+
 --
--- Name: tables_carts_dressesLiked_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tables_carts_dressesLiked_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin2
 --
 
 ALTER SEQUENCE public."tables_carts_dressesLiked_id_seq" OWNED BY public."tables_carts_dressesLiked".id;
 
 
 --
--- Name: tables_carts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tables_carts_id_seq; Type: SEQUENCE; Schema: public; Owner: admin2
 --
 
 CREATE SEQUENCE public.tables_carts_id_seq
@@ -538,15 +603,17 @@ CREATE SEQUENCE public.tables_carts_id_seq
     CACHE 1;
 
 
+ALTER TABLE public.tables_carts_id_seq OWNER TO admin2;
+
 --
--- Name: tables_carts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tables_carts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin2
 --
 
 ALTER SEQUENCE public.tables_carts_id_seq OWNED BY public.tables_carts.id;
 
 
 --
--- Name: tables_dress; Type: TABLE; Schema: public; Owner: -
+-- Name: tables_dress; Type: TABLE; Schema: public; Owner: admin2
 --
 
 CREATE TABLE public.tables_dress (
@@ -560,12 +627,14 @@ CREATE TABLE public.tables_dress (
     price integer NOT NULL,
     title character varying(70) NOT NULL,
     description character varying(500) NOT NULL,
-    availability boolean NOT NULL
+    "unavailableDates" character varying(500)
 );
 
 
+ALTER TABLE public.tables_dress OWNER TO admin2;
+
 --
--- Name: tables_userinfo; Type: TABLE; Schema: public; Owner: -
+-- Name: tables_userinfo; Type: TABLE; Schema: public; Owner: admin2
 --
 
 CREATE TABLE public.tables_userinfo (
@@ -574,12 +643,15 @@ CREATE TABLE public.tables_userinfo (
     size character varying(50) NOT NULL,
     gender character varying(20) NOT NULL,
     email character varying(40) NOT NULL,
-    phone character varying(50) NOT NULL
+    phone character varying(50) NOT NULL,
+    "numberRented" integer NOT NULL
 );
 
 
+ALTER TABLE public.tables_userinfo OWNER TO admin2;
+
 --
--- Name: tables_userinfo_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tables_userinfo_id_seq; Type: SEQUENCE; Schema: public; Owner: admin2
 --
 
 CREATE SEQUENCE public.tables_userinfo_id_seq
@@ -591,134 +663,136 @@ CREATE SEQUENCE public.tables_userinfo_id_seq
     CACHE 1;
 
 
+ALTER TABLE public.tables_userinfo_id_seq OWNER TO admin2;
+
 --
--- Name: tables_userinfo_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tables_userinfo_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin2
 --
 
 ALTER SEQUENCE public.tables_userinfo_id_seq OWNED BY public.tables_userinfo.id;
 
 
 --
--- Name: auth_group id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: auth_group id; Type: DEFAULT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.auth_group ALTER COLUMN id SET DEFAULT nextval('public.auth_group_id_seq'::regclass);
 
 
 --
--- Name: auth_group_permissions id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: auth_group_permissions id; Type: DEFAULT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_group_permissions_id_seq'::regclass);
 
 
 --
--- Name: auth_permission id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: auth_permission id; Type: DEFAULT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.auth_permission ALTER COLUMN id SET DEFAULT nextval('public.auth_permission_id_seq'::regclass);
 
 
 --
--- Name: auth_user id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: auth_user id; Type: DEFAULT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.auth_user ALTER COLUMN id SET DEFAULT nextval('public.auth_user_id_seq'::regclass);
 
 
 --
--- Name: auth_user_groups id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: auth_user_groups id; Type: DEFAULT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.auth_user_groups ALTER COLUMN id SET DEFAULT nextval('public.auth_user_groups_id_seq'::regclass);
 
 
 --
--- Name: auth_user_user_permissions id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: auth_user_user_permissions id; Type: DEFAULT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.auth_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_user_user_permissions_id_seq'::regclass);
 
 
 --
--- Name: django_admin_log id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: django_admin_log id; Type: DEFAULT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.django_admin_log ALTER COLUMN id SET DEFAULT nextval('public.django_admin_log_id_seq'::regclass);
 
 
 --
--- Name: django_cas_ng_proxygrantingticket id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: django_cas_ng_proxygrantingticket id; Type: DEFAULT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.django_cas_ng_proxygrantingticket ALTER COLUMN id SET DEFAULT nextval('public.django_cas_ng_proxygrantingticket_id_seq'::regclass);
 
 
 --
--- Name: django_cas_ng_sessionticket id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: django_cas_ng_sessionticket id; Type: DEFAULT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.django_cas_ng_sessionticket ALTER COLUMN id SET DEFAULT nextval('public.django_cas_ng_sessionticket_id_seq'::regclass);
 
 
 --
--- Name: django_content_type id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: django_content_type id; Type: DEFAULT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.django_content_type ALTER COLUMN id SET DEFAULT nextval('public.django_content_type_id_seq'::regclass);
 
 
 --
--- Name: django_migrations id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: django_migrations id; Type: DEFAULT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.django_migrations ALTER COLUMN id SET DEFAULT nextval('public.django_migrations_id_seq'::regclass);
 
 
 --
--- Name: tables_alerts id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: tables_alerts id; Type: DEFAULT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.tables_alerts ALTER COLUMN id SET DEFAULT nextval('public.tables_alerts_id_seq'::regclass);
 
 
 --
--- Name: tables_alerts_dressesSelected id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: tables_alerts_dressesSelected id; Type: DEFAULT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public."tables_alerts_dressesSelected" ALTER COLUMN id SET DEFAULT nextval('public."tables_alerts_dressesSelected_id_seq"'::regclass);
 
 
 --
--- Name: tables_carts id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: tables_carts id; Type: DEFAULT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.tables_carts ALTER COLUMN id SET DEFAULT nextval('public.tables_carts_id_seq'::regclass);
 
 
 --
--- Name: tables_carts_dressesAdded id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: tables_carts_dressesAdded id; Type: DEFAULT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public."tables_carts_dressesAdded" ALTER COLUMN id SET DEFAULT nextval('public."tables_carts_dressesAdded_id_seq"'::regclass);
 
 
 --
--- Name: tables_carts_dressesLiked id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: tables_carts_dressesLiked id; Type: DEFAULT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public."tables_carts_dressesLiked" ALTER COLUMN id SET DEFAULT nextval('public."tables_carts_dressesLiked_id_seq"'::regclass);
 
 
 --
--- Name: tables_userinfo id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: tables_userinfo id; Type: DEFAULT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.tables_userinfo ALTER COLUMN id SET DEFAULT nextval('public.tables_userinfo_id_seq'::regclass);
 
 
 --
--- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: admin2
 --
 
 COPY public.auth_group (id, name) FROM stdin;
@@ -726,7 +800,7 @@ COPY public.auth_group (id, name) FROM stdin;
 
 
 --
--- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: admin2
 --
 
 COPY public.auth_group_permissions (id, group_id, permission_id) FROM stdin;
@@ -734,7 +808,7 @@ COPY public.auth_group_permissions (id, group_id, permission_id) FROM stdin;
 
 
 --
--- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: admin2
 --
 
 COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
@@ -787,7 +861,7 @@ COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
 
 
 --
--- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: admin2
 --
 
 COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
@@ -1622,12 +1696,12 @@ COPY public.auth_user (id, password, last_login, is_superuser, username, first_n
 831		2019-05-13 00:09:41.843-04	f	kvlach				f	t	2019-05-13 00:09:41.703-04
 832		2019-05-19 02:35:06.498-04	f	jbachek				f	t	2019-05-19 02:35:06.267-04
 833		2019-05-24 01:14:10.876-04	f	mneff				f	t	2019-05-24 01:14:10.753-04
-2	pbkdf2_sha256$100000$YctJOoai4vsK$n/TqGyGRI6GNlSSZyNwO6Jf11+v5l7rJF4WT6SsAIT0=	2019-11-03 17:06:26.327557-05	t	admin			khyatiagrawal1998@gmail.com	t	t	2018-04-13 02:14:16.313-04
+2	pbkdf2_sha256$100000$YctJOoai4vsK$n/TqGyGRI6GNlSSZyNwO6Jf11+v5l7rJF4WT6SsAIT0=	2019-11-10 19:02:06.417706-05	t	admin			khyatiagrawal1998@gmail.com	t	t	2018-04-13 02:14:16.313-04
 \.
 
 
 --
--- Data for Name: auth_user_groups; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: auth_user_groups; Type: TABLE DATA; Schema: public; Owner: admin2
 --
 
 COPY public.auth_user_groups (id, user_id, group_id) FROM stdin;
@@ -1635,7 +1709,7 @@ COPY public.auth_user_groups (id, user_id, group_id) FROM stdin;
 
 
 --
--- Data for Name: auth_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: auth_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: admin2
 --
 
 COPY public.auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
@@ -1643,7 +1717,7 @@ COPY public.auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
 
 
 --
--- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: admin2
 --
 
 COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
@@ -2730,11 +2804,107 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 1081	2019-11-03 17:20:28.855217-05	3	Simple white printed dress	1	[{"added": {}}]	15	2
 1082	2019-11-03 17:24:50.387376-05	4	Blue and white short dress	1	[{"added": {}}]	15	2
 1083	2019-11-03 17:29:19.572185-05	5	Strappy black romper	1	[{"added": {}}]	15	2
+1084	2019-11-10 14:35:09.597349-05	1	Classy blue A-line dress	3		15	2
+1085	2019-11-10 14:38:59.147962-05	5	Strappy black romper	3		15	2
+1086	2019-11-10 14:39:09.432023-05	4	Blue and white short dress	3		15	2
+1087	2019-11-10 14:39:18.124702-05	3	Simple white printed dress	3		15	2
+1088	2019-11-10 14:39:23.505442-05	2	Flowy lace dress	3		15	2
+1089	2019-11-10 14:43:53.71185-05	0	Flowy Blue Chiffon Dress	1	[{"added": {}}]	15	2
+1090	2019-11-10 14:44:27.764108-05	0	Flowy Blue Chiffon Dress	3		15	2
+1091	2019-11-10 14:45:31.291468-05	0	Flowy Blue Chiffon Dress	1	[{"added": {}}]	15	2
+1092	2019-11-10 14:49:10.399473-05	8	Rose Gold Sequined Mini	1	[{"added": {}}]	15	2
+1093	2019-11-10 14:50:44.116934-05	27	Aqua Lace Halter Mini	1	[{"added": {}}]	15	2
+1094	2019-11-10 14:56:16.796002-05	114	Casual Striped Tank Dress	1	[{"added": {}}]	15	2
+1095	2019-11-10 15:36:32.077621-05	108	Tie-Dye Blue Dress	1	[{"added": {}}]	15	2
+1096	2019-11-10 15:40:50.638782-05	112	Blue Printed Floral Summer Dress	1	[{"added": {}}]	15	2
+1097	2019-11-10 15:43:13.139927-05	113	Casual Plaid Long-Sleeved Dress	1	[{"added": {}}]	15	2
+1098	2019-11-10 15:51:38.410547-05	117	Flirty Chiffon Wrap	1	[{"added": {}}]	15	2
+1099	2019-11-10 15:52:40.094972-05	118	Maroon Floral Ruffled Dress	1	[{"added": {}}]	15	2
+1100	2019-11-10 15:54:01.121726-05	119	Bodycon Pink Mini	1	[{"added": {}}]	15	2
+1101	2019-11-10 16:18:45.323741-05	1	Mauve Lace Mini	1	[{"added": {}}]	15	2
+1102	2019-11-10 16:20:19.194101-05	2	White Printed Dress	1	[{"added": {}}]	15	2
+1103	2019-11-10 16:21:23.184132-05	3	Blue and White Striped Mini	1	[{"added": {}}]	15	2
+1104	2019-11-10 16:23:03.270598-05	4	Casual Black Button Romper	1	[{"added": {}}]	15	2
+1105	2019-11-10 16:24:26.21102-05	5	White Tulip Chiffon	1	[{"added": {}}]	15	2
+1106	2019-11-10 16:25:58.45296-05	6	Blue Printed Flirty Dress	1	[{"added": {}}]	15	2
+1107	2019-11-10 16:27:07.531828-05	7	Sequined Light Turquoise Shift	1	[{"added": {}}]	15	2
+1108	2019-11-10 16:30:05.301229-05	9	Navy Denim Mini	1	[{"added": {}}]	15	2
+1109	2019-11-10 16:31:17.517134-05	10	Open-Shoulder Chiffon Mini	1	[{"added": {}}]	15	2
+1110	2019-11-10 16:32:23.267069-05	11	Green Tank Dress	1	[{"added": {}}]	15	2
+1111	2019-11-10 16:33:24.205573-05	12	Black A-Line Mini	1	[{"added": {}}]	15	2
+1112	2019-11-10 16:36:37.120143-05	112	Green Tank Dress	2	[{"changed": {"fields": ["id", "view1", "view2", "view3"]}}]	15	2
+1113	2019-11-10 16:37:26.139409-05	13	Black A-Line Mini	2	[{"changed": {"fields": ["id", "view1", "view2", "view3"]}}]	15	2
+1114	2019-11-10 16:38:32.046017-05	14	Teal Knit Sweater Dress	1	[{"added": {}}]	15	2
+1115	2019-11-10 16:39:42.145945-05	15	Color-Block Strapless Maxi	1	[{"added": {}}]	15	2
+1116	2019-11-10 16:40:49.120021-05	16	Multicolored Printed Summer Dress	1	[{"added": {}}]	15	2
+1117	2019-11-10 16:41:56.951858-05	17	Elegant Royal Blue Bodycon	1	[{"added": {}}]	15	2
+1118	2019-11-10 16:43:15.846826-05	18	Blush Lace Mini	1	[{"added": {}}]	15	2
+1119	2019-11-10 16:44:23.804113-05	19	Elegant Tie-Neck Halter	1	[{"added": {}}]	15	2
+1120	2019-11-10 16:45:34.564981-05	20	Flowy Black Romper	1	[{"added": {}}]	15	2
+1121	2019-11-10 16:46:49.80296-05	21	Striped BodyCon Mini	1	[{"added": {}}]	15	2
+1122	2019-11-10 16:48:07.921577-05	22	White Floral Open Maxi	1	[{"added": {}}]	15	2
+1123	2019-11-10 16:49:10.149336-05	23	Green Lace A-Line Dress	1	[{"added": {}}]	15	2
+1124	2019-11-10 16:50:15.302792-05	24	White Lace Halter Mini	1	[{"added": {}}]	15	2
+1125	2019-11-10 16:51:16.184103-05	25	Pinstriped Gray Button-Down Dress	1	[{"added": {}}]	15	2
+1126	2019-11-10 16:52:14.469624-05	26	Flirty Summer Floral	1	[{"added": {}}]	15	2
+1127	2019-11-10 16:53:37.325518-05	94	Aqua Lace Halter Mini	1	[{"added": {}}]	15	2
+1128	2019-11-10 16:54:45.477001-05	28	White Puff-Sleeved Mini	1	[{"added": {}}]	15	2
+1129	2019-11-10 16:55:53.222525-05	30	Striped A-Line Mini	1	[{"added": {}}]	15	2
+1130	2019-11-10 16:57:00.172954-05	31	Red Lace Bodycon Mini	1	[{"added": {}}]	15	2
+1131	2019-11-10 16:58:06.727766-05	32	Navy Casual Dress	1	[{"added": {}}]	15	2
+1132	2019-11-10 16:59:21.772003-05	34	White Lace Bodycon	1	[{"added": {}}]	15	2
+1133	2019-11-10 17:00:28.753099-05	107	Dark Teal Sleeveless Mini	1	[{"added": {}}]	15	2
+1134	2019-11-10 17:01:33.849311-05	36	Casual Denim Dress	1	[{"added": {}}]	15	2
+1135	2019-11-10 17:02:34.147853-05	38	Blue Floral Button-Up Dress	1	[{"added": {}}]	15	2
+1136	2019-11-10 17:03:43.944061-05	39	White Lace Mini	1	[{"added": {}}]	15	2
+1137	2019-11-10 17:04:57.234133-05	40	Glamorous Grey Mini	1	[{"added": {}}]	15	2
+1138	2019-11-10 17:06:01.292152-05	41	Printed Tie-Waist Romper	1	[{"added": {}}]	15	2
+1139	2019-11-10 17:07:03.878224-05	43	Pink Lace Dress	1	[{"added": {}}]	15	2
+1140	2019-11-10 17:08:12.32784-05	46	Midnight Blue Velvet Midi	1	[{"added": {}}]	15	2
+1141	2019-11-10 17:09:17.911408-05	48	Black Lace Cap Sleeve Mini	1	[{"added": {}}]	15	2
+1142	2019-11-10 17:15:04.760181-05	37	Floral Yellow Wrap Dress	1	[{"added": {}}]	15	2
+1143	2019-11-10 17:16:57.925264-05	50	Maroon Floral Romper	1	[{"added": {}}]	15	2
+1144	2019-11-10 17:17:56.066682-05	51	Metallic Gunmetal Halter Mini	1	[{"added": {}}]	15	2
+1145	2019-11-10 17:20:31.36357-05	52	Royal Purple Drapey Mini	1	[{"added": {}}]	15	2
+1146	2019-11-10 17:21:41.311867-05	53	Bright Pink Collared Dress	1	[{"added": {}}]	15	2
+1147	2019-11-10 17:23:00.992772-05	54	Business Color Block Dress	1	[{"added": {}}]	15	2
+1148	2019-11-10 17:24:07.478521-05	55	Black Corduroy Overall	1	[{"added": {}}]	15	2
+1149	2019-11-10 17:25:17.247088-05	56	Black Choker Flowy Mini	1	[{"added": {}}]	15	2
+1150	2019-11-10 17:27:01.220246-05	57	Black Lace Bodycon	1	[{"added": {}}]	15	2
+1151	2019-11-10 17:28:14.182021-05	59	Printed Black and Purple Dress	1	[{"added": {}}]	15	2
+1152	2019-11-10 17:29:24.391112-05	60	Black and White A-Line Printed Dress	1	[{"added": {}}]	15	2
+1153	2019-11-10 17:30:44.770548-05	61	Fun Orange Printed Maxi	1	[{"added": {}}]	15	2
+1154	2019-11-10 17:31:48.266931-05	100	Blush Floral Maxi	1	[{"added": {}}]	15	2
+1155	2019-11-10 17:33:04.089114-05	105	Olive Green Denim Overall	1	[{"added": {}}]	15	2
+1156	2019-11-10 17:34:09.927415-05	64	Neon Pink Romper	1	[{"added": {}}]	15	2
+1157	2019-11-10 17:35:20.121587-05	106	Pink Ruffled Chiffon	1	[{"added": {}}]	15	2
+1158	2019-11-10 17:36:41.402205-05	66	Blue Tie-Dye Summer Dress	1	[{"added": {}}]	15	2
+1159	2019-11-10 17:37:45.203843-05	68	Floral Halter Mini	1	[{"added": {}}]	15	2
+1160	2019-11-10 17:38:46.000426-05	69	Black Lace Romper	1	[{"added": {}}]	15	2
+1161	2019-11-10 17:40:01.395602-05	103	Printed Black and White Flared Mini	1	[{"added": {}}]	15	2
+1162	2019-11-10 17:41:25.08017-05	71	Navy Lace Sleeveless Mini	1	[{"added": {}}]	15	2
+1163	2019-11-10 17:42:44.10553-05	72	Blue and Pink Floral Dress	1	[{"added": {}}]	15	2
+1164	2019-11-10 17:43:55.663508-05	73	Summery Ruffled Dress	1	[{"added": {}}]	15	2
+1165	2019-11-10 17:45:04.19059-05	74	White A-Line Floral Mini	1	[{"added": {}}]	15	2
+1166	2019-11-10 17:46:09.193931-05	75	Blue Floral Summer Dress	1	[{"added": {}}]	15	2
+1167	2019-11-10 17:47:33.704876-05	76	Printed Black and White Romper	1	[{"added": {}}]	15	2
+1168	2019-11-10 17:52:50.188734-05	77	Flirty Yellow Summer Dress	1	[{"added": {}}]	15	2
+1169	2019-11-10 17:55:01.244368-05	79	Blue Floral Summer Dress	1	[{"added": {}}]	15	2
+1170	2019-11-10 17:56:20.976339-05	81	Black and White Striped Bodycon	1	[{"added": {}}]	15	2
+1171	2019-11-10 17:57:45.57427-05	102	Pink Sleeveless Shift Dress	1	[{"added": {}}]	15	2
+1172	2019-11-10 17:58:49.571144-05	83	Casual Striped Dress	1	[{"added": {}}]	15	2
+1173	2019-11-10 17:59:58.048948-05	84	Printed Blue Satin	1	[{"added": {}}]	15	2
+1174	2019-11-10 18:00:54.388513-05	85	Printed Multicolored Chiffon Mini	1	[{"added": {}}]	15	2
+1175	2019-11-10 18:01:58.580126-05	86	Heather Gray Casual Dress	1	[{"added": {}}]	15	2
+1176	2019-11-10 18:03:06.915362-05	104	White Printed Bodycon	1	[{"added": {}}]	15	2
+1177	2019-11-10 18:05:25.113665-05	97	Cold-Shouldered Printed Summer Dress	1	[{"added": {}}]	15	2
+1178	2019-11-10 18:07:09.60411-05	90	Casual Gray T-Shirt Dress	1	[{"added": {}}]	15	2
+1179	2019-11-10 18:08:26.370578-05	91	Delicate Black Mini	1	[{"added": {}}]	15	2
 \.
 
 
 --
--- Data for Name: django_cas_ng_proxygrantingticket; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: django_cas_ng_proxygrantingticket; Type: TABLE DATA; Schema: public; Owner: admin2
 --
 
 COPY public.django_cas_ng_proxygrantingticket (id, session_key, pgtiou, pgt, date, user_id) FROM stdin;
@@ -2742,7 +2912,7 @@ COPY public.django_cas_ng_proxygrantingticket (id, session_key, pgtiou, pgt, dat
 
 
 --
--- Data for Name: django_cas_ng_sessionticket; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: django_cas_ng_sessionticket; Type: TABLE DATA; Schema: public; Owner: admin2
 --
 
 COPY public.django_cas_ng_sessionticket (id, session_key, ticket) FROM stdin;
@@ -4374,7 +4544,7 @@ COPY public.django_cas_ng_sessionticket (id, session_key, ticket) FROM stdin;
 
 
 --
--- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: admin2
 --
 
 COPY public.django_content_type (id, app_label, model) FROM stdin;
@@ -4397,7 +4567,7 @@ COPY public.django_content_type (id, app_label, model) FROM stdin;
 
 
 --
--- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: admin2
 --
 
 COPY public.django_migrations (id, app, name, applied) FROM stdin;
@@ -4435,11 +4605,15 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 32	tables	0002_auto_20191026_1652	2019-10-26 12:52:42.257924-04
 33	tables	0003_auto_20191027_0224	2019-10-26 22:25:11.565286-04
 34	tables	0004_auto_20191103_1936	2019-11-03 14:36:49.437418-05
+35	tables	0002_auto_20191110_1933	2019-11-10 14:33:45.365303-05
+36	tables	0003_auto_20191111_0006	2019-11-10 19:06:58.365225-05
+37	tables	0004_auto_20191111_0526	2019-11-11 00:26:20.752249-05
+38	tables	0005_userinfo_numberrented	2019-11-11 00:41:30.58816-05
 \.
 
 
 --
--- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: admin2
 --
 
 COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
@@ -5536,11 +5710,12 @@ zuz8wgt7z0usr0o8787cubrz9r1vazsq	ODRmODVkZjZhYWM1ZGYwMDdhYWZlNjFkZDdmZGZhNjlkYzU
 zzfduos11vx2ogl0um9aypng3bbqllk5	ZDFmNjNiNGQyYzAyYThiMjRhMzA5MDA4MTE4NGFiZWNjYTFiYjVlNjp7Il9hdXRoX3VzZXJfaGFzaCI6IjA3MGYxYTI2Mjc4NDYzOTQ4MzRmNmZmOWE0ZDcxMWQ5ODFmNjc1OTgiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ29fY2FzX25nLmJhY2tlbmRzLkNBU0JhY2tlbmQiLCJfYXV0aF91c2VyX2lkIjoiMjUyIn0=	2018-05-17 14:51:42.058-04
 zzgjymkyner4q7pjtqsplokng2706l1q	MTY1YjcwZTM1MDU3NjUxY2YyOTlkYzhhODY3YjZiMjQzZTQ3YmEyYTp7Il9hdXRoX3VzZXJfaWQiOiI2NTYiLCJfYXV0aF91c2VyX2hhc2giOiIwNzBmMWEyNjI3ODQ2Mzk0ODM0ZjZmZjlhNGQ3MTFkOTgxZjY3NTk4IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIn0=	2019-05-05 14:42:49.706-04
 zzmvjdxsp5a3981odj69ax8ijluiu0br	MzQzYmM5ZDU0MzY5YjIwNTA1M2RhYTRjZDBkOTJmMTlkZGNlMzM2YTp7Il9hdXRoX3VzZXJfaGFzaCI6IjA3MGYxYTI2Mjc4NDYzOTQ4MzRmNmZmOWE0ZDcxMWQ5ODFmNjc1OTgiLCJfYXV0aF91c2VyX2lkIjoiNTQ4IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIn0=	2018-05-18 14:23:29.387-04
+a50fixb0naonzo2bwtji2bt02qp5rdhc	MjgwYWJkNjY1M2EyOWU0YTM5NWE1Y2M3ZDQ2MWI4MDhiYjU4YTM0Yjp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlOTRmNzljODdlNjQxYjEwMDZmYmNmNmM2Yjg4NGVhNWJlMTk3YTQ1In0=	2019-11-24 19:02:06.420003-05
 \.
 
 
 --
--- Data for Name: tables_alerts; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: tables_alerts; Type: TABLE DATA; Schema: public; Owner: admin2
 --
 
 COPY public.tables_alerts (id, "trialDateAndTime", user_id) FROM stdin;
@@ -5548,7 +5723,7 @@ COPY public.tables_alerts (id, "trialDateAndTime", user_id) FROM stdin;
 
 
 --
--- Data for Name: tables_alerts_dressesSelected; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: tables_alerts_dressesSelected; Type: TABLE DATA; Schema: public; Owner: admin2
 --
 
 COPY public."tables_alerts_dressesSelected" (id, alerts_id, dress_id) FROM stdin;
@@ -5556,15 +5731,15 @@ COPY public."tables_alerts_dressesSelected" (id, alerts_id, dress_id) FROM stdin
 
 
 --
--- Data for Name: tables_carts; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: tables_carts; Type: TABLE DATA; Schema: public; Owner: admin2
 --
 
-COPY public.tables_carts (id, "dressAdded_id", user_id) FROM stdin;
+COPY public.tables_carts (id, "dressAdded_id", user_id, "rentalHistory") FROM stdin;
 \.
 
 
 --
--- Data for Name: tables_carts_dressesAdded; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: tables_carts_dressesAdded; Type: TABLE DATA; Schema: public; Owner: admin2
 --
 
 COPY public."tables_carts_dressesAdded" (id, carts_id, dress_id) FROM stdin;
@@ -5572,7 +5747,7 @@ COPY public."tables_carts_dressesAdded" (id, carts_id, dress_id) FROM stdin;
 
 
 --
--- Data for Name: tables_carts_dressesLiked; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: tables_carts_dressesLiked; Type: TABLE DATA; Schema: public; Owner: admin2
 --
 
 COPY public."tables_carts_dressesLiked" (id, carts_id, dress_id) FROM stdin;
@@ -5580,709 +5755,792 @@ COPY public."tables_carts_dressesLiked" (id, carts_id, dress_id) FROM stdin;
 
 
 --
--- Data for Name: tables_dress; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: tables_dress; Type: TABLE DATA; Schema: public; Owner: admin2
 --
 
-COPY public.tables_dress (id, view1, view2, view3, size, brand, occasions, price, title, description, availability) FROM stdin;
-1	dresses/view1/00_1mFVjxd.jpg	dresses/view2/00_2FSFKIK.jpg	dresses/view3/00_zuQeeiP.jpg	S	Unknown	semis formals interviews	7	Classy blue A-line dress	Versatile and simple light blue sleeveless dress with an A-line cut, and round neck, Length is variable (model wearing is 5ft 8 inches)	t
-2	dresses/view1/01.jpg	dresses/view2/01.jpg	dresses/view3/01.jpg	S	La Bala	semis lawnparties	5	Flowy lace dress	Cute pink lace dress, with three-quarters sleeves. Chiffon makes it perfect for lawnparties or semi-formal events. Flowy and v-neck it's an instant favorite!	t
-3	dresses/view1/02.jpg	dresses/view2/02.jpg	dresses/view3/02.jpg	S	Forever21	semis lawnparties theme-nights	5	Simple white printed dress	A simple cotton white dress with bronze motif prints, cute and comfortable for lawnparties, semis or daily wear. Looks great with gold accessories.	t
-4	dresses/view1/03.jpg	dresses/view2/03.jpg	dresses/view3/03.jpg	S	Placeholder	lawnparties	7	Blue and white short dress	Cute blue and white vertical striped dress. Sleeveless, and fitted waist up. Perfect for lawnparties or a sunny day!	t
-5	dresses/view1/04.jpg	dresses/view2/04.jpg	dresses/view3/04.jpg	M	Forever21	lawnparties	7	Strappy black romper	Strappy black romper with a frilled button down front.	t
+COPY public.tables_dress (id, view1, view2, view3, size, brand, occasions, price, title, description, "unavailableDates") FROM stdin;
+0	dresses/view1/000.jpg	dresses/view2/000.jpg	dresses/view3/000.jpg	XS	By & By	lawnparties semi-formals formals	7	Flowy Blue Chiffon Dress	Flowy blue chiffon dress with a flattering hem	None
+8	dresses/view1/008.jpg	dresses/view2/008.jpg	dresses/view3/008.jpg	M	Forever21	semi-formals formals	7	Rose Gold Sequined Mini	Glamorous flapper rose-gold sequined mini	None
+27	dresses/view1/027.jpg	dresses/view2/027.jpg	dresses/view3/027.jpg	S	SLNY	semi-formals formals	7	Aqua Lace Halter Mini	Flapper-esque aqua/teal lace, with intricate fringe detail	None
+114	dresses/view1/114.jpg	dresses/view2/114.jpg	dresses/view3/114.jpg	XS	H&M	lawnparties semi-formals	7	Casual Striped Tank Dress	Fun and casual striped tank dress	None
+108	dresses/view1/108.jpg	dresses/view2/108.jpg	dresses/view3/108.jpg	S	Unknown	lawnparties	7	Tie-Dye Blue Dress	Flowy tie-dye blue dress with smock detailing	None
+113	dresses/view1/113.jpg	dresses/view2/113.jpg	dresses/view3/113.jpg	M	Old Navy	interviews theme-nights	7	Casual Plaid Long-Sleeved Dress	Casual black, red, and green plaid shirt-dress	None
+117	dresses/view1/117.jpg	dresses/view2/117.jpg	dresses/view3/117.jpg	XS	Neon Rose	lawnparties semi-formals formals	7	Flirty Chiffon Wrap	Fun and flirty red chiffon polka-dotted wrap dress with ties	None
+118	dresses/view1/118.jpg	dresses/view2/118.jpg	dresses/view3/118.jpg	S	zara	lawnparties	7	Maroon Floral Ruffled Dress	Maroon floral mini with ruffle sleeve detailing and floral embroidery	None
+119				M L	Love Culture	interviews semi-formals	7	Bodycon Pink Mini	Pastel pink bodycon mini dress	None
+1	dresses/view1/001.jpg	dresses/view2/001.jpg	dresses/view3/001.jpg	S	Tobi	semi-formals formals	7	Mauve Lace Mini	Delicate mauve mini with a deep v, long bell sleeves	None
+2	dresses/view1/002.jpg	dresses/view2/002.jpg	dresses/view3/002.jpg	S	Forever21	lawnparties semi-formals	7	White Printed Dress	Sleeveless silky white dress with printed trim	None
+3	dresses/view1/003.jpg	dresses/view2/003.jpg	dresses/view3/003.jpg	XS	Hollister	lawnparties semi-formals	7	Blue and White Striped Mini	Blue and white pinstripes on a flirty silhouette	None
+4	dresses/view1/004.jpg	dresses/view2/004.jpg	dresses/view3/004.jpg	S	Old Navy	lawnparties semi-formals	7	Casual Black Button Romper	Casual elegant black romper with button detailing and - pockets!	None
+5	dresses/view1/005.jpg	dresses/view2/005.jpg	dresses/view3/005.jpg	S	Unknown	semi-formals formals	7	White Tulip Chiffon	White flowy chiffon dress with a layered tulip skirt	None
+6	dresses/view1/006.jpg	dresses/view2/006.jpg	dresses/view3/006.jpg	M	Uniqlo	lawnparties	7	Blue Printed Flirty Dress	Blue printed knee-length dress perfect for a summer picnic	None
+7	dresses/view1/007.jpg	dresses/view2/007.jpg	dresses/view3/007.jpg	S	Adriana Papell	semi-formals formals	7	Sequined Light Turquoise Shift	Light turquoise shift dress with beautiful sequin detailing	None
+9	dresses/view1/009.jpg	dresses/view2/009.jpg	dresses/view3/009.jpg	S	Lily Rose	lawnparties semi-formals	7	Navy Denim Mini	Navy denim mini with ruffle detailing	None
+10	dresses/view1/010.jpg	dresses/view2/010.jpg	dresses/view3/010.jpg	S	Papaya	lawnparties semi-formals	7	Open-Shoulder Chiffon Mini	Flowy bohemian open-shoulder white sundress with lace detailing	None
+11	dresses/view1/011.jpg	dresses/view2/011.jpg	dresses/view3/011.jpg	XS	One Clothing	lawnparties semi-formals	7	Green Tank Dress	Casual summery green tank dress	None
+12	dresses/view1/012.jpg	dresses/view2/012.jpg	dresses/view3/012.jpg	M L	Forever21	semi-formals formals	7	Black A-Line Mini	Black a-line silhouette with cut-out front detailing	None
+112	dresses/view1/012_SgEJjul.jpg	dresses/view2/012_5jlMBHV.jpg	dresses/view3/012_xrNnwMr.jpg	XS	One Clothing	lawnparties semi-formals	7	Green Tank Dress	Casual summery green tank dress	None
+13	dresses/view1/013.jpg	dresses/view2/013.jpg	dresses/view3/013.jpg	M L	Forever21	semi-formals formals	7	Black A-Line Mini	Black a-line silhouette with cut-out front detailing	None
+14	dresses/view1/014.jpg	dresses/view2/014.jpg	dresses/view3/014.jpg	S M	Unknown	interviews semi-formals	7	Teal Knit Sweater Dress	Teal knit sweater dress with long sleeves and knitted pleats	None
+15	dresses/view1/015.jpg	dresses/view2/015.jpg	dresses/view3/015.jpg	S	Toska	semi-formals formals	7	Color-Block Strapless Maxi	Black and royal blue color-block strapless maxi with a gorgeous flowy skirt	None
+16	dresses/view1/016.jpg	dresses/view2/016.jpg	dresses/view3/016.jpg	S	Angie	lawnparties	7	Multicolored Printed Summer Dress	Multicolored kaleidoscope printed summer dress with a flared skirt	None
+17	dresses/view1/017.jpg	dresses/view2/017.jpg	dresses/view3/017.jpg	XS S	Ann Taylor	interviews semi-formals formals	7	Elegant Royal Blue Bodycon	Elegant and sophisticated bright blue bodycon dress	None
+18	dresses/view1/018.jpg	dresses/view2/018.jpg	dresses/view3/018.jpg	XS S	Collezioni Tacconi	semi-formals formals	7	Blush Lace Mini	Romantic blush lace bodycon mini	None
+19	dresses/view1/019.jpg	dresses/view2/019.jpg	dresses/view3/019.jpg	XS S	Express	lawnparties semi-formals formals	7	Elegant Tie-Neck Halter	Elegant white tie-neck silky halter dress	None
+20	dresses/view1/020.jpg	dresses/view2/020.jpg	dresses/view3/020.jpg	M	Forever21	lawnparties semi-formals	7	Flowy Black Romper	Flowy black romper with lace detailing	None
+21	dresses/view1/021.jpg	dresses/view2/021.jpg	dresses/view3/021.jpg	S M	Ann Taylor	semi-formals interviews	7	Striped BodyCon Mini	Bodycon mini with intersecting stripes	None
+22	dresses/view1/022.jpg	dresses/view2/022.jpg	dresses/view3/022.jpg	S	Shein	lawnparties semi-formals formals	7	White Floral Open Maxi	Gorgeous halter neck white maxi with rose appliqué	None
+23	dresses/view1/023.jpg	dresses/view2/023.jpg	dresses/view3/023.jpg	S	H&M	semi-formals formals	7	Green Lace A-Line Dress	Emerald green lace dress with an A-Line Dress	None
+24	dresses/view1/024.jpg	dresses/view2/024.jpg	dresses/view3/024.jpg	S	City Studio	semi-formals formals	7	White Lace Halter Mini	White lace halter mini with embroidered hems and cut-out waist detailing	None
+25	dresses/view1/025.jpg	dresses/view2/025.jpg	dresses/view3/025.jpg	XL	Poetry	lawnparties semi-formals	7	Pinstriped Gray Button-Down Dress	Gray and white pinstriped dress with a sweetheart neckline and button detailing	None
+26	dresses/view1/026.jpg	dresses/view2/026.jpg	dresses/view3/026.jpg	XS	Old Navy	lawnparties	7	Flirty Summer Floral	Flirty white floral summer dress with a flowy skirt	None
+94	dresses/view1/094.jpg	dresses/view2/094.jpg	dresses/view3/094.jpg	S	SLNY	semi-formals formals	7	Aqua Lace Halter Mini	Flapper-esque aqua/teal lace, with intricate fringe detail	None
+28	dresses/view1/028.jpg	dresses/view2/028.jpg	dresses/view3/028.jpg	S	Forever21	lawnparties semi-formals formals	7	White Puff-Sleeved Mini	White puff-sleeved elegant mini	None
+30	dresses/view1/030.jpg	dresses/view2/030.jpg	dresses/view3/030.jpg	XS	Papaya	semi-formals formals	7	Striped A-Line Mini	Bold striped mini with an a-line skirt	None
+31	dresses/view1/031.jpg	dresses/view2/031.jpg	dresses/view3/031.jpg	S	Forever21	semi-formals formals	7	Red Lace Bodycon Mini	Red lace bodycon mini, perfect for a formal or semiformal	None
+32	dresses/view1/032.jpg	dresses/view2/032.jpg	dresses/view3/032.jpg	M	Unknown	semi-formals formals interviews	7	Navy Casual Dress	Casual navy dress with a flirty skirt and smock-waist detailing	None
+34	dresses/view1/034.jpg	dresses/view2/034.jpg	dresses/view3/034.jpg	XS	Design Lab	semi-formals formals	7	White Lace Bodycon	White bodycon dress with intricate black lace detailing around hem and neckline	None
+107	dresses/view1/107.jpg	dresses/view2/107.jpg	dresses/view3/107.jpg	XS	Old Navy	lawnparties semi-formals	7	Dark Teal Sleeveless Mini	Blue-green sleeveless dress with cute white pattern detailing	None
+36	dresses/view1/036.jpg	dresses/view2/036.jpg	dresses/view3/036.jpg	XS	Girl Krazy	lawnparties interviews	7	Casual Denim Dress	Casual everyday denim dress, long-sleeved and cozy	None
+38	dresses/view1/038.jpg	dresses/view2/038.jpg	dresses/view3/038.jpg	XS	Unknown	lawnparties	7	Blue Floral Button-Up Dress	Cute floral mini with button detailing	None
+39	dresses/view1/039.jpg	dresses/view2/039.jpg	dresses/view3/039.jpg	S	Forever21	lawnparties semi-formals formals	7	White Lace Mini	White halter-neck mini with a intricate lace detailing	None
+40	dresses/view1/040.jpg	dresses/view2/040.jpg	dresses/view3/040.jpg	S	Tobi	semi-formals formals	7	Glamorous Grey Mini	Glamorous knit multishade woolen grey mini with an assymetrical neckline	None
+41	dresses/view1/041.jpg	dresses/view2/041.jpg	dresses/view3/041.jpg	XS	H&M	lawnparties	7	Printed Tie-Waist Romper	Printed romper with an adjustable tie-waist	None
+43	dresses/view1/043.jpg	dresses/view2/043.jpg	dresses/view3/043.jpg	M	Bailey Blue	lawnparties semi-formals formals	7	Pink Lace Dress	Pretty in pink lace knee-length dress	None
+46	dresses/view1/046.jpg	dresses/view2/046.jpg	dresses/view3/046.jpg	S M	Land's End	semi-formals formals	7	Midnight Blue Velvet Midi	Gorgeous midnight blue velvet midi dress	None
+48	dresses/view1/048.jpg	dresses/view2/048.jpg	dresses/view3/048.jpg	XS	American Rag	semi-formals formals	7	Black Lace Cap Sleeve Mini	Black mini with stunning lace overlay	None
+37	dresses/view1/037.jpg	dresses/view2/037.jpg	dresses/view3/037.jpg	S M	Unknown	lawnparties	7	Floral Yellow Wrap Dress	Flirty yellow wrap-dress with gorgeous printed flowers	None
+50	dresses/view1/050.jpg	dresses/view2/050.jpg	dresses/view3/050.jpg	S	Ambiance	lawnparties semi-formals	7	Maroon Floral Romper	Flirty maroon romper with printed flower pattern and spaghetti straps	None
+51	dresses/view1/051.jpg	dresses/view2/051.jpg	dresses/view3/051.jpg	S	Design Lab	semi-formals formals	7	Metallic Gunmetal Halter Mini	Gorgeous iridescent halter mini in gunmetal	None
+52	dresses/view1/052.jpg	dresses/view2/052.jpg	dresses/view3/052.jpg	S	Arithalia	semi-formals formals	7	Royal Purple Drapey Mini	Royal deep purple mini with beautiful draped shoulder sleeves	None
+53	dresses/view1/053.jpg	dresses/view2/053.jpg	dresses/view3/053.jpg	S	Merona	lawnparties	7	Bright Pink Collared Dress	Bright pink collared dress with slight pattern detailing	None
+54	dresses/view1/054.jpg	dresses/view2/054.jpg	dresses/view3/054.jpg	S M	Tommy Hilfiger	interviews	7	Business Color Block Dress	Elevated business casual with a formal silhouette but a fun color-block detailing	None
+55	dresses/view1/055.jpg	dresses/view2/055.jpg	dresses/view3/055.jpg	S	H&M	lawnparties semi-formals	7	Black Corduroy Overall	Comfy-cozy black corduroy pinafore with zipper detailing	None
+56	dresses/view1/056.jpg	dresses/view2/056.jpg	dresses/view3/056.jpg	S	Express	semi-formals formals	7	Black Choker Flowy Mini	Loose, flowy comfy-cute black mini with choker detailing	None
+57	dresses/view1/057.jpg	dresses/view2/057.jpg	dresses/view3/057.jpg	XS	Speechless	semi-formals formals	7	Black Lace Bodycon	Black lace boydcon dress, perfect for formals	None
+59	dresses/view1/059.jpg	dresses/view2/059.jpg	dresses/view3/059.jpg	S	Xhilaration	lawnparties semi-formals	7	Printed Black and Purple Dress	Printed Black and purple dress with smock-waist detailing	None
+60	dresses/view1/060.jpg	dresses/view2/060.jpg	dresses/view3/060.jpg	S	Mossimo	semi-formals	7	Black and White A-Line Printed Dress	Black and white printed dress with an a-line skirt	None
+61	dresses/view1/061.jpg	dresses/view2/061.jpg	dresses/view3/061.jpg	M	And	lawnparties semi-formals	7	Fun Orange Printed Maxi	Fun orange printed maxi, perfect for a summer picnic	None
+100	dresses/view1/100.jpg	dresses/view2/100.jpg	dresses/view3/100.jpg	M	Shein	lawnparties	7	Blush Floral Maxi	Gorgeous off-shouolder floral number with a long tulip skirt	None
+105	dresses/view1/105.jpg	dresses/view2/105.jpg	dresses/view3/105.jpg	S	zara	lawnparties	7	Olive Green Denim Overall	Casual cute denim green overall dress with patchwork	None
+64	dresses/view1/064.jpg	dresses/view2/064.jpg	dresses/view3/064.jpg	S M	Bebe	lawnparties semi-formals	7	Neon Pink Romper	Fun neon pink romper	None
+106	dresses/view1/106.jpg	dresses/view2/106.jpg	dresses/view3/106.jpg	M	La Bala	lawnparties semi-formals	7	Pink Ruffled Chiffon	Pastel pink dress with ruffle detailing	None
+66	dresses/view1/066.jpg	dresses/view2/066.jpg	dresses/view3/066.jpg	S	Planet Gold	lawnparties	7	Blue Tie-Dye Summer Dress	Blue tie-dyed summer dress with white sleeves and empire waist	None
+68	dresses/view1/068.jpg	dresses/view2/068.jpg	dresses/view3/068.jpg	S	Forever21	lawnparties	7	Floral Halter Mini	Pretty in pink loose flowy floral halter mini	None
+69	dresses/view1/069.jpg	dresses/view2/069.jpg	dresses/view3/069.jpg	S	Forever21	lawnparties semi-formals	7	Black Lace Romper	Black lace romper with subtle texture detailing	None
+103	dresses/view1/103.jpg	dresses/view2/103.jpg	dresses/view3/103.jpg	M	H&M	lawnparties semi-formals	7	Printed Black and White Flared Mini	Printed black and white flared mini, perfect for casual summer events	None
+71	dresses/view1/071.jpg	dresses/view2/071.jpg	dresses/view3/071.jpg	S	Monteau	semi-formals formals	7	Navy Lace Sleeveless Mini	Blue lace dress with tie-up detailing	None
+72	dresses/view1/072.jpg	dresses/view2/072.jpg	dresses/view3/072.jpg	XS	Mossimo	lawnparties	7	Blue and Pink Floral Dress	Summery blue floral dress with pink spots and slightly pleated detailing	None
+73	dresses/view1/073.jpg	dresses/view2/073.jpg	dresses/view3/073.jpg	S M	Bailey Blue	lawnparties semi-formals	7	Summery Ruffled Dress	Casual cute blue-green ruffled mini	None
+74	dresses/view1/074.jpg	dresses/view2/074.jpg	dresses/view3/074.jpg	S	Unknown	lawnparties semi-formals	7	White A-Line Floral Mini	Flirty white dress with an a-line skirt and floral pattern	None
+75	dresses/view1/075.jpg	dresses/view2/075.jpg	dresses/view3/075.jpg	S	Mossimo	lawnparties	7	Blue Floral Summer Dress	Blue and white floral summer dress with spaghetti straps and layered skirt	None
+76	dresses/view1/076.jpg	dresses/view2/076.jpg	dresses/view3/076.jpg	S	Forever21	lawnparties semi-formals	7	Printed Black and White Romper	Printed black and white romper with smock-waist detailing	None
+77	dresses/view1/077.jpg	dresses/view2/077.jpg	dresses/view3/077.jpg	L	Mossimo	lawnparties	7	Flirty Yellow Summer Dress	Fun and flirty pastel yellow casual summer dress with printed detailing	None
+79	dresses/view1/079.jpg	dresses/view2/079.jpg	dresses/view3/079.jpg	S	Unknown	lawnparties semi-formals	7	Blue Floral Summer Dress	Navy blue floral summer dress with smocked top detailing	None
+81	dresses/view1/081.jpg	dresses/view2/081.jpg	dresses/view3/081.jpg	S	H&M	interviews	7	Black and White Striped Bodycon	Black and white striped bodycon dress with long sleeves	None
+102	dresses/view1/102.jpg	dresses/view2/102.jpg	dresses/view3/102.jpg	S M	Charter Club	semi-formals formals	7	Pink Sleeveless Shift Dress	Sleeveless pink shift with beautiful printed pattern on vibrant pink	None
+83	dresses/view1/083.jpg	dresses/view2/083.jpg	dresses/view3/083.jpg	S M	Unknown	interviews	7	Casual Striped Dress	Casual black and white striped dress	None
+84	dresses/view1/084.jpg	dresses/view2/084.jpg	dresses/view3/084.jpg	XS S	ABS	lawnparties semi-formals	7	Printed Blue Satin	Printed paisley blue satin dress with boho sleeves and a ruffled trim	None
+85	dresses/view1/085.jpg	dresses/view2/085.jpg	dresses/view3/085.jpg	XS	BCBG	lawnparties	7	Printed Multicolored Chiffon Mini	Printed multicolored chiffon halter summer dress	None
+86	dresses/view1/086.jpg	dresses/view2/086.jpg	dresses/view3/086.jpg	S M	Unknown	interviews	7	Heather Gray Casual Dress	Heahter gray casual knee-length dress	None
+104	dresses/view1/104.jpg	dresses/view2/104.jpg	dresses/view3/104.jpg	S M	Atmosphere	interviews semi-formals	7	White Printed Bodycon	White and black printed bodycon dress with three-quarter sleeves	None
+97	dresses/view1/097.jpg	dresses/view2/097.jpg	dresses/view3/097.jpg	XS	Planet Gold	lawnparties	7	Cold-Shouldered Printed Summer Dress	Summery cold-shouldered printed summer dress	None
+90	dresses/view1/090.jpg	dresses/view2/090.jpg	dresses/view3/090.jpg	S M	Unknown	interviews	7	Casual Gray T-Shirt Dress	Casual gray t-shirt dress, perfect for any occasion and dressing up or dressing down	None
+91	dresses/view1/091.jpg	dresses/view2/091.jpg	dresses/view3/091.jpg	S	Material Girl	semi-formals formals	7	Delicate Black Mini	Delicate black mini dress with an a-line skirt and a sweetheart neckline	None
 \.
 
 
 --
--- Data for Name: tables_userinfo; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: tables_userinfo; Type: TABLE DATA; Schema: public; Owner: admin2
 --
 
-COPY public.tables_userinfo (id, username, size, gender, email, phone) FROM stdin;
-4	admin	['S', 'M']	admin	khyatia@princeton.edu	60986866966
-6	khyatia	['S', 'M']	F	khyatia@princeton.edu	
-9	uuberoy	['XS', 'S']	F	uuberoy@princeton.edu	6093566458
-10	jorinak	['S', 'M']	Female	jorinak@princeton.edu	6094954533
-12	axue	['S', 'M']	Female	axue@princeton.edu	9143385195
-13	bgupta	[]	F	bgupta@princeton.edu	6309158956
-14	tswanson	M L 	Female	tswanson@princeton.edu	7123013592
-15	dp15	M L 	M	dp15@princeton.edu	929292929292
-16	amittal	['XXL']	female	yamini98@gmail.com	5149752075
-17	andrewz	S M 	Male	andyzeng75@gmail.com	2147272076
-18	ashleyd	S M 	Female	ashleyd@princeton.edu	0000000000
-19	jsul	S M 	Female	jsul@princeton.edu	Urvashi is annoying 
-20	ejberman	M L XL 	non-binary	ejberman@princeton.edu	4129793406
-21	yangshao	S M 	Female	yangshao@princeton.edu	6096085742
-22	nnangia	XS S 	Female	nangias2010@gmail.com	7328047747
-23	dm19	XS S 	Female	dm19@princeton.edu	7325351678
-24	kendrad	XS S 	Female	kendrad@princeton.edu	7745711713
-25	sab4	S M 	Female	sab4@princeton.edu	2155890022
-26	am33	S M 	Female 	am33@princeton.edu	18182615128
-28	nlgrant	S M 	Female	nlgrant@princeton.edu	
-29	janetcl	S M 	Janet Lee	janetcl@princeton.edu	4088365245
-30	gba	XS S 	Female	grace.ack@gmail.com	
-31	sv2	S 	Female	sv2@princeton.edu	
-32	rdicker	S M 	Male	rdicker@princeton.edu	2102486791
-33	iessani	XS S 	Female	iessani@princeton.edu	6789080695
-34	anz	S M 	Female	anz@princeton.edu	9494126805
-35	rcobzaru	XS S 	F	rcobzaru@princeton.edu	
-36	az2	S M L 	F	amyxiaozhang@gmail.com	6093755946
-37	kx2	S M 	Female	kx2@princeton.edu	5105572217
-38	ktraudt	XS S 	Female	ktraudt@princeton.edu	9736705273
-39	mec7	S M 	Female	mec7@princeton.edu	3108699242
-40	rakhit	XS S 	Female	rakhit@princeton.edu	
-41	lc12	XS S M 	Female	lc12@princeton.edu	
-42	alicex	XS 	Female	alicex@princeton.edu	
-43	lmarrone	M 	Female	lmarrone@princeton.edu	5164620274
-44	aweyant	XS S 	Female	aweyant@princeton.edu	2403825652
-45	mc28	S 	Female	mc28@princeton.edu	
-46	ac33	XS S M 	F	ac33@princeton.edu	
-47	kxtai	S M L 	Female	abc@gmail.com	
-48	chelsiea	S M 	Female	chelsiea@princeton.edu	
-49	spward	S M 	female	spward@princeton.edu	7192293455
-50	mrowicki	XS S 	Michelle Rowicki	mrowicki@princeton.edu	
-51	aiqbal	XS 	Male	aiqbal@princeton.edu	6035136383
-52	kmpowell	M L 	Woman	kmpowell@princeton	3123164989
-53	sbajaj	XS S 	F	somyabajaj94@gmail.com	6098653593
-54	bobbib	XS S 	female	bobbi.jean77@yahoo.com	2709789716
-55	ktrout	XS S 	Female 	ktrout@princeton.edu	
-56	lbn	XS 	f	lbn@princeton.edu	
-57	accheng	S 	Fem	accheng@princeton.edu	
-58	trisham	M L 	female	loseruser08@gmail.com	
-59	myjiang	XS S 	Female	mayjiang@princeton.edu	6504557238
-60	acrd	XS 	F	acrd@princeton	
-61	jkopra	XS S M 	Female	jkopra@princeton.edu	
-62	rsaka	S M 	Female	rsaka@princeton.edu	443-635-9238
-63	devinas	XS S 	Female	devinas@princeton.edu	
-64	syr	XS S 	Female	syr@princeton.edu	5189158642
-65	yjchoi	S M 	Female	youngjoo12@gmail.com	
-66	lmwatt	M	F	lmwatt@princeton.edu	6037813650
-67	rutingl	XS S M 	Female	rutingl@princeton.edu	
-68	jz8	XS S 	Female	jz8@princeton.edu	princetonsucks
-69	zshoaib	XS 	Female	zshoaib@princeton.edu	7178025227
-70	dvalek	['L', 'XL', 'XXL']	Female	dvalek@princeton.edu	3017128875
-71	sbisogno	XS S M 	female	sofiabisogno@gmail.com	2406442214
-72	sgiyer	S M L 	Female 	sgiyer@princeton.edu	7706871441
-73	hanw	S M 	Female	hanw@princeton.edu	
-74	smmathew	M L 	Female	sarah.smileyface@gmail.com	
-75	ejong	S M 	Female	ejong@princeton.edu	8174716334
-76	alchu	M 	Female	alchu@princeton.edu	4088052683
-77	rninan	S M L 	Female	rninan@princeton.edu	6158283903
-78	jasminew	XS S M 	Female	jasminew@princeton.edu	8485655057
-79	cstamps	M L XL 	female	cstamps@princeton.edu	
-80	cnvu	S M L 	Female	cnvu@princeton.edu	
-81	fcorral	XS S 	Female	fcorral@princeton.edu	+52(686)2167790
-82	ccantu	XS S 	Female	ccantu@princeton.edu	
-83	am23	S 	Female	am23@princeton.edu	6095773698
-84	allyson	L XL 	Female	allyson@princeton.edu	8057141664
-85	taylorb	XS S 	Female	taylorb@princeton.edu	
-86	ecorless	S M 	Female	ecorless@princeton.edu	2012649706
-87	st17	L 	Female	st17@princeton.edu	
-88	karenmg	S M 	Female	karenmg@princeton.edu	
-89	dph2	S 	Female 	dph2@princeton.edu	8608953556
-90	sijh	XS S 	female	sijh@princeton.edu	9147032159
-91	cebeard	M L 	Female	cebeard@princeton.edu	3148637915
-92	gyin	XS S 	Female	gyin@princeton.edu	
-93	shuyingc	XS 	F	shuyingc@princeton.edu	8482286823
-94	st14	M 	Male 	st14@princeton.edu	
-95	anthapur	S M 	Female	anthapur@princeton.edu	4088248023
-96	rachelhs	S M 	Female	rachelhs@princeton.edu	
-97	aizhana	S M 	Female	aizhan.akh@gmail.com	
-98	yhui	S 	Female	yhui@princeton.edu	
-99	kyying	XS 	Female	kyying@princeton.edu	6175384345
-100	nwedel	S M 	Female	nwedel@princeton.edu	2016756612
-101	seevans	S M 	Female	seevans@princeton.edu	5043104914
-102	czeng	XS S M 	female	czeng@princeton.edu	
-103	dianat	XS S 	Female	dianat@princeton.edu	
-104	madisonm	M 	Female	madisonm@princeton.edu	8606140604
-105	saumyau	XS S 	Female	saumya.umashankar@gmail.com	6099066533
-106	azou	S M 	F	azou@princeton.edu	6145988531
-107	sbz	M 	Female	sbz@princeton.edu	3093975731
-108	archang	S M 	Female	archang@princeton.edu	4088382832
-109	aw25	S M 	Female	aw25@princeton.edu	4752890363
-110	moak	S 	Female	moak@princeton.edu	6097121676
-111	afuente	S M 	Female	afuente@princeton.edu	7654041093
-112	ylao	XS S 	Female	ylao@princeton.edu	917-656-0616
-113	cm18	XS S 	Female	cm18@princeton.edu	
-114	ruchitab	XS S 	Female 	ruchita.balasubramanian@gmail.com	
-115	jz9	['S']	Female	jz9@princeton.edu	4083874880
-116	jherrle	S M L 	female	jherrle@princeton.edu	
-117	kcoates	S M 	Female	kcoates@princeton.edu	
-118	pattnaik	['M']	Male	pattnaik@princeton.edu	6087199767
-119	juyl	XS S 	Female	juyl@princeton.edu	8188085073
-120	mayyav	XS S 	female	mayyav@princeton.edu	
-121	luy	XS S 	F	luy@princeton.edu	6092169651
-122	ztu	S M 	Female	ztu@princeton.edu	
-123	juechser	L XL XXL 	female	ejuechser@icloud.com	
-124	joyc	S 	Female	joyc@princeton.edu	9173304491
-125	akohli	['M', 'L']	Male	akohli@princeton.edu	
-126	stutim	XS S 	Female	stutim@princeton.edu	321-745-9167
-127	zadong	S M L 	girl	zadong@princeton.edu	
-128	jberardo	XS 	Female	jberardo@princeton.edu	9087529983
-129	gkwon	XS S 	Female	gkwon@princeton.edu	
-130	cw29	S M 	Female	cw29@princeton.edu	19179236317
-131	msultana	XS S 	Female	msultana@princeton.edu	3022528797
-132	minsunp	S 	Female	minsunp@princeton.edu	
-133	cdm5	M L 	Female	cdm5@Princeton.edu	8563618250
-134	gkaur	S M 	Female	gkaur@princeton.edu	
-135	rachelmc	S 	Female	rachelmc@princeton.edu	443-615-4392
-136	mbui	M L 	female	mbui@princeton.edu	6512535645
-137	lmeng	M 	female	lmeng@princeton.edu	
-138	ttahmed	S 	Female	ttahmed@princeton.edu	
-139	jedouard	XS S M 	Female	jedouard@Princeton.EDU	
-140	aw24	S M 	Female	amberwang98@gmail.com	8325995206
-141	tale	XS 	female	tale@princeton.edu	
-142	showlett	S M 	Female	showlett@princeton.edu	
-143	eryu	XS S M L 	Female	eryu@princeton.edu	9197498054
-144	bshitaye	XS S 	Female	gigglescrazy98@gmail.com	7033398010
-145	macknick	S M L 	Female	macknick@princeton.edu	
-146	kodali	XS S 	Female	kodali@princeton.edu	
-147	sejala	XS 	F	um@gmail.com	
-148	eabdo	XS S M 	Female	eabdo@princeton.edu	8582431790
-149	bbao	S M 	F	bbao@princeton.edu	
-150	ejmartin	M L 	female	emartin@princeton.edu	
-151	hs12	M 	Male	hs12@princeton.edu	4843409848
-152	anushkad	XS S 	F	afirstandalast@yahoo.com	
-153	mceb	S M 	Female	mceb@princeton.edu	
-154	vt2	XS S 	Female	victoriajtang@gmail.com	7328811838
-155	rs23	S M 	Female	rs23@princeton.edu	
-156	qparker	S M 	F	qparker@princeton.edu	
-157	gmasback	S M 	Female	gmasback@gmail.com	9714009733
-158	spli	XS S 	Female	spli@princeton.edu	6094541235
-159	sthode	S M L 	Female	sthode@princeton.edu	
-160	mfechter	S M 	Female	mfechter@princeton.edu	7138548126
-161	rschnell	M L 	female	rschnell@princeton.edu	
-162	lgoytia	S M 	female	lgoytia@princeton.edu	9083922153
-163	ixue	S M 	female	ixue@princeton.edu	2017902173
-164	mryeh	S 	Female	mryeh@princeton.edu	0000000000
-165	lej2	XS 	F	lej2@princeton.edu	6096085490
-166	nsi	M L 	Female	nsi@princeton.edu	9735805919
-167	shashim	S M 	Female	shashim@princeton.edu	
-168	vmehta	XS S M 	Female	vmehta@princeton.edu	
-169	dkaki	M L 	F	dkaki@princeton.edu	
-170	vong	XS S M 	Female	vong@princeton.edu	7327732958
-171	jhaynes	M L XL 	F	jeseniamillenia@aim.com	315530875
-172	djokovic	XS S 	She/hers	djokovic@princeton.edu	5862564056
-173	sfvan	['XS', 'S']	Female	sfvan@princeton.edu	7144066177
-174	yap	S M 	Male	yap@princeton.edu	
-175	erikab	S M 	Female	erikab@princeton.edu	8313199712
-176	jcasazza	S M 	female	jcasazza@princeton.edu	
-177	tshanker	['XS', 'S', 'M']	Male	eaijfoiejf@princeton.edu	
-178	spj	XS S 	Female	spj@princeton.edu	6092219026
-179	branu	S M 	female	branu@princeton.edu	
-180	mrg2	S M 	female	michellergreenfield@gmail.com	6025260157
-181	eyk	M L 	Female	eyk@princeton.edu	
-182	kkeels	L XL 	Female	kirsten.keels@gmail.com	479-221-6687
-183	cwjeong	XS S M 	Female	cwjeong@princeton.edu	6092169488
-184	ayodelef	S M 	Female	ayodelef@princeton.edu	4702586677
-185	ckumar	S 	Female	ckumar@princeton.edu	
-186	sd8	XS S M L 	female	sd8@princeton.edu	5157083496
-187	aspenw	S 	Female	aspenw@princeton.edu	6099370928
-188	jquinter	S M 	Female	jquinter@princeton.edu	
-189	mbenso	S 	female	mbenso@princeton.edu	6264519970
-190	al13	XS 	female	a@j.com	
-191	gkresge	M L 	Female	gkresge@princeton.edu	6096056376
-192	mfalter	M L 	Female	melody.falter@gmail.com	8032068919
-193	ihsu	XS S 	female	ihsu@princeton.edu	
-194	lindy	S 	F	lindy@princeton.edu	
-195	swaneeg	XS S 	Female	swaneeg@princeton.edu	6099029227
-196	mel3	XS S 	female	mel3@princeton.edu	
-197	bsicim	S 	Female	bsicim@princeton.edu	
-198	alackey	S M 	F	alackey@princeton.edu	6096492357
-199	mdkim	S M 	Female	kimarykim@gmail.com	
-200	spacilio	S M 	female	spacilio@princeton.edu	3157718022
-201	bgray	XS S 	female	bgray@princeton.edu	
-202	eaw6	XS S 	Female	isabella.wahl.3@gmail.com	15076576566
-203	aab2	L XL 	Female	aab2@princeton.edu	8457413583
-204	ggarlock	S M 	Female	ggarlock@princeton.edu	6092408657
-205	swashio	S 	Female	swashio@princeton.edu	8087830786
-206	mbahrani	S M L 	Female	mbahrani@princeton.edu	
-207	pgradu	S M 	female	pgradu@princeton.edu	
-208	rabrol	XS S 	Female	rabrol@princeton.edu	5164263598
-209	dqi	XS S 	Female	dqi@princeton.edu	
-210	mymin	XS S 	Female	mymin@princeton.edu	
-211	lln	XS S M 	Female	lln@princeton.edu	
-212	lhausman	L 	female	lhausman@princeton.edu	6463199631
-213	sandralc	XS S 	Female	sandralc@princeton.edu	2039175047
-214	tkmills	L XL 	Female	tkmills@princeton.edu	6096513595
-215	aedavis	S 	female	aedavis@princeton.edu	7046163897
-216	mnrogers	M L 	Female	mnrogers@princeton.edu	5102898538
-217	heicklen	L 	Female	heicklen@princeton.edu	2017531515
-218	nanw	XS S 	Female	nanw@princeton.edu	2672415979
-219	mattard	S M 	Female	mattard@princeton.edu	
-220	sm27	S M 	Female	sm27@princeton.edu	8035533954
-221	sb16	S M 	Female	sb16@princeton.edu	6095782563
-222	laurenrs	XS S M 	female	laurenrs@princeton.edu	6314023615
-223	asb2	M 	female	asb2@princeton.edu	8043398499
-224	myriaml	XS 	Female	1lin.mimi@gmail.com	6508667816
-225	fahlberg	XS S 	Female	fahlberg@princeton.edu	7034073896
-226	mongelli	S M 	Female	micaelamongelli@gmail.com	2015438309
-227	azxie	S 	Feamle	azxie@princeton.edu	8582481825
-228	reneel	XS S 	Female	reneel@princeton.edu	
-229	mporras	S M 	Female	mporras@princeton.edu	9146252588
-230	lvarkey	S M 	female	lvarkey@princeton.edu	
-231	kvpl	XS S 	Female	kvpl@princeton.edu	
-232	jh56	S 	Female	jh56@princeton.edu	7329831789
-233	mcrojas	S M L 	Female	mcrojas@princeton.edu	7604506663
-234	sra2	XS S 	Female	sra2@princeton.edu	7323725379
-235	hkawabe	XS S M 	female	hkawabe@princeton.edu	
-236	jasonx	M 	m	jasonx@princeton.edu	7326984229
-237	cc27	XS S 	F	cathy.chen@princeton.edu	6105733159
-238	watumull	M 	female	watumull@princeton.edu	
-239	rlm8	M L 	female	rlm8@princeton.edu	4078102295
-240	sod2	L XL XXL 	female 	sod2@princeton.edu	2019957164
-241	larissao	M 	Female	larissa522095@gmail.com	9736660250
-242	adejesus	XS S 	Female	adejesus@princeton.edu	
-243	hkhurram	XS S 	Female	hkhurram@princeton.edu	
-244	jlawlor	S M 	female	jlawlor@princeton.edu	2035210911
-245	mgdoyle	S M 	Female	mgdoyle@princeton.edu	4848444966
-246	janety	S M L 	Female	janet70176@gmail.com	
-247	yudithp	XS S 	Female	yudithpl97@gmail.com	6103481871
-248	lrezai	XS S 	Female	lrezai@princeton.edu	
-249	heavynj	XXL 	Female	tequillamichell@gmail.com	3147836687
-250	al12	S M 	Female	al12@princeton.edu	
-251	pragya	S M 	Female	pragya@princeton.edu	
-252	jxin	M XL 	Female	jenjen2839@gmail.com	6503916459
-253	michang	M 	Male	michang@princeton.edu	7322164207
-254	kazhang	XS S 	Female	kazhang@princeton.edu	2673865131
-255	jgalindo	L 	Female	jgalindo@princeton.edu	
-256	madisons	XS S 	Female	madisonns30@gmail.com	908-310-1466
-257	jzzhang	S M 	Female	jzzhang@princeton.edu	
-258	mmcooper	S M 	female	mmcooper@princeton.edu	7038595933
-259	ziegesar	S M L 	Female	ziegesar@princeton.edu	9173760774
-260	allicep	XS S M 	Female	allicep@princeton.edu	4073530135
-261	sophiaw	S M 	Female	sophiaw@Princeton.EDU	8456087432
-262	csue	XS S 	Female	csue@princeton.edu	3476537787
-263	ttang	XS S 	Female	ttang@princeton.edu	6093562403
-264	ozhang	S M 	female	ozhang@princeton.edu	5714329222
-265	ktbarnes	XXL 	scooby doo	scoobydoo@gmail.com	2147836666
-266	av7	XS S 	female	17avinitsky@gmail.com	
-267	ifaccone	XS S 	female	ifaccone@princeton.edu	
-268	kdavies	M L 	Woman	kdavies@princeton.edu	
-269	ked	S M L 	Female	ked@princeton	
-270	pc14	XS S 	Female	pc14@princeton.edu	
-271	mld3	M L 	female	mld3@princeton.edu	
-272	ms54	S 	Female	ms54@princeton.edu	6099335094
-273	jyfan	XS S M 	Female	jyfan@princeton.edu	
-274	jgiller	XS S M 	Female	jgiller@princeton.edu	614-581-2904
-275	nramirez	S M L 	Female	nramirez@princeton.edu	7606137355
-276	ll7	XS S M 	female	ll7@princeton.edu	
-277	mnaphade	S M L 	F	mnaphade@princeton.edu	
-278	yichengh	S 	female	yichengh@princeton.edu	6099373965
-279	ahalter	M 	Female	ahalter@princeton.edu	608-799-1172
-280	kding	XS S M 	female	kding@princeton.edu	6093009224
-281	mateos	S 	a	a@a.com	
-282	peallen	L XL XXL 	Female	peallen@wyomingseminary.org	5708553278
-283	acurwen	XS S 	Female	acurwen@princeton.edu	
-284	abigailk	M 	female	abigailk@princeton.edu	4259456931
-285	ariaw	M 	Female	ariaw@princeton.edu	6175487174
-286	ffurnari	XS S 	Female	ffurnari@princeton.edu	9084423703
-287	rsk2	S M 	Female	mrjadoon147@gmail.com	7327633278
-288	lflaming	M L 	Female	laflaming@yahoo.com	8589478666
-289	okusio	S M 	Female	okusio@princeton.edu	3472160941
-290	eshire	M 	female	eshire@princeton.edu	6513997927
-291	avthars	M 	F	2dei2edin@princeton.edu	3r329382432498234
-292	jhj6	XS S 	Female	jhj6@princeton.edu	6095787523
-293	ofoster	XS S M 	Female	o.foster2016@gmail.com	
-294	keg2	L XL XXL 	Female	keg2@princeton.edu	9739972557
-295	jianingz	M 	female	jianingz@princeton.edu	
-296	ms2pupp	XS S 	Female	ms2pupp@princeton.edu	6094334597
-297	sjr4	M L 	female	sruybalid@princeton.edu	7192204368
-298	yhahn	S 	Female	yhahn@princeton.edu	6094541175
-299	jinnp	S M L 	Female	jinnp@princeton.edu	
-300	rosea	['XS', 'S', 'M']	Female	rosea@princeton.edu	7178190654
-301	aberland	S 	Female	akberland6@gmail.com	
-302	hdwaters	M 	Female	hdwaters@princeton.edu	
-303	shaniw	S 	Female	swills218@gmail.com	9734623466
-304	jyxu	S 	Female	jyxu@princeton.edu	
-305	sw24	XS S M 	F	sw24@princeton.edu	9175393353
-306	vlpan	S M L 	Female	vlpan@Princeton.EDU	6106399296
-307	sprieto	S 	Female	sprieto@princeton.edu	9157319393
-308	mariajs	M 	Female	mariajs@princeton.edu	
-309	zz6	S 	Female	zzaman@princeton.edu	6093562027
-310	jkondic	M 	female	jkondic@princeton.edu	
-311	vg6	S M L 	female/woman	vg6@princeton.edu	
-312	shannong	S M 	female	shannong@princeton.edu	
-313	oguan	XS 	Female	oguan@princeton.edu	
-314	jjyun	XS S 	female	jjyun@princeton.edu	
-315	sfriscia	XS S 	Female	cartkitten@aol.com	
-316	skiesel	XS S 	female	skiesel@princeton.edu	
-317	emilyho	XS S 	F	emilyho@princeton.edu	
-318	gerivera	S 	female	gerivera@princeton.edu	7816905040
-319	cyduran	S M 	female	cyduran@princeton.edu	(915)503-7116
-320	jeanluo	S 	F	twihart19@gmail.com	
-321	ekaris	S M 	Female	ekaris@princeton.edu	4805161131
-322	imabrouk	L XL 	f	imabrouk@princeton.edu	7708960060
-323	cporr	XS 	Female	ceporr@gmail.com	9089672890
-324	sophieli	XS S M 	Female	sophieli@princeton.edu	
-325	hpouler	M L 	Female	hpouler@princeton.edu	8606718223
-326	lishah	S M 	Female	lishah@princeton.edu	6462586832
-327	keyeung	XS S 	female	123@gmail.com	
-328	psiyer	S 	female 	psiyer@princeton.edu	7706587979
-329	jloda	M L 	Female	jloda@princeton.edu	7323951485
-330	dalelee	XS S 	female	dalelee@princeton.edu	6508239837
-331	roopar	M L 	Female	roopar@princeton.edu	
-332	aegar	XS S M 	F	aegar@princeton.edu	8575230958
-333	js53	XS 	Female	js53@princeton.edu	
-334	hyejinj	XS S 	Female	jhj960326@gmail.com	6094802173
-335	audreyl	XS S 	Female 	audreyl@princeton.edu	
-336	kfarlie	S 	Female	kfarlie@princeton.edu	9542963715
-337	rjkadler	M 	female	rjkadler@princeton.edu	2152662244
-338	asyang	S M 	Female	asyang@Princeton.EDU	6146848685
-339	anrowe	L 	Female	anrowe@princeton.edu	3477821000
-340	hlau	XS S 	Female	hl.lau54@gmail.com	
-341	aoifeb	L 	Female	aoifeb@princeton.edu	9174465071
-342	kristena	XS 	Female	kristena@princeton.edu	7653763888
-343	eerdos	XS S 	Female	ec.erdos@gmail.com	9788446821
-344	bnehoran	L 	Male	not@my.email	
-345	hannahjc	S M 	Female	hannahjayne1998@gmail.com	8563044096
-346	emaxey	S M 	female	emaxey@princeton.edu	6096479150
-347	kamilar	XS S 	Female	kamilar@princeton.edu	
-348	algarcia	XS S M 	Female	algarcia@princeton.edu	4802913592
-349	acelik	M 	Female	nicksue425@hotmail.com	
-350	barnaout	M L 	f	ad13barn@uwcad.it	
-351	ichung	XS 	Female	icfc1@icloud.com	9142168156
-352	maschwab	M 	Female	maschwab@princeton.edu	
-353	sarahem	S M 	Female	sarahem@princeton.edu	9732712701
-354	aliyag	M L 	female	aliyag@princeton.edu	
-355	ssv	XS S 	Female	ssv@princeton.edu	
-356	kweledji	M L XL 	Female	kweledji@princeton.edu	
-357	zalewska	S 	Female	zalewska@princeton.edu	
-358	levinger	L XL 	Female	xlevinger@gmail.com	5039574094
-359	fatimab	S 	female	fatimafb@hotmail.com	6092160569
-360	drohira	XS S 	Female	drohira@princeton.edu	
-361	morro	XS S M 	Female	morro@princeton.edu	9192648820
-362	bgjura	M L 	female	bgjura@princeton.edu	
-363	jj22	XS S M 	Female	jj22@princeton.edu	7749925133
-364	mcollum	S 	female	mcollum@princeton.edu	
-365	lthurn	M L 	female	lthurn@Princeton.EDU	
-366	eszemraj	S 	Female	eszemraj@princeton.edu	8476917156
-367	rbova	M 	Male	rbova@princeton.edu	6107725518
-368	skzhang	S M 	F	orangemangosmoothie@gmail.com	
-369	vmadan	S 	female	vrindam11@gmail.com	5166037095
-370	katelynp	S 	female	katelynp@princeton.edu	
-371	atong	M 	Male	adriantongusa@gmail.com	8586499498
-372	hbhasker	XS 	Female	hbhasker@princeton.edu	
-373	chitrap	S M L 	Female	chitrap@princeton.edu	
-374	eswu	M 	Female	eswu@princeton.edu	
-375	naomic	S M 	Female	naomic@princeton.edu	3017936497
-376	helenp	S M 	Helen Park	helenp@princeton.edu	
-377	paoletta	M L XL XXL 	Female	paoletta@princeton.edu	4014805492
-378	chain	S M 	Female	chain@princeton.edu	
-379	hkalucha	S M 	female	hkalucha@princeton.edu	
-380	mb38	XS S 	Female	mb38@princeton.edu	4048245974
-381	mcengel	S M 	Female	mcengel@princeton.edu	9802534288
-382	lehehalt	M L 	Female	lehehalt@princeton.edu	5867649959
-383	adlin	XS S 	Female	adlin@princeton.edu	
-384	mmcvey	XS S 	Female	mariah.mcvey@gmail.com	4349898569
-385	tlnguyen	S 	Female	tlnguyen@princeton.edu	2063137687
-386	kjwang	S 	Female	kjwang@princeton.edu	
-387	arulg	['S']	male	arulg@princeton.edu	6099371037
-388	astaylor	XS S 	Female	ali.taylor331@gmail.com	
-389	sarahdu	XS S M 	Female	sarahdu@princeton.edu	
-390	jnli	XS S 	Female	jnli@princeton.edu	4803195516
-391	ssands	S 	female	ssands@princeton.edu	9146434212
-393	joycew	XS S M 	Female	joywu31@gmail.com	4156526099
-394	pranavr	M 	male	pranavrekapalli@gmail.com	55555555
-395	amindel	XS S M 	female	amindel@princeton.edu	2159178608
-396	yangsong	S XL 	hjkl	wefa@awef.com	aaaaa7
-397	tis	M L 	female	tatijana.stewart@gmail.com	3852051502
-398	seli	XXL 	Male	samuelli97@gmail.com	
-399	cwkchan	XS S M 	Female	charmaine.chan.1998@gmail.com	6467094820
-400	uris	M 	male	asdghaksdgahsjd@gmail.com	
-401	vpatwari	XS S 	female	vpatwari@princeton.edu	
-402	pyoon	S 	female	abc@hotmail.com	123456789
-403	ciarao	S 	female	bballgirl316@gmail.com	8459206321
-404	adivan	S 	Female 	adivan@princeton.edu	6099374090
-405	wesby	S 	Female	wesby@princeton.edu	
-406	yoey	S 	female	yoey@princeton.edu	
-407	atair	M 	male	asdfas@gmail.com	
-408	djmajor	XS XL 	Male	djmajor@princeton.edu	
-409	emeyers	S M 	Female	banderson3141@gmail.com	
-410	bwk	['XS', 'S', 'M', 'L', 'XL', 'XXL']	myob	bwk@princeton.edu	
-411	jywei	S 	Fluid	lancetakesroids@lance.com	999
-412	akling	['XS', 'S', 'M']	'; SELECT *;	klingenator@gmail.com	4088024258
-413	lanceg	['M', 'L']	Not a Gender	lanceg@princeton.edu	4434731555
-414	lumbroso	['S', 'M']	Male	lumbroso@cs.princeton.edu	
-415	ws9	M L 	f	ws9@princeton.edu	5555555555
-416	mbroome	M L 	Female	mbroome@Princeton.EDU	5204297399
-417	cs35	L XL 	Female	cs35@princeton.edu	
-418	sarahlee	S M 	Female	sarahlee@princeton.edu	9312374739
-419	morganln	S M 	Female	morganln@princeton.edu	6094398828
-420	dorothyz	XS 	Female	dorothyz@princeton.edu	2675674513
-421	jiayangl	S 	Female	jiayangl@princeton.edu	4803296338
-422	fsw2	S M L 	Woman	fsw2@princeton.edu	2014073146
-423	bha2	XS S M 	Female	bha2@princeton.edu	
-424	kkopach	S M 	FEMALE	kkopach@princeton.edu	2679803613
-425	annayang	S M 	Anna Yang	annayang@princeton.edu	6098655861
-426	ssakai	XS S M 	Female	ssakai@princeton.edu	
-427	ellenli	XS S 	Female	ellenli@princeton.edu	
-428	aepupp	M L XL 	Female	aepupp@princeton.edu	6098021519
-429	arikah	S M 	Female	arikah@princeton.edu	5038840736
-430	joicek	S M 	female	joicek@princeton.edu	
-431	ez2	S M L 	female	ez2@princeton.edu	8433235265
-432	jaeyoonc	S M 	Female	jaeyoonc@princeton.edu	
-433	jhsia	S 	Female	jhsia@princeton.edu	
-434	bchawla	S 	Male	bchawla@princeton.edu	
-435	mwoo	S M 	female	mwoo@princeton.edu	
-436	roopav	XS S 	female	roopav@princeton.edu	
-437	avellore	S 	Female	avellore@princeton.edu	
-438	hgaulke	M L 	female	hgaulke@princeton.edu	2188513944
-439	mqadir	S M 	Female	mqadir@princeton.edu	7163803344
-440	sahithit	XS S M 	Female	sahithit@princeton.edu	8063671945
-441	mandyy	S 	female	mandyy@princeton.edu	
-442	sarahpan	XS S 	F	sarahpan@princeton.edu	2406783453
-443	hto	S M L 	Female	hto@princeton.edu	5083697038
-444	kas9	XS S M 	Female	kas9@princeton.edu	9498700503
-445	ah16	XS S 	Female	ah16@princeton.edu	
-446	amnaa	XS S 	Female	amnaa@princeton.edu	
-447	torchi	XS 	Female	tasnuvaorchi@gmail.com	9174843126
-448	nmontiel	S M 	Female	nmontiel@princeton.edu	5188130855
-449	wl14	S M 	Male	hooligan@gmail.com	9081235432
-450	ikhan	S M L 	F	ikhan@princeton.edu	
-451	rcmyers	M 	Rachel Myers	rcmyers@princeton.edu	2766139430
-452	zkahana	XS S M 	female	zkahana@princeton.edu	2147558426
-453	maressac	XS S M 	Female	maressac@princeton.edu	9173711922
-454	amcgee	S 	female	amcgee@princeton.edu	2709948700
-455	lmchuang	S 	Princeton University	lmchuang@princeton.edu	4043685796
-456	jcs4	S M 	Female	jcs4@princeton.edu	9089148146
-457	eld2	S M L 	Female	eld2@princeton.edu	3158077435
-458	ccolter	M 	Female	ccolter@princeton.edu	6156861453
-459	sjpi	S 	Female	selinajpi@yahoo.com	8433270542
-460	mlh4	M 	Female	mlh4@princeton.edu	7347573080
-461	sl34	XS 	F	sl34@princeton.edu	6093756983
-462	jmdavila	L 	Female	jmdavila@princeton.edu	9164776486
-463	jleanos	M L 	Female	jleanos@Princeton.EDU	
-464	dbracho	M L 	male	danielfbracho@gmail.com	
-465	haeunj	S 	female	haeunj@Princeton.EDU	3604480524
-466	emcmahon	S M 	Female	emcmahon@princeton.edu	
-467	cbms	M L XL 	Female	cbms@princeton.edu	4436684737
-468	syusina	L 	female	syusina@princeton.edu	
-469	kml6	S M 	Female	kml6@princeton.edu	2482291453
-470	naguiar	S M 	yes	naguiar@princeton.edu	
-471	conniem	XS S M 	Female	conniem@princeton.edu	
-472	whhuang	XS S 	Female	whhuang@princeton.edu	6099028738
-473	malloryw	XS 	Female	malloryw@princeton.edu	
-474	akanhai	XS S M 	Woman 	akanhai@princeton.edu	8624382184
-475	mmishra	XS 	F	mmishra@princeton.edu	3176828468
-476	ycantero	XS S 	Female	ycantero@princeton.edu	9139382387
-477	nnadeem	S M 	Female	nimra.nadeem.ahmad@gmail.com	6099335081
-478	jillianq	M L XL 	Female 	jillianq@princeton.edu	9144004725
-479	sbellete	S M 	Female	sbellete@princeton.edu	8624386394
-480	hanyingj	S 	Female	hanyingjiang0918@gmail.com	
-481	dsiman	M L 	female	dsiman@princeton.edu	6099335088
-482	kzecchin	XS 	Female	kzecchin@princeton.edu	
-483	hlcho	XS S 	Female	hlcho@princeton.edu	
-484	bkp	XS 	female	brookekphillips@gmail.com	7326891997
-485	kavyac	S 	Female	kavyac@princeton.edu	
-486	mhooper	S M 	Female	mhooper@princeton.edu	4343270870
-487	hc20	S M 	Female	hc20@princeton.edu	
-488	smm5	S 	Female	smm5@princeton.edu	4193459063
-489	llzhang	S M 	Female	llzhang@princeton.edu	
-490	asheehan	S M 	Female	asheehan@princeton.edu	2156805790
-491	racheltl	S 	Female	racheltl@princeton.edu	
-492	jillshah	S 	Female	jillshah@princeton.edu	
-493	msakkal	S M 	Female	msakkal@princeton.edu	2154991340
-494	lemi	M 	Female	lindsayspamspam@gmail.com	
-495	irinal	XS S 	female	irinal@princeton.edu	7326881899
-496	wlho	S M 	Wendy Ho	wlho@princeton.edu	2149232305
-497	aspare	L XL 	Abby Spare	aspare@princeton.edu	5084638714
-498	ayardi	S M 	Female 	ayardi@princeton.edu	
-499	mcarmen	XS S 	Female	mcarmen@princeton.edu	9175629019
-500	sp21	S M 	Female	sp21@princeton.edu	3366719198
-501	jimink	S M 	Female	jimink@princeton.edu	6093562151
-502	sophiahu	M L XL 	Female	sophiahu@princeton.edu	
-503	jjoh	XS S 	Female	jjoh@princeton.edu	4259564058
-504	grosario	M 	female	grosario@princeton.edu	
-505	kz5	S M 	Female	kz5@princeton.edu	
-506	aikhakoo	XS S 	Female	aikhakoo@princeton.edu	6505541250
-507	naahmed	XS S M L 	Female	naahmed@princeton.edu	8326384782
-508	cd16	XS S 	Female	christinedeng@princeton.edu	2038323577
-509	sevoy	S M 	Female	sevoy@princeton.edu	4125967893
-510	shkhan	M L 	Female	shkhan@princeton.edu	5162637552
-511	zkoh	XS S M 	female	kohzexin@gmail.com	5102418032
-512	risag	S M 	Female	risag@princeton.edu	8576362314
-513	mathiniv	XS S 	Mathini Vaikunthan	mathiniv@princeton.edu	9739448683
-514	hafeng	S M L 	Female	hafeng@princeton.edu	5129626291
-515	elacerda	S 	Female 	elacerda@princeton.edu	2012944198
-516	om2	XS S 	Female	om2@princeton.edu	9737132588
-517	opugh	XS S 	female	oliviapugh17@gmail.com	7034092717
-518	bmf3	XS S 	F	bmf3@princeton.edu	5706603066
-519	cl28	M 	Woman	carollee515@gmail.com	
-520	zvirk	S M 	F	zvirk@princeton.edu	7345566467
-521	etian	XS S 	Female	etian@princeton.edu	2145193139
-522	exiong	S M 	F	sarahdance306603@gmail.com	4156865837
-523	as79	S 	Female 	as79@princeton.edu	3477220256
-524	amliang	M L 	Agender	amliang@princeton.edu	9082409733
-525	maiy	XS S M 	Female	mya8716@icloud.com	
-526	ld10	M 	Femalw	ld10@princeton.edu	
-527	kmemis	['S']	female	kmemis@princeton.edu	8564498877
-528	wngecu	XS S 	Female	wngecu@princeton.edu	
-529	dbarrios	XL XXL 	Female	dbarrios@princeton.edu	
-530	lazarova	S M 	Female	lazarova@princeton.edu	9739309768
-531	sarahib	XS S M 	Woman	sarahib@princeton.edu	9783800780
-532	eabdalla	L XL XXL 	Female	eabdalla@princeton.edu	2015880575
-533	yuanning	S 	Female	yuanning@princeton.edu	
-534	emilyss	S 	Female	emschoe@gmail.com	16465104445
-535	pbentley	XS S 	Female	pbentley@princeton.edu	5133357600
-536	mariacr	S 	female	mariacr@princeton.edu	6099170934
-537	emilyyu	XS 	Female	emilyyu@princeton.edu	6102562888
-538	jasming	S M 	Female	jasming@princeton.edu	6786654278
-539	chiaran	S M 	Female	chiaran@princeton.edu	9174341595
-540	lesliek	S 	female	lesliek@princeton.edu	2137002469
-541	eanamos	XS 	Female	eanamos@princeton.edu	3108927348
-542	ejliu	M L 	Female	eliushen@princeton.edu	
-543	cindyli	S M 	Female	cindyli@princeton.edu	
-544	amberl	XS S 	Female	amberl@princeton.edu	
-545	lx2	XS S 	Female	lx2@princeton.edu	4343056403
-546	tsj	XS S M 	Female	tsj@princeton.edu	7575671714
-547	riel	['XS', 'S', 'M']	Female	deriel@princeton.edu	6099337704
-548	nblu	M 	Female	dancegirl2006103@yahoo.com	
-549	rmodi	XS 	Female	rmodi@princeton.edu	
-550	sbabul	XS 	Female 	sbabul@princeton.edu	6099373932
-551	lsherron	XS S M 	Female	lsherron@princeton.edu	6057283274
-552	shuangt	S M 	Female	shuangt@princeton.edu	
-553	lalarson	XS S 	female	lisa.abascal@Princeton.edu	
-554	mmb6	XS S 	Female	mmb6@princeton.edu	4106005205
-555	tbelshee	XS S 	Cis female 	tbelshee@princeton.edu	7605340930
-556	jonk	M 	Female	j.kim@princeton.edu	6093756113
-557	kl22	XS S 	female	kl22@princeton.edu	6319430271
-558	pacharya	XS S 	Female	acharya.preeta@gmail.com	7328536040
-559	adevraj	S 	male	adevraj@princeton.edu	
-560	ninahe	M L 	female	nihe07@gmail.com	5085170097
-561	spreyes	S M 	Female	spreyes@princeton.edu	
-562	kuttab	M L 	F	kuttab@princeton.edu	2677460930
-563	gargis	M L XL 	Female	gargis@princeton.edu	6098658475
-564	ts17	XL XXL 	Female 	ts17@princeton.edu	5714469988
-565	mgaynor	S M 	Female	mgaynor@princeton.edu	3128024820
-566	yjlee	S 	Female	yjlee@princeton.edu	
-567	jlyang	S 	Female	jyangmi98@gmail.com	
-568	monac	XS S 	female	monac@princeton.edu	6099374033
-569	maganh	S M 	Femail	mha169320@gmail.com	
-570	gpgarcia	XS S 	Female	gpgarcia@princeton.edu	9259130638
-571	mneff	S 	Female	mneff@princeton.edu	7168012978
+COPY public.tables_userinfo (id, username, size, gender, email, phone, "numberRented") FROM stdin;
+4	admin	['S', 'M']	admin	khyatia@princeton.edu	60986866966	0
+6	khyatia	['S', 'M']	F	khyatia@princeton.edu		0
+9	uuberoy	['XS', 'S']	F	uuberoy@princeton.edu	6093566458	0
+10	jorinak	['S', 'M']	Female	jorinak@princeton.edu	6094954533	0
+12	axue	['S', 'M']	Female	axue@princeton.edu	9143385195	0
+13	bgupta	[]	F	bgupta@princeton.edu	6309158956	0
+14	tswanson	M L 	Female	tswanson@princeton.edu	7123013592	0
+15	dp15	M L 	M	dp15@princeton.edu	929292929292	0
+16	amittal	['XXL']	female	yamini98@gmail.com	5149752075	0
+17	andrewz	S M 	Male	andyzeng75@gmail.com	2147272076	0
+18	ashleyd	S M 	Female	ashleyd@princeton.edu	0000000000	0
+19	jsul	S M 	Female	jsul@princeton.edu	Urvashi is annoying 	0
+20	ejberman	M L XL 	non-binary	ejberman@princeton.edu	4129793406	0
+21	yangshao	S M 	Female	yangshao@princeton.edu	6096085742	0
+22	nnangia	XS S 	Female	nangias2010@gmail.com	7328047747	0
+23	dm19	XS S 	Female	dm19@princeton.edu	7325351678	0
+24	kendrad	XS S 	Female	kendrad@princeton.edu	7745711713	0
+25	sab4	S M 	Female	sab4@princeton.edu	2155890022	0
+26	am33	S M 	Female 	am33@princeton.edu	18182615128	0
+28	nlgrant	S M 	Female	nlgrant@princeton.edu		0
+29	janetcl	S M 	Janet Lee	janetcl@princeton.edu	4088365245	0
+30	gba	XS S 	Female	grace.ack@gmail.com		0
+31	sv2	S 	Female	sv2@princeton.edu		0
+32	rdicker	S M 	Male	rdicker@princeton.edu	2102486791	0
+33	iessani	XS S 	Female	iessani@princeton.edu	6789080695	0
+34	anz	S M 	Female	anz@princeton.edu	9494126805	0
+35	rcobzaru	XS S 	F	rcobzaru@princeton.edu		0
+36	az2	S M L 	F	amyxiaozhang@gmail.com	6093755946	0
+37	kx2	S M 	Female	kx2@princeton.edu	5105572217	0
+38	ktraudt	XS S 	Female	ktraudt@princeton.edu	9736705273	0
+39	mec7	S M 	Female	mec7@princeton.edu	3108699242	0
+40	rakhit	XS S 	Female	rakhit@princeton.edu		0
+41	lc12	XS S M 	Female	lc12@princeton.edu		0
+42	alicex	XS 	Female	alicex@princeton.edu		0
+43	lmarrone	M 	Female	lmarrone@princeton.edu	5164620274	0
+44	aweyant	XS S 	Female	aweyant@princeton.edu	2403825652	0
+45	mc28	S 	Female	mc28@princeton.edu		0
+46	ac33	XS S M 	F	ac33@princeton.edu		0
+47	kxtai	S M L 	Female	abc@gmail.com		0
+48	chelsiea	S M 	Female	chelsiea@princeton.edu		0
+49	spward	S M 	female	spward@princeton.edu	7192293455	0
+50	mrowicki	XS S 	Michelle Rowicki	mrowicki@princeton.edu		0
+51	aiqbal	XS 	Male	aiqbal@princeton.edu	6035136383	0
+52	kmpowell	M L 	Woman	kmpowell@princeton	3123164989	0
+53	sbajaj	XS S 	F	somyabajaj94@gmail.com	6098653593	0
+54	bobbib	XS S 	female	bobbi.jean77@yahoo.com	2709789716	0
+55	ktrout	XS S 	Female 	ktrout@princeton.edu		0
+56	lbn	XS 	f	lbn@princeton.edu		0
+57	accheng	S 	Fem	accheng@princeton.edu		0
+58	trisham	M L 	female	loseruser08@gmail.com		0
+59	myjiang	XS S 	Female	mayjiang@princeton.edu	6504557238	0
+60	acrd	XS 	F	acrd@princeton		0
+61	jkopra	XS S M 	Female	jkopra@princeton.edu		0
+62	rsaka	S M 	Female	rsaka@princeton.edu	443-635-9238	0
+63	devinas	XS S 	Female	devinas@princeton.edu		0
+64	syr	XS S 	Female	syr@princeton.edu	5189158642	0
+65	yjchoi	S M 	Female	youngjoo12@gmail.com		0
+66	lmwatt	M	F	lmwatt@princeton.edu	6037813650	0
+67	rutingl	XS S M 	Female	rutingl@princeton.edu		0
+68	jz8	XS S 	Female	jz8@princeton.edu	princetonsucks	0
+69	zshoaib	XS 	Female	zshoaib@princeton.edu	7178025227	0
+70	dvalek	['L', 'XL', 'XXL']	Female	dvalek@princeton.edu	3017128875	0
+71	sbisogno	XS S M 	female	sofiabisogno@gmail.com	2406442214	0
+72	sgiyer	S M L 	Female 	sgiyer@princeton.edu	7706871441	0
+73	hanw	S M 	Female	hanw@princeton.edu		0
+74	smmathew	M L 	Female	sarah.smileyface@gmail.com		0
+75	ejong	S M 	Female	ejong@princeton.edu	8174716334	0
+76	alchu	M 	Female	alchu@princeton.edu	4088052683	0
+77	rninan	S M L 	Female	rninan@princeton.edu	6158283903	0
+78	jasminew	XS S M 	Female	jasminew@princeton.edu	8485655057	0
+79	cstamps	M L XL 	female	cstamps@princeton.edu		0
+80	cnvu	S M L 	Female	cnvu@princeton.edu		0
+81	fcorral	XS S 	Female	fcorral@princeton.edu	+52(686)2167790	0
+82	ccantu	XS S 	Female	ccantu@princeton.edu		0
+83	am23	S 	Female	am23@princeton.edu	6095773698	0
+84	allyson	L XL 	Female	allyson@princeton.edu	8057141664	0
+85	taylorb	XS S 	Female	taylorb@princeton.edu		0
+86	ecorless	S M 	Female	ecorless@princeton.edu	2012649706	0
+87	st17	L 	Female	st17@princeton.edu		0
+88	karenmg	S M 	Female	karenmg@princeton.edu		0
+89	dph2	S 	Female 	dph2@princeton.edu	8608953556	0
+90	sijh	XS S 	female	sijh@princeton.edu	9147032159	0
+91	cebeard	M L 	Female	cebeard@princeton.edu	3148637915	0
+92	gyin	XS S 	Female	gyin@princeton.edu		0
+93	shuyingc	XS 	F	shuyingc@princeton.edu	8482286823	0
+94	st14	M 	Male 	st14@princeton.edu		0
+95	anthapur	S M 	Female	anthapur@princeton.edu	4088248023	0
+96	rachelhs	S M 	Female	rachelhs@princeton.edu		0
+97	aizhana	S M 	Female	aizhan.akh@gmail.com		0
+98	yhui	S 	Female	yhui@princeton.edu		0
+99	kyying	XS 	Female	kyying@princeton.edu	6175384345	0
+100	nwedel	S M 	Female	nwedel@princeton.edu	2016756612	0
+101	seevans	S M 	Female	seevans@princeton.edu	5043104914	0
+102	czeng	XS S M 	female	czeng@princeton.edu		0
+103	dianat	XS S 	Female	dianat@princeton.edu		0
+104	madisonm	M 	Female	madisonm@princeton.edu	8606140604	0
+105	saumyau	XS S 	Female	saumya.umashankar@gmail.com	6099066533	0
+106	azou	S M 	F	azou@princeton.edu	6145988531	0
+107	sbz	M 	Female	sbz@princeton.edu	3093975731	0
+108	archang	S M 	Female	archang@princeton.edu	4088382832	0
+109	aw25	S M 	Female	aw25@princeton.edu	4752890363	0
+110	moak	S 	Female	moak@princeton.edu	6097121676	0
+111	afuente	S M 	Female	afuente@princeton.edu	7654041093	0
+112	ylao	XS S 	Female	ylao@princeton.edu	917-656-0616	0
+113	cm18	XS S 	Female	cm18@princeton.edu		0
+114	ruchitab	XS S 	Female 	ruchita.balasubramanian@gmail.com		0
+115	jz9	['S']	Female	jz9@princeton.edu	4083874880	0
+116	jherrle	S M L 	female	jherrle@princeton.edu		0
+117	kcoates	S M 	Female	kcoates@princeton.edu		0
+118	pattnaik	['M']	Male	pattnaik@princeton.edu	6087199767	0
+119	juyl	XS S 	Female	juyl@princeton.edu	8188085073	0
+120	mayyav	XS S 	female	mayyav@princeton.edu		0
+121	luy	XS S 	F	luy@princeton.edu	6092169651	0
+122	ztu	S M 	Female	ztu@princeton.edu		0
+123	juechser	L XL XXL 	female	ejuechser@icloud.com		0
+124	joyc	S 	Female	joyc@princeton.edu	9173304491	0
+125	akohli	['M', 'L']	Male	akohli@princeton.edu		0
+126	stutim	XS S 	Female	stutim@princeton.edu	321-745-9167	0
+127	zadong	S M L 	girl	zadong@princeton.edu		0
+128	jberardo	XS 	Female	jberardo@princeton.edu	9087529983	0
+129	gkwon	XS S 	Female	gkwon@princeton.edu		0
+130	cw29	S M 	Female	cw29@princeton.edu	19179236317	0
+131	msultana	XS S 	Female	msultana@princeton.edu	3022528797	0
+132	minsunp	S 	Female	minsunp@princeton.edu		0
+133	cdm5	M L 	Female	cdm5@Princeton.edu	8563618250	0
+134	gkaur	S M 	Female	gkaur@princeton.edu		0
+135	rachelmc	S 	Female	rachelmc@princeton.edu	443-615-4392	0
+136	mbui	M L 	female	mbui@princeton.edu	6512535645	0
+137	lmeng	M 	female	lmeng@princeton.edu		0
+138	ttahmed	S 	Female	ttahmed@princeton.edu		0
+139	jedouard	XS S M 	Female	jedouard@Princeton.EDU		0
+140	aw24	S M 	Female	amberwang98@gmail.com	8325995206	0
+141	tale	XS 	female	tale@princeton.edu		0
+142	showlett	S M 	Female	showlett@princeton.edu		0
+143	eryu	XS S M L 	Female	eryu@princeton.edu	9197498054	0
+144	bshitaye	XS S 	Female	gigglescrazy98@gmail.com	7033398010	0
+145	macknick	S M L 	Female	macknick@princeton.edu		0
+146	kodali	XS S 	Female	kodali@princeton.edu		0
+147	sejala	XS 	F	um@gmail.com		0
+148	eabdo	XS S M 	Female	eabdo@princeton.edu	8582431790	0
+149	bbao	S M 	F	bbao@princeton.edu		0
+150	ejmartin	M L 	female	emartin@princeton.edu		0
+151	hs12	M 	Male	hs12@princeton.edu	4843409848	0
+152	anushkad	XS S 	F	afirstandalast@yahoo.com		0
+153	mceb	S M 	Female	mceb@princeton.edu		0
+154	vt2	XS S 	Female	victoriajtang@gmail.com	7328811838	0
+155	rs23	S M 	Female	rs23@princeton.edu		0
+156	qparker	S M 	F	qparker@princeton.edu		0
+157	gmasback	S M 	Female	gmasback@gmail.com	9714009733	0
+158	spli	XS S 	Female	spli@princeton.edu	6094541235	0
+159	sthode	S M L 	Female	sthode@princeton.edu		0
+160	mfechter	S M 	Female	mfechter@princeton.edu	7138548126	0
+161	rschnell	M L 	female	rschnell@princeton.edu		0
+162	lgoytia	S M 	female	lgoytia@princeton.edu	9083922153	0
+163	ixue	S M 	female	ixue@princeton.edu	2017902173	0
+164	mryeh	S 	Female	mryeh@princeton.edu	0000000000	0
+165	lej2	XS 	F	lej2@princeton.edu	6096085490	0
+166	nsi	M L 	Female	nsi@princeton.edu	9735805919	0
+167	shashim	S M 	Female	shashim@princeton.edu		0
+168	vmehta	XS S M 	Female	vmehta@princeton.edu		0
+169	dkaki	M L 	F	dkaki@princeton.edu		0
+170	vong	XS S M 	Female	vong@princeton.edu	7327732958	0
+171	jhaynes	M L XL 	F	jeseniamillenia@aim.com	315530875	0
+172	djokovic	XS S 	She/hers	djokovic@princeton.edu	5862564056	0
+173	sfvan	['XS', 'S']	Female	sfvan@princeton.edu	7144066177	0
+174	yap	S M 	Male	yap@princeton.edu		0
+175	erikab	S M 	Female	erikab@princeton.edu	8313199712	0
+176	jcasazza	S M 	female	jcasazza@princeton.edu		0
+177	tshanker	['XS', 'S', 'M']	Male	eaijfoiejf@princeton.edu		0
+178	spj	XS S 	Female	spj@princeton.edu	6092219026	0
+179	branu	S M 	female	branu@princeton.edu		0
+180	mrg2	S M 	female	michellergreenfield@gmail.com	6025260157	0
+181	eyk	M L 	Female	eyk@princeton.edu		0
+182	kkeels	L XL 	Female	kirsten.keels@gmail.com	479-221-6687	0
+183	cwjeong	XS S M 	Female	cwjeong@princeton.edu	6092169488	0
+184	ayodelef	S M 	Female	ayodelef@princeton.edu	4702586677	0
+185	ckumar	S 	Female	ckumar@princeton.edu		0
+186	sd8	XS S M L 	female	sd8@princeton.edu	5157083496	0
+187	aspenw	S 	Female	aspenw@princeton.edu	6099370928	0
+188	jquinter	S M 	Female	jquinter@princeton.edu		0
+189	mbenso	S 	female	mbenso@princeton.edu	6264519970	0
+190	al13	XS 	female	a@j.com		0
+191	gkresge	M L 	Female	gkresge@princeton.edu	6096056376	0
+192	mfalter	M L 	Female	melody.falter@gmail.com	8032068919	0
+193	ihsu	XS S 	female	ihsu@princeton.edu		0
+194	lindy	S 	F	lindy@princeton.edu		0
+195	swaneeg	XS S 	Female	swaneeg@princeton.edu	6099029227	0
+196	mel3	XS S 	female	mel3@princeton.edu		0
+197	bsicim	S 	Female	bsicim@princeton.edu		0
+198	alackey	S M 	F	alackey@princeton.edu	6096492357	0
+199	mdkim	S M 	Female	kimarykim@gmail.com		0
+200	spacilio	S M 	female	spacilio@princeton.edu	3157718022	0
+201	bgray	XS S 	female	bgray@princeton.edu		0
+202	eaw6	XS S 	Female	isabella.wahl.3@gmail.com	15076576566	0
+203	aab2	L XL 	Female	aab2@princeton.edu	8457413583	0
+204	ggarlock	S M 	Female	ggarlock@princeton.edu	6092408657	0
+205	swashio	S 	Female	swashio@princeton.edu	8087830786	0
+206	mbahrani	S M L 	Female	mbahrani@princeton.edu		0
+207	pgradu	S M 	female	pgradu@princeton.edu		0
+208	rabrol	XS S 	Female	rabrol@princeton.edu	5164263598	0
+209	dqi	XS S 	Female	dqi@princeton.edu		0
+210	mymin	XS S 	Female	mymin@princeton.edu		0
+211	lln	XS S M 	Female	lln@princeton.edu		0
+212	lhausman	L 	female	lhausman@princeton.edu	6463199631	0
+213	sandralc	XS S 	Female	sandralc@princeton.edu	2039175047	0
+214	tkmills	L XL 	Female	tkmills@princeton.edu	6096513595	0
+215	aedavis	S 	female	aedavis@princeton.edu	7046163897	0
+216	mnrogers	M L 	Female	mnrogers@princeton.edu	5102898538	0
+217	heicklen	L 	Female	heicklen@princeton.edu	2017531515	0
+218	nanw	XS S 	Female	nanw@princeton.edu	2672415979	0
+219	mattard	S M 	Female	mattard@princeton.edu		0
+220	sm27	S M 	Female	sm27@princeton.edu	8035533954	0
+221	sb16	S M 	Female	sb16@princeton.edu	6095782563	0
+222	laurenrs	XS S M 	female	laurenrs@princeton.edu	6314023615	0
+223	asb2	M 	female	asb2@princeton.edu	8043398499	0
+224	myriaml	XS 	Female	1lin.mimi@gmail.com	6508667816	0
+225	fahlberg	XS S 	Female	fahlberg@princeton.edu	7034073896	0
+226	mongelli	S M 	Female	micaelamongelli@gmail.com	2015438309	0
+227	azxie	S 	Feamle	azxie@princeton.edu	8582481825	0
+228	reneel	XS S 	Female	reneel@princeton.edu		0
+229	mporras	S M 	Female	mporras@princeton.edu	9146252588	0
+230	lvarkey	S M 	female	lvarkey@princeton.edu		0
+231	kvpl	XS S 	Female	kvpl@princeton.edu		0
+232	jh56	S 	Female	jh56@princeton.edu	7329831789	0
+233	mcrojas	S M L 	Female	mcrojas@princeton.edu	7604506663	0
+234	sra2	XS S 	Female	sra2@princeton.edu	7323725379	0
+235	hkawabe	XS S M 	female	hkawabe@princeton.edu		0
+236	jasonx	M 	m	jasonx@princeton.edu	7326984229	0
+237	cc27	XS S 	F	cathy.chen@princeton.edu	6105733159	0
+238	watumull	M 	female	watumull@princeton.edu		0
+239	rlm8	M L 	female	rlm8@princeton.edu	4078102295	0
+240	sod2	L XL XXL 	female 	sod2@princeton.edu	2019957164	0
+241	larissao	M 	Female	larissa522095@gmail.com	9736660250	0
+242	adejesus	XS S 	Female	adejesus@princeton.edu		0
+243	hkhurram	XS S 	Female	hkhurram@princeton.edu		0
+244	jlawlor	S M 	female	jlawlor@princeton.edu	2035210911	0
+245	mgdoyle	S M 	Female	mgdoyle@princeton.edu	4848444966	0
+246	janety	S M L 	Female	janet70176@gmail.com		0
+247	yudithp	XS S 	Female	yudithpl97@gmail.com	6103481871	0
+248	lrezai	XS S 	Female	lrezai@princeton.edu		0
+249	heavynj	XXL 	Female	tequillamichell@gmail.com	3147836687	0
+250	al12	S M 	Female	al12@princeton.edu		0
+251	pragya	S M 	Female	pragya@princeton.edu		0
+252	jxin	M XL 	Female	jenjen2839@gmail.com	6503916459	0
+253	michang	M 	Male	michang@princeton.edu	7322164207	0
+254	kazhang	XS S 	Female	kazhang@princeton.edu	2673865131	0
+255	jgalindo	L 	Female	jgalindo@princeton.edu		0
+256	madisons	XS S 	Female	madisonns30@gmail.com	908-310-1466	0
+257	jzzhang	S M 	Female	jzzhang@princeton.edu		0
+258	mmcooper	S M 	female	mmcooper@princeton.edu	7038595933	0
+259	ziegesar	S M L 	Female	ziegesar@princeton.edu	9173760774	0
+260	allicep	XS S M 	Female	allicep@princeton.edu	4073530135	0
+261	sophiaw	S M 	Female	sophiaw@Princeton.EDU	8456087432	0
+262	csue	XS S 	Female	csue@princeton.edu	3476537787	0
+263	ttang	XS S 	Female	ttang@princeton.edu	6093562403	0
+264	ozhang	S M 	female	ozhang@princeton.edu	5714329222	0
+265	ktbarnes	XXL 	scooby doo	scoobydoo@gmail.com	2147836666	0
+266	av7	XS S 	female	17avinitsky@gmail.com		0
+267	ifaccone	XS S 	female	ifaccone@princeton.edu		0
+268	kdavies	M L 	Woman	kdavies@princeton.edu		0
+269	ked	S M L 	Female	ked@princeton		0
+270	pc14	XS S 	Female	pc14@princeton.edu		0
+271	mld3	M L 	female	mld3@princeton.edu		0
+272	ms54	S 	Female	ms54@princeton.edu	6099335094	0
+273	jyfan	XS S M 	Female	jyfan@princeton.edu		0
+274	jgiller	XS S M 	Female	jgiller@princeton.edu	614-581-2904	0
+275	nramirez	S M L 	Female	nramirez@princeton.edu	7606137355	0
+276	ll7	XS S M 	female	ll7@princeton.edu		0
+277	mnaphade	S M L 	F	mnaphade@princeton.edu		0
+278	yichengh	S 	female	yichengh@princeton.edu	6099373965	0
+279	ahalter	M 	Female	ahalter@princeton.edu	608-799-1172	0
+280	kding	XS S M 	female	kding@princeton.edu	6093009224	0
+281	mateos	S 	a	a@a.com		0
+282	peallen	L XL XXL 	Female	peallen@wyomingseminary.org	5708553278	0
+283	acurwen	XS S 	Female	acurwen@princeton.edu		0
+284	abigailk	M 	female	abigailk@princeton.edu	4259456931	0
+285	ariaw	M 	Female	ariaw@princeton.edu	6175487174	0
+286	ffurnari	XS S 	Female	ffurnari@princeton.edu	9084423703	0
+287	rsk2	S M 	Female	mrjadoon147@gmail.com	7327633278	0
+288	lflaming	M L 	Female	laflaming@yahoo.com	8589478666	0
+289	okusio	S M 	Female	okusio@princeton.edu	3472160941	0
+290	eshire	M 	female	eshire@princeton.edu	6513997927	0
+291	avthars	M 	F	2dei2edin@princeton.edu	3r329382432498234	0
+292	jhj6	XS S 	Female	jhj6@princeton.edu	6095787523	0
+293	ofoster	XS S M 	Female	o.foster2016@gmail.com		0
+294	keg2	L XL XXL 	Female	keg2@princeton.edu	9739972557	0
+295	jianingz	M 	female	jianingz@princeton.edu		0
+296	ms2pupp	XS S 	Female	ms2pupp@princeton.edu	6094334597	0
+297	sjr4	M L 	female	sruybalid@princeton.edu	7192204368	0
+298	yhahn	S 	Female	yhahn@princeton.edu	6094541175	0
+299	jinnp	S M L 	Female	jinnp@princeton.edu		0
+300	rosea	['XS', 'S', 'M']	Female	rosea@princeton.edu	7178190654	0
+301	aberland	S 	Female	akberland6@gmail.com		0
+302	hdwaters	M 	Female	hdwaters@princeton.edu		0
+303	shaniw	S 	Female	swills218@gmail.com	9734623466	0
+304	jyxu	S 	Female	jyxu@princeton.edu		0
+305	sw24	XS S M 	F	sw24@princeton.edu	9175393353	0
+306	vlpan	S M L 	Female	vlpan@Princeton.EDU	6106399296	0
+307	sprieto	S 	Female	sprieto@princeton.edu	9157319393	0
+308	mariajs	M 	Female	mariajs@princeton.edu		0
+309	zz6	S 	Female	zzaman@princeton.edu	6093562027	0
+310	jkondic	M 	female	jkondic@princeton.edu		0
+311	vg6	S M L 	female/woman	vg6@princeton.edu		0
+312	shannong	S M 	female	shannong@princeton.edu		0
+313	oguan	XS 	Female	oguan@princeton.edu		0
+314	jjyun	XS S 	female	jjyun@princeton.edu		0
+315	sfriscia	XS S 	Female	cartkitten@aol.com		0
+316	skiesel	XS S 	female	skiesel@princeton.edu		0
+317	emilyho	XS S 	F	emilyho@princeton.edu		0
+318	gerivera	S 	female	gerivera@princeton.edu	7816905040	0
+319	cyduran	S M 	female	cyduran@princeton.edu	(915)503-7116	0
+320	jeanluo	S 	F	twihart19@gmail.com		0
+321	ekaris	S M 	Female	ekaris@princeton.edu	4805161131	0
+322	imabrouk	L XL 	f	imabrouk@princeton.edu	7708960060	0
+323	cporr	XS 	Female	ceporr@gmail.com	9089672890	0
+324	sophieli	XS S M 	Female	sophieli@princeton.edu		0
+325	hpouler	M L 	Female	hpouler@princeton.edu	8606718223	0
+326	lishah	S M 	Female	lishah@princeton.edu	6462586832	0
+327	keyeung	XS S 	female	123@gmail.com		0
+328	psiyer	S 	female 	psiyer@princeton.edu	7706587979	0
+329	jloda	M L 	Female	jloda@princeton.edu	7323951485	0
+330	dalelee	XS S 	female	dalelee@princeton.edu	6508239837	0
+331	roopar	M L 	Female	roopar@princeton.edu		0
+332	aegar	XS S M 	F	aegar@princeton.edu	8575230958	0
+333	js53	XS 	Female	js53@princeton.edu		0
+334	hyejinj	XS S 	Female	jhj960326@gmail.com	6094802173	0
+335	audreyl	XS S 	Female 	audreyl@princeton.edu		0
+336	kfarlie	S 	Female	kfarlie@princeton.edu	9542963715	0
+337	rjkadler	M 	female	rjkadler@princeton.edu	2152662244	0
+338	asyang	S M 	Female	asyang@Princeton.EDU	6146848685	0
+339	anrowe	L 	Female	anrowe@princeton.edu	3477821000	0
+340	hlau	XS S 	Female	hl.lau54@gmail.com		0
+341	aoifeb	L 	Female	aoifeb@princeton.edu	9174465071	0
+342	kristena	XS 	Female	kristena@princeton.edu	7653763888	0
+343	eerdos	XS S 	Female	ec.erdos@gmail.com	9788446821	0
+344	bnehoran	L 	Male	not@my.email		0
+345	hannahjc	S M 	Female	hannahjayne1998@gmail.com	8563044096	0
+346	emaxey	S M 	female	emaxey@princeton.edu	6096479150	0
+347	kamilar	XS S 	Female	kamilar@princeton.edu		0
+348	algarcia	XS S M 	Female	algarcia@princeton.edu	4802913592	0
+349	acelik	M 	Female	nicksue425@hotmail.com		0
+350	barnaout	M L 	f	ad13barn@uwcad.it		0
+351	ichung	XS 	Female	icfc1@icloud.com	9142168156	0
+352	maschwab	M 	Female	maschwab@princeton.edu		0
+353	sarahem	S M 	Female	sarahem@princeton.edu	9732712701	0
+354	aliyag	M L 	female	aliyag@princeton.edu		0
+355	ssv	XS S 	Female	ssv@princeton.edu		0
+356	kweledji	M L XL 	Female	kweledji@princeton.edu		0
+357	zalewska	S 	Female	zalewska@princeton.edu		0
+358	levinger	L XL 	Female	xlevinger@gmail.com	5039574094	0
+359	fatimab	S 	female	fatimafb@hotmail.com	6092160569	0
+360	drohira	XS S 	Female	drohira@princeton.edu		0
+361	morro	XS S M 	Female	morro@princeton.edu	9192648820	0
+362	bgjura	M L 	female	bgjura@princeton.edu		0
+363	jj22	XS S M 	Female	jj22@princeton.edu	7749925133	0
+364	mcollum	S 	female	mcollum@princeton.edu		0
+365	lthurn	M L 	female	lthurn@Princeton.EDU		0
+366	eszemraj	S 	Female	eszemraj@princeton.edu	8476917156	0
+367	rbova	M 	Male	rbova@princeton.edu	6107725518	0
+368	skzhang	S M 	F	orangemangosmoothie@gmail.com		0
+369	vmadan	S 	female	vrindam11@gmail.com	5166037095	0
+370	katelynp	S 	female	katelynp@princeton.edu		0
+371	atong	M 	Male	adriantongusa@gmail.com	8586499498	0
+372	hbhasker	XS 	Female	hbhasker@princeton.edu		0
+373	chitrap	S M L 	Female	chitrap@princeton.edu		0
+374	eswu	M 	Female	eswu@princeton.edu		0
+375	naomic	S M 	Female	naomic@princeton.edu	3017936497	0
+376	helenp	S M 	Helen Park	helenp@princeton.edu		0
+377	paoletta	M L XL XXL 	Female	paoletta@princeton.edu	4014805492	0
+378	chain	S M 	Female	chain@princeton.edu		0
+379	hkalucha	S M 	female	hkalucha@princeton.edu		0
+380	mb38	XS S 	Female	mb38@princeton.edu	4048245974	0
+381	mcengel	S M 	Female	mcengel@princeton.edu	9802534288	0
+382	lehehalt	M L 	Female	lehehalt@princeton.edu	5867649959	0
+383	adlin	XS S 	Female	adlin@princeton.edu		0
+384	mmcvey	XS S 	Female	mariah.mcvey@gmail.com	4349898569	0
+385	tlnguyen	S 	Female	tlnguyen@princeton.edu	2063137687	0
+386	kjwang	S 	Female	kjwang@princeton.edu		0
+387	arulg	['S']	male	arulg@princeton.edu	6099371037	0
+388	astaylor	XS S 	Female	ali.taylor331@gmail.com		0
+389	sarahdu	XS S M 	Female	sarahdu@princeton.edu		0
+390	jnli	XS S 	Female	jnli@princeton.edu	4803195516	0
+391	ssands	S 	female	ssands@princeton.edu	9146434212	0
+393	joycew	XS S M 	Female	joywu31@gmail.com	4156526099	0
+394	pranavr	M 	male	pranavrekapalli@gmail.com	55555555	0
+395	amindel	XS S M 	female	amindel@princeton.edu	2159178608	0
+396	yangsong	S XL 	hjkl	wefa@awef.com	aaaaa7	0
+397	tis	M L 	female	tatijana.stewart@gmail.com	3852051502	0
+398	seli	XXL 	Male	samuelli97@gmail.com		0
+399	cwkchan	XS S M 	Female	charmaine.chan.1998@gmail.com	6467094820	0
+400	uris	M 	male	asdghaksdgahsjd@gmail.com		0
+401	vpatwari	XS S 	female	vpatwari@princeton.edu		0
+402	pyoon	S 	female	abc@hotmail.com	123456789	0
+403	ciarao	S 	female	bballgirl316@gmail.com	8459206321	0
+404	adivan	S 	Female 	adivan@princeton.edu	6099374090	0
+405	wesby	S 	Female	wesby@princeton.edu		0
+406	yoey	S 	female	yoey@princeton.edu		0
+407	atair	M 	male	asdfas@gmail.com		0
+408	djmajor	XS XL 	Male	djmajor@princeton.edu		0
+409	emeyers	S M 	Female	banderson3141@gmail.com		0
+410	bwk	['XS', 'S', 'M', 'L', 'XL', 'XXL']	myob	bwk@princeton.edu		0
+411	jywei	S 	Fluid	lancetakesroids@lance.com	999	0
+412	akling	['XS', 'S', 'M']	'; SELECT *;	klingenator@gmail.com	4088024258	0
+413	lanceg	['M', 'L']	Not a Gender	lanceg@princeton.edu	4434731555	0
+414	lumbroso	['S', 'M']	Male	lumbroso@cs.princeton.edu		0
+415	ws9	M L 	f	ws9@princeton.edu	5555555555	0
+416	mbroome	M L 	Female	mbroome@Princeton.EDU	5204297399	0
+417	cs35	L XL 	Female	cs35@princeton.edu		0
+418	sarahlee	S M 	Female	sarahlee@princeton.edu	9312374739	0
+419	morganln	S M 	Female	morganln@princeton.edu	6094398828	0
+420	dorothyz	XS 	Female	dorothyz@princeton.edu	2675674513	0
+421	jiayangl	S 	Female	jiayangl@princeton.edu	4803296338	0
+422	fsw2	S M L 	Woman	fsw2@princeton.edu	2014073146	0
+423	bha2	XS S M 	Female	bha2@princeton.edu		0
+424	kkopach	S M 	FEMALE	kkopach@princeton.edu	2679803613	0
+425	annayang	S M 	Anna Yang	annayang@princeton.edu	6098655861	0
+426	ssakai	XS S M 	Female	ssakai@princeton.edu		0
+427	ellenli	XS S 	Female	ellenli@princeton.edu		0
+428	aepupp	M L XL 	Female	aepupp@princeton.edu	6098021519	0
+429	arikah	S M 	Female	arikah@princeton.edu	5038840736	0
+430	joicek	S M 	female	joicek@princeton.edu		0
+431	ez2	S M L 	female	ez2@princeton.edu	8433235265	0
+432	jaeyoonc	S M 	Female	jaeyoonc@princeton.edu		0
+433	jhsia	S 	Female	jhsia@princeton.edu		0
+434	bchawla	S 	Male	bchawla@princeton.edu		0
+435	mwoo	S M 	female	mwoo@princeton.edu		0
+436	roopav	XS S 	female	roopav@princeton.edu		0
+437	avellore	S 	Female	avellore@princeton.edu		0
+438	hgaulke	M L 	female	hgaulke@princeton.edu	2188513944	0
+439	mqadir	S M 	Female	mqadir@princeton.edu	7163803344	0
+440	sahithit	XS S M 	Female	sahithit@princeton.edu	8063671945	0
+441	mandyy	S 	female	mandyy@princeton.edu		0
+442	sarahpan	XS S 	F	sarahpan@princeton.edu	2406783453	0
+443	hto	S M L 	Female	hto@princeton.edu	5083697038	0
+444	kas9	XS S M 	Female	kas9@princeton.edu	9498700503	0
+445	ah16	XS S 	Female	ah16@princeton.edu		0
+446	amnaa	XS S 	Female	amnaa@princeton.edu		0
+447	torchi	XS 	Female	tasnuvaorchi@gmail.com	9174843126	0
+448	nmontiel	S M 	Female	nmontiel@princeton.edu	5188130855	0
+449	wl14	S M 	Male	hooligan@gmail.com	9081235432	0
+450	ikhan	S M L 	F	ikhan@princeton.edu		0
+451	rcmyers	M 	Rachel Myers	rcmyers@princeton.edu	2766139430	0
+452	zkahana	XS S M 	female	zkahana@princeton.edu	2147558426	0
+453	maressac	XS S M 	Female	maressac@princeton.edu	9173711922	0
+454	amcgee	S 	female	amcgee@princeton.edu	2709948700	0
+455	lmchuang	S 	Princeton University	lmchuang@princeton.edu	4043685796	0
+456	jcs4	S M 	Female	jcs4@princeton.edu	9089148146	0
+457	eld2	S M L 	Female	eld2@princeton.edu	3158077435	0
+458	ccolter	M 	Female	ccolter@princeton.edu	6156861453	0
+459	sjpi	S 	Female	selinajpi@yahoo.com	8433270542	0
+460	mlh4	M 	Female	mlh4@princeton.edu	7347573080	0
+461	sl34	XS 	F	sl34@princeton.edu	6093756983	0
+462	jmdavila	L 	Female	jmdavila@princeton.edu	9164776486	0
+463	jleanos	M L 	Female	jleanos@Princeton.EDU		0
+464	dbracho	M L 	male	danielfbracho@gmail.com		0
+465	haeunj	S 	female	haeunj@Princeton.EDU	3604480524	0
+466	emcmahon	S M 	Female	emcmahon@princeton.edu		0
+467	cbms	M L XL 	Female	cbms@princeton.edu	4436684737	0
+468	syusina	L 	female	syusina@princeton.edu		0
+469	kml6	S M 	Female	kml6@princeton.edu	2482291453	0
+470	naguiar	S M 	yes	naguiar@princeton.edu		0
+471	conniem	XS S M 	Female	conniem@princeton.edu		0
+472	whhuang	XS S 	Female	whhuang@princeton.edu	6099028738	0
+473	malloryw	XS 	Female	malloryw@princeton.edu		0
+474	akanhai	XS S M 	Woman 	akanhai@princeton.edu	8624382184	0
+475	mmishra	XS 	F	mmishra@princeton.edu	3176828468	0
+476	ycantero	XS S 	Female	ycantero@princeton.edu	9139382387	0
+477	nnadeem	S M 	Female	nimra.nadeem.ahmad@gmail.com	6099335081	0
+478	jillianq	M L XL 	Female 	jillianq@princeton.edu	9144004725	0
+479	sbellete	S M 	Female	sbellete@princeton.edu	8624386394	0
+480	hanyingj	S 	Female	hanyingjiang0918@gmail.com		0
+481	dsiman	M L 	female	dsiman@princeton.edu	6099335088	0
+482	kzecchin	XS 	Female	kzecchin@princeton.edu		0
+483	hlcho	XS S 	Female	hlcho@princeton.edu		0
+484	bkp	XS 	female	brookekphillips@gmail.com	7326891997	0
+485	kavyac	S 	Female	kavyac@princeton.edu		0
+486	mhooper	S M 	Female	mhooper@princeton.edu	4343270870	0
+487	hc20	S M 	Female	hc20@princeton.edu		0
+488	smm5	S 	Female	smm5@princeton.edu	4193459063	0
+489	llzhang	S M 	Female	llzhang@princeton.edu		0
+490	asheehan	S M 	Female	asheehan@princeton.edu	2156805790	0
+491	racheltl	S 	Female	racheltl@princeton.edu		0
+492	jillshah	S 	Female	jillshah@princeton.edu		0
+493	msakkal	S M 	Female	msakkal@princeton.edu	2154991340	0
+494	lemi	M 	Female	lindsayspamspam@gmail.com		0
+495	irinal	XS S 	female	irinal@princeton.edu	7326881899	0
+496	wlho	S M 	Wendy Ho	wlho@princeton.edu	2149232305	0
+497	aspare	L XL 	Abby Spare	aspare@princeton.edu	5084638714	0
+498	ayardi	S M 	Female 	ayardi@princeton.edu		0
+499	mcarmen	XS S 	Female	mcarmen@princeton.edu	9175629019	0
+500	sp21	S M 	Female	sp21@princeton.edu	3366719198	0
+501	jimink	S M 	Female	jimink@princeton.edu	6093562151	0
+502	sophiahu	M L XL 	Female	sophiahu@princeton.edu		0
+503	jjoh	XS S 	Female	jjoh@princeton.edu	4259564058	0
+504	grosario	M 	female	grosario@princeton.edu		0
+505	kz5	S M 	Female	kz5@princeton.edu		0
+506	aikhakoo	XS S 	Female	aikhakoo@princeton.edu	6505541250	0
+507	naahmed	XS S M L 	Female	naahmed@princeton.edu	8326384782	0
+508	cd16	XS S 	Female	christinedeng@princeton.edu	2038323577	0
+509	sevoy	S M 	Female	sevoy@princeton.edu	4125967893	0
+510	shkhan	M L 	Female	shkhan@princeton.edu	5162637552	0
+511	zkoh	XS S M 	female	kohzexin@gmail.com	5102418032	0
+512	risag	S M 	Female	risag@princeton.edu	8576362314	0
+513	mathiniv	XS S 	Mathini Vaikunthan	mathiniv@princeton.edu	9739448683	0
+514	hafeng	S M L 	Female	hafeng@princeton.edu	5129626291	0
+515	elacerda	S 	Female 	elacerda@princeton.edu	2012944198	0
+516	om2	XS S 	Female	om2@princeton.edu	9737132588	0
+517	opugh	XS S 	female	oliviapugh17@gmail.com	7034092717	0
+518	bmf3	XS S 	F	bmf3@princeton.edu	5706603066	0
+519	cl28	M 	Woman	carollee515@gmail.com		0
+520	zvirk	S M 	F	zvirk@princeton.edu	7345566467	0
+521	etian	XS S 	Female	etian@princeton.edu	2145193139	0
+522	exiong	S M 	F	sarahdance306603@gmail.com	4156865837	0
+523	as79	S 	Female 	as79@princeton.edu	3477220256	0
+524	amliang	M L 	Agender	amliang@princeton.edu	9082409733	0
+525	maiy	XS S M 	Female	mya8716@icloud.com		0
+526	ld10	M 	Femalw	ld10@princeton.edu		0
+527	kmemis	['S']	female	kmemis@princeton.edu	8564498877	0
+528	wngecu	XS S 	Female	wngecu@princeton.edu		0
+529	dbarrios	XL XXL 	Female	dbarrios@princeton.edu		0
+530	lazarova	S M 	Female	lazarova@princeton.edu	9739309768	0
+531	sarahib	XS S M 	Woman	sarahib@princeton.edu	9783800780	0
+532	eabdalla	L XL XXL 	Female	eabdalla@princeton.edu	2015880575	0
+533	yuanning	S 	Female	yuanning@princeton.edu		0
+534	emilyss	S 	Female	emschoe@gmail.com	16465104445	0
+535	pbentley	XS S 	Female	pbentley@princeton.edu	5133357600	0
+536	mariacr	S 	female	mariacr@princeton.edu	6099170934	0
+537	emilyyu	XS 	Female	emilyyu@princeton.edu	6102562888	0
+538	jasming	S M 	Female	jasming@princeton.edu	6786654278	0
+539	chiaran	S M 	Female	chiaran@princeton.edu	9174341595	0
+540	lesliek	S 	female	lesliek@princeton.edu	2137002469	0
+541	eanamos	XS 	Female	eanamos@princeton.edu	3108927348	0
+542	ejliu	M L 	Female	eliushen@princeton.edu		0
+543	cindyli	S M 	Female	cindyli@princeton.edu		0
+544	amberl	XS S 	Female	amberl@princeton.edu		0
+545	lx2	XS S 	Female	lx2@princeton.edu	4343056403	0
+546	tsj	XS S M 	Female	tsj@princeton.edu	7575671714	0
+547	riel	['XS', 'S', 'M']	Female	deriel@princeton.edu	6099337704	0
+548	nblu	M 	Female	dancegirl2006103@yahoo.com		0
+549	rmodi	XS 	Female	rmodi@princeton.edu		0
+550	sbabul	XS 	Female 	sbabul@princeton.edu	6099373932	0
+551	lsherron	XS S M 	Female	lsherron@princeton.edu	6057283274	0
+552	shuangt	S M 	Female	shuangt@princeton.edu		0
+553	lalarson	XS S 	female	lisa.abascal@Princeton.edu		0
+554	mmb6	XS S 	Female	mmb6@princeton.edu	4106005205	0
+555	tbelshee	XS S 	Cis female 	tbelshee@princeton.edu	7605340930	0
+556	jonk	M 	Female	j.kim@princeton.edu	6093756113	0
+557	kl22	XS S 	female	kl22@princeton.edu	6319430271	0
+558	pacharya	XS S 	Female	acharya.preeta@gmail.com	7328536040	0
+559	adevraj	S 	male	adevraj@princeton.edu		0
+560	ninahe	M L 	female	nihe07@gmail.com	5085170097	0
+561	spreyes	S M 	Female	spreyes@princeton.edu		0
+562	kuttab	M L 	F	kuttab@princeton.edu	2677460930	0
+563	gargis	M L XL 	Female	gargis@princeton.edu	6098658475	0
+564	ts17	XL XXL 	Female 	ts17@princeton.edu	5714469988	0
+565	mgaynor	S M 	Female	mgaynor@princeton.edu	3128024820	0
+566	yjlee	S 	Female	yjlee@princeton.edu		0
+567	jlyang	S 	Female	jyangmi98@gmail.com		0
+568	monac	XS S 	female	monac@princeton.edu	6099374033	0
+569	maganh	S M 	Femail	mha169320@gmail.com		0
+570	gpgarcia	XS S 	Female	gpgarcia@princeton.edu	9259130638	0
+571	mneff	S 	Female	mneff@princeton.edu	7168012978	0
 \.
 
 
 --
--- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
 SELECT pg_catalog.setval('public.auth_group_id_seq', 1, false);
 
 
 --
--- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
 SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 1, false);
 
 
 --
--- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
 SELECT pg_catalog.setval('public.auth_permission_id_seq', 45, true);
 
 
 --
--- Name: auth_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
 SELECT pg_catalog.setval('public.auth_user_groups_id_seq', 1, false);
 
 
 --
--- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
 SELECT pg_catalog.setval('public.auth_user_id_seq', 833, true);
 
 
 --
--- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
 SELECT pg_catalog.setval('public.auth_user_user_permissions_id_seq', 1, false);
 
 
 --
--- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
-SELECT pg_catalog.setval('public.django_admin_log_id_seq', 1083, true);
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 1179, true);
 
 
 --
--- Name: django_cas_ng_proxygrantingticket_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: django_cas_ng_proxygrantingticket_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
 SELECT pg_catalog.setval('public.django_cas_ng_proxygrantingticket_id_seq', 1, false);
 
 
 --
--- Name: django_cas_ng_sessionticket_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: django_cas_ng_sessionticket_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
 SELECT pg_catalog.setval('public.django_cas_ng_sessionticket_id_seq', 1624, true);
 
 
 --
--- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
 SELECT pg_catalog.setval('public.django_content_type_id_seq', 15, true);
 
 
 --
--- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
-SELECT pg_catalog.setval('public.django_migrations_id_seq', 34, true);
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 38, true);
 
 
 --
--- Name: tables_alerts_dressesSelected_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tables_alerts_dressesSelected_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
 SELECT pg_catalog.setval('public."tables_alerts_dressesSelected_id_seq"', 1, false);
 
 
 --
--- Name: tables_alerts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tables_alerts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
 SELECT pg_catalog.setval('public.tables_alerts_id_seq', 1, false);
 
 
 --
--- Name: tables_carts_dressesAdded_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tables_carts_dressesAdded_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
 SELECT pg_catalog.setval('public."tables_carts_dressesAdded_id_seq"', 1, false);
 
 
 --
--- Name: tables_carts_dressesLiked_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tables_carts_dressesLiked_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
 SELECT pg_catalog.setval('public."tables_carts_dressesLiked_id_seq"', 1, false);
 
 
 --
--- Name: tables_carts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tables_carts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
 SELECT pg_catalog.setval('public.tables_carts_id_seq', 1, false);
 
 
 --
--- Name: tables_userinfo_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tables_userinfo_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
 SELECT pg_catalog.setval('public.tables_userinfo_id_seq', 571, true);
 
 
 --
--- Name: auth_group auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: auth_group auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.auth_group
@@ -6290,7 +6548,7 @@ ALTER TABLE ONLY public.auth_group
 
 
 --
--- Name: auth_group_permissions auth_group_permissions_group_id_permission_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: auth_group_permissions auth_group_permissions_group_id_permission_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.auth_group_permissions
@@ -6298,7 +6556,7 @@ ALTER TABLE ONLY public.auth_group_permissions
 
 
 --
--- Name: auth_group_permissions auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: auth_group_permissions auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.auth_group_permissions
@@ -6306,7 +6564,7 @@ ALTER TABLE ONLY public.auth_group_permissions
 
 
 --
--- Name: auth_group auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: auth_group auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.auth_group
@@ -6314,7 +6572,7 @@ ALTER TABLE ONLY public.auth_group
 
 
 --
--- Name: auth_permission auth_permission_content_type_id_codename_01ab375a_uniq; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: auth_permission auth_permission_content_type_id_codename_01ab375a_uniq; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.auth_permission
@@ -6322,7 +6580,7 @@ ALTER TABLE ONLY public.auth_permission
 
 
 --
--- Name: auth_permission auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: auth_permission auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.auth_permission
@@ -6330,7 +6588,7 @@ ALTER TABLE ONLY public.auth_permission
 
 
 --
--- Name: auth_user_groups auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: auth_user_groups auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.auth_user_groups
@@ -6338,7 +6596,7 @@ ALTER TABLE ONLY public.auth_user_groups
 
 
 --
--- Name: auth_user_groups auth_user_groups_user_id_group_id_94350c0c_uniq; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: auth_user_groups auth_user_groups_user_id_group_id_94350c0c_uniq; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.auth_user_groups
@@ -6346,7 +6604,7 @@ ALTER TABLE ONLY public.auth_user_groups
 
 
 --
--- Name: auth_user auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: auth_user auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.auth_user
@@ -6354,7 +6612,7 @@ ALTER TABLE ONLY public.auth_user
 
 
 --
--- Name: auth_user_user_permissions auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: auth_user_user_permissions auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.auth_user_user_permissions
@@ -6362,7 +6620,7 @@ ALTER TABLE ONLY public.auth_user_user_permissions
 
 
 --
--- Name: auth_user_user_permissions auth_user_user_permissions_user_id_permission_id_14a6b632_uniq; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: auth_user_user_permissions auth_user_user_permissions_user_id_permission_id_14a6b632_uniq; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.auth_user_user_permissions
@@ -6370,7 +6628,7 @@ ALTER TABLE ONLY public.auth_user_user_permissions
 
 
 --
--- Name: auth_user auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: auth_user auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.auth_user
@@ -6378,7 +6636,7 @@ ALTER TABLE ONLY public.auth_user
 
 
 --
--- Name: django_admin_log django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: django_admin_log django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.django_admin_log
@@ -6386,7 +6644,7 @@ ALTER TABLE ONLY public.django_admin_log
 
 
 --
--- Name: django_cas_ng_proxygrantingticket django_cas_ng_proxygrant_session_key_user_id_4cd2ea19_uniq; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: django_cas_ng_proxygrantingticket django_cas_ng_proxygrant_session_key_user_id_4cd2ea19_uniq; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.django_cas_ng_proxygrantingticket
@@ -6394,7 +6652,7 @@ ALTER TABLE ONLY public.django_cas_ng_proxygrantingticket
 
 
 --
--- Name: django_cas_ng_proxygrantingticket django_cas_ng_proxygrantingticket_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: django_cas_ng_proxygrantingticket django_cas_ng_proxygrantingticket_pkey; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.django_cas_ng_proxygrantingticket
@@ -6402,7 +6660,7 @@ ALTER TABLE ONLY public.django_cas_ng_proxygrantingticket
 
 
 --
--- Name: django_cas_ng_sessionticket django_cas_ng_sessionticket_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: django_cas_ng_sessionticket django_cas_ng_sessionticket_pkey; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.django_cas_ng_sessionticket
@@ -6410,7 +6668,7 @@ ALTER TABLE ONLY public.django_cas_ng_sessionticket
 
 
 --
--- Name: django_content_type django_content_type_app_label_model_76bd3d3b_uniq; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: django_content_type django_content_type_app_label_model_76bd3d3b_uniq; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.django_content_type
@@ -6418,7 +6676,7 @@ ALTER TABLE ONLY public.django_content_type
 
 
 --
--- Name: django_content_type django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: django_content_type django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.django_content_type
@@ -6426,7 +6684,7 @@ ALTER TABLE ONLY public.django_content_type
 
 
 --
--- Name: django_migrations django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: django_migrations django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.django_migrations
@@ -6434,7 +6692,7 @@ ALTER TABLE ONLY public.django_migrations
 
 
 --
--- Name: django_session django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: django_session django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.django_session
@@ -6442,7 +6700,7 @@ ALTER TABLE ONLY public.django_session
 
 
 --
--- Name: tables_alerts_dressesSelected tables_alerts_dressesSelected_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: tables_alerts_dressesSelected tables_alerts_dressesSelected_pkey; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public."tables_alerts_dressesSelected"
@@ -6450,7 +6708,7 @@ ALTER TABLE ONLY public."tables_alerts_dressesSelected"
 
 
 --
--- Name: tables_alerts_dressesSelected tables_alerts_dressesselected_alerts_id_dress_id_af46f3aa_uniq; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: tables_alerts_dressesSelected tables_alerts_dressesselected_alerts_id_dress_id_af46f3aa_uniq; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public."tables_alerts_dressesSelected"
@@ -6458,7 +6716,7 @@ ALTER TABLE ONLY public."tables_alerts_dressesSelected"
 
 
 --
--- Name: tables_alerts tables_alerts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: tables_alerts tables_alerts_pkey; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.tables_alerts
@@ -6466,7 +6724,7 @@ ALTER TABLE ONLY public.tables_alerts
 
 
 --
--- Name: tables_carts_dressesAdded tables_carts_dressesAdded_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: tables_carts_dressesAdded tables_carts_dressesAdded_pkey; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public."tables_carts_dressesAdded"
@@ -6474,7 +6732,7 @@ ALTER TABLE ONLY public."tables_carts_dressesAdded"
 
 
 --
--- Name: tables_carts_dressesLiked tables_carts_dressesLiked_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: tables_carts_dressesLiked tables_carts_dressesLiked_pkey; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public."tables_carts_dressesLiked"
@@ -6482,7 +6740,7 @@ ALTER TABLE ONLY public."tables_carts_dressesLiked"
 
 
 --
--- Name: tables_carts_dressesAdded tables_carts_dressesadded_carts_id_dress_id_3d1eebed_uniq; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: tables_carts_dressesAdded tables_carts_dressesadded_carts_id_dress_id_3d1eebed_uniq; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public."tables_carts_dressesAdded"
@@ -6490,7 +6748,7 @@ ALTER TABLE ONLY public."tables_carts_dressesAdded"
 
 
 --
--- Name: tables_carts_dressesLiked tables_carts_dressesliked_carts_id_dress_id_6b13cc74_uniq; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: tables_carts_dressesLiked tables_carts_dressesliked_carts_id_dress_id_6b13cc74_uniq; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public."tables_carts_dressesLiked"
@@ -6498,7 +6756,7 @@ ALTER TABLE ONLY public."tables_carts_dressesLiked"
 
 
 --
--- Name: tables_carts tables_carts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: tables_carts tables_carts_pkey; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.tables_carts
@@ -6506,7 +6764,7 @@ ALTER TABLE ONLY public.tables_carts
 
 
 --
--- Name: tables_dress tables_dress_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: tables_dress tables_dress_pkey; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.tables_dress
@@ -6514,7 +6772,7 @@ ALTER TABLE ONLY public.tables_dress
 
 
 --
--- Name: tables_userinfo tables_userinfo_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: tables_userinfo tables_userinfo_pkey; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.tables_userinfo
@@ -6522,7 +6780,7 @@ ALTER TABLE ONLY public.tables_userinfo
 
 
 --
--- Name: tables_userinfo tables_userinfo_username_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: tables_userinfo tables_userinfo_username_key; Type: CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.tables_userinfo
@@ -6530,168 +6788,168 @@ ALTER TABLE ONLY public.tables_userinfo
 
 
 --
--- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: public; Owner: -
+-- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: public; Owner: admin2
 --
 
 CREATE INDEX auth_group_name_a6ea08ec_like ON public.auth_group USING btree (name varchar_pattern_ops);
 
 
 --
--- Name: auth_group_permissions_group_id_b120cbf9; Type: INDEX; Schema: public; Owner: -
+-- Name: auth_group_permissions_group_id_b120cbf9; Type: INDEX; Schema: public; Owner: admin2
 --
 
 CREATE INDEX auth_group_permissions_group_id_b120cbf9 ON public.auth_group_permissions USING btree (group_id);
 
 
 --
--- Name: auth_group_permissions_permission_id_84c5c92e; Type: INDEX; Schema: public; Owner: -
+-- Name: auth_group_permissions_permission_id_84c5c92e; Type: INDEX; Schema: public; Owner: admin2
 --
 
 CREATE INDEX auth_group_permissions_permission_id_84c5c92e ON public.auth_group_permissions USING btree (permission_id);
 
 
 --
--- Name: auth_permission_content_type_id_2f476e4b; Type: INDEX; Schema: public; Owner: -
+-- Name: auth_permission_content_type_id_2f476e4b; Type: INDEX; Schema: public; Owner: admin2
 --
 
 CREATE INDEX auth_permission_content_type_id_2f476e4b ON public.auth_permission USING btree (content_type_id);
 
 
 --
--- Name: auth_user_groups_group_id_97559544; Type: INDEX; Schema: public; Owner: -
+-- Name: auth_user_groups_group_id_97559544; Type: INDEX; Schema: public; Owner: admin2
 --
 
 CREATE INDEX auth_user_groups_group_id_97559544 ON public.auth_user_groups USING btree (group_id);
 
 
 --
--- Name: auth_user_groups_user_id_6a12ed8b; Type: INDEX; Schema: public; Owner: -
+-- Name: auth_user_groups_user_id_6a12ed8b; Type: INDEX; Schema: public; Owner: admin2
 --
 
 CREATE INDEX auth_user_groups_user_id_6a12ed8b ON public.auth_user_groups USING btree (user_id);
 
 
 --
--- Name: auth_user_user_permissions_permission_id_1fbb5f2c; Type: INDEX; Schema: public; Owner: -
+-- Name: auth_user_user_permissions_permission_id_1fbb5f2c; Type: INDEX; Schema: public; Owner: admin2
 --
 
 CREATE INDEX auth_user_user_permissions_permission_id_1fbb5f2c ON public.auth_user_user_permissions USING btree (permission_id);
 
 
 --
--- Name: auth_user_user_permissions_user_id_a95ead1b; Type: INDEX; Schema: public; Owner: -
+-- Name: auth_user_user_permissions_user_id_a95ead1b; Type: INDEX; Schema: public; Owner: admin2
 --
 
 CREATE INDEX auth_user_user_permissions_user_id_a95ead1b ON public.auth_user_user_permissions USING btree (user_id);
 
 
 --
--- Name: auth_user_username_6821ab7c_like; Type: INDEX; Schema: public; Owner: -
+-- Name: auth_user_username_6821ab7c_like; Type: INDEX; Schema: public; Owner: admin2
 --
 
 CREATE INDEX auth_user_username_6821ab7c_like ON public.auth_user USING btree (username varchar_pattern_ops);
 
 
 --
--- Name: django_admin_log_content_type_id_c4bce8eb; Type: INDEX; Schema: public; Owner: -
+-- Name: django_admin_log_content_type_id_c4bce8eb; Type: INDEX; Schema: public; Owner: admin2
 --
 
 CREATE INDEX django_admin_log_content_type_id_c4bce8eb ON public.django_admin_log USING btree (content_type_id);
 
 
 --
--- Name: django_admin_log_user_id_c564eba6; Type: INDEX; Schema: public; Owner: -
+-- Name: django_admin_log_user_id_c564eba6; Type: INDEX; Schema: public; Owner: admin2
 --
 
 CREATE INDEX django_admin_log_user_id_c564eba6 ON public.django_admin_log USING btree (user_id);
 
 
 --
--- Name: django_cas_ng_proxygrantingticket_user_id_f833edd2; Type: INDEX; Schema: public; Owner: -
+-- Name: django_cas_ng_proxygrantingticket_user_id_f833edd2; Type: INDEX; Schema: public; Owner: admin2
 --
 
 CREATE INDEX django_cas_ng_proxygrantingticket_user_id_f833edd2 ON public.django_cas_ng_proxygrantingticket USING btree (user_id);
 
 
 --
--- Name: django_session_expire_date_a5c62663; Type: INDEX; Schema: public; Owner: -
+-- Name: django_session_expire_date_a5c62663; Type: INDEX; Schema: public; Owner: admin2
 --
 
 CREATE INDEX django_session_expire_date_a5c62663 ON public.django_session USING btree (expire_date);
 
 
 --
--- Name: django_session_session_key_c0390e0f_like; Type: INDEX; Schema: public; Owner: -
+-- Name: django_session_session_key_c0390e0f_like; Type: INDEX; Schema: public; Owner: admin2
 --
 
 CREATE INDEX django_session_session_key_c0390e0f_like ON public.django_session USING btree (session_key varchar_pattern_ops);
 
 
 --
--- Name: tables_alerts_dressesSelected_alerts_id_d3cf8626; Type: INDEX; Schema: public; Owner: -
+-- Name: tables_alerts_dressesSelected_alerts_id_d3cf8626; Type: INDEX; Schema: public; Owner: admin2
 --
 
 CREATE INDEX "tables_alerts_dressesSelected_alerts_id_d3cf8626" ON public."tables_alerts_dressesSelected" USING btree (alerts_id);
 
 
 --
--- Name: tables_alerts_dressesSelected_dress_id_438fddff; Type: INDEX; Schema: public; Owner: -
+-- Name: tables_alerts_dressesSelected_dress_id_438fddff; Type: INDEX; Schema: public; Owner: admin2
 --
 
 CREATE INDEX "tables_alerts_dressesSelected_dress_id_438fddff" ON public."tables_alerts_dressesSelected" USING btree (dress_id);
 
 
 --
--- Name: tables_alerts_user_id_32e0ea85; Type: INDEX; Schema: public; Owner: -
+-- Name: tables_alerts_user_id_32e0ea85; Type: INDEX; Schema: public; Owner: admin2
 --
 
 CREATE INDEX tables_alerts_user_id_32e0ea85 ON public.tables_alerts USING btree (user_id);
 
 
 --
--- Name: tables_carts_dressesAdded_carts_id_bbbd0ea9; Type: INDEX; Schema: public; Owner: -
+-- Name: tables_carts_dressesAdded_carts_id_bbbd0ea9; Type: INDEX; Schema: public; Owner: admin2
 --
 
 CREATE INDEX "tables_carts_dressesAdded_carts_id_bbbd0ea9" ON public."tables_carts_dressesAdded" USING btree (carts_id);
 
 
 --
--- Name: tables_carts_dressesAdded_dress_id_8859186b; Type: INDEX; Schema: public; Owner: -
+-- Name: tables_carts_dressesAdded_dress_id_8859186b; Type: INDEX; Schema: public; Owner: admin2
 --
 
 CREATE INDEX "tables_carts_dressesAdded_dress_id_8859186b" ON public."tables_carts_dressesAdded" USING btree (dress_id);
 
 
 --
--- Name: tables_carts_dressesLiked_carts_id_fc8d804c; Type: INDEX; Schema: public; Owner: -
+-- Name: tables_carts_dressesLiked_carts_id_fc8d804c; Type: INDEX; Schema: public; Owner: admin2
 --
 
 CREATE INDEX "tables_carts_dressesLiked_carts_id_fc8d804c" ON public."tables_carts_dressesLiked" USING btree (carts_id);
 
 
 --
--- Name: tables_carts_dressesLiked_dress_id_085d351a; Type: INDEX; Schema: public; Owner: -
+-- Name: tables_carts_dressesLiked_dress_id_085d351a; Type: INDEX; Schema: public; Owner: admin2
 --
 
 CREATE INDEX "tables_carts_dressesLiked_dress_id_085d351a" ON public."tables_carts_dressesLiked" USING btree (dress_id);
 
 
 --
--- Name: tables_carts_user_id_734b380c; Type: INDEX; Schema: public; Owner: -
+-- Name: tables_carts_user_id_734b380c; Type: INDEX; Schema: public; Owner: admin2
 --
 
 CREATE INDEX tables_carts_user_id_734b380c ON public.tables_carts USING btree (user_id);
 
 
 --
--- Name: tables_userinfo_username_6f5889eb_like; Type: INDEX; Schema: public; Owner: -
+-- Name: tables_userinfo_username_6f5889eb_like; Type: INDEX; Schema: public; Owner: admin2
 --
 
 CREATE INDEX tables_userinfo_username_6f5889eb_like ON public.tables_userinfo USING btree (username varchar_pattern_ops);
 
 
 --
--- Name: auth_group_permissions auth_group_permissio_permission_id_84c5c92e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: auth_group_permissions auth_group_permissio_permission_id_84c5c92e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.auth_group_permissions
@@ -6699,7 +6957,7 @@ ALTER TABLE ONLY public.auth_group_permissions
 
 
 --
--- Name: auth_group_permissions auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: auth_group_permissions auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.auth_group_permissions
@@ -6707,7 +6965,7 @@ ALTER TABLE ONLY public.auth_group_permissions
 
 
 --
--- Name: auth_permission auth_permission_content_type_id_2f476e4b_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: auth_permission auth_permission_content_type_id_2f476e4b_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.auth_permission
@@ -6715,7 +6973,7 @@ ALTER TABLE ONLY public.auth_permission
 
 
 --
--- Name: auth_user_groups auth_user_groups_group_id_97559544_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: auth_user_groups auth_user_groups_group_id_97559544_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.auth_user_groups
@@ -6723,7 +6981,7 @@ ALTER TABLE ONLY public.auth_user_groups
 
 
 --
--- Name: auth_user_groups auth_user_groups_user_id_6a12ed8b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: auth_user_groups auth_user_groups_user_id_6a12ed8b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.auth_user_groups
@@ -6731,7 +6989,7 @@ ALTER TABLE ONLY public.auth_user_groups
 
 
 --
--- Name: auth_user_user_permissions auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: auth_user_user_permissions auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.auth_user_user_permissions
@@ -6739,7 +6997,7 @@ ALTER TABLE ONLY public.auth_user_user_permissions
 
 
 --
--- Name: auth_user_user_permissions auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: auth_user_user_permissions auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.auth_user_user_permissions
@@ -6747,7 +7005,7 @@ ALTER TABLE ONLY public.auth_user_user_permissions
 
 
 --
--- Name: django_admin_log django_admin_log_content_type_id_c4bce8eb_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: django_admin_log django_admin_log_content_type_id_c4bce8eb_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.django_admin_log
@@ -6755,7 +7013,7 @@ ALTER TABLE ONLY public.django_admin_log
 
 
 --
--- Name: django_admin_log django_admin_log_user_id_c564eba6_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: django_admin_log django_admin_log_user_id_c564eba6_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.django_admin_log
@@ -6763,7 +7021,7 @@ ALTER TABLE ONLY public.django_admin_log
 
 
 --
--- Name: django_cas_ng_proxygrantingticket django_cas_ng_proxyg_user_id_f833edd2_fk_auth_user; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: django_cas_ng_proxygrantingticket django_cas_ng_proxyg_user_id_f833edd2_fk_auth_user; Type: FK CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.django_cas_ng_proxygrantingticket
@@ -6771,7 +7029,7 @@ ALTER TABLE ONLY public.django_cas_ng_proxygrantingticket
 
 
 --
--- Name: tables_alerts_dressesSelected tables_alerts_dresse_alerts_id_d3cf8626_fk_tables_al; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: tables_alerts_dressesSelected tables_alerts_dresse_alerts_id_d3cf8626_fk_tables_al; Type: FK CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public."tables_alerts_dressesSelected"
@@ -6779,7 +7037,7 @@ ALTER TABLE ONLY public."tables_alerts_dressesSelected"
 
 
 --
--- Name: tables_alerts_dressesSelected tables_alerts_dresse_dress_id_438fddff_fk_tables_dr; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: tables_alerts_dressesSelected tables_alerts_dresse_dress_id_438fddff_fk_tables_dr; Type: FK CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public."tables_alerts_dressesSelected"
@@ -6787,7 +7045,7 @@ ALTER TABLE ONLY public."tables_alerts_dressesSelected"
 
 
 --
--- Name: tables_alerts tables_alerts_user_id_32e0ea85_fk_tables_userinfo_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: tables_alerts tables_alerts_user_id_32e0ea85_fk_tables_userinfo_id; Type: FK CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.tables_alerts
@@ -6795,7 +7053,7 @@ ALTER TABLE ONLY public.tables_alerts
 
 
 --
--- Name: tables_carts_dressesAdded tables_carts_dressesAdded_carts_id_bbbd0ea9_fk_tables_carts_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: tables_carts_dressesAdded tables_carts_dressesAdded_carts_id_bbbd0ea9_fk_tables_carts_id; Type: FK CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public."tables_carts_dressesAdded"
@@ -6803,7 +7061,7 @@ ALTER TABLE ONLY public."tables_carts_dressesAdded"
 
 
 --
--- Name: tables_carts_dressesAdded tables_carts_dressesAdded_dress_id_8859186b_fk_tables_dress_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: tables_carts_dressesAdded tables_carts_dressesAdded_dress_id_8859186b_fk_tables_dress_id; Type: FK CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public."tables_carts_dressesAdded"
@@ -6811,7 +7069,7 @@ ALTER TABLE ONLY public."tables_carts_dressesAdded"
 
 
 --
--- Name: tables_carts_dressesLiked tables_carts_dressesLiked_carts_id_fc8d804c_fk_tables_carts_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: tables_carts_dressesLiked tables_carts_dressesLiked_carts_id_fc8d804c_fk_tables_carts_id; Type: FK CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public."tables_carts_dressesLiked"
@@ -6819,7 +7077,7 @@ ALTER TABLE ONLY public."tables_carts_dressesLiked"
 
 
 --
--- Name: tables_carts_dressesLiked tables_carts_dressesLiked_dress_id_085d351a_fk_tables_dress_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: tables_carts_dressesLiked tables_carts_dressesLiked_dress_id_085d351a_fk_tables_dress_id; Type: FK CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public."tables_carts_dressesLiked"
@@ -6827,7 +7085,7 @@ ALTER TABLE ONLY public."tables_carts_dressesLiked"
 
 
 --
--- Name: tables_carts tables_carts_user_id_734b380c_fk_tables_userinfo_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: tables_carts tables_carts_user_id_734b380c_fk_tables_userinfo_id; Type: FK CONSTRAINT; Schema: public; Owner: admin2
 --
 
 ALTER TABLE ONLY public.tables_carts

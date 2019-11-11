@@ -50,6 +50,12 @@ class UInfoSerializer(serializers.Serializer):
 
 class AvailableTimesSerializer(serializers.Serializer):
     """Your data serializer, define your fields here."""
-    DateTime = serializers.DateTimeField()
+    DateTime = serializers.DateTimeField(format = '%m/%d/%y %H:%M')
     PersonIncharge = serializers.CharField(max_length=30)
+
+class RentalHistorySerializer(serializers.Serializer):
+    """Your data serializer, define your fields here."""
+    Date = serializers.DateTimeField(format = '%m/%d/')
+    RentedDress = DressSerializer(source = 'RentedDress')
+
 
