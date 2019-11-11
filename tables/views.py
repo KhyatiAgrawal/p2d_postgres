@@ -50,6 +50,7 @@ def dress_list(request):
     if request.method == 'GET':
         dress_filter = Dress.objects.all()
     if request.method == 'POST':
+        print(request.data)
         dress_filter = DressFilter(request.data, queryset=Dress.objects.all())
     serializer = DressSerializer(dress_filter, many=True)
     print(serializer.data)  

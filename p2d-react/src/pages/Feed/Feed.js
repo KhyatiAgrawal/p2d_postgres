@@ -25,6 +25,7 @@ class Feed extends React.Component {
 		let storedItems = JSON.parse(localStorage.getItem('state'))
 		this.state = {
 			dresses: [],
+			searchFilters: storedItems ? storedItems['searchFilters'] : [],
 			filters: storedItems ? storedItems['filters'] : [],
 			activeFilters: storedItems ? storedItems['activeFilters'] : new Array(0).fill(false),
 			showSidebar: storedItems ? storedItems['showSidebar'] : true,
@@ -39,7 +40,6 @@ class Feed extends React.Component {
 	}
 
 	fetchDresses = async (filters) => {
-		console.log(filters)
 		let res;
 		if (filters && filters.length > 0) {
 			res = await axios.post(`${API_URL}/api/feed/`, filters)
@@ -80,16 +80,19 @@ class Feed extends React.Component {
 
 	toggleFilter = (index) => {
 		let newFilters = this.state.filters.slice()
+		let newSearchFilters = this.state.searchFilters.slice()
 		let newActiveFilters = this.state.activeFilters.slice()
 		newActiveFilters[index] = newActiveFilters[index]
 		newFilters = (newFilters.slice(0, index)).concat(newFilters.slice(index+1, newFilters.length))
+		newSearchFilters = (newSearchFilters.slice(0, index)).concat(newSearchFilters.slice(index+1, newSearchFilters.length))
 	
 		this.setState({
 			filters: newFilters,
-			activeFilters: newActiveFilters
+			activeFilters: newActiveFilters,
+			searchFilters: newSearchFilters
 		})
 
-		this.fetchDresses(newFilters);
+		this.fetchDresses(newSearchFilters);
 	}
 
 	toggleMenu = () => {
@@ -108,19 +111,27 @@ class Feed extends React.Component {
 		})
 	}
 
-	addFilter = (filter) => {
+	addFilter = (filter, price) => {
 		let newFilters = this.state.filters.slice()
+		let newSearchFilters = this.state.searchFilters.slice()
 		let newActiveFilters = this.state.activeFilters.slice()
 
 		newFilters.unshift(filter)
 		newActiveFilters.unshift(true)
 
+		if (filter.startsWith("max")) {
+			newSearchFilters.unshift(price)
+		} else {
+			newSearchFilters.unshift(filter)
+		}
+
 		this.setState({
 			filters: newFilters,
-			activeFilters: newActiveFilters
+			activeFilters: newActiveFilters,
+			searchFilters: newSearchFilters
 		})
 
-		this.fetchDresses(newFilters);
+		this.fetchDresses(newSearchFilters);
 	}
 
 	render() {
@@ -180,11 +191,11 @@ class Feed extends React.Component {
 							<img src={this.state.showFilters['max_price'] ? minus : plus} className="filter-title__img" />
 						</div>
 						<div className="filter-options" style={!this.state.showFilters['max_price'] ? {display: 'none'} : {display: 'flex'}}>
-							<div className={"filter-option" + (this.state.filters.includes('max-price: $10') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('max-price: $10')) this.addFilter('max-price: $10')}}>$10</div>
-							<div className={"filter-option" + (this.state.filters.includes('max-price: $20') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('max-price: $20')) this.addFilter('max-price: $20')}}>$20</div>
-							<div className={"filter-option" + (this.state.filters.includes('max-price: $30') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('max-price: $30')) this.addFilter('max-price: $30')}}>$30</div>
-							<div className={"filter-option" + (this.state.filters.includes('max-price: $40') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('max-price: $40')) this.addFilter('max-price: $40')}}>$40</div>
-							<div className={"filter-option" + (this.state.filters.includes('max-price: $50') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('max-price: $50')) this.addFilter('max-price: $50')}}>$50</div>
+							<div className={"filter-option" + (this.state.filters.includes('max-price: $10') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('max-price: $10')) this.addFilter('max-price: $10', 10)}}>$10</div>
+							<div className={"filter-option" + (this.state.filters.includes('max-price: $20') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('max-price: $20')) this.addFilter('max-price: $20', 20)}}>$20</div>
+							<div className={"filter-option" + (this.state.filters.includes('max-price: $30') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('max-price: $30')) this.addFilter('max-price: $30', 30)}}>$30</div>
+							<div className={"filter-option" + (this.state.filters.includes('max-price: $40') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('max-price: $40')) this.addFilter('max-price: $40', 40)}}>$40</div>
+							<div className={"filter-option" + (this.state.filters.includes('max-price: $50') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('max-price: $50')) this.addFilter('max-price: $50', 50)}}>$50</div>
 						</div>
 						<div className="filter-title" onClick={() => {this.toggleFilterDisplay('availability')}}>
 							<div className="filter-title__text">AVAILABILITY</div>
