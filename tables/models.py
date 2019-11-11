@@ -7,6 +7,8 @@ class UserInfo(models.Model):
     gender = models.CharField(max_length=20)
     email = models.EmailField(max_length=40)
     phone = models.CharField(max_length=50)
+    numberRented = models.IntegerField(default = 0)
+
 
 
 class Dress(models.Model):
@@ -24,23 +26,25 @@ class Dress(models.Model):
     price = models.IntegerField()
     title = models.CharField(max_length=70)
     description = models.CharField(max_length=500)
-    availability = models.BooleanField(default=False)
+    unavailableDates = models.CharField(max_length=500)
 
     def __str__(self):
-        return self.title
+        return self.id
+
+
 
 # Keeps track of what dresses are associated with what users
 class Carts(models.Model):
     user = models.ForeignKey(UserInfo, related_name='RelatedUser', on_delete=models.CASCADE)
     dressesAdded = models.ManyToManyField(Dress, related_name='CartDresses')
     dressesLiked = models.ManyToManyField(Dress, related_name='LikedDresses')
+    rentalHistory = models.CharField(max_length=1000, default = "")
+
     
 # Keeps track of the dresses and trial time a person has selected 
 class Alerts(models.Model):
     user = models.ForeignKey(UserInfo, related_name='UserWhoBooked', on_delete=models.CASCADE)
     dressesSelected = models.ManyToManyField(Dress)
-    # eventId = models.CharField(max_length=100)
     trialDateAndTime = models.DateTimeField(null=True)
 
-# Calendar stuff (Google Calender api)
 
