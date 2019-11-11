@@ -1,5 +1,6 @@
 from django.db import models
 import sys
+from django.core.files.storage import FileSystemStorage
 
 class UserInfo(models.Model):
     username = models.CharField(max_length=30, unique=True)
@@ -10,14 +11,23 @@ class UserInfo(models.Model):
     numberRented = models.IntegerField(default = 0)
 
 
+class OverwriteStorage(FileSystemStorage):
+
+    def get_available_name(self, name, max_length=None):
+        # If the filename already exists, remove it as if it was a true file system
+        if self.exists(name):
+            os.remove(os.path.join(settings.MEDIA_ROOT, name))
+        return name
+ 
 
 class Dress(models.Model):
+    
     id = models.IntegerField(primary_key=True)
 
     # The three views of the photos
-    view1 = models.ImageField(upload_to='./dresses/view1', blank=True)
-    view2 = models.ImageField(upload_to='./dresses/view2', blank=True)
-    view3 = models.ImageField(upload_to='./dresses/view3', blank=True)
+    view1 = models.ImageField(upload_to='./dresses/view1', blank=True, storage=OverwriteStorage())
+    view2 = models.ImageField(upload_to='./dresses/view2', blank=True, storage=OverwriteStorage())
+    view3 = models.ImageField(upload_to='./dresses/view3', blank=True, storage=OverwriteStorage())
 
     # Information about the dress
     size = models.CharField(max_length=10)
@@ -28,7 +38,7 @@ class Dress(models.Model):
     description = models.CharField(max_length=500)
     unavailableDates = models.CharField(max_length=500)
 
-    def __str__(self):
+    def __int__(self):
         return self.id
 
 

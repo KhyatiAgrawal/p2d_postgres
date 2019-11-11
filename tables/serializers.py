@@ -7,7 +7,7 @@ from .models import UserInfo
 class DressSerializer(serializers.ModelSerializer):
     class Meta:
         model = Dress 
-        fields = ('id','view1', 'view2', 'view3', 'size','brand','occasions', 'price', 'title', 'description', 'availability')
+        fields = ('id','view1', 'view2', 'view3', 'size','brand','occasions', 'price', 'title', 'description', 'unavailableDates')
 
 
 # class CartsSerializer(serializers.ModelSerializer):
@@ -46,7 +46,7 @@ class AlertsSerializer(serializers.ModelSerializer):
 class UInfoSerializer(serializers.Serializer):
     class Meta:
         model = UserInfo
-        fields = ('username','size', 'gender', 'email', 'phone')
+        fields = ('username','size', 'gender', 'email', 'phone', 'numberRented')
 
 class AvailableTimesSerializer(serializers.Serializer):
     """Your data serializer, define your fields here."""
