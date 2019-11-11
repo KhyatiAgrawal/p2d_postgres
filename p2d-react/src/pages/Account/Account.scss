@@ -1,0 +1,95 @@
+@import '../../index.scss';
+
+.Account {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  padding-left: 2.5vw;
+  padding-top: 20px;
+  padding-right: 2.5vw;
+  color: $p2d-gray;
+}
+
+.account-title {
+	&__container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-top: calc(5vw + 45px);
+		width: 100%;
+	}
+
+	&__text {
+		color: $p2d-gray;
+		font-size: 32px;
+		font-weight: bold;
+	}
+}
+
+.sus {
+	&__container {
+		margin-top: 60px;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	&__title {
+		color: $p2d-gray;
+		font-size: 18px;
+	}
+
+	&__outer-outer-bar {
+		margin-top: 20px;
+		border: 2px solid $p2d-reg;
+		border-radius: 50px;
+		width: 80%;
+		height: 90px;
+		max-width: 620px;
+		overflow: hidden;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&__outer-bar {
+		border-radius: 50px;
+		width: 98%;
+		height: 98%;
+		max-width: 600px;
+		height: 80px;
+		overflow: hidden;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+	}
+
+	&__inner-bar {
+		height: 200px;
+	}
+	
+}
+
+.info {
+	&__container {
+		width: 100%;
+		margin-top: 20px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&__text {
+		font-size: 20px;
+		color: $p2d-reg;
+	}
+
+	&__stat {
+		font-size: 24px;
+		color: $p2d-reg;
+	}
+}

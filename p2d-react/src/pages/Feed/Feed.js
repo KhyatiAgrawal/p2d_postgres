@@ -12,7 +12,6 @@ import minus from '../../styles/svgs/minus.svg'
 import black_heart from '../../styles/svgs/black-heart.svg'
 import left_arrow from '../../styles/svgs/left-arrow.svg'
 
-import dress1 from '../../styles/images/mock_dresses/key_dresses/01.jpg'
 import axios from 'axios';
 const API_URL = 'http://127.0.0.1:8000';
 const api_endpoint = new retrieveData();
@@ -138,7 +137,6 @@ class Feed extends React.Component {
 	}
 
 	render() {
-		console.log(this.state.trial_dresses);
 		localStorage.setItem('state', JSON.stringify(this.state))
 		return (
 			<div className="Feed">
