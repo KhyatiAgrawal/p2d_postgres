@@ -9,20 +9,8 @@ import Modal from '../Modal/Modal'
 class Grid extends Component {
   constructor(props) {
     super(props)
-    let images = {}
-    for (var key in props.images) {
-      images[key] = props.images[key]
-      images[key].modal = false
-      images[key].size = "Medium"
-      images[key].brand = "Urban Outfitters"
-      images[key].availability = "Available"
-      images[key].occasion = "Lawnparties"
-      images[key].price = "$14.99"
-      images[key].principal = true
-      images[key].total = 3
-    }
     this.state = {
-      images: images,
+      images: {},
     }
   }
 
@@ -46,8 +34,6 @@ class Grid extends Component {
     this.setState({
       images: images
     })
-
-    // console.log(this.state.images[key].modal)
   }
 
   toggleDress = (key) => {
@@ -55,6 +41,20 @@ class Grid extends Component {
     images[key].principal = !this.state.images[key].principal
     this.setState({
       images: images
+    })
+  }
+
+  componentWillReceiveProps({images}) {
+    let dress_data = {}
+    for (let i in images) {
+      dress_data[i] = {
+        ...images[i],
+        principal: true,
+        modal: false,
+      }
+    }
+    this.setState({
+      images: dress_data,
     })
   }
 

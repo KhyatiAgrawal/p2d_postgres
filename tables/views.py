@@ -37,7 +37,7 @@ SCOPES = ['https://www.googleapis.com/auth/calendar.events']
 # Confirm stuff here 
 # Make sure this works for all dresses 
 # @login_required
-@api_view((['GET', 'PUT']))
+@api_view((['GET', 'POST']))
 def dress_list(request):
     """
     List of dresses according to the search request passed
@@ -49,9 +49,9 @@ def dress_list(request):
     # See if you can use tssearch for better searches
     if request.method == 'GET':
         dress_filter = Dress.objects.all()
-    if request.method == 'PUT':
+    if request.method == 'POST':
         dress_filter = DressFilter(request.data, queryset=Dress.objects.all())
-    serializer = DressSerializer(dress_filter, many=True, context={'request': request})
+    serializer = DressSerializer(dress_filter, many=True)
     print(serializer.data)  
     return Response(serializer.data, status=status.HTTP_200_OK, template_name=None)
     # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

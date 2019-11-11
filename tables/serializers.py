@@ -7,7 +7,7 @@ from .models import UserInfo
 class DressSerializer(serializers.ModelSerializer):
     class Meta:
         model = Dress 
-        fields = ('id','view1', 'view2', 'view3', 'size','brand','occasions', 'price', 'title', 'description', 'availability')
+        fields = ('id','view1', 'view2', 'view3', 'size','brand','occasions', 'price', 'title', 'description', 'unavailableDates')
 
 
 # class CartsSerializer(serializers.ModelSerializer):

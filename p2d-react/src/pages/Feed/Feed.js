@@ -21,38 +21,10 @@ class Feed extends React.Component {
 	constructor(props) {
 		super(props)
 
-		const reqSvgs = require.context ( '../../styles/images/mock_dresses/key_dresses', true, /\.jpg$/ )
-		const paths = reqSvgs.keys ()
-
-		const images = paths.map( path => reqSvgs ( path ) )
-
-		const reqSvgsSecond = require.context ( '../../styles/images/mock_dresses/second_dresses', true, /\.jpg$/ )
-		const paths2 = reqSvgsSecond.keys ()
-
-		const second_dresses = paths2.map( path => reqSvgsSecond ( path ) )
-
-		const reqSvgsThird = require.context ( '../../styles/images/mock_dresses/third_dresses', true, /\.jpg$/ )
-		const paths3 = reqSvgsThird.keys ()
-
-		const third_dresses = paths3.map( path => reqSvgsThird ( path ) )
-		const num_images = images.length;
-		let dresses = {}
-		for (var i = 0; i < images.length; i++) {
-			let keydress = images[i]
-			let second_dress = second_dresses[i]
-			let third_dress = third_dresses[i]
-			dresses[i] = {
-				0: keydress,
-				1: second_dress,
-				2: third_dress,
-				title: 'Linen Midi Dress',
-				selected: 0,
-				total: 3,
-			}
-		}
-
+		this.fetchDresses = this.fetchDresses.bind(this)
 		let storedItems = JSON.parse(localStorage.getItem('state'))
 		this.state = {
+			dresses: [],
 			filters: storedItems ? storedItems['filters'] : [],
 			activeFilters: storedItems ? storedItems['activeFilters'] : new Array(0).fill(false),
 			showSidebar: storedItems ? storedItems['showSidebar'] : true,
@@ -62,37 +34,48 @@ class Feed extends React.Component {
 				max_price: storedItems ? storedItems['showFilters']['max_price'] : false,
 				availability: storedItems ? storedItems['showFilters']['availability'] : false,
 				keyword: storedItems ? storedItems['showFilters']['keyword'] : false,
-			},
-			dresses: dresses,
-			trial_dresses: {},
-		}
-
-		this.fetchDresses = this.fetchDresses.bind(this)
-	}
-
-	fetchDresses() {
-	    // api_endpoint.getAllDresses().then(function (result) {
-	    //     this.setState({ trial_dresses:  result.data })
-	    // });
-
-	    let ex = {}
-	    async function test () {
-			try {
-			  let res = await axios.get(`${API_URL}/api/feed/`)
-			  console.log(JSON.stringify(res.data));
-			  for (let i in res.data) {
-			  	ex[i] = res.data[i]
-			  }
-			} catch (e) {
-			  console.log(e.response) // undefined
 			}
 		}
-		test()
-		this.setState({trial_dresses: ex})
+	}
+
+	fetchDresses = async (filters) => {
+		console.log(filters)
+		let res;
+		if (filters && filters.length > 0) {
+			res = await axios.post(`${API_URL}/api/feed/`, filters)
+		} else {
+			res = await axios.get(`${API_URL}/api/feed/`)
+		}
+		let dress_data = []
+		for (let i in res.data) {
+			dress_data.push({
+				id: res.data[i]["id"],
+				0: API_URL + "/" + res.data[i]["view1"],
+				1: API_URL + "/" + res.data[i]["view2"],
+				2: API_URL + "/" + res.data[i]["view3"],
+				title: res.data[i]["title"],
+				selected: 0,
+				total: 3,
+				brand: res.data[i]["brand"],
+				size: res.data[i]["size"],
+				description: res.data[i]["description"],
+				occasion: res.data[i]["occasions"].split(/(\s+)/),
+				price: res.data[i]["price"],
+				availability: res.data[i]["unavailableDates"]
+			})
+		}
+		if (this.mounted) {
+			this.setState({dresses: dress_data})
+		}
 	}
 
 	componentDidMount() {
+		this.mounted = true;
 		this.fetchDresses();
+	}
+
+	componentWillUnmount() {
+		this.mounted = false;
 	}
 
 	toggleFilter = (index) => {
@@ -100,11 +83,13 @@ class Feed extends React.Component {
 		let newActiveFilters = this.state.activeFilters.slice()
 		newActiveFilters[index] = newActiveFilters[index]
 		newFilters = (newFilters.slice(0, index)).concat(newFilters.slice(index+1, newFilters.length))
-
+	
 		this.setState({
 			filters: newFilters,
 			activeFilters: newActiveFilters
 		})
+
+		this.fetchDresses(newFilters);
 	}
 
 	toggleMenu = () => {
@@ -134,6 +119,8 @@ class Feed extends React.Component {
 			filters: newFilters,
 			activeFilters: newActiveFilters
 		})
+
+		this.fetchDresses(newFilters);
 	}
 
 	render() {
@@ -212,6 +199,18 @@ class Feed extends React.Component {
 							<img src={this.state.showFilters['keyword'] ? minus : plus} className="filter-title__img" />
 						</div>
 						<div className="filter-options" style={!this.state.showFilters['keyword'] ? {display: 'none'} : {display: 'flex'}}>
+							<div 
+								id={"keyword"}
+								className={"filter-option" + (document.getElementById("keyword") && this.state.filters.includes(document.getElementById("keyword").innerHTML) ? " added" : "")}
+								onKeyDown={(e) => {
+									if ((e.key) === 'Enter') {
+										if (!this.state.filters.includes(document.getElementById("keyword-txt").value))
+											this.addFilter(document.getElementById("keyword-txt").value)
+									}
+								}}
+								>
+									<input type="text" id="keyword-txt"/>
+								</div>
 						</div>
 					</div>
 					<div className="feed-grid__container"><Grid images={this.state.dresses}/></div>
