@@ -45,7 +45,6 @@ class Modal extends Component {
               <div className="modalimage-container__text"><b>{this.props.image.title}</b></div>
               <div><p className="dress-info">{this.props.image.description}</p></div>
               <div><p className="dress-info"><b>Our rental price: </b>${this.props.image.price}.00</p></div>
-              <br />
               <div className="dress-info"><b>Dress information:</b></div>
               <div className="dress-info">{"Size: " + this.props.image.size}</div>
               <div className="dress-info">{"Occasion: " + this.props.image.occasion.join(" ")}</div>
