@@ -41,7 +41,6 @@ class Feed extends React.Component {
 
 	fetchDresses = async (filters) => {
 		let clusteredFilters = this.clusterFilters(filters)
-		console.log(clusteredFilters)
 		let res;
 		if (filters && filters.length > 0) {
 			res = await axios.post(`${API_URL}/api/feed/`, clusteredFilters)
@@ -149,7 +148,6 @@ class Feed extends React.Component {
 	}
 
 	render() {
-		console.log(this.state.searchFilters)
 		localStorage.setItem('state', JSON.stringify(this.state))
 		return (
 			<div className="Feed">
