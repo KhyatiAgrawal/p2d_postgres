@@ -78,7 +78,7 @@ class Grid extends Component {
             </div>
             <div className="dress-title__container">
               <div className="dress-title">{this.state.images[index].title}</div>
-              <div className="dress-rental">{this.state.images[index].price}</div>
+              <div className="dress-rental">${this.state.images[index].price}.00</div>
             </div>
           </div>
         ))}

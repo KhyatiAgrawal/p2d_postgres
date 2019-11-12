@@ -40,9 +40,11 @@ class Feed extends React.Component {
 	}
 
 	fetchDresses = async (filters) => {
+		let clusteredFilters = this.clusterFilters(filters)
+		console.log(clusteredFilters)
 		let res;
 		if (filters && filters.length > 0) {
-			res = await axios.post(`${API_URL}/api/feed/`, filters)
+			res = await axios.post(`${API_URL}/api/feed/`, clusteredFilters)
 		} else {
 			res = await axios.get(`${API_URL}/api/feed/`)
 		}
@@ -67,6 +69,19 @@ class Feed extends React.Component {
 		if (this.mounted) {
 			this.setState({dresses: dress_data})
 		}
+	}
+
+	clusterFilters = (filters) => {
+		let cluster = {}
+		for (let i in filters) {
+			let key = Object.keys(filters[i])[0]
+			if (cluster[key]) {
+				cluster[key].push(filters[i][key])
+			} else {
+				cluster[key] = [filters[i][key]]
+			}
+		}
+		return cluster
 	}
 
 	componentDidMount() {
@@ -111,7 +126,7 @@ class Feed extends React.Component {
 		})
 	}
 
-	addFilter = (filter, price) => {
+	addFilter = (type, filter, price) => {
 		let newFilters = this.state.filters.slice()
 		let newSearchFilters = this.state.searchFilters.slice()
 		let newActiveFilters = this.state.activeFilters.slice()
@@ -119,10 +134,10 @@ class Feed extends React.Component {
 		newFilters.unshift(filter)
 		newActiveFilters.unshift(true)
 
-		if (filter.startsWith("max")) {
-			newSearchFilters.unshift(price)
+		if (type === "price") {
+			newSearchFilters.unshift({"price": price})
 		} else {
-			newSearchFilters.unshift(filter)
+			newSearchFilters.unshift({[type]: filter})
 		}
 
 		this.setState({
@@ -130,11 +145,11 @@ class Feed extends React.Component {
 			activeFilters: newActiveFilters,
 			searchFilters: newSearchFilters
 		})
-
 		this.fetchDresses(newSearchFilters);
 	}
 
 	render() {
+		console.log(this.state.searchFilters)
 		localStorage.setItem('state', JSON.stringify(this.state))
 		return (
 			<div className="Feed">
@@ -169,41 +184,37 @@ class Feed extends React.Component {
 							<img src={this.state.showFilters['occasion'] ? minus : plus} className="filter-title__img" />
 						</div>
 						<div className="filter-options" style={!this.state.showFilters['occasion'] ? {display: 'none'} : {display: 'flex'}}>
-							<div className={"filter-option" + (this.state.filters.includes('lawnparties') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('lawnparties')) this.addFilter('lawnparties')}}>lawnparties</div>
-							<div className={"filter-option" + (this.state.filters.includes('formals') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('formals')) this.addFilter('formals')}}>formals</div>
-							<div className={"filter-option" + (this.state.filters.includes('semi-formals') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('semi-formals')) this.addFilter('semi-formals')}}>semi-formals</div>
-							<div className={"filter-option" + (this.state.filters.includes('interviews') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('interviews')) this.addFilter('interviews')}}>interviews</div>
-							<div className={"filter-option" + (this.state.filters.includes('casual') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('casual')) this.addFilter('casual')}}>casual</div>
+							<div className={"filter-option" + (this.state.filters.includes('lawnparties') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('lawnparties')) this.addFilter("ocassion", 'lawnparties')}}>lawnparties</div>
+							<div className={"filter-option" + (this.state.filters.includes('formals') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('formals')) this.addFilter("occasion", 'formals')}}>formals</div>
+							<div className={"filter-option" + (this.state.filters.includes('semi-formals') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('semi-formals')) this.addFilter("occasion", 'semi-formals')}}>semi-formals</div>
+							<div className={"filter-option" + (this.state.filters.includes('interviews') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('interviews')) this.addFilter("occasion", 'interviews')}}>interviews</div>
+							<div className={"filter-option" + (this.state.filters.includes('casual') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('casual')) this.addFilter("occasion", 'casual')}}>casual</div>
 						</div>
 						<div className="filter-title" onClick={() => {this.toggleFilterDisplay('size')}}>
 							<div className="filter-title__text">SIZE</div>
 							<img src={this.state.showFilters['size'] ? minus : plus} className="filter-title__img" />
 						</div>
 						<div className="filter-options" style={!this.state.showFilters['size'] ? {display: 'none'} : {display: 'flex'}}>
-							<div className={"filter-option" + (this.state.filters.includes('XS') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('XS')) this.addFilter('XS')}}>XS</div>
-							<div className={"filter-option" + (this.state.filters.includes('S') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('S')) this.addFilter('S')}}>S</div>
-							<div className={"filter-option" + (this.state.filters.includes('M') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('M')) this.addFilter('M')}}>M</div>
-							<div className={"filter-option" + (this.state.filters.includes('L') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('L')) this.addFilter('L')}}>L</div>
-							<div className={"filter-option" + (this.state.filters.includes('XL') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('XL')) this.addFilter('XL')}}>XL</div>
+							<div className={"filter-option" + (this.state.filters.includes('XS') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('XS')) this.addFilter("size", 'XS')}}>XS</div>
+							<div className={"filter-option" + (this.state.filters.includes('S') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('S')) this.addFilter("size", 'S')}}>S</div>
+							<div className={"filter-option" + (this.state.filters.includes('M') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('M')) this.addFilter("size", 'M')}}>M</div>
+							<div className={"filter-option" + (this.state.filters.includes('L') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('L')) this.addFilter("size", 'L')}}>L</div>
+							<div className={"filter-option" + (this.state.filters.includes('XL') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('XL')) this.addFilter("size", 'XL')}}>XL</div>
 						</div>
 						<div className="filter-title" onClick={() => {this.toggleFilterDisplay('max_price')}}>
 							<div className="filter-title__text">MAXIMUM PRICE</div>
 							<img src={this.state.showFilters['max_price'] ? minus : plus} className="filter-title__img" />
 						</div>
 						<div className="filter-options" style={!this.state.showFilters['max_price'] ? {display: 'none'} : {display: 'flex'}}>
-							<div className={"filter-option" + (this.state.filters.includes('max-price: $10') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('max-price: $10')) this.addFilter('max-price: $10', 10)}}>$10</div>
-							<div className={"filter-option" + (this.state.filters.includes('max-price: $20') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('max-price: $20')) this.addFilter('max-price: $20', 20)}}>$20</div>
-							<div className={"filter-option" + (this.state.filters.includes('max-price: $30') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('max-price: $30')) this.addFilter('max-price: $30', 30)}}>$30</div>
-							<div className={"filter-option" + (this.state.filters.includes('max-price: $40') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('max-price: $40')) this.addFilter('max-price: $40', 40)}}>$40</div>
-							<div className={"filter-option" + (this.state.filters.includes('max-price: $50') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('max-price: $50')) this.addFilter('max-price: $50', 50)}}>$50</div>
+							<div className={"filter-option" + (this.state.filters.includes('max-price: $10') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('max-price: $10')) this.addFilter("price", 'max-price: $10', 10)}}>$10</div>
+							<div className={"filter-option" + (this.state.filters.includes('max-price: $20') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('max-price: $20')) this.addFilter("price", 'max-price: $20', 20)}}>$20</div>
+							<div className={"filter-option" + (this.state.filters.includes('max-price: $30') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('max-price: $30')) this.addFilter("price", 'max-price: $30', 30)}}>$30</div>
+							<div className={"filter-option" + (this.state.filters.includes('max-price: $40') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('max-price: $40')) this.addFilter("price", 'max-price: $40', 40)}}>$40</div>
+							<div className={"filter-option" + (this.state.filters.includes('max-price: $50') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('max-price: $50')) this.addFilter("price", 'max-price: $50', 50)}}>$50</div>
 						</div>
 						<div className="filter-title" onClick={() => {this.toggleFilterDisplay('availability')}}>
 							<div className="filter-title__text">AVAILABILITY</div>
 							<img src={this.state.showFilters['availability'] ? minus : plus} className="filter-title__img" />
-						</div>
-						<div className="filter-options" style={!this.state.showFilters['availability'] ? {display: 'none'} : {display: 'flex'}}>
-							<div className={"filter-option" + (this.state.filters.includes('in-use') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('in-use')) this.addFilter('in-use')}}>IN-USE</div>
-							<div className={"filter-option" + (this.state.filters.includes('available') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('available')) this.addFilter('available')}}>AVAILABLE</div>
 						</div>
 						<div className="filter-title" onClick={() => {this.toggleFilterDisplay('keyword')}}>
 							<div className="filter-title__text">KEYWORD</div>
@@ -216,7 +227,7 @@ class Feed extends React.Component {
 								onKeyDown={(e) => {
 									if ((e.key) === 'Enter') {
 										if (!this.state.filters.includes(document.getElementById("keyword-txt").value))
-											this.addFilter(document.getElementById("keyword-txt").value)
+											this.addFilter("keyword", document.getElementById("keyword-txt").value)
 									}
 								}}
 								>
