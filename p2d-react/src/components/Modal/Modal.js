@@ -8,19 +8,26 @@ import heart_gray from '../../styles/svgs/black-heart.svg';
 class Modal extends Component {
   constructor(props) {
     super(props)
-    let dresses = []
-    for (var i = 0; i < props.image.total; i++) {
-      dresses.push(props.image[i])
-    }
     this.state = {
-      dresses: dresses,
-      selected: props.image.selected,
+      dresses: [],
+      selected: 0,
     }
   }
 
   changeSelection = (index) => {
     this.setState({
       selected: index,
+    })
+  }
+
+  componentWillReceiveProps({image}) {
+    let dress_data = []
+    for (var i = 0; i < image.total; i++) {
+      dress_data.push(image[i])
+    }
+    this.setState({
+      dresses: dress_data,
+      selected: image.selected
     })
   }
 
