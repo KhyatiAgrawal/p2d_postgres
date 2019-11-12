@@ -186,7 +186,6 @@ class Feed extends React.Component {
 							<div className={"filter-option" + (this.state.filters.includes('formals') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('formals')) this.addFilter("occasion", 'formals')}}>formals</div>
 							<div className={"filter-option" + (this.state.filters.includes('semi-formals') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('semi-formals')) this.addFilter("occasion", 'semi-formals')}}>semi-formals</div>
 							<div className={"filter-option" + (this.state.filters.includes('interviews') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('interviews')) this.addFilter("occasion", 'interviews')}}>interviews</div>
-							<div className={"filter-option" + (this.state.filters.includes('casual') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('casual')) this.addFilter("occasion", 'casual')}}>casual</div>
 						</div>
 						<div className="filter-title" onClick={() => {this.toggleFilterDisplay('size')}}>
 							<div className="filter-title__text">SIZE</div>
@@ -209,10 +208,6 @@ class Feed extends React.Component {
 							<div className={"filter-option" + (this.state.filters.includes('max-price: $30') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('max-price: $30')) this.addFilter("price", 'max-price: $30', 30)}}>$30</div>
 							<div className={"filter-option" + (this.state.filters.includes('max-price: $40') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('max-price: $40')) this.addFilter("price", 'max-price: $40', 40)}}>$40</div>
 							<div className={"filter-option" + (this.state.filters.includes('max-price: $50') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('max-price: $50')) this.addFilter("price", 'max-price: $50', 50)}}>$50</div>
-						</div>
-						<div className="filter-title" onClick={() => {this.toggleFilterDisplay('availability')}}>
-							<div className="filter-title__text">AVAILABILITY</div>
-							<img src={this.state.showFilters['availability'] ? minus : plus} className="filter-title__img" />
 						</div>
 						<div className="filter-title" onClick={() => {this.toggleFilterDisplay('keyword')}}>
 							<div className="filter-title__text">KEYWORD</div>
