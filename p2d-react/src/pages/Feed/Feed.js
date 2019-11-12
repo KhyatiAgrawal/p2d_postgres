@@ -182,7 +182,7 @@ class Feed extends React.Component {
 							<img src={this.state.showFilters['occasion'] ? minus : plus} className="filter-title__img" />
 						</div>
 						<div className="filter-options" style={!this.state.showFilters['occasion'] ? {display: 'none'} : {display: 'flex'}}>
-							<div className={"filter-option" + (this.state.filters.includes('lawnparties') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('lawnparties')) this.addFilter("ocassion", 'lawnparties')}}>lawnparties</div>
+							<div className={"filter-option" + (this.state.filters.includes('lawnparties') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('lawnparties')) this.addFilter("occasion", 'lawnparties')}}>lawnparties</div>
 							<div className={"filter-option" + (this.state.filters.includes('formals') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('formals')) this.addFilter("occasion", 'formals')}}>formals</div>
 							<div className={"filter-option" + (this.state.filters.includes('semi-formals') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('semi-formals')) this.addFilter("occasion", 'semi-formals')}}>semi-formals</div>
 							<div className={"filter-option" + (this.state.filters.includes('interviews') ? " added" : "")}  onClick={()=> { if (!this.state.filters.includes('interviews')) this.addFilter("occasion", 'interviews')}}>interviews</div>

@@ -2,6 +2,9 @@ from __future__ import print_function
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
+from functools import reduce
+import operator
+from django.db.models import Q
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import UserInfo
@@ -37,6 +40,12 @@ SCOPES = ['https://www.googleapis.com/auth/calendar.events']
 # Confirm stuff here 
 # Make sure this works for all dresses 
 # @login_required
+
+# occasion list of occasion
+# size list of size
+# price number 
+# keyword list of strings
+
 @api_view((['GET', 'POST']))
 def dress_list(request):
     """
@@ -52,8 +61,8 @@ def dress_list(request):
         serializer = DressSerializer(dress_filter, many=True) 
         return Response(serializer.data, status=status.HTTP_200_OK, template_name=None)
     elif request.method == 'POST':
-        dress_filter = DressFilter({'occasions' : 'lawnparties'}, queryset=Dress.objects.all().order_by('id'))
-        serializer = DressSerializer(dress_filter.qs, many=True) 
+        dress_filter = CustomFilter(request.data)
+        serializer = DressSerializer(dress_filter, many=True) 
         return Response(serializer.data, status=status.HTTP_200_OK, template_name=None)
     return Response({}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -456,5 +465,21 @@ def send_email_create(uname, userEmailId, trialObj, personIncharge):
     }
     event = service.events().insert(calendarId='primary', body=event, sendNotifications= True).execute()
     return
+
+# Custom Filter for dresses
+def CustomFilter(myDict):
+    print(myDict)
+    dress_filter = Dress.objects.all().order_by('id')
+    for key in myDict:
+        if key == 'occasion' or key == 'ocassion':
+            dress_filter = dress_filter.filter(reduce(operator.or_, [Q(occasions__contains=x) for x in myDict[key]]))
+        elif key == 'size':
+            dress_filter = dress_filter.filter(reduce(operator.or_, [Q(size__contains=x) for x in myDict[key]]))
+        elif key == 'keyword':
+            dress_filter = dress_filter.filter(reduce(operator.or_, [Q(description__contains=x.lower()) for x in myDict[key]]))
+        else:
+            dress_filter = dress_filter.filter(price__lte = myDict[key])
+    return dress_filter
+
 
 
