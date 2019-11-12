@@ -1,6 +1,8 @@
 from django.db import models
-import sys
 from django.core.files.storage import FileSystemStorage
+from django.conf import settings
+import os
+import sys
 
 class UserInfo(models.Model):
     username = models.CharField(max_length=30, unique=True)

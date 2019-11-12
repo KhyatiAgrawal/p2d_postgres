@@ -42,7 +42,7 @@ class Feed extends React.Component {
 	fetchDresses = async (filters) => {
 		let res;
 		if (filters && filters.length > 0) {
-			res = await axios.put(`${API_URL}/api/feed/`, filters)
+			res = await axios.post(`${API_URL}/api/feed/`, filters)
 		} else {
 			res = await axios.get(`${API_URL}/api/feed/`)
 		}
