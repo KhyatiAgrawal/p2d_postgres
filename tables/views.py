@@ -37,7 +37,7 @@ SCOPES = ['https://www.googleapis.com/auth/calendar.events']
 # Confirm stuff here 
 # Make sure this works for all dresses 
 # @login_required
-@api_view((['GET', 'PUT']))
+@api_view((['GET', 'POST']))
 def dress_list(request):
     """
     List of dresses according to the search request passed
@@ -48,14 +48,14 @@ def dress_list(request):
     # Right now this is using old search method
     # See if you can use tssearch for better searches
     if request.method == 'GET':
-        dress_filter = Dress.objects.all()
-    if request.method == 'PUT':
-        print(request.data)
-        dress_filter = DressFilter(request.data, queryset=Dress.objects.all())
-    serializer = DressSerializer(dress_filter, many=True)
-    print(serializer.data)  
-    return Response(serializer.data, status=status.HTTP_200_OK, template_name=None)
-    # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        dress_filter = Dress.objects.all().order_by('id')
+        serializer = DressSerializer(dress_filter, many=True) 
+        return Response(serializer.data, status=status.HTTP_200_OK, template_name=None)
+    elif request.method == 'POST':
+        dress_filter = DressFilter({'occasions' : 'lawnparties'}, queryset=Dress.objects.all().order_by('id'))
+        serializer = DressSerializer(dress_filter.qs, many=True) 
+        return Response(serializer.data, status=status.HTTP_200_OK, template_name=None)
+    return Response({}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view((['GET', 'PUT', 'DELETE']))
 @login_required
@@ -409,7 +409,7 @@ def get_rentalHistory(request):
         toSerialize.append({"Date": rentalDateObj, "RentedDress": dressObj})
 
 
-    serializer = AvailableTimesSerializer(toSerialize, many=True)
+    serializer = RentalHistorySerializer(toSerialize, many=True)
     if serializer.is_valid():
         return Response(serializer.data)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

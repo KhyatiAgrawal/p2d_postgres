@@ -1696,7 +1696,7 @@ COPY public.auth_user (id, password, last_login, is_superuser, username, first_n
 831		2019-05-13 00:09:41.843-04	f	kvlach				f	t	2019-05-13 00:09:41.703-04
 832		2019-05-19 02:35:06.498-04	f	jbachek				f	t	2019-05-19 02:35:06.267-04
 833		2019-05-24 01:14:10.876-04	f	mneff				f	t	2019-05-24 01:14:10.753-04
-2	pbkdf2_sha256$100000$YctJOoai4vsK$n/TqGyGRI6GNlSSZyNwO6Jf11+v5l7rJF4WT6SsAIT0=	2019-11-10 19:02:06.417706-05	t	admin			khyatiagrawal1998@gmail.com	t	t	2018-04-13 02:14:16.313-04
+2	pbkdf2_sha256$100000$YctJOoai4vsK$n/TqGyGRI6GNlSSZyNwO6Jf11+v5l7rJF4WT6SsAIT0=	2019-11-12 16:49:04.895353-05	t	admin			khyatiagrawal1998@gmail.com	t	t	2018-04-13 02:14:16.313-04
 \.
 
 
@@ -2900,6 +2900,17 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 1177	2019-11-10 18:05:25.113665-05	97	Cold-Shouldered Printed Summer Dress	1	[{"added": {}}]	15	2
 1178	2019-11-10 18:07:09.60411-05	90	Casual Gray T-Shirt Dress	1	[{"added": {}}]	15	2
 1179	2019-11-10 18:08:26.370578-05	91	Delicate Black Mini	1	[{"added": {}}]	15	2
+1180	2019-11-11 01:53:06.964444-05	11	Dress object (11)	3		15	2
+1181	2019-11-11 01:55:15.329464-05	12	Dress object (12)	2	[{"changed": {"fields": ["size", "brand", "occasions", "title", "description"]}}]	15	2
+1182	2019-11-11 02:04:32.944867-05	25	Dress object (25)	2	[{"changed": {"fields": ["unavailableDates"]}}]	15	2
+1183	2019-11-11 02:05:23.791212-05	25	Dress object (25)	3		15	2
+1184	2019-11-11 11:44:48.528186-05	119	Dress object (119)	2	[{"changed": {"fields": ["view1", "view2", "view3"]}}]	15	2
+1185	2019-11-11 16:06:37.470907-05	37	Dress object (37)	2	[{"changed": {"fields": ["view2", "view3"]}}]	15	2
+1186	2019-11-11 16:07:26.363048-05	37	Dress object (37)	2	[{"changed": {"fields": ["view2", "view3"]}}]	15	2
+1187	2019-11-12 16:51:16.724244-05	101	Dress object (101)	1	[{"added": {}}]	15	2
+1188	2019-11-12 16:52:34.079347-05	109	Dress object (109)	1	[{"added": {}}]	15	2
+1189	2019-11-12 16:53:52.981096-05	110	Dress object (110)	1	[{"added": {}}]	15	2
+1190	2019-11-12 16:55:28.652012-05	11	Dress object (11)	1	[{"added": {}}]	15	2
 \.
 
 
@@ -5710,7 +5721,7 @@ zuz8wgt7z0usr0o8787cubrz9r1vazsq	ODRmODVkZjZhYWM1ZGYwMDdhYWZlNjFkZDdmZGZhNjlkYzU
 zzfduos11vx2ogl0um9aypng3bbqllk5	ZDFmNjNiNGQyYzAyYThiMjRhMzA5MDA4MTE4NGFiZWNjYTFiYjVlNjp7Il9hdXRoX3VzZXJfaGFzaCI6IjA3MGYxYTI2Mjc4NDYzOTQ4MzRmNmZmOWE0ZDcxMWQ5ODFmNjc1OTgiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ29fY2FzX25nLmJhY2tlbmRzLkNBU0JhY2tlbmQiLCJfYXV0aF91c2VyX2lkIjoiMjUyIn0=	2018-05-17 14:51:42.058-04
 zzgjymkyner4q7pjtqsplokng2706l1q	MTY1YjcwZTM1MDU3NjUxY2YyOTlkYzhhODY3YjZiMjQzZTQ3YmEyYTp7Il9hdXRoX3VzZXJfaWQiOiI2NTYiLCJfYXV0aF91c2VyX2hhc2giOiIwNzBmMWEyNjI3ODQ2Mzk0ODM0ZjZmZjlhNGQ3MTFkOTgxZjY3NTk4IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIn0=	2019-05-05 14:42:49.706-04
 zzmvjdxsp5a3981odj69ax8ijluiu0br	MzQzYmM5ZDU0MzY5YjIwNTA1M2RhYTRjZDBkOTJmMTlkZGNlMzM2YTp7Il9hdXRoX3VzZXJfaGFzaCI6IjA3MGYxYTI2Mjc4NDYzOTQ4MzRmNmZmOWE0ZDcxMWQ5ODFmNjc1OTgiLCJfYXV0aF91c2VyX2lkIjoiNTQ4IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIn0=	2018-05-18 14:23:29.387-04
-a50fixb0naonzo2bwtji2bt02qp5rdhc	MjgwYWJkNjY1M2EyOWU0YTM5NWE1Y2M3ZDQ2MWI4MDhiYjU4YTM0Yjp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlOTRmNzljODdlNjQxYjEwMDZmYmNmNmM2Yjg4NGVhNWJlMTk3YTQ1In0=	2019-11-24 19:02:06.420003-05
+kxhzsvoswjc19mrgoypcezijd9nao0b0	MjgwYWJkNjY1M2EyOWU0YTM5NWE1Y2M3ZDQ2MWI4MDhiYjU4YTM0Yjp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlOTRmNzljODdlNjQxYjEwMDZmYmNmNmM2Yjg4NGVhNWJlMTk3YTQ1In0=	2019-11-25 15:57:15.84616-05
 \.
 
 
@@ -5759,6 +5770,10 @@ COPY public."tables_carts_dressesLiked" (id, carts_id, dress_id) FROM stdin;
 --
 
 COPY public.tables_dress (id, view1, view2, view3, size, brand, occasions, price, title, description, "unavailableDates") FROM stdin;
+101	dresses/view1/101.jpg	dresses/view2/101.jpg	dresses/view3/101.jpg	S M	Urban Outfitters	lawnparties semi-formals formals	7	Pink Empire-Waist Mini	Pink lace mini with an empire waist	None
+109	dresses/view1/109.jpg	dresses/view2/109.jpg	dresses/view3/109.jpg	S M	Uniqlo	interviews	7	Structured Black and White Midi	Structured black and white printed dress, perfect for interviews	None
+119	dresses/view1/119.jpg	dresses/view2/119.jpg	dresses/view3/119.jpg	M L	Love Culture	interviews semi-formals	7	Bodycon Pink Mini	Pastel pink bodycon mini dress	None
+110	dresses/view1/110.jpg	dresses/view2/110.jpg	dresses/view3/110.jpg	S	Abercrombie & Fitch	lawnparties semi-formals formals	7	White Lace Sweetheart Mini	Precious white lace mini with a flared skirt and a sweetheart neckline	None
 0	dresses/view1/000.jpg	dresses/view2/000.jpg	dresses/view3/000.jpg	XS	By & By	lawnparties semi-formals formals	7	Flowy Blue Chiffon Dress	Flowy blue chiffon dress with a flattering hem	None
 8	dresses/view1/008.jpg	dresses/view2/008.jpg	dresses/view3/008.jpg	M	Forever21	semi-formals formals	7	Rose Gold Sequined Mini	Glamorous flapper rose-gold sequined mini	None
 27	dresses/view1/027.jpg	dresses/view2/027.jpg	dresses/view3/027.jpg	S	SLNY	semi-formals formals	7	Aqua Lace Halter Mini	Flapper-esque aqua/teal lace, with intricate fringe detail	None
@@ -5767,7 +5782,6 @@ COPY public.tables_dress (id, view1, view2, view3, size, brand, occasions, price
 113	dresses/view1/113.jpg	dresses/view2/113.jpg	dresses/view3/113.jpg	M	Old Navy	interviews theme-nights	7	Casual Plaid Long-Sleeved Dress	Casual black, red, and green plaid shirt-dress	None
 117	dresses/view1/117.jpg	dresses/view2/117.jpg	dresses/view3/117.jpg	XS	Neon Rose	lawnparties semi-formals formals	7	Flirty Chiffon Wrap	Fun and flirty red chiffon polka-dotted wrap dress with ties	None
 118	dresses/view1/118.jpg	dresses/view2/118.jpg	dresses/view3/118.jpg	S	zara	lawnparties	7	Maroon Floral Ruffled Dress	Maroon floral mini with ruffle sleeve detailing and floral embroidery	None
-119				M L	Love Culture	interviews semi-formals	7	Bodycon Pink Mini	Pastel pink bodycon mini dress	None
 1	dresses/view1/001.jpg	dresses/view2/001.jpg	dresses/view3/001.jpg	S	Tobi	semi-formals formals	7	Mauve Lace Mini	Delicate mauve mini with a deep v, long bell sleeves	None
 2	dresses/view1/002.jpg	dresses/view2/002.jpg	dresses/view3/002.jpg	S	Forever21	lawnparties semi-formals	7	White Printed Dress	Sleeveless silky white dress with printed trim	None
 3	dresses/view1/003.jpg	dresses/view2/003.jpg	dresses/view3/003.jpg	XS	Hollister	lawnparties semi-formals	7	Blue and White Striped Mini	Blue and white pinstripes on a flirty silhouette	None
@@ -5777,8 +5791,6 @@ COPY public.tables_dress (id, view1, view2, view3, size, brand, occasions, price
 7	dresses/view1/007.jpg	dresses/view2/007.jpg	dresses/view3/007.jpg	S	Adriana Papell	semi-formals formals	7	Sequined Light Turquoise Shift	Light turquoise shift dress with beautiful sequin detailing	None
 9	dresses/view1/009.jpg	dresses/view2/009.jpg	dresses/view3/009.jpg	S	Lily Rose	lawnparties semi-formals	7	Navy Denim Mini	Navy denim mini with ruffle detailing	None
 10	dresses/view1/010.jpg	dresses/view2/010.jpg	dresses/view3/010.jpg	S	Papaya	lawnparties semi-formals	7	Open-Shoulder Chiffon Mini	Flowy bohemian open-shoulder white sundress with lace detailing	None
-11	dresses/view1/011.jpg	dresses/view2/011.jpg	dresses/view3/011.jpg	XS	One Clothing	lawnparties semi-formals	7	Green Tank Dress	Casual summery green tank dress	None
-12	dresses/view1/012.jpg	dresses/view2/012.jpg	dresses/view3/012.jpg	M L	Forever21	semi-formals formals	7	Black A-Line Mini	Black a-line silhouette with cut-out front detailing	None
 112	dresses/view1/012_SgEJjul.jpg	dresses/view2/012_5jlMBHV.jpg	dresses/view3/012_xrNnwMr.jpg	XS	One Clothing	lawnparties semi-formals	7	Green Tank Dress	Casual summery green tank dress	None
 13	dresses/view1/013.jpg	dresses/view2/013.jpg	dresses/view3/013.jpg	M L	Forever21	semi-formals formals	7	Black A-Line Mini	Black a-line silhouette with cut-out front detailing	None
 14	dresses/view1/014.jpg	dresses/view2/014.jpg	dresses/view3/014.jpg	S M	Unknown	interviews semi-formals	7	Teal Knit Sweater Dress	Teal knit sweater dress with long sleeves and knitted pleats	None
@@ -5792,7 +5804,6 @@ COPY public.tables_dress (id, view1, view2, view3, size, brand, occasions, price
 22	dresses/view1/022.jpg	dresses/view2/022.jpg	dresses/view3/022.jpg	S	Shein	lawnparties semi-formals formals	7	White Floral Open Maxi	Gorgeous halter neck white maxi with rose appliqué	None
 23	dresses/view1/023.jpg	dresses/view2/023.jpg	dresses/view3/023.jpg	S	H&M	semi-formals formals	7	Green Lace A-Line Dress	Emerald green lace dress with an A-Line Dress	None
 24	dresses/view1/024.jpg	dresses/view2/024.jpg	dresses/view3/024.jpg	S	City Studio	semi-formals formals	7	White Lace Halter Mini	White lace halter mini with embroidered hems and cut-out waist detailing	None
-25	dresses/view1/025.jpg	dresses/view2/025.jpg	dresses/view3/025.jpg	XL	Poetry	lawnparties semi-formals	7	Pinstriped Gray Button-Down Dress	Gray and white pinstriped dress with a sweetheart neckline and button detailing	None
 26	dresses/view1/026.jpg	dresses/view2/026.jpg	dresses/view3/026.jpg	XS	Old Navy	lawnparties	7	Flirty Summer Floral	Flirty white floral summer dress with a flowy skirt	None
 94	dresses/view1/094.jpg	dresses/view2/094.jpg	dresses/view3/094.jpg	S	SLNY	semi-formals formals	7	Aqua Lace Halter Mini	Flapper-esque aqua/teal lace, with intricate fringe detail	None
 28	dresses/view1/028.jpg	dresses/view2/028.jpg	dresses/view3/028.jpg	S	Forever21	lawnparties semi-formals formals	7	White Puff-Sleeved Mini	White puff-sleeved elegant mini	None
@@ -5809,8 +5820,9 @@ COPY public.tables_dress (id, view1, view2, view3, size, brand, occasions, price
 43	dresses/view1/043.jpg	dresses/view2/043.jpg	dresses/view3/043.jpg	M	Bailey Blue	lawnparties semi-formals formals	7	Pink Lace Dress	Pretty in pink lace knee-length dress	None
 46	dresses/view1/046.jpg	dresses/view2/046.jpg	dresses/view3/046.jpg	S M	Land's End	semi-formals formals	7	Midnight Blue Velvet Midi	Gorgeous midnight blue velvet midi dress	None
 48	dresses/view1/048.jpg	dresses/view2/048.jpg	dresses/view3/048.jpg	XS	American Rag	semi-formals formals	7	Black Lace Cap Sleeve Mini	Black mini with stunning lace overlay	None
-37	dresses/view1/037.jpg	dresses/view2/037.jpg	dresses/view3/037.jpg	S M	Unknown	lawnparties	7	Floral Yellow Wrap Dress	Flirty yellow wrap-dress with gorgeous printed flowers	None
 50	dresses/view1/050.jpg	dresses/view2/050.jpg	dresses/view3/050.jpg	S	Ambiance	lawnparties semi-formals	7	Maroon Floral Romper	Flirty maroon romper with printed flower pattern and spaghetti straps	None
+12	dresses/view1/012.jpg	dresses/view2/012.jpg	dresses/view3/012.jpg	XS	One Clothing	lawnparties, semi-formals	7	Green Tank Dress	Casual summery green tank dress	None
+37	dresses/view1/037.jpg	dresses/view2/037.jpg	dresses/view3/037.jpg	S M	Unknown	lawnparties	7	Floral Yellow Wrap Dress	Flirty yellow wrap-dress with gorgeous printed flowers	None
 51	dresses/view1/051.jpg	dresses/view2/051.jpg	dresses/view3/051.jpg	S	Design Lab	semi-formals formals	7	Metallic Gunmetal Halter Mini	Gorgeous iridescent halter mini in gunmetal	None
 52	dresses/view1/052.jpg	dresses/view2/052.jpg	dresses/view3/052.jpg	S	Arithalia	semi-formals formals	7	Royal Purple Drapey Mini	Royal deep purple mini with beautiful draped shoulder sleeves	None
 53	dresses/view1/053.jpg	dresses/view2/053.jpg	dresses/view3/053.jpg	S	Merona	lawnparties	7	Bright Pink Collared Dress	Bright pink collared dress with slight pattern detailing	None
@@ -5847,6 +5859,7 @@ COPY public.tables_dress (id, view1, view2, view3, size, brand, occasions, price
 97	dresses/view1/097.jpg	dresses/view2/097.jpg	dresses/view3/097.jpg	XS	Planet Gold	lawnparties	7	Cold-Shouldered Printed Summer Dress	Summery cold-shouldered printed summer dress	None
 90	dresses/view1/090.jpg	dresses/view2/090.jpg	dresses/view3/090.jpg	S M	Unknown	interviews	7	Casual Gray T-Shirt Dress	Casual gray t-shirt dress, perfect for any occasion and dressing up or dressing down	None
 91	dresses/view1/091.jpg	dresses/view2/091.jpg	dresses/view3/091.jpg	S	Material Girl	semi-formals formals	7	Delicate Black Mini	Delicate black mini dress with an a-line skirt and a sweetheart neckline	None
+11	dresses/view1/011.jpg	dresses/view2/011.jpg	dresses/view3/011.jpg	M	Unknown	lawnparties interviews semis	7	Blue Striped Midi	Fun and comfy striped A-line dress	None
 \.
 
 
@@ -6466,7 +6479,7 @@ SELECT pg_catalog.setval('public.auth_user_user_permissions_id_seq', 1, false);
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
-SELECT pg_catalog.setval('public.django_admin_log_id_seq', 1179, true);
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 1190, true);
 
 
 --

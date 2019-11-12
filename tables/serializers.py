@@ -46,7 +46,7 @@ class AlertsSerializer(serializers.ModelSerializer):
 class UInfoSerializer(serializers.Serializer):
     class Meta:
         model = UserInfo
-        fields = ('username','size', 'gender', 'email', 'phone')
+        fields = ('username','size', 'gender', 'email', 'phone', 'numberRented')
 
 class AvailableTimesSerializer(serializers.Serializer):
     """Your data serializer, define your fields here."""
