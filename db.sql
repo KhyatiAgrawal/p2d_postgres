@@ -3,7 +3,7 @@
 --
 
 -- Dumped from database version 11.3
--- Dumped by pg_dump version 11.5
+-- Dumped by pg_dump version 11.3
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -1696,7 +1696,7 @@ COPY public.auth_user (id, password, last_login, is_superuser, username, first_n
 831		2019-05-13 00:09:41.843-04	f	kvlach				f	t	2019-05-13 00:09:41.703-04
 832		2019-05-19 02:35:06.498-04	f	jbachek				f	t	2019-05-19 02:35:06.267-04
 833		2019-05-24 01:14:10.876-04	f	mneff				f	t	2019-05-24 01:14:10.753-04
-2	pbkdf2_sha256$100000$YctJOoai4vsK$n/TqGyGRI6GNlSSZyNwO6Jf11+v5l7rJF4WT6SsAIT0=	2019-11-12 18:23:03.707569-05	t	admin			khyatiagrawal1998@gmail.com	t	t	2018-04-13 02:14:16.313-04
+2	pbkdf2_sha256$100000$YctJOoai4vsK$n/TqGyGRI6GNlSSZyNwO6Jf11+v5l7rJF4WT6SsAIT0=	2019-11-12 20:25:07.242657-05	t	admin			khyatiagrawal1998@gmail.com	t	t	2018-04-13 02:14:16.313-04
 \.
 
 
@@ -2932,6 +2932,15 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 1209	2019-11-12 18:54:15.349045-05	87	Dress object (87)	1	[{"added": {}}]	15	2
 1210	2019-11-12 18:55:30.304658-05	88	Dress object (88)	1	[{"added": {}}]	15	2
 1211	2019-11-12 18:56:18.47213-05	89	Dress object (89)	1	[{"added": {}}]	15	2
+1212	2019-11-12 20:37:56.204976-05	92	Dress object (92)	1	[{"added": {}}]	15	2
+1213	2019-11-12 20:38:59.565512-05	93	Dress object (93)	1	[{"added": {}}]	15	2
+1214	2019-11-12 20:40:29.586132-05	95	Dress object (95)	1	[{"added": {}}]	15	2
+1215	2019-11-12 20:41:46.310836-05	96	Dress object (96)	1	[{"added": {}}]	15	2
+1216	2019-11-12 20:43:08.803826-05	98	Dress object (98)	1	[{"added": {}}]	15	2
+1217	2019-11-12 20:44:17.322435-05	99	Dress object (99)	1	[{"added": {}}]	15	2
+1218	2019-11-12 20:46:40.215597-05	111	Dress object (111)	1	[{"added": {}}]	15	2
+1219	2019-11-12 20:47:46.327089-05	115	Dress object (115)	1	[{"added": {}}]	15	2
+1220	2019-11-12 20:48:54.006664-05	116	Dress object (116)	1	[{"added": {}}]	15	2
 \.
 
 
@@ -5903,6 +5912,15 @@ COPY public.tables_dress (id, view1, view2, view3, size, brand, occasions, price
 87	dresses/view1/087.jpg	dresses/view2/087.jpg	dresses/view3/087.jpg	S M	Kimchi Blue	formals semi-formals	7	Black Layered Tulle Mini	Black strapless mini with a sweetheart neckline and gorgeous skirt layering detail	None
 88	dresses/view1/088.jpg	dresses/view2/088.jpg	dresses/view3/088.jpg	M	H&M	formals semi-formals	7	Black Net Mini	LBD with net detailing	None
 89	dresses/view1/089.jpg	dresses/view2/089.jpg	dresses/view3/089.jpg	S	BCBGeneration	formals semi-formals	7	Pink Satin Mini	Pink satin mini with wrap detailing on the bodice and pockets	None
+92	dresses/view1/092.jpg	dresses/view2/092.jpg	dresses/view3/092.jpg	S	Shein	lawnparties	7	Vintage Floral Maxi	Classic white tie-waist maxi with floral detailing	None
+93	dresses/view1/093.jpg	dresses/view2/093.jpg	dresses/view3/093.jpg	L	Cynthia Rowley	semi-formals formals	7	Classic LBD	Simple and elegant black dress, perfect for semi-formals	None
+95	dresses/view1/095.jpg	dresses/view2/095.jpg	dresses/view3/095.jpg	S M	Robert Rodriguez	formals semi-formals	7	Black Lace Strapless Mini	Black lace strapless mini with intricate lace detailing overlayed on nude	None
+96	dresses/view1/096.jpg	dresses/view2/096.jpg	dresses/view3/096.jpg	M	And	semi-formals formals	7	Red Chiffon Maxi	Red chiffon sleeveless maxi with neckline mesh detailing	None
+98	dresses/view1/098.jpg	dresses/view2/098.jpg	dresses/view3/098.jpg	S M	Kimchi Blue	lawnparties semi-formals formals	7	Maroon Mini	Maroon mini with lace detailing	None
+99	dresses/view1/099.jpg	dresses/view2/099.jpg	dresses/view3/099.jpg	S M	Kimchi Blue	lawnparties semi-formals	7	Pink Lace Cut-Out Mini	Pink lace mini with intricate cut-out detailing	None
+111	dresses/view1/111.jpg	dresses/view2/111.jpg	dresses/view3/111.jpg	M	Pins and Needles	lawnparties semi-formals	7	Pink Chiffon Drape	Pink chiffon mini with smock-waist detailing and a draped skirt	None
+115	dresses/view1/115.jpg	dresses/view2/115.jpg	dresses/view3/115.jpg	M	CÖ for Urban Outfitt	semi-formals formals	7	Black Lace Bodycon	Black bodycon mini with lace detailing around the neckline	None
+116	dresses/view1/116.jpg	dresses/view2/116.jpg	dresses/view3/116.jpg	S M	Unknown	interviews	7	Formal Black Midi	A three-quarter sleeved midi perfect for interviews	None
 \.
 
 
@@ -6522,7 +6540,7 @@ SELECT pg_catalog.setval('public.auth_user_user_permissions_id_seq', 1, false);
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
-SELECT pg_catalog.setval('public.django_admin_log_id_seq', 1211, true);
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 1220, true);
 
 
 --

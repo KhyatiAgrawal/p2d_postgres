@@ -471,7 +471,7 @@ def CustomFilter(myDict):
     dress_filter = Dress.objects.all().order_by('id')
     for key in myDict:
         if key == 'occasion':
-            dress_filter = dress_filter.filter(reduce(operator.or_, [Q(occasions__contains=x) for x in myDict[key]]))
+            dress_filter = dress_filter.filter(reduce(operator.or_, [Q(occasions__contains=' ' + x) for x in myDict[key]]))
         elif key == 'size':
             dress_filter = dress_filter.filter(reduce(operator.or_, [Q(size__contains=x) for x in myDict[key]]))
         elif key == 'keyword':
