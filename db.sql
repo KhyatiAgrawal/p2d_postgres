@@ -3,7 +3,7 @@
 --
 
 -- Dumped from database version 11.3
--- Dumped by pg_dump version 11.3
+-- Dumped by pg_dump version 11.5
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -1696,7 +1696,7 @@ COPY public.auth_user (id, password, last_login, is_superuser, username, first_n
 831		2019-05-13 00:09:41.843-04	f	kvlach				f	t	2019-05-13 00:09:41.703-04
 832		2019-05-19 02:35:06.498-04	f	jbachek				f	t	2019-05-19 02:35:06.267-04
 833		2019-05-24 01:14:10.876-04	f	mneff				f	t	2019-05-24 01:14:10.753-04
-2	pbkdf2_sha256$100000$YctJOoai4vsK$n/TqGyGRI6GNlSSZyNwO6Jf11+v5l7rJF4WT6SsAIT0=	2019-11-12 16:49:04.895353-05	t	admin			khyatiagrawal1998@gmail.com	t	t	2018-04-13 02:14:16.313-04
+2	pbkdf2_sha256$100000$YctJOoai4vsK$n/TqGyGRI6GNlSSZyNwO6Jf11+v5l7rJF4WT6SsAIT0=	2019-11-12 18:23:03.707569-05	t	admin			khyatiagrawal1998@gmail.com	t	t	2018-04-13 02:14:16.313-04
 \.
 
 
@@ -2833,6 +2833,7 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 1110	2019-11-10 16:32:23.267069-05	11	Green Tank Dress	1	[{"added": {}}]	15	2
 1111	2019-11-10 16:33:24.205573-05	12	Black A-Line Mini	1	[{"added": {}}]	15	2
 1112	2019-11-10 16:36:37.120143-05	112	Green Tank Dress	2	[{"changed": {"fields": ["id", "view1", "view2", "view3"]}}]	15	2
+1192	2019-11-12 18:31:56.144664-05	29	Dress object (29)	1	[{"added": {}}]	15	2
 1113	2019-11-10 16:37:26.139409-05	13	Black A-Line Mini	2	[{"changed": {"fields": ["id", "view1", "view2", "view3"]}}]	15	2
 1114	2019-11-10 16:38:32.046017-05	14	Teal Knit Sweater Dress	1	[{"added": {}}]	15	2
 1115	2019-11-10 16:39:42.145945-05	15	Color-Block Strapless Maxi	1	[{"added": {}}]	15	2
@@ -2911,6 +2912,26 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 1188	2019-11-12 16:52:34.079347-05	109	Dress object (109)	1	[{"added": {}}]	15	2
 1189	2019-11-12 16:53:52.981096-05	110	Dress object (110)	1	[{"added": {}}]	15	2
 1190	2019-11-12 16:55:28.652012-05	11	Dress object (11)	1	[{"added": {}}]	15	2
+1191	2019-11-12 18:30:03.325636-05	25	Dress object (25)	1	[{"added": {}}]	15	2
+1193	2019-11-12 18:34:10.542249-05	33	Dress object (33)	1	[{"added": {}}]	15	2
+1194	2019-11-12 18:35:59.039993-05	35	Dress object (35)	1	[{"added": {}}]	15	2
+1195	2019-11-12 18:37:16.282159-05	42	Dress object (42)	1	[{"added": {}}]	15	2
+1196	2019-11-12 18:38:19.352002-05	44	Dress object (44)	1	[{"added": {}}]	15	2
+1197	2019-11-12 18:39:38.141673-05	45	Dress object (45)	1	[{"added": {}}]	15	2
+1198	2019-11-12 18:40:37.989488-05	47	Dress object (47)	1	[{"added": {}}]	15	2
+1199	2019-11-12 18:41:35.373737-05	49	Dress object (49)	1	[{"added": {}}]	15	2
+1200	2019-11-12 18:44:34.510163-05	58	Dress object (58)	1	[{"added": {}}]	15	2
+1201	2019-11-12 18:46:13.09088-05	62	Dress object (62)	1	[{"added": {}}]	15	2
+1202	2019-11-12 18:47:07.955355-05	63	Dress object (63)	1	[{"added": {}}]	15	2
+1203	2019-11-12 18:48:06.324408-05	65	Dress object (65)	1	[{"added": {}}]	15	2
+1204	2019-11-12 18:49:08.189194-05	67	Dress object (67)	1	[{"added": {}}]	15	2
+1205	2019-11-12 18:50:16.067266-05	70	Dress object (70)	1	[{"added": {}}]	15	2
+1206	2019-11-12 18:51:12.937796-05	78	Dress object (78)	1	[{"added": {}}]	15	2
+1207	2019-11-12 18:52:19.370872-05	80	Dress object (80)	1	[{"added": {}}]	15	2
+1208	2019-11-12 18:53:18.84677-05	82	Dress object (82)	1	[{"added": {}}]	15	2
+1209	2019-11-12 18:54:15.349045-05	87	Dress object (87)	1	[{"added": {}}]	15	2
+1210	2019-11-12 18:55:30.304658-05	88	Dress object (88)	1	[{"added": {}}]	15	2
+1211	2019-11-12 18:56:18.47213-05	89	Dress object (89)	1	[{"added": {}}]	15	2
 \.
 
 
@@ -5722,6 +5743,7 @@ zzfduos11vx2ogl0um9aypng3bbqllk5	ZDFmNjNiNGQyYzAyYThiMjRhMzA5MDA4MTE4NGFiZWNjYTF
 zzgjymkyner4q7pjtqsplokng2706l1q	MTY1YjcwZTM1MDU3NjUxY2YyOTlkYzhhODY3YjZiMjQzZTQ3YmEyYTp7Il9hdXRoX3VzZXJfaWQiOiI2NTYiLCJfYXV0aF91c2VyX2hhc2giOiIwNzBmMWEyNjI3ODQ2Mzk0ODM0ZjZmZjlhNGQ3MTFkOTgxZjY3NTk4IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIn0=	2019-05-05 14:42:49.706-04
 zzmvjdxsp5a3981odj69ax8ijluiu0br	MzQzYmM5ZDU0MzY5YjIwNTA1M2RhYTRjZDBkOTJmMTlkZGNlMzM2YTp7Il9hdXRoX3VzZXJfaGFzaCI6IjA3MGYxYTI2Mjc4NDYzOTQ4MzRmNmZmOWE0ZDcxMWQ5ODFmNjc1OTgiLCJfYXV0aF91c2VyX2lkIjoiNTQ4IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIn0=	2018-05-18 14:23:29.387-04
 kxhzsvoswjc19mrgoypcezijd9nao0b0	MjgwYWJkNjY1M2EyOWU0YTM5NWE1Y2M3ZDQ2MWI4MDhiYjU4YTM0Yjp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlOTRmNzljODdlNjQxYjEwMDZmYmNmNmM2Yjg4NGVhNWJlMTk3YTQ1In0=	2019-11-25 15:57:15.84616-05
+v60780x4zi7evma0yf6ij89eod8hcmma	MjgwYWJkNjY1M2EyOWU0YTM5NWE1Y2M3ZDQ2MWI4MDhiYjU4YTM0Yjp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlOTRmNzljODdlNjQxYjEwMDZmYmNmNmM2Yjg4NGVhNWJlMTk3YTQ1In0=	2019-11-26 18:23:03.730517-05
 \.
 
 
@@ -5860,6 +5882,27 @@ COPY public.tables_dress (id, view1, view2, view3, size, brand, occasions, price
 90	dresses/view1/090.jpg	dresses/view2/090.jpg	dresses/view3/090.jpg	S M	Unknown	interviews	7	Casual Gray T-Shirt Dress	Casual gray t-shirt dress, perfect for any occasion and dressing up or dressing down	None
 91	dresses/view1/091.jpg	dresses/view2/091.jpg	dresses/view3/091.jpg	S	Material Girl	semi-formals formals	7	Delicate Black Mini	Delicate black mini dress with an a-line skirt and a sweetheart neckline	None
 11	dresses/view1/011.jpg	dresses/view2/011.jpg	dresses/view3/011.jpg	M	Unknown	lawnparties interviews semis	7	Blue Striped Midi	Fun and comfy striped A-line dress	None
+25	dresses/view1/025.jpg	dresses/view2/025.jpg	dresses/view3/025.jpg	XL	Poetry	lawnparties semi-formals	7	Pinstriped Gray Button-Down Dress	Gray and white pinstriped dress with a sweetheart neckline and button detailing	None
+29	dresses/view1/029.jpg	dresses/view2/029.jpg	dresses/view3/029.jpg	M L	Ecote	semi-formals formals	7	Regal White Maxi	Stunning white maxi with layers of fabric and an open back	None
+33	dresses/view1/033.jpg	dresses/view2/033.jpg	dresses/view3/033.jpg	S M	H&M	semi-formals formals	7	Strapless Black and Gold Mini	Gorgeous strapless black and gold metallic mini	None
+35	dresses/view1/035.jpg	dresses/view2/035.jpg	dresses/view3/035.jpg	S	H&M	semi-formals formals	7	Sequined Gold Mini	Stunning white mini with gold sequined detailing	None
+42	dresses/view1/042.jpg	dresses/view2/042.jpg	dresses/view3/042.jpg	M L	Silence & Noise	formals semi-formals	7	White Sweetheart Mini	Metallic white mini with intricate printed design and a strapless, sweetheart neckline	None
+44	dresses/view1/044.jpg	dresses/view2/044.jpg	dresses/view3/044.jpg	M	Ecote	lawnparties semi-formals formals	7	Fun Orange Studded Mini	Fun orange studded mini with delicate spaghetti straps	None
+45	dresses/view1/045.jpg	dresses/view2/045.jpg	dresses/view3/045.jpg	S M	Silence & Noise	formals semi-formals	7	Black Sequined Bodycon	Sequined black bodycon dress with a sexy silhouette	None
+47	dresses/view1/047.jpg	dresses/view2/047.jpg	dresses/view3/047.jpg	M	Kimchi Blue	formals semi-formals	7	Black Halter Slip	Satiny black halter neck slip dress with ruffle detail	None
+49	dresses/view1/049.jpg	dresses/view2/049.jpg	dresses/view3/049.jpg	XS S	H&M	formals semi-formals	7	Precious Gray Sweetheart Mini	Adorable gray mini with contrasting polka dots and a wrap sweetheart neckline	None
+58	dresses/view1/058.jpg	dresses/view2/058.jpg	dresses/view3/058.jpg	S	B. Darlin	semi-formals formals	7	White Sweetheart Mini	White lace flared dress	None
+62	dresses/view1/062.jpg	dresses/view2/062.jpg	dresses/view3/062.jpg	S	Mossimo	lawnparties	7	Muted Boho Sundress	Strappy lace-trimmed summer dress	None
+63	dresses/view1/063.jpg	dresses/view2/063.jpg	dresses/view3/063.jpg	M	Pins and Needles	semi-formals formals	7	Classic Lace Dress	White strappy lace dress for formals or semis	None
+65	dresses/view1/065.jpg	dresses/view2/065.jpg	dresses/view3/065.jpg	S	Xhileration	semi-formals formals	7	Black Strapless Jumpsuit	Elegant black strapless jumpsuit	None
+67	dresses/view1/067.jpg	dresses/view2/067.jpg	dresses/view3/067.jpg	S M	Cooperative	lawnparties semi-formals formals	7	Flared Yellow Mini	Fun flared Yellow Mini	None
+70	dresses/view1/070.jpg	dresses/view2/070.jpg	dresses/view3/070.jpg	M	Sparkle & Fade	semi-formals formals	7	Sexy Black Lace Mini	Black lace mini with a plunging v-neck and gorgeous skirt detailing	None
+78	dresses/view1/078.jpg	dresses/view2/078.jpg	dresses/view3/078.jpg	M	Urban Outfitters	semi-formals formals	7	Red Satin Maxi	Luxurious red satin maxi with a wrap tulip skirt	None
+80	dresses/view1/080.jpg	dresses/view2/080.jpg	dresses/view3/080.jpg	M	En Francais by Huey	formals semi-formals	7	Black Satin Flared Mini	Gorgeous satin mini with a flared, structured skirt and a square neckline	None
+82	dresses/view1/082.jpg	dresses/view2/082.jpg	dresses/view3/082.jpg	M L	ASOS	lawnparties semi-formals	7	Black Denim Button-Down	Cute and casual black denim button-down	None
+87	dresses/view1/087.jpg	dresses/view2/087.jpg	dresses/view3/087.jpg	S M	Kimchi Blue	formals semi-formals	7	Black Layered Tulle Mini	Black strapless mini with a sweetheart neckline and gorgeous skirt layering detail	None
+88	dresses/view1/088.jpg	dresses/view2/088.jpg	dresses/view3/088.jpg	M	H&M	formals semi-formals	7	Black Net Mini	LBD with net detailing	None
+89	dresses/view1/089.jpg	dresses/view2/089.jpg	dresses/view3/089.jpg	S	BCBGeneration	formals semi-formals	7	Pink Satin Mini	Pink satin mini with wrap detailing on the bodice and pockets	None
 \.
 
 
@@ -6479,7 +6522,7 @@ SELECT pg_catalog.setval('public.auth_user_user_permissions_id_seq', 1, false);
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
-SELECT pg_catalog.setval('public.django_admin_log_id_seq', 1190, true);
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 1211, true);
 
 
 --
