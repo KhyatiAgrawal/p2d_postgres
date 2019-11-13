@@ -1,4 +1,4 @@
-'''import sys, os, cgi, urllib, re
+import sys, os, cgi, urllib, re
 
 form = cgi.FieldStorage()
 
@@ -45,4 +45,4 @@ def main():
   print "CASClient does not run standalone"
 
 if __name__ == '__main__':
-  main()'''
+   main()

@@ -469,13 +469,14 @@ def send_email_create(uname, userEmailId, trialObj, personIncharge):
 # Custom Filter for dresses
 def CustomFilter(myDict):
     dress_filter = Dress.objects.all().order_by('id')
+    print(myDict)
     for key in myDict:
         if key == 'occasion':
-            dress_filter = dress_filter.filter(reduce(operator.or_, [Q(occasions__contains=' ' + x) for x in myDict[key]]))
+            dress_filter = dress_filter.filter(reduce(operator.or_, [Q(occasions__icontains= x + ' ') for x in myDict[key]]))
         elif key == 'size':
-            dress_filter = dress_filter.filter(reduce(operator.or_, [Q(size__contains=x) for x in myDict[key]]))
+            dress_filter = dress_filter.filter(reduce(operator.or_, [Q(size__icontains=x) for x in myDict[key]]))
         elif key == 'keyword':
-            dress_filter = dress_filter.filter(reduce(operator.or_, [Q(description__contains=' ' + x.lower()) for x in myDict[key]]))
+            dress_filter = dress_filter.filter(reduce(operator.or_, [Q(description__icontains=' ' + x.lower()) for x in myDict[key]]))
         else:
             dress_filter = dress_filter.filter(price__lte = myDict[key])
     return dress_filter
