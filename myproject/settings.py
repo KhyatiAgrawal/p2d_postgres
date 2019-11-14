@@ -30,7 +30,9 @@ CAS_ADMIN_PREFIX = 'admin/'
 CAS_IGNORE_REFERER = True
 CAS_PROVIDE_URL_TO_LOGOUT = True
 CAS_SERVER_URL = 'https://fed.princeton.edu/cas/'
-CAS_REDIRECT_URL = "http://127.0.0.1:8000/temp/"
+CAS_REDIRECT_URL = 'https://localhost:3000'
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_PASSWORD = 'forget&no'
@@ -39,6 +41,10 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
+
+SECURE_SSL_REDIRECT  = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 # Application definition
 
@@ -53,6 +59,7 @@ INSTALLED_APPS = [
     'django_cas_ng',
     'rest_framework',
     'corsheaders',
+    "sslserver",
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -71,6 +78,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_cas_ng.middleware.CASMiddleware',
+    'myproject.middleware.CorsMiddleware',
     
 ]
 

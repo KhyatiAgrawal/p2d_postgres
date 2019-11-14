@@ -13,7 +13,7 @@ import black_heart from '../../styles/svgs/black-heart.svg'
 import left_arrow from '../../styles/svgs/left-arrow.svg'
 
 import axios from 'axios';
-const API_URL = 'http://127.0.0.1:8000';
+const API_URL = 'https://localhost:8000';
 const api_endpoint = new retrieveData();
 
 class Feed extends React.Component {
@@ -43,9 +43,9 @@ class Feed extends React.Component {
 		let clusteredFilters = this.clusterFilters(filters)
 		let res;
 		if (filters && filters.length > 0) {
-			res = await axios.post(`${API_URL}/api/feed/`, clusteredFilters)
+			res = await axios.post(`${API_URL}/api/feed/`, {data: clusteredFilters, withCredentials: true})
 		} else {
-			res = await axios.get(`${API_URL}/api/feed/`)
+			res = await axios.get(`${API_URL}/api/feed/`, {withCredentials: true})
 		}
 		let dress_data = []
 		for (let i in res.data) {

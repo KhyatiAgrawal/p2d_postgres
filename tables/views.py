@@ -47,6 +47,7 @@ SCOPES = ['https://www.googleapis.com/auth/calendar.events']
 # keyword list of strings
 
 @api_view((['GET', 'POST']))
+@login_required
 def dress_list(request):
     """
     List of dresses according to the search request passed
