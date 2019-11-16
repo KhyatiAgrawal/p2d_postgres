@@ -36,6 +36,8 @@
 .fav-dresses {
 	flex-grow: 1;
 	max-width: 90%;
+	display: flex;
+	justify-content: center;
 }
 
 @media only screen and (max-width: 700px) {

@@ -42,6 +42,11 @@ class Cart extends Component {
     }
   }
 
+  totalHandler = (total, amount, dresses) => {
+    if (this.mounted)
+      this.setState({total: total, amount: amount, dresses: dresses})
+  }
+
   getAvailableTimes = async () => {
     let res = await axios.get(`${API_URL}/api/availableTimes/`)
     let times = res.data
@@ -50,40 +55,9 @@ class Cart extends Component {
     }
   }
 
-  fetchDressesInCart = async () => {
-    let res = await axios.get(`${API_URL}/api/cart/`)
-    console.log(res.data)
-    let dress_data = {}
-    let amount = 0
-    let total = 0
-    for (let i in res.data) {
-      dress_data[i] = {
-        id: res.data[i]["id"],
-        0: API_URL + "/" + res.data[i]["view1"],
-        1: API_URL + "/" + res.data[i]["view2"],
-        2: API_URL + "/" + res.data[i]["view3"],
-        title: res.data[i]["title"],
-        selected: 0,
-        total: 3,
-        brand: res.data[i]["brand"],
-        size: res.data[i]["size"],
-        description: res.data[i]["description"],
-        occasion: res.data[i]["occasions"].split(/(\s+)/),
-        price: res.data[i]["price"],
-        availability: res.data[i]["unavailableDates"]
-      }
-      amount += parseInt(dress_data[i]["price"])
-      total += 1
-    }
-    if (this.mounted) {
-      this.setState({dresses: dress_data, amount: amount, total: total})
-    }
-  }
-
   componentDidMount() {
     this.mounted = true;
     this.getAvailableTimes();
-    this.fetchDressesInCart();
   }
 
   componentWillUnmount() {
@@ -98,17 +72,17 @@ class Cart extends Component {
           <Navbar weight="heavy" />
         </div>
         <div className="cart-title">
-          <div className="cart-title__text">{"My Cart (" + this.state.total + ")"}</div>
-        </div>
+            <div className="cart-title__text">{"My Cart (" + this.state.total + ")"}</div>
+          </div>
         <div className="cart-body">
-          <div className="cart-dresses"><DressDisplay dresses={this.state.dresses} cart={true} /></div>
+          <div className="cart-dresses"><DressDisplay cart={true} handleTotal={this.totalHandler}/></div>
           <div className="cart-summary" style={{maxHeight: this.state.total * 30 + 195}}>
             <div className="cart-summary__title">Your Try-On Request</div>
             <div className="cart-summary__items">
               {Object.keys(this.state.dresses).map((key, index) => (
                 <div className="cart-summary__item">
                   <div>{this.state.dresses[index].title}</div>
-                  <div>{"$" + this.state.dresses[index].price}</div>
+                  <div>${this.state.dresses[index].price}.00</div>
                 </div>
               ))}
             </div>
