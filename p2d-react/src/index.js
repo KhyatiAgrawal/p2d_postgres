@@ -11,6 +11,9 @@ import Orders from './pages/Orders/Orders'
 import Cart from './pages/Cart/Cart'
 import Favorites from './pages/Favorites/Favorites'
 
+// var cors = require('cors');    
+// app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+
 ReactDOM.render(<App />, document.getElementById('root'));
 
 const history = createHistory({

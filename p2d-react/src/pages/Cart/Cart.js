@@ -8,24 +8,18 @@ import dress1 from '../../styles/images/mock_dresses/key_dresses/001.jpg'
 import dress2 from '../../styles/images/mock_dresses/key_dresses/001.jpg'
 import dress3 from '../../styles/images/mock_dresses/key_dresses/001.jpg'
 
+import axios from 'axios';
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = "csrftoken"
+const API_URL = 'https://localhost:8000';
+
 class Cart extends Component {
   constructor(props) {
     super(props)
 
     let dresses = {}
     let amount = 0
-    for (var i = 0; i < 10; i++) {
-      dresses[i] = {
-        0: dress1,
-        1: dress2,
-        2: dress3,
-        price: "15.00",
-        title: 'Linen Midi Dress',
-        selected: 0,
-        total: 3,
-      }
-      amount += parseInt(dresses[i].price)
-    }
 
     this.state = {
       dresses: dresses,
@@ -48,7 +42,56 @@ class Cart extends Component {
     }
   }
 
+  getAvailableTimes = async () => {
+    let res = await axios.get(`${API_URL}/api/availableTimes/`)
+    let times = res.data
+    if (this.mounted) {
+      this.setState({available_times: times})
+    }
+  }
+
+  fetchDressesInCart = async () => {
+    let res = await axios.get(`${API_URL}/api/cart/`)
+    console.log(res.data)
+    let dress_data = {}
+    let amount = 0
+    let total = 0
+    for (let i in res.data) {
+      dress_data[i] = {
+        id: res.data[i]["id"],
+        0: API_URL + "/" + res.data[i]["view1"],
+        1: API_URL + "/" + res.data[i]["view2"],
+        2: API_URL + "/" + res.data[i]["view3"],
+        title: res.data[i]["title"],
+        selected: 0,
+        total: 3,
+        brand: res.data[i]["brand"],
+        size: res.data[i]["size"],
+        description: res.data[i]["description"],
+        occasion: res.data[i]["occasions"].split(/(\s+)/),
+        price: res.data[i]["price"],
+        availability: res.data[i]["unavailableDates"]
+      }
+      amount += parseInt(dress_data[i]["price"])
+      total += 1
+    }
+    if (this.mounted) {
+      this.setState({dresses: dress_data, amount: amount, total: total})
+    }
+  }
+
+  componentDidMount() {
+    this.mounted = true;
+    this.getAvailableTimes();
+    this.fetchDressesInCart();
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
+  }
+
 	render() {
+    console.log(this.state.available_times)
     return (
       <div className="cart__container">
         <div>
