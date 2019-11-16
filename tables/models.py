@@ -48,8 +48,8 @@ class Dress(models.Model):
 # Keeps track of what dresses are associated with what users
 class Carts(models.Model):
     user = models.ForeignKey(UserInfo, related_name='RelatedUser', on_delete=models.CASCADE)
-    dressesAdded = models.ManyToManyField(Dress, related_name='CartDresses')
-    dressesLiked = models.ManyToManyField(Dress, related_name='LikedDresses')
+    dressesAdded = models.ManyToManyField(Dress, related_name='CartDresses', null=True)
+    dressesLiked = models.ManyToManyField(Dress, related_name='LikedDresses', null=True)
     rentalHistory = models.CharField(max_length=1000, default = "")
 
     

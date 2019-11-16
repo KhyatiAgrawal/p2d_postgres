@@ -26,16 +26,25 @@ from .filters import DressFilter
 from django.core.mail import EmailMessage
 
 import datetime
+from datetime import datetime as dt
 import pickle
 import os.path
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from rest_framework.decorators import api_view, renderer_classes
+from django.views.decorators.csrf import csrf_exempt
+
+from django.http import JsonResponse
+from django.middleware.csrf import get_token
+
 
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/calendar.events']
+
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Confirm stuff here 
 # Make sure this works for all dresses 
@@ -56,60 +65,61 @@ def dress_list(request):
     # Apply other filters
     # Serialize return query set
     # Right now this is using old search method
-    # See if you can use tssearch for better searches
+    # See if you can use tssearch for better searches 
     if request.method == 'GET':
         dress_filter = Dress.objects.all().order_by('id')
         serializer = DressSerializer(dress_filter, many=True) 
         return Response(serializer.data, status=status.HTTP_200_OK, template_name=None)
-    elif request.method == 'POST':
+    else:
         dress_filter = CustomFilter(request.data)
         serializer = DressSerializer(dress_filter, many=True) 
         return Response(serializer.data, status=status.HTTP_200_OK, template_name=None)
-    return Response({}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view((['GET', 'PUT', 'DELETE']))
 @login_required
 def getOrUpdate_cart(request):
     # The given username should exist in the cart table
     username = request.user.username
+
     try:
-        cart = Carts.objects.get(user=username)
+        uInfo = getUInfo(username)
+        cart = Carts.objects.get(user=uInfo)
     except Carts.DoesNotExist:
         # if cart doesn't exist create an empty cart object
         cart = Carts.objects.create(
-            user = username
+            user = uInfo
             )
         cart.save()
 
     # return the cart if the request is a GET request
     if request.method == 'GET':
         # Serialize the cart object and return
-        serializer = DressesSerializer(cart.dressesAdded, context={'request': request})
+        serializer = DressSerializer(cart.dressesAdded, many=True)  
         return Response(serializer.data)
- 
-    # update the cart if the request is a POST request
-    elif request.method == 'PUT':
+    
+    if request.method == 'PUT':
         # Allow only 5 dresses in each user's cart
         if cart.dressesAdded.all().count() < 5:
-            dressObj = Dress.objects.get(id = request.PUT['dressToAdd'])
+            dressObj = Dress.objects.get(id = request.data['dressToAdd'])
             cart.dressesAdded.add(dressObj)
             cart.save()
+        else:
+            dressObj = Dress.objects.get(id = request.data['dressToAdd'])
+            cart.dressesLiked.add(dressObj)
+            cart.save()
 
-        serializer = DressesSerializer(cart.dressesAdded, context={'request': request})  
-        if serializer.is_valid():
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer = DressSerializer(cart.dressesAdded, many=True)  
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     # Check if delete can be a method
     # refer to Digital ocean link
     elif request.method == 'DELETE':
-        dressObj = Dress.objects.get(id = request.DELETE['dressToDelete'])
+        dressObj = Dress.objects.get(id = request.data['dressToDelete'])
         cart.dressesAdded.remove(dressObj)
         cart.save()
-        serializer = DressesSerializer(cart.dressesAdded, context={'request': request})  
-        if serializer.is_valid():
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer = DressSerializer(cart.dressesAdded, many=True)  
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view((['GET', 'PUT', 'DELETE']))
 @login_required
@@ -117,7 +127,8 @@ def getOrUpdate_favorite(request):
     # The given username should exist in the favorites table
     username = request.user.username
     try:
-        userFavorites= Carts.objects.get(user=username)
+        uInfo = getUInfo(username)
+        userFavorites= Carts.objects.get(user=uInfo)
     except Carts.DoesNotExist:
         # if no dress is liked, create an empty favorites cart
         userFavorites = Carts.objects.create(
@@ -128,29 +139,28 @@ def getOrUpdate_favorite(request):
     # return the favorites if the request is a GET request
     if request.method == 'GET':
         # Serialize the object and return
-        serializer = DressesSerializer(userFavorites.dressesLiked, context={'request': request})     
+        serializer = DressSerializer(userFavorites.dressesLiked, many=True)     
         return Response(serializer.data)
  
     # update the favorites if the request is a POST request
     elif request.method == 'PUT':
-        dressObj = Dress.objects.get(id = request.PUT['dressToAdd'])
+        dressObj = Dress.objects.get(id = request.data['dressToAdd'])
         userFavorites.dressesLiked.add(dressObj)
         userFavorites.save()
-        serializer = DressesSerializer(userFavorites.dressesLiked, context={'request': request})  
-        if serializer.is_valid():
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer = DressSerializer(userFavorites.dressesLiked, many=True)  
+        # if serializer.is_valid():
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     # Check if delete can be a method
     # refer to 
     elif request.method == 'DELETE':
-        dressObj = Dress.objects.get(id = request.DELETE['dressToDelete'])
-        userFavorites.dressesAdded.remove(dressObj)
+        dressObj = Dress.objects.get(id = request.data['dressToDelete'])
+        userFavorites.dressesLiked.remove(dressObj)
         userFavorites.save()
-        serializer = DressesSerializer(userFavorites.dressesLiked, context={'request': request})
-        if serializer.is_valid():
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer = DressSerializer(userFavorites.dressesLiked, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view((['GET']))
@@ -210,6 +220,7 @@ def get_AvailableForTrial(request):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view((['GET']))
 @login_required
 def getAvailableTimes(request):
     # Here is where you need to:
@@ -222,8 +233,10 @@ def getAvailableTimes(request):
     # The file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
     # time.
-    if os.path.exists('token.pickle'):
-        with open('token.pickle', 'rb') as token:
+    # print(os.path.join(BASE_DIR, 'tables/token.pickle'))
+    token_file = os.path.join(BASE_DIR, 'tables/token.pickle')
+    if os.path.exists(token_file):
+        with open(token_file, 'rb') as token:
             creds = pickle.load(token)
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
@@ -247,6 +260,7 @@ def getAvailableTimes(request):
                                         orderBy='startTime').execute()
     events = events_result.get('items', [])
 
+    slots = []
     for event in events:
         startString = event['start'].get('dateTime')
         endString = event['end'].get('dateTime')
@@ -262,18 +276,16 @@ def getAvailableTimes(request):
         end_time_obj = dt.strptime(endString, '%Y-%m-%dT%H:%M:%S-05:00')
         now = dt.now().strftime("%Y-%m-%d %H:%M:%S")
         
-        slots = []
-        if  start_time_obj <= dt.now() + datetime.timedelta(days=2) and eventType == "Pick up time":
+        if  start_time_obj <= dt.now() + datetime.timedelta(days=7) and eventType == "Pick up time":
             slot = start_time_obj
             while slot < end_time_obj:
                 slots.append({"DateTime": slot, "PersonIncharge": eventInCharge})
                 slot = slot + datetime.timedelta(minutes=30)
 
-        # Serialize the time slots found into json and return response
-        serializer = AvailableTimesSerializer(slots, many=True)
-        if serializer.is_valid():
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    print(slots)
+    # Serialize the time slots found into json and return response
+    serializer = AvailableTimesSerializer(slots, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view((['GET', 'PUT', 'DELETE']))
 @login_required
@@ -300,7 +312,8 @@ def getOrUpdate_Alerts(request):
         newTrial.trialDateAndTime = request.PUT['DateTime']
 
         # Get the associated cart object
-        cart = Carts.objects.get(user=uname)
+        uInfo = getUInfo(username)
+        cart = Carts.objects.get(user=uInfo)
 
 
         # The request will contain the list of dresses the user wants to book for trial
@@ -364,7 +377,6 @@ def getOrUpdate_userInfo(request):
     try:
         uInfo = UserInfo.objects.get(user=uname)
     except UserInfo.DoesNotExist:
-        # if no dress is liked 
         uInfo = UserInfo.objects.create(
             username = uname,
             email = str(uname) + "@princeton.edu"
@@ -394,6 +406,20 @@ def getOrUpdate_userInfo(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+def getUInfo(uname):
+    try:
+        uInfo = UserInfo.objects.get(username=uname)
+    except UserInfo.DoesNotExist:
+        uInfo = UserInfo.objects.create(
+            username = uname,
+            email = str(uname) + "@princeton.edu"
+            )
+        uInfo.save()
+    return uInfo
+
+
 
 @api_view(['GET'])
 @login_required
@@ -470,7 +496,6 @@ def send_email_create(uname, userEmailId, trialObj, personIncharge):
 # Custom Filter for dresses
 def CustomFilter(myDict):
     dress_filter = Dress.objects.all().order_by('id')
-    print(myDict)
     for key in myDict:
         if key == 'occasion':
             dress_filter = dress_filter.filter(reduce(operator.or_, [Q(occasions__icontains= x + ' ') for x in myDict[key]]))
@@ -482,5 +507,8 @@ def CustomFilter(myDict):
             dress_filter = dress_filter.filter(price__lte = myDict[key])
     return dress_filter
 
+
+def csrf(request):
+    return JsonResponse({'csrfToken': get_token(request)})
 
 
