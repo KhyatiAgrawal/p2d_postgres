@@ -37,6 +37,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
+from django.views.decorators.csrf import csrf_exempt
 
 
 
@@ -56,6 +57,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # keyword list of strings
 
 @api_view((['GET', 'POST']))
+@csrf_exempt
 @login_required
 def dress_list(request):
     """
@@ -80,20 +82,11 @@ def dress_list(request):
 def getOrUpdate_cart(request):
     # The given username should exist in the cart table
     username = request.user.username
-
-    try:
-        uInfo = getUInfo(username)
-        cart = Carts.objects.get(user=uInfo)
-    except Carts.DoesNotExist:
-        # if cart doesn't exist create an empty cart object
-        cart = Carts.objects.create(
-            user = uInfo
-            )
-        cart.save()
+    uInfo = getUInfo(username)
+    cart = getCart(uInfo)
 
     # return the cart if the request is a GET request
     if request.method == 'GET':
-        # Serialize the cart object and return
         serializer = DressSerializer(cart.dressesAdded, many=True)  
         return Response(serializer.data)
     
@@ -126,19 +119,11 @@ def getOrUpdate_cart(request):
 def getOrUpdate_favorite(request):
     # The given username should exist in the favorites table
     username = request.user.username
-    try:
-        uInfo = getUInfo(username)
-        userFavorites= Carts.objects.get(user=uInfo)
-    except Carts.DoesNotExist:
-        # if no dress is liked, create an empty favorites cart
-        userFavorites = Carts.objects.create(
-            user = username
-            )
-        userFavorites.save()
+    uInfo = getUInfo(username)
+    userFavorites = getCart(uInfo)
 
     # return the favorites if the request is a GET request
     if request.method == 'GET':
-        # Serialize the object and return
         serializer = DressSerializer(userFavorites.dressesLiked, many=True)     
         return Response(serializer.data)
  
@@ -152,8 +137,6 @@ def getOrUpdate_favorite(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
         # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    # Check if delete can be a method
-    # refer to 
     elif request.method == 'DELETE':
         dressObj = Dress.objects.get(id = request.data['dressToDelete'])
         userFavorites.dressesLiked.remove(dressObj)
@@ -233,7 +216,6 @@ def getAvailableTimes(request):
     # The file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
     # time.
-    # print(os.path.join(BASE_DIR, 'tables/token.pickle'))
     token_file = os.path.join(BASE_DIR, 'tables/token.pickle')
     if os.path.exists(token_file):
         with open(token_file, 'rb') as token:
@@ -281,9 +263,6 @@ def getAvailableTimes(request):
             while slot < end_time_obj:
                 slots.append({"DateTime": slot, "PersonIncharge": eventInCharge})
                 slot = slot + datetime.timedelta(minutes=30)
-
-    print(slots)
-    # Serialize the time slots found into json and return response
     serializer = AvailableTimesSerializer(slots, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -294,11 +273,8 @@ def getOrUpdate_Alerts(request):
         try: 
             trial = Alerts.objects.get(user=uname)
             serializer = AlertsSerializer(trial, context={'request': request})
-            if serializer.is_valid():
-                return Response(serializer.data)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.data)
         except Alerts.DoesNotExist: 
-            # return empty response
             return Response(status=status.HTTP_204_NO_CONTENT)
 
 
@@ -309,7 +285,7 @@ def getOrUpdate_Alerts(request):
             )
 
         # Request format '10/25/06 14:30'
-        newTrial.trialDateAndTime = request.PUT['DateTime']
+        newTrial.trialDateAndTime = request.data['DateTime']
 
         # Get the associated cart object
         uInfo = getUInfo(username)
@@ -346,7 +322,7 @@ def getOrUpdate_Alerts(request):
 
         emailId = uInfo.email
 
-        send_email_create(uname, emailId, newTrial, request.PUT['PersonIncharge'])
+        send_email_create(uname, emailId, newTrial, request.data['PersonIncharge'])
         serializer = AlertsSerializer(newTrial, context={'request': request})
         if serializer.is_valid():
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -374,14 +350,7 @@ def getOrUpdate_Alerts(request):
 def getOrUpdate_userInfo(request):
     # The given username should exist in the favorites table
     uname = request.user.username
-    try:
-        uInfo = UserInfo.objects.get(user=uname)
-    except UserInfo.DoesNotExist:
-        uInfo = UserInfo.objects.create(
-            username = uname,
-            email = str(uname) + "@princeton.edu"
-            )
-        uInfo.save()
+    uInfo = getUInfo(uname)
 
     # return the favorites if the request is a GET request
     if request.method == 'GET':
@@ -391,10 +360,10 @@ def getOrUpdate_userInfo(request):
  
     # update the favorites if the request is a POST request
     elif request.method == 'PUT':
-        uInfo.gender = request.PUT['gender']
-        uInfo.email = request.PUT['email']
-        uInfo.phone = request.PUT['phone']
-        sizes = request.PUT.getlist('sizes[]')
+        uInfo.gender = request.data['gender']
+        uInfo.email = request.data['email']
+        uInfo.phone = request.data['phone']
+        sizes = request.data.getlist('sizes[]')
         s = ""
         for c in sizes:
             s = s  + c + " "
@@ -402,10 +371,7 @@ def getOrUpdate_userInfo(request):
         uInfo.save()
 
         serializer = UInfoSerializer(uInfo, context={'request': request})  
-        if serializer.is_valid():
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 def getUInfo(uname):
@@ -423,32 +389,29 @@ def getUInfo(uname):
 
 @api_view(['GET'])
 @login_required
-def get_rentalHistory(request):
+def getRentalHistory(request):
     uname = request.user.username
-    # The given username should exist in the cart table
-    username = request.user.username
-    try:
-        cart = Carts.objects.get(user=username)
-    except Carts.DoesNotExist:
-        # if cart doesn't exist create an empty cart object
-        cart = Carts.objects.create(
-            user = username
-            )
-        cart.save()
+    uInfo = getUInfo(uname)
+    cart = getCart(uInfo)
 
-    toSerialize = []
+    toSerialize1 = []
+    toSerialize2 = []
     history = cart.rentalHistory.split(";")
+    count = 0
     for entry in history:
         temp = entry.split()
         rentalDateObj = dt.strptime(temp[0],  '%m/%d/%y')
         dressObj = Dress.objects.get(id = temp[1])
-        toSerialize.append({"Date": rentalDateObj, "RentedDress": dressObj})
+        if  rentalDateObj > dt.now() - datetime.timedelta(days = 1):
+            toSerialize2.append({"Date": rentalDateObj, "RentedDress": dressObj})
+        else:
+            toSerialize1.append({"Date": rentalDateObj, "RentedDress": dressObj})
+        count += 1
+    uInfo.numberRented = count
 
-
-    serializer = RentalHistorySerializer(toSerialize, many=True)
-    if serializer.is_valid():
-        return Response(serializer.data)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    serializer1 = PastRentalHistorySerializer(toSerialize1, many=True)
+    serializer2 = UpcomingRentalHistorySerializer(toSerialize2, many=True)
+    return Response({'pastHistory': serializer1.data, 'upcomingHistory': serializer2.data})
 
 
 # Internal use method
@@ -510,5 +473,44 @@ def CustomFilter(myDict):
 
 def csrf(request):
     return JsonResponse({'csrfToken': get_token(request)})
+
+
+# Method that returns the number of dresses in the cart
+@api_view(['GET'])
+def getNumberInCart(myDict):
+    # The given username should exist in the cart table
+    username = request.user.username
+    uInfo = getUInfo(username)
+    cart = getCart(uInfo)
+    if cart.dressesAdded != None:
+        return Response({'NumberInCart': cart.dressesAdded.all().count()})
+    return Response({'numberInCart': 0})
+
+
+# Method that returns the number of orders
+@api_view(['GET'])
+def getNumberDressesRented(myDict):
+    # The given username should exist in the cart table
+    username = request.user.username
+    uInfo = getUInfo(username)
+    return Response({'numberRented': uInfo.numberRented})
+
+def getCart(uInfoObject):
+    try:
+        cart = Carts.objects.get(user=uInfoObject)
+    except Carts.DoesNotExist:
+        cart = Carts.objects.create(
+            user = username
+            )
+        cart.save()
+    return cart
+
+
+    
+
+
+
+
+
 
 
