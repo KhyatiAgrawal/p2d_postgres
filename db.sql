@@ -512,7 +512,7 @@ ALTER SEQUENCE public.tables_alerts_id_seq OWNED BY public.tables_alerts.id;
 
 CREATE TABLE public.tables_carts (
     id integer NOT NULL,
-    "dressAdded_id" integer NOT NULL,
+    "dressAdded_id" integer,
     user_id integer NOT NULL,
     "rentalHistory" character varying(1000) NOT NULL
 );
@@ -865,7 +865,6 @@ COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
 --
 
 COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
-1		2019-05-29 16:21:55.913-04	f	khyatia				f	t	2018-04-13 02:12:23.716-04
 3		2018-05-06 02:30:06.831-04	f	arulg				f	t	2018-04-13 20:43:10.895-04
 5		2019-05-16 10:31:35.502-04	f	uuberoy				f	t	2018-04-19 23:46:46.554-04
 6		2019-04-16 23:38:53.021-04	f	jorinak				f	t	2018-04-20 00:05:02.483-04
@@ -1696,7 +1695,8 @@ COPY public.auth_user (id, password, last_login, is_superuser, username, first_n
 831		2019-05-13 00:09:41.843-04	f	kvlach				f	t	2019-05-13 00:09:41.703-04
 832		2019-05-19 02:35:06.498-04	f	jbachek				f	t	2019-05-19 02:35:06.267-04
 833		2019-05-24 01:14:10.876-04	f	mneff				f	t	2019-05-24 01:14:10.753-04
-2	pbkdf2_sha256$100000$YctJOoai4vsK$n/TqGyGRI6GNlSSZyNwO6Jf11+v5l7rJF4WT6SsAIT0=	2019-11-12 20:25:07.242657-05	t	admin			khyatiagrawal1998@gmail.com	t	t	2018-04-13 02:14:16.313-04
+1		2019-11-15 20:51:52.414467-05	f	khyatia				f	t	2018-04-13 02:12:23.716-04
+2	pbkdf2_sha256$100000$YctJOoai4vsK$n/TqGyGRI6GNlSSZyNwO6Jf11+v5l7rJF4WT6SsAIT0=	2019-11-15 20:43:30.038418-05	t	admin			khyatiagrawal1998@gmail.com	t	t	2018-04-13 02:14:16.313-04
 \.
 
 
@@ -4581,6 +4581,22 @@ COPY public.django_cas_ng_sessionticket (id, session_key, ticket) FROM stdin;
 1622	bn5uf6pk3pgoitlggedzrodk6h3hsjiz	ST-793552-oed5BkiGAiR9oWsL5ScV-auth-a
 1623	x8s0d0z9fwaaruuwvqsi85vvqclwx4ic	ST-33339-AWctpFRWIeRkUNGj9z5D-auth-a
 1624	qw2tmgen236k5cb51zmwpe4pw5xyw43x	ST-174800-7ddajfd7UYGISLktBTij-auth-a
+1625	cfm9itka82fxk8lmbul8d58be7kjp0nz	ST-705834-e7XOylkZxXcQsJof1PWU-auth-a
+1626	0hz5zdtz3uxib3z0z7dkduxh0ol9x0wv	ST-706643-k0Dpxlx2R0Qx6cfWRWQj-auth-a
+1627	7uxuqox7b2ky1g9aaxsc0jftutry2ttm	ST-706702-7A75fYUJeCb20mmwHj9k-auth-a
+1628	fxv67rbybb9jk0zuvqjpxgsw972ag5lv	ST-708020-2X0fcaEDPYt6LBbbjb7e-auth-a
+1629	ap9rwhpa91ukxelnk346q8f3f74utxx3	ST-708087-bi4HbulEgFpOYBnPNKHl-auth-a
+1630	0if1ezio7iwu91chqet8f3zpszyt4df1	ST-708280-X72rbbJMbWhpaF2lgXgU-auth-a
+1631	jzhbgkwglxvbipe9gst20r2ija8g1w7t	ST-708538-pyWrZ9lnEPA4Jcaq6ef4-auth-a
+1632	puvrod0ekwro831qa3nmkn1is7xbb7ns	ST-758682-n6sSu6MasrEd60ItZ1LD-auth-a
+1633	5duw3iucalnt1r1h1rpolw2dcy12atlx	ST-759196-DixUEd2dhZgge9xj9Eyo-auth-a
+1634	ewf8qg0f83ptqtfym6k9i7kl31ai3plp	ST-759443-TXhdhkGljn7jng7qqBKm-auth-a
+1635	rndn67es05odgmruk5c93denosdc9mvw	ST-759974-M31eNzLniPDhu1rh6vnz-auth-a
+1636	5olyymumibzfl53rfrz04yh2fkm8m4qj	ST-760351-mmPIitRGlcPzZhi6e2ut-auth-a
+1637	yxm893dlrja2wqne0zvsqzv9wsmlez8z	ST-761725-W0SWOfAcafzJYq0RjZJK-auth-a
+1638	te8ys6cp9grps02q3taqfvhudg80qlni	ST-762063-eTTSiTdHdvzTAdVgmuN7-auth-a
+1639	3busojr2z0do19z4uzl8p7ueidfimlrz	ST-770740-aOiiXD7I232CJ1PiHRed-auth-a
+1640	sl91yy0auk1r83exgbbi79o2rd56mquc	ST-770925-fctKyciBsgMaURhFf9JQ-auth-a
 \.
 
 
@@ -4650,6 +4666,8 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 36	tables	0003_auto_20191111_0006	2019-11-10 19:06:58.365225-05
 37	tables	0004_auto_20191111_0526	2019-11-11 00:26:20.752249-05
 38	tables	0005_userinfo_numberrented	2019-11-11 00:41:30.58816-05
+39	tables	0006_auto_20191115_2044	2019-11-15 15:44:28.689139-05
+40	tables	0007_auto_20191115_2048	2019-11-15 15:48:42.632349-05
 \.
 
 
@@ -5753,6 +5771,20 @@ zzgjymkyner4q7pjtqsplokng2706l1q	MTY1YjcwZTM1MDU3NjUxY2YyOTlkYzhhODY3YjZiMjQzZTQ
 zzmvjdxsp5a3981odj69ax8ijluiu0br	MzQzYmM5ZDU0MzY5YjIwNTA1M2RhYTRjZDBkOTJmMTlkZGNlMzM2YTp7Il9hdXRoX3VzZXJfaGFzaCI6IjA3MGYxYTI2Mjc4NDYzOTQ4MzRmNmZmOWE0ZDcxMWQ5ODFmNjc1OTgiLCJfYXV0aF91c2VyX2lkIjoiNTQ4IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIn0=	2018-05-18 14:23:29.387-04
 kxhzsvoswjc19mrgoypcezijd9nao0b0	MjgwYWJkNjY1M2EyOWU0YTM5NWE1Y2M3ZDQ2MWI4MDhiYjU4YTM0Yjp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlOTRmNzljODdlNjQxYjEwMDZmYmNmNmM2Yjg4NGVhNWJlMTk3YTQ1In0=	2019-11-25 15:57:15.84616-05
 v60780x4zi7evma0yf6ij89eod8hcmma	MjgwYWJkNjY1M2EyOWU0YTM5NWE1Y2M3ZDQ2MWI4MDhiYjU4YTM0Yjp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlOTRmNzljODdlNjQxYjEwMDZmYmNmNmM2Yjg4NGVhNWJlMTk3YTQ1In0=	2019-11-26 18:23:03.730517-05
+cfm9itka82fxk8lmbul8d58be7kjp0nz	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-27 18:49:08.637735-05
+0hz5zdtz3uxib3z0z7dkduxh0ol9x0wv	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-27 19:12:10.139857-05
+7uxuqox7b2ky1g9aaxsc0jftutry2ttm	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-27 19:14:30.40157-05
+fxv67rbybb9jk0zuvqjpxgsw972ag5lv	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-27 19:47:26.896302-05
+ap9rwhpa91ukxelnk346q8f3f74utxx3	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-27 19:50:24.582664-05
+jzhbgkwglxvbipe9gst20r2ija8g1w7t	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-27 20:05:25.898239-05
+puvrod0ekwro831qa3nmkn1is7xbb7ns	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-29 12:19:38.493752-05
+5duw3iucalnt1r1h1rpolw2dcy12atlx	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-29 12:37:34.009326-05
+ewf8qg0f83ptqtfym6k9i7kl31ai3plp	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-29 12:46:04.232324-05
+rndn67es05odgmruk5c93denosdc9mvw	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-29 13:03:34.409771-05
+yxm893dlrja2wqne0zvsqzv9wsmlez8z	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-29 13:53:16.52369-05
+te8ys6cp9grps02q3taqfvhudg80qlni	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-29 14:01:43.49384-05
+3busojr2z0do19z4uzl8p7ueidfimlrz	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-29 20:36:36.307712-05
+sl91yy0auk1r83exgbbi79o2rd56mquc	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-29 20:51:52.417484-05
 \.
 
 
@@ -5777,6 +5809,7 @@ COPY public."tables_alerts_dressesSelected" (id, alerts_id, dress_id) FROM stdin
 --
 
 COPY public.tables_carts (id, "dressAdded_id", user_id, "rentalHistory") FROM stdin;
+14	\N	6	
 \.
 
 
@@ -5785,6 +5818,11 @@ COPY public.tables_carts (id, "dressAdded_id", user_id, "rentalHistory") FROM st
 --
 
 COPY public."tables_carts_dressesAdded" (id, carts_id, dress_id) FROM stdin;
+2	14	1
+3	14	3
+4	14	4
+6	14	7
+7	14	8
 \.
 
 
@@ -5793,6 +5831,9 @@ COPY public."tables_carts_dressesAdded" (id, carts_id, dress_id) FROM stdin;
 --
 
 COPY public."tables_carts_dressesLiked" (id, carts_id, dress_id) FROM stdin;
+1	14	1
+2	14	0
+3	14	17
 \.
 
 
@@ -6554,7 +6595,7 @@ SELECT pg_catalog.setval('public.django_cas_ng_proxygrantingticket_id_seq', 1, f
 -- Name: django_cas_ng_sessionticket_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
-SELECT pg_catalog.setval('public.django_cas_ng_sessionticket_id_seq', 1624, true);
+SELECT pg_catalog.setval('public.django_cas_ng_sessionticket_id_seq', 1640, true);
 
 
 --
@@ -6568,7 +6609,7 @@ SELECT pg_catalog.setval('public.django_content_type_id_seq', 15, true);
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
-SELECT pg_catalog.setval('public.django_migrations_id_seq', 38, true);
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 40, true);
 
 
 --
@@ -6589,21 +6630,21 @@ SELECT pg_catalog.setval('public.tables_alerts_id_seq', 1, false);
 -- Name: tables_carts_dressesAdded_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
-SELECT pg_catalog.setval('public."tables_carts_dressesAdded_id_seq"', 1, false);
+SELECT pg_catalog.setval('public."tables_carts_dressesAdded_id_seq"', 7, true);
 
 
 --
 -- Name: tables_carts_dressesLiked_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
-SELECT pg_catalog.setval('public."tables_carts_dressesLiked_id_seq"', 1, false);
+SELECT pg_catalog.setval('public."tables_carts_dressesLiked_id_seq"', 4, true);
 
 
 --
 -- Name: tables_carts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
-SELECT pg_catalog.setval('public.tables_carts_id_seq', 1, false);
+SELECT pg_catalog.setval('public.tables_carts_id_seq', 14, true);
 
 
 --
