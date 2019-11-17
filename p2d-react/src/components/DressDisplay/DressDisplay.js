@@ -31,22 +31,18 @@ class DressDisplay extends Component {
       this.fetchDresses("favorites");
   }
 
-  componentWillReceiveProps = ({date}) => {
-    console.log(date)
-    this.setState({date_needed: date})
+  componentWillReceiveProps = ({date_needed}) => {
+    this.setState({date_needed: date_needed})
+    this.fetchDresses("cart")
   }
 
   fetchDresses = async (stem) => {
     let res;
     if (this.state.date_needed) {
-      let date = this.state.date_needed.split("-")
-      date = date[1] + "/" + date[2] + "/" + date[3]
-      console.log(date)
-      res = await axios.get(`${API_URL}/api/${stem}/`, {'rentalDate': date})
+      res = await axios.get(`${API_URL}/api/${stem}/`, {'rentalDate': this.state.date_needed})
     } else {
       res = await axios.get(`${API_URL}/api/${stem}/`)
     }
-    console.log(res.data)
     let dress_data = {}
     let amount = 0
     let total = 0
@@ -104,7 +100,6 @@ class DressDisplay extends Component {
                 <div>{"Size: " + this.state.dresses[index].size}</div>
                 <div>{"Occasion: " + this.state.dresses[index].occasion}</div>
                 <div>{"Brand: " + this.state.dresses[index].brand}</div>
-                <div>{"Availability: " + this.state.dresses[index].availability}</div>
                 <div className="cart-button" style={this.props.cart ? { display: 'flex'} : {display: 'none'}} onClick={() => {this.removeFromCart(this.state.dresses[index].id)}}>
                   <div className="cart-button__content">Remove from cart</div>
                 </div>
