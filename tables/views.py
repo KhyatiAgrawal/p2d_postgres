@@ -397,6 +397,8 @@ def getRentalHistory(request):
     count = 0
     for entry in history:
         temp = entry.split()
+        if len(temp) == 0:
+            return Response({'pastHistory': {}, 'upcomingHistory': {}})
         rentalDateObj = dt.strptime(temp[0],  '%m/%d/%y')
         dressObj = Dress.objects.get(id = temp[1])
         if  rentalDateObj > dt.now() - datetime.timedelta(days = 1):
@@ -406,8 +408,8 @@ def getRentalHistory(request):
         count += 1
     uInfo.numberRented = count
 
-    serializer1 = PastRentalHistorySerializer(toSerialize1, many=True)
-    serializer2 = UpcomingRentalHistorySerializer(toSerialize2, many=True)
+    serializer1 = RentalHistorySerializer(toSerialize1, many=True)
+    serializer2 = RentalHistorySerializer(toSerialize2, many=True)
     return Response({'pastHistory': serializer1.data, 'upcomingHistory': serializer2.data})
 
 

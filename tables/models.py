@@ -52,6 +52,9 @@ class Carts(models.Model):
     dressesLiked = models.ManyToManyField(Dress, related_name='LikedDresses', null=True)
     rentalHistory = models.CharField(max_length=1000, default = "")
 
+    def __str__(self):
+        return self.user.username
+
     
 # Keeps track of the dresses and trial time a person has selected 
 class Alerts(models.Model):
