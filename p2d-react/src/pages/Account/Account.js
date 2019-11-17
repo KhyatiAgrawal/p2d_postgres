@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
 import { useLayoutEffect, useState } from 'react';
 import './Account.scss';
+import retrieveData from '../../components/retrieveData';
 
 import Navbar from '../../components/Navbar/Navbar';
+import axios from 'axios';
+
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = "csrftoken"
+
+
+const API_URL = 'https://localhost:8000';
+const api_endpoint = new retrieveData();
+
 
 class Account extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			orders: [0, 0, 0, 0, 0, 0, 0],
+			orders: [],
 			windowSize: window.innerWidth,
 		}
 	}
@@ -22,11 +33,23 @@ class Account extends Component {
 	    });
 	 };
 
+	fetchNumberRented = async (filters) => {
+		let res;
+		res = await axios.get(`${API_URL}/api/numberRented`)
+		if (this.mounted) {
+			this.setState({orders: new Array(res.data['numberRented'])})
+		}
+	}
+
+
 	componentDidMount() {
+		this.mounted = true;
 	    window.addEventListener("resize", this.handleResize);
+	    this.fetchNumberRented();
 	}
 
 	componentWillUnmount() {
+		this.mounted = false;
 	    window.removeEventListener("resize", this.handleResize);
 	}
 
@@ -57,6 +80,7 @@ class Account extends Component {
 					<div className="info__stat">You've saved <b>{Math.round(3.53 * this.state.orders.length)} lbs</b> of carbon emissions</div>
 				</div>
 	    	</div>
+
 		);
 	}
 }

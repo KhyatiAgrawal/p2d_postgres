@@ -146,40 +146,42 @@ def getOrUpdate_favorite(request):
         # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view((['GET']))
+@api_view((['POST']))
 @login_required
-def get_AvailableForTrial(request):
-    # return the cart if the request is a GET request
+def getAvailableForTrial(request):
+
+
     uname = request.user.username
+    uInfo = getUInfo(uname)
 
     # If trial is already scheduled tell the user that the trial is scheduled
     # and that they have an upcoming trial
     try: 
-        alreadyScheduled = Alerts.objects.get(user=uname)
-
-        # Convert into MM/DD/YY format
-        # Date object only
+        alreadyScheduled = Alerts.objects.get(user=uInfo)
         date_obj = dt.strptime(str(alreadyScheduled.trialDateAndTime), '%m/%d/%y %H:%M')
 
         # Expire the trial if outdated
-        if  dateTime_obj > dt.now():
+        if  dt.now() > date_obj:
             alreadyScheduled.delete()
-            # the function calls itself
-            return getOrUpdate_ForTrial(request)
-        # don't let them schedule two trials for the same day
-        elif date_obj.strftime('%m/%d/%y') == userRentalDate_obj:
+            return getAvailableForTrial(request)
+        else:
             # send the existing trial details
             serializer = AlertsSerializer(alreadyScheduled, context={'request': request})
-            if serializer.is_valid():
-                return Response(serializer.data)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.data)
+
+        # don't let them schedule two trials for the same day
+        # elif date_obj.strftime('%m/%d/%y') == userRentalDate_obj:
+        #     serializer = AlertsSerializer(alreadyScheduled, context={'request': request})
+        #     if serializer.is_valid():
+        #         return Response(serializer.data)
+        #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     # If the they haven't scheduled their trial yet
     # Show them the dresses they that are available at their specified date
     except Alerts.DoesNotExist:
 
         # Get the three day window that they are trying to book
-        userRentalDate_obj = dt.strptime(request.GET['RentalDate'], '%m/%d/%y')
+        userRentalDate_obj = dt.strptime(request.data['rentalDate'], '%m/%d/%y')
         d1 = userRentalDate_obj.strftime('%m/%d/%y')
         d2 = (userRentalDate_obj + datetime.timedelta(days=1)).strftime('%m/%d/%y')
         d3 = (userRentalDate_obj + datetime.timedelta(days=-1)).strftime('%m/%d/%y')
@@ -187,21 +189,16 @@ def get_AvailableForTrial(request):
 
         # Get the dresses they are trying to book
         cart = Carts.objects.get(user=uname)
-
         tentativeDresses = []
         for DressObj in cart.dressesAdded:
             booked = DressObj.unavailableDates
-            # if there is any overlap with existing tentative bookings for that dress
-            # don't book
             if any(x in booked for x in dateWindow):
                 continue
             tentativeDresses.append(DressObj)
 
         # return the available dresses
-        serializer = DressesSerializer(tentativeDresses, context={'request': request})  
-        if serializer.is_valid():
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer = DresSerializer(tentativeDresses, many=True)  
+        return Response(serializer.data)
 
 @api_view((['GET']))
 @login_required
@@ -489,11 +486,10 @@ def getNumberInCart(myDict):
 
 # Method that returns the number of orders
 @api_view(['GET'])
-def getNumberDressesRented(myDict):
-    # The given username should exist in the cart table
+def getNumberDressesRented(request):
     username = request.user.username
     uInfo = getUInfo(username)
-    return Response({'numberRented': uInfo.numberRented})
+    return Response({'numberRented': uInfo.numberRented}, status=status.HTTP_200_OK)
 
 def getCart(uInfoObject):
     try:

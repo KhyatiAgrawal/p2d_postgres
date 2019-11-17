@@ -16,7 +16,7 @@ urlpatterns = [
     url(r'^api/cart/', views.getOrUpdate_cart),
     url(r'^api/alerts/', views.getOrUpdate_Alerts),
     url(r'^api/favorites/', views.getOrUpdate_favorite),
-    url(r'^api/availability', views.get_AvailableForTrial),
+    url(r'^api/availability', views.getAvailableForTrial),
     url(r'^api/availableTimes', views.getAvailableTimes),
     url(r'^api/myOrders', views.getRentalHistory),
     url(r'^api/numberInCart', views.getNumberInCart),
