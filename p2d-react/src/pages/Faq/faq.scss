@@ -16,27 +16,33 @@
 .faq-title-top {
 	&__container {
 		display: flex;
-		align-items: left;
-		justify-content: left;
-		margin-left: 45px;
+		align-items: center;
+		justify-content: center;
 		margin-top: calc(5vw + 20px);
 		width: 100%;
 	}
 
 	&__text {
-		color: $p2d-reg;
-		font-size: 20px;
+		color: $p2d-gray;
+		font-size: 32px;
 		font-weight: bold;
 	}
 }
+.faq-container {
+	display: flex;
+	width: 100%;
+	align-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
 .faq-title {
 	&__container {
 		display: flex;
+		width: 60%;
 		align-items: left;
 		justify-content: left;
-		margin-left: 45px;
 		margin-top: 20px;
-		width: 100%;
 	}
 
 	&__text {
@@ -65,12 +71,11 @@
 
 .infoFAQ {
 	&__container {
-		width: 65%;
+		width: 60%;
 		margin-top: 5px;
-		margin-left: 45px;
 		display: flex;
-		align-items: center;
-		justify-content: left;
+		align-items: left;
+		justify-content: center;
 	}
 
 	&__text {
