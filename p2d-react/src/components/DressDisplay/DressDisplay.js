@@ -31,8 +31,21 @@ class DressDisplay extends Component {
       this.fetchDresses("favorites");
   }
 
+  componentWillReceiveProps = ({date}) => {
+    console.log(date)
+    this.setState({date_needed: date})
+  }
+
   fetchDresses = async (stem) => {
-    let res = await axios.get(`${API_URL}/api/${stem}/`)
+    let res;
+    if (this.state.date_needed) {
+      let date = this.state.date_needed.split("-")
+      date = date[1] + "/" + date[2] + "/" + date[3]
+      console.log(date)
+      res = await axios.get(`${API_URL}/api/${stem}/`, {'rentalDate': date})
+    } else {
+      res = await axios.get(`${API_URL}/api/${stem}/`)
+    }
     console.log(res.data)
     let dress_data = {}
     let amount = 0
