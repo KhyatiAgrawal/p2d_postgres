@@ -49,8 +49,8 @@ class Feed extends React.Component {
 		this.state = {
 			dresses: [],
 			searchFilters: storedItems ? storedItems['searchFilters'] : [],
-			filters: storedItems ? storedItems['filters'] : [],
-			searchFilters: storedItems ? storedItems['searchFilters'] : [],
+			filters: [],
+			searchFilters: [],
 			activeFilters: storedItems ? storedItems['activeFilters'] : new Array(0).fill(false),
 			showSidebar: storedItems ? storedItems['showSidebar'] : true,
 			showFilters: {

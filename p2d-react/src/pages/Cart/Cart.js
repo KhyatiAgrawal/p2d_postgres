@@ -26,6 +26,7 @@ class Cart extends Component {
       total: Object.keys(dresses).length,
       amount: amount,
       submitted: false,
+      pickedDate: false,
     }
   }
 
@@ -55,6 +56,10 @@ class Cart extends Component {
     }
   }
 
+  checkAvailability = () => {
+    this.setState({date_needed: document.getElementById("date-picker").value})
+  }
+
   componentDidMount() {
     this.mounted = true;
     this.getAvailableTimes();
@@ -65,7 +70,6 @@ class Cart extends Component {
   }
 
 	render() {
-    console.log(this.state.available_times)
     return (
       <div className="cart__container">
         <div>
@@ -75,25 +79,39 @@ class Cart extends Component {
             <div className="cart-title__text">{"My Cart (" + this.state.total + ")"}</div>
           </div>
         <div className="cart-body">
-          <div className="cart-dresses"><DressDisplay cart={true} handleTotal={this.totalHandler}/></div>
-          <div className="cart-summary" style={{maxHeight: this.state.total * 30 + 195}}>
-            <div className="cart-summary__title">Your Try-On Request</div>
-            <div className="cart-summary__items">
-              {Object.keys(this.state.dresses).map((key, index) => (
-                <div className="cart-summary__item">
-                  <div>{this.state.dresses[index].title}</div>
-                  <div>${this.state.dresses[index].price}.00</div>
-                </div>
-              ))}
+          <div className="cart-dresses"><DressDisplay cart={true} handleTotal={this.totalHandler} date_needed={this.state.date_needed}/></div>
+          <div className="cart-summary" style={{maxHeight: this.state.total * 30 + 195}}> 
+          <div className="cart-summary__date">
+            <div className="cart-summary__total" id="cart-date">When do you need these dresses?</div>
+            <input className="cart-summary__pick-date" id="date-picker" type="date" />
+            <div className="cart-summary__submit" onClick={this.checkAvailability}>
+                Check availability
             </div>
-            <div className="cart-summary__total" id="cart-date">Pick a date: <input type="date" /></div>
-            <div className="cart-summary__total" id="cart-time">Pick a time: <input type="time" /></div>
-            <div className="cart-summary__submit" onClick={this.toggleSubmitted} style={this.state.submitted ? {opacity: 0.7, pointer: 'default'} : {}}>
-              Submit try-on request!
+
+          </div>
+          {
+            this.state.pickedDate ?
+            <div>
+              <div className="cart-summary__title">Your Try-On Request</div>
+              <div className="cart-summary__items">
+                {Object.keys(this.state.dresses).map((key, index) => (
+                  <div className="cart-summary__item">
+                    <div>{this.state.dresses[index].title}</div>
+                    <div>${this.state.dresses[index].price}.00</div>
+                  </div>
+                ))}
+              </div>
+              <div className="cart-summary__total" id="cart-date">Pick a date: <input type="date" /></div>
+              <div className="cart-summary__total" id="cart-time">Pick a time: <input type="time" /></div>
+              <div className="cart-summary__submit" onClick={this.toggleSubmitted} style={this.state.submitted ? {opacity: 0.7, pointer: 'default'} : {}}>
+                Submit try-on request!
+              </div>
+              <div className="cart-summary__submitted" style={this.state.submitted ? {display: 'flex'} : {display: 'none'}}>
+                Your request has been submitted - <br />we'll confirm your appointment shortly!
+              </div>
             </div>
-            <div className="cart-summary__submitted" style={this.state.submitted ? {display: 'flex'} : {display: 'none'}}>
-              Your request has been submitted - <br />we'll confirm your appointment shortly!
-            </div>
+            : <div />
+          }
           </div>
         </div>
       </div>

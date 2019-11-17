@@ -63,14 +63,14 @@ class Grid extends Component {
       <div className="grid__container">
         <div className="wrapper">
         {Object.keys(this.state.images).map((key, index) => ( 
-          <div className="dress-container" onMouseOver={() => this.toggleDress(index)}
-                onMouseOut={() => this.toggleDress(index)}>
+          <div className="dress-container">
             <div className="image-container">
               <img
                 src={this.state.images[index].principal ? this.state.images[index][0] : this.state.images[index][1]}
                 className="image-container__img"
               />
-              <div className='dress-overlay' onClick={() => {this.toggleQuickView(key)}}>    
+              <div className='dress-overlay' onMouseOver={() => this.toggleDress(index)}
+                onMouseOut={() => this.toggleDress(index)} onClick={() => {this.toggleQuickView(key)}}>    
               </div>
               <div className="modal-container" style={this.state.images[index].modal ? {display: 'block'} : {display: 'none'}} >
                 <Modal image={this.state.images[index]} onClick={() => {this.toggleQuickView(key)}}/>
