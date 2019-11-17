@@ -233,7 +233,6 @@ def getAvailableTimes(request):
 
     # Call the Calendar API
     now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
-    print('Getting the upcoming 10 events')
     events_result = service.events().list(calendarId='primary', timeMin=now,
                                         maxResults=10, singleEvents=True,
                                         orderBy='startTime').execute()
@@ -265,6 +264,9 @@ def getAvailableTimes(request):
 @api_view((['GET', 'PUT', 'DELETE']))
 @login_required
 def getOrUpdate_Alerts(request):
+    uname = request.user.username
+    uInfo = getUInfo(uname)
+
     if request.method == 'GET':
         try: 
             trial = Alerts.objects.get(user=uname)
@@ -277,23 +279,19 @@ def getOrUpdate_Alerts(request):
     if request.method == 'PUT':
 
         newTrial = Alerts.objects.create(
-            user = username
+            user = uInfo
             )
 
         # Request format '10/25/06 14:30'
         newTrial.trialDateAndTime = request.data['DateTime']
-
-        # Get the associated cart object
-        uInfo = getUInfo(username)
         cart = Carts.objects.get(user=uInfo)
 
-
         # The request will contain the list of dresses the user wants to book for trial
-        for dressId in request.data['dresses']:
+        for dressId in request.data['Dresses']:
             dressObj = Dress.objects.get(id = dressId)
 
             # RentalDate must be passed in the request in MM/DD/YY format
-            dressObj.unavailableDates.append(";" + request.PUT['RentalDate'])
+            dressObj.unavailableDates = dressObj.unavailableDates  + ";" + request.data['RentalDate']
             dressObj.save()
 
             # The entries must be added with the specificied date and time in Alerts
@@ -304,25 +302,11 @@ def getOrUpdate_Alerts(request):
 
         newTrial.save()
         cart.save()
-
-        # Get the user info if exists
-        # Create the user info object if not
-        try:
-            uInfo = UserInfo.objects.get(user=uname)
-        except UserInfo.DoesNotExist:
-            uInfo = UserInfo.objects.create(
-            username = uname,
-            email = str(uname) + "@princeton.edu"
-            )
-            uInfo.save()
-
         emailId = uInfo.email
 
         send_email_create(uname, emailId, newTrial, request.data['PersonIncharge'])
         serializer = AlertsSerializer(newTrial, context={'request': request})
-        if serializer.is_valid():
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     # Handling cancellations
     # User manually cancels trial
@@ -338,7 +322,7 @@ def getOrUpdate_Alerts(request):
         uInfo = UserInfo.objects.get(user=uname)
         emailId = uInfo.email
         # Send email push to cancel the event
-        send_email(emailId, trial, request.PUT['PersonIncharge'], False)
+        send_email(emailId, trial, request.data['PersonIncharge'], False)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view((['GET', 'PUT']))
@@ -419,6 +403,27 @@ def send_email_create(uname, userEmailId, trialObj, personIncharge):
     # time, dresses booked for trial
     # This event should be pushed in the form of an invite.ics
     # to the user's preferred email
+    creds = None
+    # The file token.pickle stores the user's access and refresh tokens, and is
+    # created automatically when the authorization flow completes for the first
+    # time.
+    if os.path.exists('token.pickle'):
+        with open('token.pickle', 'rb') as token:
+            creds = pickle.load(token)
+    # If there are no (valid) credentials available, let the user log in.
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file(
+                'credentials.json', SCOPES)
+            creds = flow.run_local_server(port=0)
+        # Save the credentials for the next run
+        with open('token.pickle', 'wb') as token:
+            pickle.dump(creds, token)
+
+    service = build('calendar', 'v3', credentials=creds)
+
     start_dateTime_obj = dt.strptime(str(trialObj.trialDateAndTime), '%m/%d/%y %H:%M')
     end_dateTime_obj = start_dateTime_obj + datetime.timedelta(minutes = 30)
 

@@ -21,7 +21,6 @@ class OverwriteStorage(FileSystemStorage):
             os.remove(os.path.join(settings.MEDIA_ROOT, name))
         return name
  
-
 class Dress(models.Model):
     
     id = models.IntegerField(primary_key=True)
@@ -60,6 +59,6 @@ class Carts(models.Model):
 class Alerts(models.Model):
     user = models.ForeignKey(UserInfo, related_name='UserWhoBooked', on_delete=models.CASCADE)
     dressesSelected = models.ManyToManyField(Dress)
-    trialDateAndTime = models.DateTimeField(null=True)
+    trialDateAndTime = models.CharField(max_length=10, null=True)
 
 

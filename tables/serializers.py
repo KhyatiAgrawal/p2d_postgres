@@ -41,7 +41,7 @@ class DressesSerializer(serializers.Serializer):
 class AlertsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Alerts 
-        fields = ('user','dressSelected', 'trialDateAndTime')
+        fields = ('user','dressesSelected', 'trialDateAndTime')
 
 class UInfoSerializer(serializers.Serializer):
     class Meta:

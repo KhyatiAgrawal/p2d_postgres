@@ -41,7 +41,9 @@ class Cart extends Component {
         submitted: true
       })
     }
-    axios.put(`${API_URL}/api/alerts/`, selectedDate)
+    let val = this.state.selected.split(" ")
+    axios.put(`${API_URL}/api/alerts/`, 
+      {'DateTime': val[0] + " " + val[1], 'RentalDate': this.state.date_needed, 'Dresses': [0, 1], 'PersonIncharge': val[2]})
   }
 
   totalHandler = (total, amount, dresses) => {
@@ -53,7 +55,7 @@ class Cart extends Component {
     let res = await axios.get(`${API_URL}/api/availableTimes/`)
     let times = []
     for (let i in res.data) {
-      times.push({"value": res.data[i]['DateTime'], "label": res.data[i]['DateTime']})
+      times.push({"value": res.data[i]['DateTime'] + " " + res.data[i]["PersonIncharge"], "label": res.data[i]['DateTime']})
     }
     if (this.mounted) {
       this.setState({available_times: times})
@@ -92,7 +94,7 @@ class Cart extends Component {
   }
 
   _onSelect = (option) => {
-    this.setState({selected: option.label})
+    this.setState({selected: option.value})
   }
 
   componentDidMount() {
