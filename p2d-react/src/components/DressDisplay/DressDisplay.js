@@ -31,18 +31,18 @@ class DressDisplay extends Component {
       this.fetchDresses("favorites");
   }
 
-  componentWillReceiveProps = ({date_needed}) => {
-    this.setState({date_needed: date_needed})
-    this.fetchDresses("cart")
-  }
+  // componentWillReceiveProps = ({date_needed}) => {
+  //   this.setState({date_needed: date_needed})
+  //   this.fetchDresses("cart")
+  // }
 
   fetchDresses = async (stem) => {
     let res;
-    if (this.state.date_needed) {
-      res = await axios.get(`${API_URL}/api/${stem}/`, {'rentalDate': this.state.date_needed})
-    } else {
+    // if (this.state.date_needed) {
+    //   res = await axios.get(`${API_URL}/api/${stem}/`, {'rentalDate': this.state.date_needed})
+    // } else {
       res = await axios.get(`${API_URL}/api/${stem}/`)
-    }
+    //}
     let dress_data = {}
     let amount = 0
     let total = 0

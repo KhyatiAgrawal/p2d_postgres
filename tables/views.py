@@ -250,12 +250,11 @@ def getAvailableTimes(request):
             eventInCharge = temp[1]
         else:
             continue
-
         start_time_obj = dt.strptime(startString, '%Y-%m-%dT%H:%M:%S-05:00')
         end_time_obj = dt.strptime(endString, '%Y-%m-%dT%H:%M:%S-05:00')
         now = dt.now().strftime("%Y-%m-%d %H:%M:%S")
         
-        if  start_time_obj <= dt.now() + datetime.timedelta(days=7) and eventType == "Incharge":
+        if  start_time_obj <= (dt.now() + datetime.timedelta(days=7)) and eventType == "Incharge":
             slot = start_time_obj
             while slot < end_time_obj:
                 slots.append({"DateTime": slot, "PersonIncharge": eventInCharge})
@@ -290,7 +289,7 @@ def getOrUpdate_Alerts(request):
 
 
         # The request will contain the list of dresses the user wants to book for trial
-        for dressId in request.PUT['dresses']:
+        for dressId in request.data['dresses']:
             dressObj = Dress.objects.get(id = dressId)
 
             # RentalDate must be passed in the request in MM/DD/YY format
