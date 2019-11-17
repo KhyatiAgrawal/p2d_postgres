@@ -4,9 +4,8 @@ import './Cart.scss';
 import Navbar from '../../components/Navbar/Navbar';
 import DressDisplay from '../../components/DressDisplay/DressDisplay';
 
-import dress1 from '../../styles/images/mock_dresses/key_dresses/001.jpg'
-import dress2 from '../../styles/images/mock_dresses/key_dresses/001.jpg'
-import dress3 from '../../styles/images/mock_dresses/key_dresses/001.jpg'
+import Dropdown from 'react-dropdown'
+import 'react-dropdown/style.css'
 
 import axios from 'axios';
 axios.defaults.withCredentials = true;
@@ -36,11 +35,13 @@ class Cart extends Component {
   }
 
   toggleSubmitted = () => {
+    const selectedDate = this.state.selected;
     if (!this.state.submitted && this.validateForm()) {
       this.setState({
         submitted: true
       })
     }
+    axios.put(`${API_URL}/api/alerts/`, selectedDate)
   }
 
   totalHandler = (total, amount, dresses) => {
@@ -50,7 +51,10 @@ class Cart extends Component {
 
   getAvailableTimes = async () => {
     let res = await axios.get(`${API_URL}/api/availableTimes/`)
-    let times = res.data
+    let times = []
+    for (let i in res.data) {
+      times.push({"value": res.data[i]['DateTime'], "label": res.data[i]['DateTime']})
+    }
     if (this.mounted) {
       this.setState({available_times: times})
     }
@@ -58,7 +62,6 @@ class Cart extends Component {
 
   checkAvailability = () => {
     let d = new Date()
-    console.log(d)
     var day = d.getDay();
     var month = d.getMonth() + 1; // Since getMonth() returns month from 0-11 not 1-12
     var year = d.getFullYear();
@@ -83,7 +86,13 @@ class Cart extends Component {
     if (isValid) {
       selectedDate = selectedDate[1] + "/" + selectedDate[2] + "/" + selectedDate[0]
       this.setState({date_needed: selectedDate, pickedDate: true})
+    } else {
+      this.setState({date_needed: undefined, pickedDate: false})
     }
+  }
+
+  _onSelect = (option) => {
+    this.setState({selected: option.label})
   }
 
   componentDidMount() {
@@ -96,6 +105,8 @@ class Cart extends Component {
   }
 
 	render() {
+    console.log(this.state.selected)
+    const defaultOption = this.state.selected
     return (
       <div className="cart__container">
         <div>
@@ -126,8 +137,7 @@ class Cart extends Component {
                   </div>
                 ))}
               </div>
-              <div className="cart-summary__total" id="cart-date">Pick a date: <input type="date" /></div>
-              <div className="cart-summary__total" id="cart-time">Pick a time: <input type="time" /></div>
+              <Dropdown id="dropdown" options={this.state.available_times} placeholder="Select a pickup time" onChange={this._onSelect} value={defaultOption}/>
               <div className="cart-summary__submit" onClick={this.toggleSubmitted} style={this.state.submitted ? {opacity: 0.7, pointer: 'default'} : {}}>
                 Submit try-on request!
               </div>
