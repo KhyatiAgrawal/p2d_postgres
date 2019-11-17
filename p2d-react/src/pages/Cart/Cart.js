@@ -57,7 +57,33 @@ class Cart extends Component {
   }
 
   checkAvailability = () => {
-    this.setState({date_needed: document.getElementById("date-picker").value})
+    let d = new Date()
+    console.log(d)
+    var day = d.getDay();
+    var month = d.getMonth() + 1; // Since getMonth() returns month from 0-11 not 1-12
+    var year = d.getFullYear();
+
+    let selectedDate = document.getElementById("date-picker").value
+    let isValid = false;
+
+    if (selectedDate) {
+      selectedDate = selectedDate.split("-")
+      var month1 = parseInt(selectedDate[1])
+      var day1 = parseInt(selectedDate[2])
+      var year1 = parseInt(selectedDate[0])
+
+      if (year1 === year && month1 >= month) {
+        if (month1 === month && day1 > day + 1) {
+          isValid = true
+        } else if (month1 > month) {
+          isValid = true
+        }   
+      }
+    }
+    if (isValid) {
+      selectedDate = selectedDate[1] + "/" + selectedDate[2] + "/" + selectedDate[0]
+      this.setState({date_needed: selectedDate, pickedDate: true})
+    }
   }
 
   componentDidMount() {
@@ -87,7 +113,6 @@ class Cart extends Component {
             <div className="cart-summary__submit" onClick={this.checkAvailability}>
                 Check availability
             </div>
-
           </div>
           {
             this.state.pickedDate ?
