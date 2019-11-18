@@ -15,34 +15,36 @@ class DressDisplay extends Component {
     }
   }
 
-  removeFromCart = (id) => {
-    axios({method: 'delete', url: `${API_URL}/api/cart/`, data: {'dressToDelete': id}})
+  removeFromCart = async (id) => {
+    await axios({method: 'delete', url: `${API_URL}/api/cart/`, data: {'dressToDelete': id}})
     if (this.props.cart)
       this.fetchDresses("cart");
     else
       this.fetchDresses("favorites");
   }
 
-  removeFromFavorites = (id) => {
-    axios({method: 'delete', url: `${API_URL}/api/favorites/`, data: {'dressToDelete': id}})
+  removeFromFavorites = async (id) => {
+    await axios({method: 'delete', url: `${API_URL}/api/favorites/`, data: {'dressToDelete': id}})
     if (this.props.cart)
       this.fetchDresses("cart");
     else
       this.fetchDresses("favorites");
   }
 
-  // componentWillReceiveProps = ({date_needed}) => {
-  //   this.setState({date_needed: date_needed})
-  //   this.fetchDresses("cart")
-  // }
+  componentWillReceiveProps = ({date_needed}) => {
+    if (date_needed !== this.state.date_needed) {
+      this.setState({date_needed: date_needed})
+      this.fetchDresses("cart")
+    }
+  }
 
   fetchDresses = async (stem) => {
     let res;
-    // if (this.state.date_needed) {
-    //   res = await axios.get(`${API_URL}/api/${stem}/`, {'rentalDate': this.state.date_needed})
-    // } else {
+    if (this.state.date_needed) {
+      res = await axios.get(`${API_URL}/api/${stem}/`, {'rentalDate': this.state.date_needed})
+    } else {
       res = await axios.get(`${API_URL}/api/${stem}/`)
-    //}
+    }
     let dress_data = {}
     let amount = 0
     let total = 0

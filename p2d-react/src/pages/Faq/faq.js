@@ -120,9 +120,10 @@ class FAQ extends Component {
 					</div>
 
 					<div className="infoFAQ__container">
-						<div className="infoFAQ__text">{`Awesome! Thanks for your interest. At the moment, we need administrative staff to scale our service. If you're able to commit 4 hours per week, please reach out to any member of our team, and they would be glad to tell you more about our initiative and get you on board!`}</div>
-
+						<div className="infoFAQ__text">{`Awesome! Thanks for your interest. At the moment, we need administrative staff to scale our service. If you're able to commit 4 hours per week, please reach out to khyatia@princeton.edu or uuberoy@princeton.edu, and they would be glad to tell you more about our initiative and get you on board!`}</div>
 					</div>
+					<br />
+					<br />
 				</div>
 	    	</div>
 		);

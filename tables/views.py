@@ -502,7 +502,7 @@ def getCart(uInfoObject):
         cart = Carts.objects.get(user=uInfoObject)
     except Carts.DoesNotExist:
         cart = Carts.objects.create(
-            user = username
+            user = uInfoObject
             )
         cart.save()
     return cart
