@@ -43,7 +43,14 @@ class DressDisplay extends Component {
     if (this.state.date_needed) {
       res = await axios.get(`${API_URL}/api/${stem}/`, {'rentalDate': this.state.date_needed})
     } else {
-      res = await axios.get(`${API_URL}/api/${stem}/`)
+      if (stem === "old_orders") {
+        res = await axios.get(`${API_URL}/api/myOrders/`)
+        res.data = res.data['pastHistory']
+      } else if (stem === "upcoming_orders") {
+        res = await axios.get(`${API_URL}/api/myOrders/`)
+        res.data = res.data['upcomingHistory']
+      } else 
+        res = await axios.get(`${API_URL}/api/${stem}/`)
     }
     let dress_data = {}
     let amount = 0
@@ -62,7 +69,8 @@ class DressDisplay extends Component {
         description: res.data[i]["description"],
         occasion: res.data[i]["occasions"].split(/(\s+)/),
         price: res.data[i]["price"],
-        availability: res.data[i]["unavailableDates"]
+        availability: res.data[i]["unavailableDates"],
+        dateRented: res.data[i]['Date'] || null
       }
       amount += parseInt(dress_data[i]["price"])
       total += 1
@@ -81,8 +89,12 @@ class DressDisplay extends Component {
     this.mounted = true;
     if (this.props.cart)
       this.fetchDresses("cart");
-    else
+    else if (this.props.favorites)
       this.fetchDresses("favorites");
+    else if (this.props.old_orders)
+      this.fetchDresses("old_orders");
+    else if (this.props.upcoming_orders)
+      this.fetchDresses("upcoming_orders");
   }
 
   componentWillUnmount() {
@@ -102,6 +114,7 @@ class DressDisplay extends Component {
                 <div>{"Size: " + this.state.dresses[index].size}</div>
                 <div>{"Occasion: " + this.state.dresses[index].occasion}</div>
                 <div>{"Brand: " + this.state.dresses[index].brand}</div>
+                <div>{(this.props.old_orders || this.props.upcoming_orders) ? "Date: " + this.state.dresses[index].dateRented : ""}</div>
                 <div className="cart-button" style={this.props.cart ? { display: 'flex'} : {display: 'none'}} onClick={() => {this.removeFromCart(this.state.dresses[index].id)}}>
                   <div className="cart-button__content">Remove from cart</div>
                 </div>
