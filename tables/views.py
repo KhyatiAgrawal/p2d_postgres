@@ -281,23 +281,16 @@ def getOrUpdate_Alerts(request):
         newTrial = Alerts.objects.create(
             user = uInfo
             )
-
-        # Request format '10/25/06 14:30'
+        
         newTrial.trialDateAndTime = request.data['DateTime']
         cart = Carts.objects.get(user=uInfo)
 
-        # The request will contain the list of dresses the user wants to book for trial
         for dressId in request.data['Dresses']:
             dressObj = Dress.objects.get(id = dressId)
-
-            # RentalDate must be passed in the request in MM/DD/YY format
             dressObj.unavailableDates = dressObj.unavailableDates  + ";" + request.data['RentalDate']
             dressObj.save()
 
-            # The entries must be added with the specificied date and time in Alerts
             newTrial.dressesSelected.add(dressObj)
-
-            # The entries must be removed from the users cart
             cart.dressesAdded.remove(dressObj)
 
         newTrial.save()
@@ -435,7 +428,7 @@ def send_email_create(uname, userEmailId, trialObj, personIncharge):
     'summary': 'Press To Dress Trial for ' + str(uname),
     'location': '34 Chamber Street, Princeton, NJ, 08544',
     'description': 
-    'Your Press To Dress trial has been confirmed! Take a second to RSVP to this invite, so our team can assit you better. Happy Shopping!',
+    'Your Press To Dress trial has been confirmed! Take a second to RSVP to this invite, so our team can assist you better. Happy Shopping!',
     'start': {
     'dateTime': start_dateTime_str,
     'timeZone': 'America/New_York',
@@ -502,10 +495,16 @@ def getCart(uInfoObject):
         cart = Carts.objects.get(user=uInfoObject)
     except Carts.DoesNotExist:
         cart = Carts.objects.create(
-            user = username
+            user = uInfoObject
             )
         cart.save()
     return cart
+
+# Function to call when new dress is rented (internal)
+# Overwrite save method?
+# def deleteUnrented(username, dressesMarkAvailable):
+
+
 
 
     
