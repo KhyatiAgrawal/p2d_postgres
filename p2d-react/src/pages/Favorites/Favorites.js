@@ -42,6 +42,9 @@ class Favorites extends Component {
         <div className="fav-title">
           <div className="fav-title__text">{"My Favorites (" + this.state.total + ")"}</div>
         </div>
+        <div className="fav-none" style={this.state.total === 0 ? {display: "flex"} : {display: "none"}}>
+          <div className="fav-none__text">There are currently no items in your favorites.</div>
+        </div>
         <div className="fav-body">
           <div className="fav-dresses"><DressDisplay handleTotal={this.totalHandler} favorites={true} /></div>
         </div>

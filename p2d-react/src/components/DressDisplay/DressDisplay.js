@@ -15,34 +15,43 @@ class DressDisplay extends Component {
     }
   }
 
-  removeFromCart = (id) => {
-    axios({method: 'delete', url: `${API_URL}/api/cart/`, data: {'dressToDelete': id}})
+  removeFromCart = async (id) => {
+    await axios({method: 'delete', url: `${API_URL}/api/cart/`, data: {'dressToDelete': id}})
     if (this.props.cart)
       this.fetchDresses("cart");
     else
       this.fetchDresses("favorites");
   }
 
-  removeFromFavorites = (id) => {
-    axios({method: 'delete', url: `${API_URL}/api/favorites/`, data: {'dressToDelete': id}})
+  removeFromFavorites = async (id) => {
+    await axios({method: 'delete', url: `${API_URL}/api/favorites/`, data: {'dressToDelete': id}})
     if (this.props.cart)
       this.fetchDresses("cart");
     else
       this.fetchDresses("favorites");
   }
 
-  // componentWillReceiveProps = ({date_needed}) => {
-  //   this.setState({date_needed: date_needed})
-  //   this.fetchDresses("cart")
-  // }
+  componentWillReceiveProps = ({date_needed}) => {
+    if (date_needed !== this.state.date_needed) {
+      this.setState({date_needed: date_needed})
+      this.fetchDresses("cart")
+    }
+  }
 
   fetchDresses = async (stem) => {
     let res;
-    // if (this.state.date_needed) {
-    //   res = await axios.get(`${API_URL}/api/${stem}/`, {'rentalDate': this.state.date_needed})
-    // } else {
-      res = await axios.get(`${API_URL}/api/${stem}/`)
-    //}
+    if (this.state.date_needed) {
+      res = await axios.get(`${API_URL}/api/${stem}/`, {'rentalDate': this.state.date_needed})
+    } else {
+      if (stem === "old_orders") {
+        res = await axios.get(`${API_URL}/api/myOrders/`)
+        res.data = res.data['pastHistory']
+      } else if (stem === "upcoming_orders") {
+        res = await axios.get(`${API_URL}/api/myOrders/`)
+        res.data = res.data['upcomingHistory']
+      } else 
+        res = await axios.get(`${API_URL}/api/${stem}/`)
+    }
     let dress_data = {}
     let amount = 0
     let total = 0
@@ -60,7 +69,8 @@ class DressDisplay extends Component {
         description: res.data[i]["description"],
         occasion: res.data[i]["occasions"].split(/(\s+)/),
         price: res.data[i]["price"],
-        availability: res.data[i]["unavailableDates"]
+        availability: res.data[i]["unavailableDates"],
+        dateRented: res.data[i]['Date'] || null
       }
       amount += parseInt(dress_data[i]["price"])
       total += 1
@@ -79,8 +89,12 @@ class DressDisplay extends Component {
     this.mounted = true;
     if (this.props.cart)
       this.fetchDresses("cart");
-    else
+    else if (this.props.favorites)
       this.fetchDresses("favorites");
+    else if (this.props.old_orders)
+      this.fetchDresses("old_orders");
+    else if (this.props.upcoming_orders)
+      this.fetchDresses("upcoming_orders");
   }
 
   componentWillUnmount() {
@@ -100,6 +114,7 @@ class DressDisplay extends Component {
                 <div>{"Size: " + this.state.dresses[index].size}</div>
                 <div>{"Occasion: " + this.state.dresses[index].occasion}</div>
                 <div>{"Brand: " + this.state.dresses[index].brand}</div>
+                <div>{(this.props.old_orders || this.props.upcoming_orders) ? "Date: " + this.state.dresses[index].dateRented : ""}</div>
                 <div className="cart-button" style={this.props.cart ? { display: 'flex'} : {display: 'none'}} onClick={() => {this.removeFromCart(this.state.dresses[index].id)}}>
                   <div className="cart-button__content">Remove from cart</div>
                 </div>

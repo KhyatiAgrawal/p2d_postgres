@@ -29,14 +29,8 @@ class Cart extends Component {
     }
   }
 
-  // work on this
-  validateForm = () => {
-    return true
-  }
-
   toggleSubmitted = () => {
-    const selectedDate = this.state.selected;
-    if (!this.state.submitted && this.validateForm()) {
+    if (!this.state.submitted) {
       this.setState({
         submitted: true
       })
@@ -64,7 +58,7 @@ class Cart extends Component {
 
   checkAvailability = () => {
     let d = new Date()
-    var day = d.getDay();
+    var day = d.getDate();
     var month = d.getMonth() + 1; // Since getMonth() returns month from 0-11 not 1-12
     var year = d.getFullYear();
 
@@ -78,7 +72,7 @@ class Cart extends Component {
       var year1 = parseInt(selectedDate[0])
 
       if (year1 === year && month1 >= month) {
-        if (month1 === month && day1 > day + 1) {
+        if (month1 === month && day1 > day + 2) {
           isValid = true
         } else if (month1 > month) {
           isValid = true
@@ -116,15 +110,21 @@ class Cart extends Component {
         </div>
         <div className="cart-title">
             <div className="cart-title__text">{"My Cart (" + this.state.total + ")"}</div>
-          </div>
+        </div>
+        <div className="cart-none" style={this.state.total === 0 ? {display: "flex"} : {display: "none"}}>
+            <div className="cart-none__text">There are currently no items in your cart.</div>
+        </div>
         <div className="cart-body">
           <div className="cart-dresses"><DressDisplay cart={true} handleTotal={this.totalHandler} date_needed={this.state.date_needed}/></div>
           <div className="cart-summary" style={{maxHeight: this.state.total * 30 + 195}}> 
-          <div className="cart-summary__date">
+          <div className="cart-summary__date" style={this.state.total === 0 ? {display: "none"} : {display: "block"}}>
             <div className="cart-summary__total" id="cart-date">When do you need these dresses?</div>
             <input className="cart-summary__pick-date" id="date-picker" type="date" />
             <div className="cart-summary__submit" onClick={this.checkAvailability}>
                 Check availability
+            </div>
+            <div style={this.state.pickedDate ? {display: "none"} : {display: "block"}}>
+              *We only accept try-on requests that are a minimum of three days from the current date.
             </div>
           </div>
           {
@@ -139,7 +139,9 @@ class Cart extends Component {
                   </div>
                 ))}
               </div>
-              <Dropdown id="dropdown" options={this.state.available_times} placeholder="Select a pickup time" onChange={this._onSelect} value={defaultOption}/>
+              <div className="date-dropdown">
+                <Dropdown id="dropdown" options={this.state.available_times} placeholder="Select a pickup time" onChange={this._onSelect} value={defaultOption}/>
+              </div>
               <div className="cart-summary__submit" onClick={this.toggleSubmitted} style={this.state.submitted ? {opacity: 0.7, pointer: 'default'} : {}}>
                 Submit try-on request!
               </div>
