@@ -342,7 +342,7 @@ def getRentalHistory(request):
     for entry in history:
         temp = entry.split()
         if len(temp) == 0:
-            return Response({'pastHistory': {}, 'upcomingHistory': {}})
+            return Response({'trial': toSend0, 'pastHistory': {}, 'upcomingHistory': {}})
         rentalDateObj = dt.strptime(temp[0],  '%m/%d/%y')
         dressObj = Dress.objects.get(id = temp[1])
         newDict = {"Date": rentalDateObj.strftime('%m/%d')}
@@ -353,6 +353,7 @@ def getRentalHistory(request):
         else:
             toSend1.append(newDict)
         count += 1
+
     return Response({'trial': toSend0, 'pastHistory': toSend1, 'upcomingHistory': toSend2})
 
 
