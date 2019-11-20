@@ -152,7 +152,8 @@ def getAvailableForTrial(request):
         # Get the dresses they are trying to book
         cart = Carts.objects.get(user=uname)
         tentativeDresses = []
-        for DressObj in cart.dressesAdded:
+        dresses = cart.dressesAdded.all()
+        for DressObj in dresses:
             booked = DressObj.unavailableDates
             if any(x in booked for x in dateWindow):
                 continue
@@ -160,7 +161,6 @@ def getAvailableForTrial(request):
 
         # return the available dresses
         serializer = DresSerializer(tentativeDresses, many=True)  
-        print(serializer.data)
         return Response(serializer.data)
 
 @api_view((['GET']))
