@@ -56,6 +56,10 @@ class Cart extends Component {
     }
   }
 
+  invalidTime = (bool) => {
+    this.setState({invalidTime: bool});
+  }
+
   checkAvailability = async () => {
     let d = new Date()
     var day = d.getDate();
@@ -101,7 +105,7 @@ class Cart extends Component {
   }
 
 	render() {
-    console.log(this.state.date_needed)
+    console.log(this.state.invalidTime)
     const defaultOption = this.state.selected
     return (
       <div className="cart__container">
@@ -115,7 +119,7 @@ class Cart extends Component {
             <div className="cart-none__text">There are currently no items in your cart.</div>
         </div>
         <div className="cart-body">
-          <div className="cart-dresses"><DressDisplay cart={true} handleTotal={this.totalHandler} date_needed={this.state.date_needed}/></div>
+          <div className="cart-dresses"><DressDisplay cart={true} handleTotal={this.totalHandler} date_needed={this.state.date_needed} invalidTime={this.invalidTime}/></div>
           <div className="cart-summary" style={{maxHeight: this.state.total * 30 + 195}}> 
           <div className="cart-summary__date" style={this.state.total === 0 ? {display: "none"} : {display: "block"}}>
             <div className="cart-summary__total" id="cart-date">When do you need these dresses?</div>
@@ -126,9 +130,12 @@ class Cart extends Component {
             <div style={this.state.pickedDate ? {display: "none"} : {display: "block"}}>
               *We only accept try-on requests that are a minimum of three days from the current date.
             </div>
+            <div style={this.state.invalidTime ? {display: "block"} : {display: "none"}}>
+              You have already scheduled a trial with us!
+            </div>
           </div>
           {
-            this.state.pickedDate ?
+            this.state.pickedDate && !this.state.invalidTime ?
             <div>
               <div className="cart-summary__title">Your Try-On Request</div>
               <div className="cart-summary__items">

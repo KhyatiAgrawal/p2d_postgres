@@ -45,6 +45,10 @@ class DressDisplay extends Component {
     let res;
     if (stem === "date") {
       res = await axios.post(`${API_URL}/api/availability/`, {'rentalDate': this.state.date_needed})
+      if (res.data['valid'] === "false") {
+        this.props.invalidTime(true);
+        return;
+      }
     } else {
       if (stem === "old_orders") {
         res = await axios.get(`${API_URL}/api/myOrders/`)
@@ -52,8 +56,11 @@ class DressDisplay extends Component {
       } else if (stem === "upcoming_orders") {
         res = await axios.get(`${API_URL}/api/myOrders/`)
         res.data = res.data['upcomingHistory']
-      } else 
+      } else {
         res = await axios.get(`${API_URL}/api/${stem}/`)
+        if (this.props.cart)
+          this.props.invalidTime(false);
+      }
     }
     let dress_data = {}
     let amount = 0

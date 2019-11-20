@@ -12,6 +12,19 @@
   color: $p2d-gray;
 }
 
+.trials-container {
+	color: black;
+	margin-top: calc(5vw + 40px);
+	display: flex;
+	justify-content: center;
+
+	&__text {
+		color: $p2d-gray;
+		font-size: 32px;
+		font-weight: bold;
+	}
+}
+
 .orders-title {
 	&__container {
 		display: flex;
