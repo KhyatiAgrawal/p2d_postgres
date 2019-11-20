@@ -127,7 +127,7 @@ def getAvailableForTrial(request):
     # and that they have an upcoming trial
     try: 
         alreadyScheduled = Alerts.objects.get(user=uInfo)
-        date_obj = dt.strptime(str(alreadyScheduled.trialDateAndTime), '%m/%d/%y %H:%M')
+        date_obj = dt.strptime(str(alreadyScheduled.trialDateAndTime), '%m/%d/%y %I:%M %p')
 
         # Expire the trial if outdated
         if  dt.now() > date_obj:
@@ -135,8 +135,8 @@ def getAvailableForTrial(request):
             return getAvailableForTrial(request)
         else:
             # send the existing trial details
-            serializer = AlertsSerializer(alreadyScheduled, context={'request': request})
-            return Response(serializer.data)
+            # serializer = AlertsSerializer({'valid': 'false'}, context={'request': request})
+            return Response({'valid': 'false'})
 
     # If the they haven't scheduled their trial yet
     # Show them the dresses they that are available at their specified date
@@ -160,7 +160,8 @@ def getAvailableForTrial(request):
             tentativeDresses.append(DressObj)
 
         # return the available dresses
-        serializer = DresSerializer(tentativeDresses, many=True)  
+        serializer = DresSerializer(tentativeDresses, many=True) 
+        serializer.data.update({'valid': 'true'})
         return Response(serializer.data)
 
 @api_view((['GET']))
@@ -233,7 +234,7 @@ def getOrUpdate_Alerts(request):
             serializer = AlertsSerializer(trial, context={'request': request})
             return Response(serializer.data)
         except Alerts.DoesNotExist: 
-            return Response(status=status.HTTP_204_NO_CONTENT)
+            return Response({}, status=status.HTTP_204_NO_CONTENT)
 
 
     if request.method == 'PUT':
@@ -332,15 +333,13 @@ def getRentalHistory(request):
         time = dateTimeObj.strftime('%I:%M %p')
         dresses = trial.dressesSelected.all()
         for dressObj in dresses:
-            newDict = {"Date": date}
-            newDict.update({"Time": time})
-            serializer = DressSerializer(dressObj)
-            newDict.update(serializer.data)
+            newDict = {"date": date}
+            newDict.update({"time": time})
+            newDict.update({"title": dressObj.title})
+            newDict.update({"price": dressObj.price})
             toSend0.append(newDict)
     except Alerts.DoesNotExist: 
         toSend0 = []
-
-    print(toSend0)
 
     toSend2 = []
     toSend1 = []
