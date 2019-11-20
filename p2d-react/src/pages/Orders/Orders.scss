@@ -25,6 +25,31 @@
 	}
 }
 
+.trials-summary {
+	color: $p2d-gray;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-content: center;
+	width: 40%;
+	
+	&__items {
+		font-family: "Roboto";
+		padding-top: 20px;
+		margin-left: 40px;
+		margin-right: 40px;
+		padding-bottom: 10px;
+		border-bottom: 1px solid $p2d-gray;
+	}
+	&__item {
+		padding-bottom: 3px;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+}
+
 .orders-title {
 	&__container {
 		display: flex;

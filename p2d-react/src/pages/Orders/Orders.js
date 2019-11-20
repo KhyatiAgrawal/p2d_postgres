@@ -70,6 +70,14 @@ class Orders extends Component {
 				<div><Navbar weight="heavy"/></div>
 				<div className="trials-container">
 					<div className="trials-container__text">Upcoming Trials</div>
+					<div className="trials-summary__items">
+						{Object.keys(this.state.trial_data).map((key, index) => (
+						<div className="trials-summary__item">
+							<div>{this.state.trial_data[index].title}</div>
+							<div>${this.state.trial_data[index].price}.00</div>
+						</div>
+						))}
+					</div>
 				</div>
 				<div className="orders-container">
 					<div className="orders-title__container">
