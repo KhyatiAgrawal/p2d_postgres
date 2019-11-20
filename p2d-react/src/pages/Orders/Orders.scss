@@ -16,12 +16,45 @@
 	color: black;
 	margin-top: calc(5vw + 40px);
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
+	align-content: center;
+	align-items: center;
 
 	&__text {
 		color: $p2d-gray;
 		font-size: 32px;
 		font-weight: bold;
+	}
+
+	&__subtext {
+		margin-top: 20px;
+		color: $p2d-gray;
+	}
+}
+
+.trials-summary {
+	color: $p2d-gray;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-content: center;
+	width: 40%;
+
+	&__items {
+		font-family: "Roboto";
+		padding-top: 20px;
+		margin-left: 40px;
+		margin-right: 40px;
+		padding-bottom: 10px;
+		border-bottom: 1px solid $p2d-gray;
+	}
+	&__item {
+		padding-bottom: 3px;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
 	}
 }
 
