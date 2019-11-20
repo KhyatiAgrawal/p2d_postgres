@@ -37,7 +37,7 @@ class Cart extends Component {
     }
     let val = this.state.selected.split(" ")
     axios.put(`${API_URL}/api/alerts/`, 
-      {'DateTime': val[0] + " " + val[1], 'RentalDate': this.state.date_needed, 'Dresses': [0, 1], 'PersonIncharge': val[2]})
+      {'DateTime': val[0] + " " + val[1] + " " + val[2], 'RentalDate': this.state.date_needed, 'Dresses': this.state.dresses, 'PersonIncharge': val[2]})
   }
 
   totalHandler = (total, amount, dresses) => {

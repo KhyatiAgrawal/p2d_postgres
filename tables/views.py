@@ -47,27 +47,10 @@ SCOPES = ['https://www.googleapis.com/auth/calendar.events']
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Confirm stuff here 
-# Make sure this works for all dresses 
-# @login_required
-
-# occasion list of occasion
-# size list of size
-# price number 
-# keyword list of strings
-
 @api_view((['GET', 'POST']))
 @csrf_exempt
 @login_required
 def dress_list(request):
-    """
-    List of dresses according to the search request passed
-    """
-    # Get dress list using filter and tssearch
-    # Apply other filters
-    # Serialize return query set
-    # Right now this is using old search method
-    # See if you can use tssearch for better searches 
     if request.method == 'GET':
         dress_filter = Dress.objects.all().order_by('id')
         serializer = DressSerializer(dress_filter, many=True) 
@@ -80,18 +63,15 @@ def dress_list(request):
 @api_view((['GET', 'PUT', 'DELETE']))
 @login_required
 def getOrUpdate_cart(request):
-    # The given username should exist in the cart table
     username = request.user.username
     uInfo = getUInfo(username)
     cart = getCart(uInfo)
 
-    # return the cart if the request is a GET request
     if request.method == 'GET':
         serializer = DressSerializer(cart.dressesAdded, many=True)  
         return Response(serializer.data)
     
     if request.method == 'PUT':
-        # Allow only 5 dresses in each user's cart
         if cart.dressesAdded.all().count() < 5:
             dressObj = Dress.objects.get(id = request.data['dressToAdd'])
             cart.dressesAdded.add(dressObj)
@@ -103,10 +83,7 @@ def getOrUpdate_cart(request):
 
         serializer = DressSerializer(cart.dressesAdded, many=True)  
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    # Check if delete can be a method
-    # refer to Digital ocean link
     elif request.method == 'DELETE':
         dressObj = Dress.objects.get(id = request.data['dressToDelete'])
         cart.dressesAdded.remove(dressObj)
@@ -117,25 +94,20 @@ def getOrUpdate_cart(request):
 @api_view((['GET', 'PUT', 'DELETE']))
 @login_required
 def getOrUpdate_favorite(request):
-    # The given username should exist in the favorites table
     username = request.user.username
     uInfo = getUInfo(username)
     userFavorites = getCart(uInfo)
 
-    # return the favorites if the request is a GET request
     if request.method == 'GET':
         serializer = DressSerializer(userFavorites.dressesLiked, many=True)     
         return Response(serializer.data)
  
-    # update the favorites if the request is a POST request
     elif request.method == 'PUT':
         dressObj = Dress.objects.get(id = request.data['dressToAdd'])
         userFavorites.dressesLiked.add(dressObj)
         userFavorites.save()
         serializer = DressSerializer(userFavorites.dressesLiked, many=True)  
-        # if serializer.is_valid():
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
         dressObj = Dress.objects.get(id = request.data['dressToDelete'])
@@ -143,14 +115,11 @@ def getOrUpdate_favorite(request):
         userFavorites.save()
         serializer = DressSerializer(userFavorites.dressesLiked, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view((['POST']))
 @login_required
 def getAvailableForTrial(request):
-
-
     uname = request.user.username
     uInfo = getUInfo(uname)
 
@@ -168,13 +137,6 @@ def getAvailableForTrial(request):
             # send the existing trial details
             serializer = AlertsSerializer(alreadyScheduled, context={'request': request})
             return Response(serializer.data)
-
-        # don't let them schedule two trials for the same day
-        # elif date_obj.strftime('%m/%d/%y') == userRentalDate_obj:
-        #     serializer = AlertsSerializer(alreadyScheduled, context={'request': request})
-        #     if serializer.is_valid():
-        #         return Response(serializer.data)
-        #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     # If the they haven't scheduled their trial yet
     # Show them the dresses they that are available at their specified date
@@ -198,6 +160,7 @@ def getAvailableForTrial(request):
 
         # return the available dresses
         serializer = DresSerializer(tentativeDresses, many=True)  
+        print(serializer.data)
         return Response(serializer.data)
 
 @api_view((['GET']))
@@ -206,9 +169,6 @@ def getAvailableTimes(request):
     # Here is where you need to:
     # Pull times from google calendar labeled pressToDress pickup
     # Show the user options for the next two days
-    """Shows basic usage of the Google Calendar API.
-    Prints the start and name of the next 10 events on the user's calendar.
-    """
     creds = None
     # The file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
@@ -269,7 +229,7 @@ def getOrUpdate_Alerts(request):
 
     if request.method == 'GET':
         try: 
-            trial = Alerts.objects.get(user=uname)
+            trial = Alerts.objects.get(user=uInfo)
             serializer = AlertsSerializer(trial, context={'request': request})
             return Response(serializer.data)
         except Alerts.DoesNotExist: 
@@ -277,61 +237,58 @@ def getOrUpdate_Alerts(request):
 
 
     if request.method == 'PUT':
+        try: 
+            trial = Alerts.objects.get(user=uInfo)
+            serializer = AlertsSerializer(trial, context={'request': request})
+            return Response(serializer.data)
+        except Alerts.DoesNotExist: 
+            newTrial = Alerts.objects.create(
+                user = uInfo
+                )
+            newTrial.trialDateAndTime = request.data['DateTime']
+            newTrial.dateNeeded = request.data['RentalDate']
+            cart = Carts.objects.get(user=uInfo)
+            dresses = request.data['Dresses']
+            for dress in dresses:
+                dressObj = Dress.objects.get(id = int(dresses[dress]['id']))
+                if dressObj.unavailableDates == "None":
+                    dressObj.unavailableDates = request.data['RentalDate']
+                else:
+                    dressObj.unavailableDates = dressObj.unavailableDates  + " " + request.data['RentalDate']
+                dressObj.save()
 
-        newTrial = Alerts.objects.create(
-            user = uInfo
-            )
-        
-        newTrial.trialDateAndTime = request.data['DateTime']
-        cart = Carts.objects.get(user=uInfo)
+                newTrial.dressesSelected.add(dressObj)
+                cart.dressesAdded.remove(dressObj)
 
-        for dressId in request.data['Dresses']:
-            dressObj = Dress.objects.get(id = dressId)
-            dressObj.unavailableDates = dressObj.unavailableDates  + ";" + request.data['RentalDate']
-            dressObj.save()
+            newTrial.save()
+            cart.save()
+            emailId = uInfo.email
 
-            newTrial.dressesSelected.add(dressObj)
-            cart.dressesAdded.remove(dressObj)
-
-        newTrial.save()
-        cart.save()
-        emailId = uInfo.email
-
-        send_email_create(uname, emailId, newTrial, request.data['PersonIncharge'])
-        serializer = AlertsSerializer(newTrial, context={'request': request})
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+            send_email_create(uname, emailId, newTrial, request.data['PersonIncharge'])
+            serializer = AlertsSerializer(newTrial, context={'request': request})
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     # Handling cancellations
     # User manually cancels trial
+    # Not in use right now
     if request.method == 'DELETE':
         try: 
             trial = Alerts.objects.get(user=uname)
         except:
             return Response({}, status=status.HTTP_400_BAD_REQUEST)
-
-        # Delete this trial 
         trial.delete()
-            
-        uInfo = UserInfo.objects.get(user=uname)
-        emailId = uInfo.email
-        # Send email push to cancel the event
-        send_email(emailId, trial, request.data['PersonIncharge'], False)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view((['GET', 'PUT']))
 @login_required
 def getOrUpdate_userInfo(request):
-    # The given username should exist in the favorites table
     uname = request.user.username
     uInfo = getUInfo(uname)
 
-    # return the favorites if the request is a GET request
     if request.method == 'GET':
-        # Serialize the object and return
         serializer = UInfoSerializer(uInfo, context={'request': request})     
         return Response(serializer.data)
  
-    # update the favorites if the request is a POST request
     elif request.method == 'PUT':
         uInfo.gender = request.data['gender']
         uInfo.email = request.data['email']
@@ -367,8 +324,26 @@ def getRentalHistory(request):
     uInfo = getUInfo(uname)
     cart = getCart(uInfo)
 
-    toSerialize1 = []
-    toSerialize2 = []
+    toSend0 = []
+    try:
+        trial = Alerts.objects.get(user=uInfo)
+        dateTimeObj = dt.strptime(trial.trialDateAndTime, '%m/%d/%y %I:%M %p')
+        date = dateTimeObj.strftime('%m/%d/%y')
+        time = dateTimeObj.strftime('%I:%M %p')
+        dresses = trial.dressesSelected.all()
+        for dressObj in dresses:
+            newDict = {"Date": date}
+            newDict.update({"Time": time})
+            serializer = DressSerializer(dressObj)
+            newDict.update(serializer.data)
+            toSend0.append(newDict)
+    except Alerts.DoesNotExist: 
+        toSend0 = []
+
+    print(toSend0)
+
+    toSend2 = []
+    toSend1 = []
     history = cart.rentalHistory.split(";")
     count = 0
     for entry in history:
@@ -377,16 +352,18 @@ def getRentalHistory(request):
             return Response({'pastHistory': {}, 'upcomingHistory': {}})
         rentalDateObj = dt.strptime(temp[0],  '%m/%d/%y')
         dressObj = Dress.objects.get(id = temp[1])
+        newDict = {"Date": rentalDateObj.strftime('%m/%d')}
+        serializer = DressSerializer(dressObj)
+        newDict.update(serializer.data)
         if  rentalDateObj > dt.now() - datetime.timedelta(days = 1):
-            toSerialize2.append({"Date": rentalDateObj, "RentedDress": dressObj})
+            toSend2.append(newDict)
         else:
-            toSerialize1.append({"Date": rentalDateObj, "RentedDress": dressObj})
+            toSend1.append(newDict)
         count += 1
-    uInfo.numberRented = count
 
-    serializer1 = RentalHistorySerializer(toSerialize1, many=True)
-    serializer2 = RentalHistorySerializer(toSerialize2, many=True)
-    return Response({'pastHistory': serializer1.data, 'upcomingHistory': serializer2.data})
+    # serializer1 = RentalHistorySerializer(toSerialize1, many=True)
+    # serializer2 = RentalHistorySerializer(toSerialize2, many=True)
+    return Response({'trial': toSend0, 'pastHistory': toSend1, 'upcomingHistory': toSend2})
 
 
 # Internal use method
@@ -417,7 +394,7 @@ def send_email_create(uname, userEmailId, trialObj, personIncharge):
 
     service = build('calendar', 'v3', credentials=creds)
 
-    start_dateTime_obj = dt.strptime(str(trialObj.trialDateAndTime), '%m/%d/%y %H:%M')
+    start_dateTime_obj = dt.strptime(str(trialObj.trialDateAndTime), '%m/%d/%y %I:%M %p')
     end_dateTime_obj = start_dateTime_obj + datetime.timedelta(minutes = 30)
 
 
@@ -474,7 +451,6 @@ def csrf(request):
 # Method that returns the number of dresses in the cart
 @api_view(['GET'])
 def getNumberInCart(myDict):
-    # The given username should exist in the cart table
     username = request.user.username
     uInfo = getUInfo(username)
     cart = getCart(uInfo)
@@ -500,9 +476,6 @@ def getCart(uInfoObject):
         cart.save()
     return cart
 
-# Function to call when new dress is rented (internal)
-# Overwrite save method?
-# def deleteUnrented(username, dressesMarkAvailable):
 
 
 

@@ -442,8 +442,9 @@ ALTER TABLE public.django_session OWNER TO admin2;
 
 CREATE TABLE public.tables_alerts (
     id integer NOT NULL,
-    "trialDateAndTime" character varying(40),
-    user_id integer NOT NULL
+    "trialDateAndTime" character varying(20),
+    user_id integer NOT NULL,
+    "dateNeeded" character varying(10)
 );
 
 
@@ -1695,7 +1696,7 @@ COPY public.auth_user (id, password, last_login, is_superuser, username, first_n
 831		2019-05-13 00:09:41.843-04	f	kvlach				f	t	2019-05-13 00:09:41.703-04
 832		2019-05-19 02:35:06.498-04	f	jbachek				f	t	2019-05-19 02:35:06.267-04
 833		2019-05-24 01:14:10.876-04	f	mneff				f	t	2019-05-24 01:14:10.753-04
-2	pbkdf2_sha256$100000$YctJOoai4vsK$n/TqGyGRI6GNlSSZyNwO6Jf11+v5l7rJF4WT6SsAIT0=	2019-11-19 15:41:31.128853-05	t	admin			khyatiagrawal1998@gmail.com	t	t	2018-04-13 02:14:16.313-04
+2	pbkdf2_sha256$100000$YctJOoai4vsK$n/TqGyGRI6GNlSSZyNwO6Jf11+v5l7rJF4WT6SsAIT0=	2019-11-19 16:24:17.082449-05	t	admin			khyatiagrawal1998@gmail.com	t	t	2018-04-13 02:14:16.313-04
 1		2019-11-17 14:14:36.660259-05	f	khyatia				f	t	2018-04-13 02:12:23.716-04
 \.
 
@@ -2947,6 +2948,33 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 1224	2019-11-19 15:46:47.182679-05	27	Dress object (27)	2	[{"changed": {"fields": ["size", "brand", "title", "description"]}}]	15	2
 1225	2019-11-19 15:48:46.166158-05	24	Dress object (24)	2	[{"changed": {"fields": ["view2"]}}]	15	2
 1226	2019-11-19 15:49:05.94376-05	0	Dress object (0)	2	[{"changed": {"fields": ["unavailableDates"]}}]	15	2
+1227	2019-11-19 16:00:51.386127-05	10	Alerts object (10)	3		14	2
+1228	2019-11-19 16:01:29.787624-05	0	Dress object (0)	2	[{"changed": {"fields": ["unavailableDates"]}}]	15	2
+1229	2019-11-19 16:01:43.445123-05	1	Dress object (1)	2	[{"changed": {"fields": ["unavailableDates"]}}]	15	2
+1230	2019-11-19 17:55:39.912656-05	14	khyatia	3		7	2
+1231	2019-11-19 18:13:17.070125-05	15	khyatia	2	[{"changed": {"fields": ["rentalHistory"]}}]	7	2
+1232	2019-11-19 18:16:32.468454-05	15	khyatia	2	[{"changed": {"fields": ["rentalHistory"]}}]	7	2
+1234	2019-11-19 18:21:12.399419-05	2	Dress object (2)	2	[{"changed": {"fields": ["unavailableDates"]}}]	15	2
+1235	2019-11-19 18:57:00.48836-05	11	khyatia	2	[{"changed": {"fields": ["trialDateAndTime", "dateNeeded"]}}]	14	2
+1236	2019-11-19 18:57:49.037606-05	0	Dress object (0)	2	[{"changed": {"fields": ["unavailableDates"]}}]	15	2
+1237	2019-11-19 18:58:10.600824-05	11	khyatia	2	[{"changed": {"fields": ["dateNeeded"]}}]	14	2
+1238	2019-11-19 18:58:16.484248-05	11	khyatia	3		14	2
+1239	2019-11-19 18:58:55.544517-05	0	Dress object (0)	2	[{"changed": {"fields": ["unavailableDates"]}}]	15	2
+1240	2019-11-19 19:08:55.084343-05	0	Dress object (0)	2	[{"changed": {"fields": ["unavailableDates"]}}]	15	2
+1241	2019-11-19 19:09:09.40613-05	1	Dress object (1)	2	[{"changed": {"fields": ["unavailableDates"]}}]	15	2
+1242	2019-11-19 19:18:02.222069-05	12	khyatia	3		14	2
+1243	2019-11-19 19:18:22.383462-05	13	khyatia	3		14	2
+1244	2019-11-19 19:21:54.634855-05	2	Dress object (2)	2	[{"changed": {"fields": ["unavailableDates"]}}]	15	2
+1245	2019-11-19 19:24:07.900036-05	15	khyatia	3		7	2
+1246	2019-11-19 19:27:05.331079-05	14	khyatia	3		14	2
+1247	2019-11-19 19:31:00.962337-05	15	khyatia	3		14	2
+1248	2019-11-19 19:31:30.523021-05	0	Dress object (0)	2	[{"changed": {"fields": ["unavailableDates"]}}]	15	2
+1249	2019-11-19 19:39:04.206537-05	1	Dress object (1)	2	[]	15	2
+1250	2019-11-19 19:39:17.545015-05	16	khyatia	3		14	2
+1251	2019-11-19 19:40:42.59091-05	1	Dress object (1)	2	[{"changed": {"fields": ["unavailableDates"]}}]	15	2
+1252	2019-11-19 19:41:12.690177-05	17	khyatia	3		14	2
+1253	2019-11-19 19:59:32.211671-05	6	UserInfo object (6)	2	[{"changed": {"fields": ["phone", "numberRented"]}}]	11	2
+1254	2019-11-19 20:01:21.705989-05	18	khyatia	3		14	2
 \.
 
 
@@ -4679,6 +4707,11 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 38	tables	0005_userinfo_numberrented	2019-11-11 00:41:30.58816-05
 39	tables	0006_auto_20191115_2044	2019-11-15 15:44:28.689139-05
 40	tables	0007_auto_20191115_2048	2019-11-15 15:48:42.632349-05
+41	tables	0008_auto_20191117_0313	2019-11-19 16:55:09.160647-05
+42	tables	0009_auto_20191119_2154	2019-11-19 16:55:09.176772-05
+43	tables	0010_auto_20191119_2256	2019-11-19 17:56:21.69032-05
+44	tables	0011_auto_20191119_2257	2019-11-19 17:57:13.897069-05
+45	tables	0012_auto_20191119_2330	2019-11-19 18:30:27.477447-05
 \.
 
 
@@ -5806,8 +5839,7 @@ ujoqofj2mbet8e5mtyfeni2ra9fhcnsf	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY
 -- Data for Name: tables_alerts; Type: TABLE DATA; Schema: public; Owner: admin2
 --
 
-COPY public.tables_alerts (id, "trialDateAndTime", user_id) FROM stdin;
-10	11/21/19 14:00	6
+COPY public.tables_alerts (id, "trialDateAndTime", user_id, "dateNeeded") FROM stdin;
 \.
 
 
@@ -5816,8 +5848,6 @@ COPY public.tables_alerts (id, "trialDateAndTime", user_id) FROM stdin;
 --
 
 COPY public."tables_alerts_dressesSelected" (id, alerts_id, dress_id) FROM stdin;
-17	10	0
-18	10	1
 \.
 
 
@@ -5826,7 +5856,7 @@ COPY public."tables_alerts_dressesSelected" (id, alerts_id, dress_id) FROM stdin
 --
 
 COPY public.tables_carts (id, "dressAdded_id", user_id, "rentalHistory") FROM stdin;
-14	\N	6	11/14/19 2;11/17/19 6
+16	\N	6	
 \.
 
 
@@ -5861,7 +5891,6 @@ COPY public.tables_dress (id, view1, view2, view3, size, brand, occasions, price
 113	dresses/view1/113.jpg	dresses/view2/113.jpg	dresses/view3/113.jpg	M	Old Navy	interviews theme-nights	7	Casual Plaid Long-Sleeved Dress	Casual black, red, and green plaid shirt-dress	None
 117	dresses/view1/117.jpg	dresses/view2/117.jpg	dresses/view3/117.jpg	XS	Neon Rose	lawnparties semi-formals formals	7	Flirty Chiffon Wrap	Fun and flirty red chiffon polka-dotted wrap dress with ties	None
 118	dresses/view1/118.jpg	dresses/view2/118.jpg	dresses/view3/118.jpg	S	zara	lawnparties	7	Maroon Floral Ruffled Dress	Maroon floral mini with ruffle sleeve detailing and floral embroidery	None
-2	dresses/view1/002.jpg	dresses/view2/002.jpg	dresses/view3/002.jpg	S	Forever21	lawnparties semi-formals	7	White Printed Dress	Sleeveless silky white dress with printed trim	None
 3	dresses/view1/003.jpg	dresses/view2/003.jpg	dresses/view3/003.jpg	XS	Hollister	lawnparties semi-formals	7	Blue and White Striped Mini	Blue and white pinstripes on a flirty silhouette	None
 4	dresses/view1/004.jpg	dresses/view2/004.jpg	dresses/view3/004.jpg	S	Old Navy	lawnparties semi-formals	7	Casual Black Button Romper	Casual elegant black romper with button detailing and - pockets!	None
 5	dresses/view1/005.jpg	dresses/view2/005.jpg	dresses/view3/005.jpg	S	Unknown	semi-formals formals	7	White Tulip Chiffon	White flowy chiffon dress with a layered tulip skirt	None
@@ -5885,6 +5914,7 @@ COPY public.tables_dress (id, view1, view2, view3, size, brand, occasions, price
 94	dresses/view1/094.jpg	dresses/view2/094.jpg	dresses/view3/094.jpg	S	SLNY	semi-formals formals	7	Aqua Lace Halter Mini	Flapper-esque aqua/teal lace, with intricate fringe detail	None
 27	dresses/view1/027.jpg	dresses/view2/027.jpg	dresses/view3/027.jpg	S M	Express	semi-formals formals	7	Black Cutout Maxi	Sexy black maxi with cut out detailing and a subtle slit up the side	None
 24	dresses/view1/024.jpg	dresses/view2/024.jpg	dresses/view3/024.jpg	S	City Studio	semi-formals formals	7	White Lace Halter Mini	White lace halter mini with embroidered hems and cut-out waist detailing	None
+2	dresses/view1/002.jpg	dresses/view2/002.jpg	dresses/view3/002.jpg	S	Forever21	lawnparties semi-formals	7	White Printed Dress	Sleeveless silky white dress with printed trim	
 28	dresses/view1/028.jpg	dresses/view2/028.jpg	dresses/view3/028.jpg	S	Forever21	lawnparties semi-formals formals	7	White Puff-Sleeved Mini	White puff-sleeved elegant mini	None
 30	dresses/view1/030.jpg	dresses/view2/030.jpg	dresses/view3/030.jpg	XS	Papaya	semi-formals formals	7	Striped A-Line Mini	Bold striped mini with an a-line skirt	None
 31	dresses/view1/031.jpg	dresses/view2/031.jpg	dresses/view3/031.jpg	S	Forever21	semi-formals formals	7	Red Lace Bodycon Mini	Red lace bodycon mini, perfect for a formal or semiformal	None
@@ -5968,9 +5998,9 @@ COPY public.tables_dress (id, view1, view2, view3, size, brand, occasions, price
 111	dresses/view1/111.jpg	dresses/view2/111.jpg	dresses/view3/111.jpg	M	Pins and Needles	lawnparties semi-formals	7	Pink Chiffon Drape	Pink chiffon mini with smock-waist detailing and a draped skirt	None
 115	dresses/view1/115.jpg	dresses/view2/115.jpg	dresses/view3/115.jpg	M	CÖ for Urban Outfitt	semi-formals formals	7	Black Lace Bodycon	Black bodycon mini with lace detailing around the neckline	None
 116	dresses/view1/116.jpg	dresses/view2/116.jpg	dresses/view3/116.jpg	S M	Unknown	interviews	7	Formal Black Midi	A three-quarter sleeved midi perfect for interviews	None
-1	dresses/view1/001.jpg	dresses/view2/001.jpg	dresses/view3/001.jpg	S	Tobi	semi-formals formals	7	Mauve Lace Mini	Delicate mauve mini with a deep v, long bell sleeves	11/18/19;11/18/2019;11/20/2019;11/18/2019;11/19/2019;11/18/2019;11/16/2019;11/16/2019;11/19/2019;11/18/2019
+1	dresses/view1/001.jpg	dresses/view2/001.jpg	dresses/view3/001.jpg	S	Tobi	semi-formals formals	7	Mauve Lace Mini	Delicate mauve mini with a deep v, long bell sleeves	
 70	dresses/view1/070.jpg	dresses/view2/070.jpg	dresses/view3/070.jpg	M	Sparkle & Fade	semi-formals formals	7	Sexy Black Lace Mini	Black lace mini with a plunging v-neck and gorgeous skirt detailing	None
-0	dresses/view1/000.jpg	dresses/view2/000.jpg	dresses/view3/000.jpg	XS	By & By	lawnparties semi-formals formals	7	Flowy Blue Chiffon Dress	Flowy blue chiffon dress with a flattering hem	11/18/2019;11/20/2019;11/18/2019;11/19/2019;11/18/2019;11/16/2019;11/16/2019;11/19/2019;11/18/2019
+0	dresses/view1/000.jpg	dresses/view2/000.jpg	dresses/view3/000.jpg	XS	By & By	lawnparties semi-formals formals	7	Flowy Blue Chiffon Dress	Flowy blue chiffon dress with a flattering hem	None
 \.
 
 
@@ -5980,7 +6010,6 @@ COPY public.tables_dress (id, view1, view2, view3, size, brand, occasions, price
 
 COPY public.tables_userinfo (id, username, size, gender, email, phone, "numberRented") FROM stdin;
 4	admin	['S', 'M']	admin	khyatia@princeton.edu	60986866966	0
-6	khyatia	['S', 'M']	F	khyatia@princeton.edu		0
 9	uuberoy	['XS', 'S']	F	uuberoy@princeton.edu	6093566458	0
 10	jorinak	['S', 'M']	Female	jorinak@princeton.edu	6094954533	0
 12	axue	['S', 'M']	Female	axue@princeton.edu	9143385195	0
@@ -6541,6 +6570,7 @@ COPY public.tables_userinfo (id, username, size, gender, email, phone, "numberRe
 569	maganh	S M 	Femail	mha169320@gmail.com		0
 570	gpgarcia	XS S 	Female	gpgarcia@princeton.edu	9259130638	0
 571	mneff	S 	Female	mneff@princeton.edu	7168012978	0
+6	khyatia	['S', 'M']	F	khyatia@princeton.edu	9737354069	0
 \.
 
 
@@ -6590,7 +6620,7 @@ SELECT pg_catalog.setval('public.auth_user_user_permissions_id_seq', 1, false);
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
-SELECT pg_catalog.setval('public.django_admin_log_id_seq', 1226, true);
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 1254, true);
 
 
 --
@@ -6618,42 +6648,42 @@ SELECT pg_catalog.setval('public.django_content_type_id_seq', 15, true);
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
-SELECT pg_catalog.setval('public.django_migrations_id_seq', 40, true);
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 45, true);
 
 
 --
 -- Name: tables_alerts_dressesSelected_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
-SELECT pg_catalog.setval('public."tables_alerts_dressesSelected_id_seq"', 18, true);
+SELECT pg_catalog.setval('public."tables_alerts_dressesSelected_id_seq"', 26, true);
 
 
 --
 -- Name: tables_alerts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
-SELECT pg_catalog.setval('public.tables_alerts_id_seq', 10, true);
+SELECT pg_catalog.setval('public.tables_alerts_id_seq', 18, true);
 
 
 --
 -- Name: tables_carts_dressesAdded_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
-SELECT pg_catalog.setval('public."tables_carts_dressesAdded_id_seq"', 75, true);
+SELECT pg_catalog.setval('public."tables_carts_dressesAdded_id_seq"', 8, true);
 
 
 --
 -- Name: tables_carts_dressesLiked_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
-SELECT pg_catalog.setval('public."tables_carts_dressesLiked_id_seq"', 40, true);
+SELECT pg_catalog.setval('public."tables_carts_dressesLiked_id_seq"', 1, true);
 
 
 --
 -- Name: tables_carts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
-SELECT pg_catalog.setval('public.tables_carts_id_seq', 14, true);
+SELECT pg_catalog.setval('public.tables_carts_id_seq', 16, true);
 
 
 --
