@@ -123,8 +123,7 @@ def getAvailableForTrial(request):
     uname = request.user.username
     uInfo = getUInfo(uname)
 
-    # If trial is already scheduled tell the user that the trial is scheduled
-    # and that they have an upcoming trial
+    # If trial is already scheduled
     try: 
         alreadyScheduled = Alerts.objects.get(user=uInfo)
         date_obj = dt.strptime(str(alreadyScheduled.trialDateAndTime), '%m/%d/%y %I:%M %p')
@@ -134,8 +133,6 @@ def getAvailableForTrial(request):
             alreadyScheduled.delete()
             return getAvailableForTrial(request)
         else:
-            # send the existing trial details
-            # serializer = AlertsSerializer({'valid': 'false'}, context={'request': request})
             return Response({'valid': 'false'})
 
     # If the they haven't scheduled their trial yet
@@ -269,9 +266,6 @@ def getOrUpdate_Alerts(request):
             serializer = AlertsSerializer(newTrial, context={'request': request})
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    # Handling cancellations
-    # User manually cancels trial
-    # Not in use right now
     if request.method == 'DELETE':
         try: 
             trial = Alerts.objects.get(user=uname)
@@ -359,9 +353,6 @@ def getRentalHistory(request):
         else:
             toSend1.append(newDict)
         count += 1
-
-    # serializer1 = RentalHistorySerializer(toSerialize1, many=True)
-    # serializer2 = RentalHistorySerializer(toSerialize2, many=True)
     return Response({'trial': toSend0, 'pastHistory': toSend1, 'upcomingHistory': toSend2})
 
 
