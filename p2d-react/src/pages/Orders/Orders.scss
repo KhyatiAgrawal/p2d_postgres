@@ -16,12 +16,20 @@
 	color: black;
 	margin-top: calc(5vw + 40px);
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
+	align-content: center;
+	align-items: center;
 
 	&__text {
 		color: $p2d-gray;
 		font-size: 32px;
 		font-weight: bold;
+	}
+
+	&__subtext {
+		margin-top: 20px;
+		color: $p2d-gray;
 	}
 }
 
@@ -33,7 +41,7 @@
 	justify-content: flex-start;
 	align-content: center;
 	width: 40%;
-	
+
 	&__items {
 		font-family: "Roboto";
 		padding-top: 20px;

@@ -20,6 +20,7 @@ class Orders extends Component {
 		this.state = {
 			oldrequests: [],
 			newrequests: [],
+			trial_data: {}
 		}
 	}
 
@@ -31,7 +32,6 @@ class Orders extends Component {
 	getTrials = async () => {
 		let res = await axios.get(`${API_URL}/api/myOrders/`)
 		res.data = res.data['trial']
-		console.log(res.data)
 		
 		let trial_data = {}
 		let date;
@@ -44,7 +44,6 @@ class Orders extends Component {
 				price: res.data[i].price
 			}
 		}
-		console.log(trial_data)
 		if (this.mounted) {
 			this.setState({
 				date: date,
@@ -64,12 +63,12 @@ class Orders extends Component {
   	}
 
 	render() {
-		console.log(this.state.trial_data)
 		return (
 			<div className="Orders">
 				<div><Navbar weight="heavy"/></div>
 				<div className="trials-container">
 					<div className="trials-container__text">Upcoming Trials</div>
+					<div className="trials-container__subtext">Date: {this.state.date} | Time: {this.state.time}</div>
 					<div className="trials-summary__items">
 						{Object.keys(this.state.trial_data).map((key, index) => (
 						<div className="trials-summary__item">
