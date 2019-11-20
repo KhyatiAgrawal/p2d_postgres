@@ -56,7 +56,7 @@ class Cart extends Component {
     }
   }
 
-  checkAvailability = () => {
+  checkAvailability = async () => {
     let d = new Date()
     var day = d.getDate();
     var month = d.getMonth() + 1; // Since getMonth() returns month from 0-11 not 1-12
@@ -101,7 +101,7 @@ class Cart extends Component {
   }
 
 	render() {
-    console.log(this.state.selected)
+    console.log(this.state.date_needed)
     const defaultOption = this.state.selected
     return (
       <div className="cart__container">
