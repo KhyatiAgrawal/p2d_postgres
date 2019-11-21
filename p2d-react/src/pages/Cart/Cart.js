@@ -146,6 +146,7 @@ class Cart extends Component {
                   </div>
                 ))}
               </div>
+              <div className="disclaimer">*If some dresses were removed from your cart, it means that they are already booked for your selected date. We have moved them over to your favorites!</div>
               <div className="date-dropdown">
                 <Dropdown id="dropdown" options={this.state.available_times} placeholder="Select a try-on time" onChange={this._onSelect} value={defaultOption}/>
               </div>

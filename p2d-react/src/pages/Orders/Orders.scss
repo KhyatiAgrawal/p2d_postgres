@@ -23,6 +23,7 @@
 
 	&__subcontainer {
 		flex-direction: column;
+		width: 30%;
 	}
 	&__text {
 		color: $p2d-gray;
@@ -58,22 +59,25 @@
 	flex-direction: column;
 	justify-content: flex-start;
 	align-content: center;
-	width: 40%;
+	width: 30%;
 
 	&__items {
 		font-family: "Roboto";
 		color: $p2d-gray;
 		padding-top: 20px;
-		margin-left: 40px;
-		margin-right: 40px;
 		padding-bottom: 10px;
 		border-bottom: 1px solid $p2d-gray;
+	}
+	&__item-container {
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
 	}
 	&__item {
 		padding-bottom: 3px;
 		display: flex;
 		flex-direction: row;
-		justify-content: space-between;
 	}
 }
 

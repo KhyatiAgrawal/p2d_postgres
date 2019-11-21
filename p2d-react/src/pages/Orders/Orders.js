@@ -88,9 +88,9 @@ class Orders extends Component {
 						<div className="trials-container__subtext">Date: {this.state.date} | Time: {this.state.time}</div>
 						<div className="trials-summary__items">
 							{Object.keys(this.state.trial_data).map((key, index) => (
-							<div className="trials-summary__item">
-								<div>{this.state.trial_data[index].title}</div>
-								<div>${this.state.trial_data[index].price}.00</div>
+							<div className="trials-summary__item-container">
+								<div className="trials-summary__item">{this.state.trial_data[index].title}</div>
+								<div className="trials-summary__item">${this.state.trial_data[index].price}.00</div>
 							</div>
 							))}
 						</div>
