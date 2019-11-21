@@ -17,22 +17,6 @@ class DressSerializer(serializers.ModelSerializer):
 #         model = Carts 
 #         fields = ('user','dressesAdded')
 
-# class FavoritesSerializer(serializers.ModelSerializer):
-#     # check this
-#     dressesLiked = serializers.PrimaryKeyRelatedField(many=True, queryset=Dress.objects.all())
-
-#     class Meta:
-#         model = Carts 
-#         fields = ('user','dressesLiked')
-
-
-# This dress serializer is used serialize:
-# 1. results from the users Cart
-# 2. results from "Dresses" that matches the user's searchc criteria
-# 3. the user's favorited dresses
-# 4. the dresses from the user's cart available for trial
-class DressesSerializer(serializers.Serializer):
-    items = DressSerializer(many=True)
 
 
 # This serializers is used serialize:
@@ -41,7 +25,7 @@ class DressesSerializer(serializers.Serializer):
 class AlertsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Alerts 
-        fields = ('user','dressSelected', 'trialDateAndTime')
+        fields = ('user','dressesSelected', 'trialDateAndTime')
 
 class UInfoSerializer(serializers.Serializer):
     class Meta:
@@ -49,13 +33,8 @@ class UInfoSerializer(serializers.Serializer):
         fields = ('username','size', 'gender', 'email', 'phone', 'numberRented')
 
 class AvailableTimesSerializer(serializers.Serializer):
-    """Your data serializer, define your fields here."""
-    DateTime = serializers.DateTimeField(format = '%m/%d/%y %H:%M')
+    DateTime = serializers.DateTimeField(format = '%m/%d/%y %I:%M %p')
     PersonIncharge = serializers.CharField(max_length=30)
 
-class RentalHistorySerializer(serializers.Serializer):
-    """Your data serializer, define your fields here."""
-    Date = serializers.DateTimeField(format = '%m/%d/')
-    RentedDress = DressSerializer(source = 'RentedDress')
 
 

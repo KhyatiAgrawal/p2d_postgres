@@ -88,7 +88,7 @@ class Navbar extends Component {
                 <div className={'helper-text ' + weight}>cart</div>
               </div>
             </a>
-            <a className="nav-link" href="/#">
+            <a className="nav-link" href="/faq">
               <div className='p2d-nav-img'>
                 <img src={this.state.icons[5]} className='nav-svg' alt="faq" />
                 <div className={'helper-text ' + weight}>FAQs</div>

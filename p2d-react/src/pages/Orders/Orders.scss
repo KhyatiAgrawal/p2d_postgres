@@ -12,6 +12,75 @@
   color: $p2d-gray;
 }
 
+.trials-container {
+	color: black;
+	margin-top: calc(5vw + 40px);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+
+	&__subcontainer {
+		flex-direction: column;
+		width: 30%;
+	}
+	&__text {
+		color: $p2d-gray;
+		font-size: 32px;
+		font-weight: bold;
+	}
+
+	&__subtext {
+		margin-top: 20px;
+		color: $p2d-gray;
+		font-weight: bold;
+		display: flex;
+		justify-content: center;
+	}
+}
+
+.delete {
+	display: flex;
+	color: white;
+	height: 50px;
+	background-color: #d11a2a;
+	justify-content: center;
+	align-items: center;
+	border-radius: 5px;
+	margin-top: 20px;
+	cursor: pointer;
+}
+
+.trials-summary {
+	color: $p2d-gray;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-content: center;
+	width: 30%;
+
+	&__items {
+		font-family: "Roboto";
+		color: $p2d-gray;
+		padding-top: 20px;
+		padding-bottom: 10px;
+		border-bottom: 1px solid $p2d-gray;
+	}
+	&__item-container {
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+	&__item {
+		padding-bottom: 3px;
+		display: flex;
+		flex-direction: row;
+	}
+}
+
 .orders-title {
 	&__container {
 		display: flex;

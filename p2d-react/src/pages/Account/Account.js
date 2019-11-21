@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
 import { useLayoutEffect, useState } from 'react';
 import './Account.scss';
+import retrieveData from '../../components/retrieveData';
 
 import Navbar from '../../components/Navbar/Navbar';
+import axios from 'axios';
+
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = "csrftoken"
+
+
+const API_URL = 'https://localhost:8000';
+const api_endpoint = new retrieveData();
+
 
 class Account extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			orders: [0, 0, 0, 0, 0, 0, 0],
+			orders: [],
 			windowSize: window.innerWidth,
 		}
 	}
@@ -22,11 +33,27 @@ class Account extends Component {
 	    });
 	 };
 
+	fetchNumberRented = async (filters) => {
+		let res;
+		res = await axios.get(`${API_URL}/api/numberRented`)
+		var newArr = [];
+		var numOrders = res.data['numberRented']
+		if (this.mounted) {
+			for (let i = 0; i < numOrders; i++)
+				newArr.push(true)
+			this.setState({orders: newArr})
+		}
+	}
+
+
 	componentDidMount() {
+		this.mounted = true;
 	    window.addEventListener("resize", this.handleResize);
+	    this.fetchNumberRented();
 	}
 
 	componentWillUnmount() {
+		this.mounted = false;
 	    window.removeEventListener("resize", this.handleResize);
 	}
 
@@ -54,9 +81,13 @@ class Account extends Component {
 					</div>
 				</div>
 				<div className="info__container">
-					<div className="info__stat">You've saved <b>{Math.round(3.53 * this.state.orders.length)} lbs</b> of carbon emissions</div>
+					{
+						this.state.orders.length === 0 ? <div className="info__stat">Rent a dress to minimize your carbon footprint! <br /> Each dress you reuse saves 3.53 lbs of carbon emissions :)</div>
+						: <div className="info__stat">You've saved <b>{Math.round(3.53 * this.state.orders.length)} lbs</b> of carbon emissions</div>
+					}
 				</div>
 	    	</div>
+
 		);
 	}
 }

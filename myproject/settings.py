@@ -30,7 +30,9 @@ CAS_ADMIN_PREFIX = 'admin/'
 CAS_IGNORE_REFERER = True
 CAS_PROVIDE_URL_TO_LOGOUT = True
 CAS_SERVER_URL = 'https://fed.princeton.edu/cas/'
-CAS_REDIRECT_URL = "http://127.0.0.1:8000/temp/"
+CAS_REDIRECT_URL = 'https://localhost:3000'
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_PASSWORD = 'forget&no'
@@ -39,6 +41,11 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
+
+SECURE_SSL_REDIRECT  = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = False
+CSRF_COOKIE_NAME = "csrftoken"
 
 # Application definition
 
@@ -53,24 +60,37 @@ INSTALLED_APPS = [
     'django_cas_ng',
     'rest_framework',
     'corsheaders',
+    "sslserver",
 ]
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = False
 
-CORS_ORIGIN_WHITELIST = (
+CORS_ORIGIN_WHITELIST = [
     'https://localhost:3000',
-)
+    'https://127.0.0.1:3000',
+    'https://localhost:8000',
+]
+CORS_ORIGIN_REGEX_WHITELIST = [
+    'http://localhost:3000',
+]
+
+CSRF_TRUSTED_ORIGINS = ['localhost:3000']
+
+CORS_ALLOW_METHODS = ['POST', 'GET', 'PUT', 'DELETE', 'OPTIONS', 'PATCH']
 
 MIDDLEWARE = [
+    'myproject.middleware.CorsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django_cas_ng.middleware.CASMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django_cas_ng.middleware.CASMiddleware',
+    
+    
     
 ]
 

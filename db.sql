@@ -3,7 +3,7 @@
 --
 
 -- Dumped from database version 11.3
--- Dumped by pg_dump version 11.3
+-- Dumped by pg_dump version 11.5
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -442,8 +442,10 @@ ALTER TABLE public.django_session OWNER TO admin2;
 
 CREATE TABLE public.tables_alerts (
     id integer NOT NULL,
-    "trialDateAndTime" timestamp with time zone,
-    user_id integer NOT NULL
+    "trialDateAndTime" character varying(20),
+    user_id integer NOT NULL,
+    "dateNeeded" character varying(10),
+    "eventId" character varying(200)
 );
 
 
@@ -512,7 +514,7 @@ ALTER SEQUENCE public.tables_alerts_id_seq OWNED BY public.tables_alerts.id;
 
 CREATE TABLE public.tables_carts (
     id integer NOT NULL,
-    "dressAdded_id" integer NOT NULL,
+    "dressAdded_id" integer,
     user_id integer NOT NULL,
     "rentalHistory" character varying(1000) NOT NULL
 );
@@ -865,9 +867,7 @@ COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
 --
 
 COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
-1		2019-05-29 16:21:55.913-04	f	khyatia				f	t	2018-04-13 02:12:23.716-04
 3		2018-05-06 02:30:06.831-04	f	arulg				f	t	2018-04-13 20:43:10.895-04
-5		2019-05-16 10:31:35.502-04	f	uuberoy				f	t	2018-04-19 23:46:46.554-04
 6		2019-04-16 23:38:53.021-04	f	jorinak				f	t	2018-04-20 00:05:02.483-04
 7		2019-04-19 02:39:24.533-04	f	axue				f	t	2018-04-20 01:11:06.76-04
 8		2019-04-20 21:31:41.07-04	f	bgupta				f	t	2018-04-20 01:40:11.828-04
@@ -1696,7 +1696,9 @@ COPY public.auth_user (id, password, last_login, is_superuser, username, first_n
 831		2019-05-13 00:09:41.843-04	f	kvlach				f	t	2019-05-13 00:09:41.703-04
 832		2019-05-19 02:35:06.498-04	f	jbachek				f	t	2019-05-19 02:35:06.267-04
 833		2019-05-24 01:14:10.876-04	f	mneff				f	t	2019-05-24 01:14:10.753-04
-2	pbkdf2_sha256$100000$YctJOoai4vsK$n/TqGyGRI6GNlSSZyNwO6Jf11+v5l7rJF4WT6SsAIT0=	2019-11-12 20:25:07.242657-05	t	admin			khyatiagrawal1998@gmail.com	t	t	2018-04-13 02:14:16.313-04
+2	pbkdf2_sha256$100000$YctJOoai4vsK$n/TqGyGRI6GNlSSZyNwO6Jf11+v5l7rJF4WT6SsAIT0=	2019-11-20 21:01:31.169533-05	t	admin			khyatiagrawal1998@gmail.com	t	t	2018-04-13 02:14:16.313-04
+1		2019-11-17 14:14:36.660259-05	f	khyatia				f	t	2018-04-13 02:12:23.716-04
+5		2019-11-20 23:59:17.714431-05	f	uuberoy				f	t	2018-04-19 23:46:46.554-04
 \.
 
 
@@ -2941,6 +2943,45 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 1218	2019-11-12 20:46:40.215597-05	111	Dress object (111)	1	[{"added": {}}]	15	2
 1219	2019-11-12 20:47:46.327089-05	115	Dress object (115)	1	[{"added": {}}]	15	2
 1220	2019-11-12 20:48:54.006664-05	116	Dress object (116)	1	[{"added": {}}]	15	2
+1221	2019-11-16 20:18:32.010678-05	14	khyatia	2	[{"changed": {"fields": ["rentalHistory"]}}]	7	2
+1222	2019-11-16 20:58:37.136461-05	1	Dress object (1)	2	[{"changed": {"fields": ["unavailableDates"]}}]	15	2
+1223	2019-11-19 15:44:12.063512-05	70	Dress object (70)	2	[{"changed": {"fields": ["view3"]}}]	15	2
+1224	2019-11-19 15:46:47.182679-05	27	Dress object (27)	2	[{"changed": {"fields": ["size", "brand", "title", "description"]}}]	15	2
+1225	2019-11-19 15:48:46.166158-05	24	Dress object (24)	2	[{"changed": {"fields": ["view2"]}}]	15	2
+1226	2019-11-19 15:49:05.94376-05	0	Dress object (0)	2	[{"changed": {"fields": ["unavailableDates"]}}]	15	2
+1227	2019-11-19 16:00:51.386127-05	10	Alerts object (10)	3		14	2
+1228	2019-11-19 16:01:29.787624-05	0	Dress object (0)	2	[{"changed": {"fields": ["unavailableDates"]}}]	15	2
+1229	2019-11-19 16:01:43.445123-05	1	Dress object (1)	2	[{"changed": {"fields": ["unavailableDates"]}}]	15	2
+1230	2019-11-19 17:55:39.912656-05	14	khyatia	3		7	2
+1231	2019-11-19 18:13:17.070125-05	15	khyatia	2	[{"changed": {"fields": ["rentalHistory"]}}]	7	2
+1232	2019-11-19 18:16:32.468454-05	15	khyatia	2	[{"changed": {"fields": ["rentalHistory"]}}]	7	2
+1234	2019-11-19 18:21:12.399419-05	2	Dress object (2)	2	[{"changed": {"fields": ["unavailableDates"]}}]	15	2
+1235	2019-11-19 18:57:00.48836-05	11	khyatia	2	[{"changed": {"fields": ["trialDateAndTime", "dateNeeded"]}}]	14	2
+1236	2019-11-19 18:57:49.037606-05	0	Dress object (0)	2	[{"changed": {"fields": ["unavailableDates"]}}]	15	2
+1237	2019-11-19 18:58:10.600824-05	11	khyatia	2	[{"changed": {"fields": ["dateNeeded"]}}]	14	2
+1238	2019-11-19 18:58:16.484248-05	11	khyatia	3		14	2
+1239	2019-11-19 18:58:55.544517-05	0	Dress object (0)	2	[{"changed": {"fields": ["unavailableDates"]}}]	15	2
+1240	2019-11-19 19:08:55.084343-05	0	Dress object (0)	2	[{"changed": {"fields": ["unavailableDates"]}}]	15	2
+1241	2019-11-19 19:09:09.40613-05	1	Dress object (1)	2	[{"changed": {"fields": ["unavailableDates"]}}]	15	2
+1242	2019-11-19 19:18:02.222069-05	12	khyatia	3		14	2
+1243	2019-11-19 19:18:22.383462-05	13	khyatia	3		14	2
+1244	2019-11-19 19:21:54.634855-05	2	Dress object (2)	2	[{"changed": {"fields": ["unavailableDates"]}}]	15	2
+1245	2019-11-19 19:24:07.900036-05	15	khyatia	3		7	2
+1246	2019-11-19 19:27:05.331079-05	14	khyatia	3		14	2
+1247	2019-11-19 19:31:00.962337-05	15	khyatia	3		14	2
+1248	2019-11-19 19:31:30.523021-05	0	Dress object (0)	2	[{"changed": {"fields": ["unavailableDates"]}}]	15	2
+1249	2019-11-19 19:39:04.206537-05	1	Dress object (1)	2	[]	15	2
+1250	2019-11-19 19:39:17.545015-05	16	khyatia	3		14	2
+1251	2019-11-19 19:40:42.59091-05	1	Dress object (1)	2	[{"changed": {"fields": ["unavailableDates"]}}]	15	2
+1252	2019-11-19 19:41:12.690177-05	17	khyatia	3		14	2
+1253	2019-11-19 19:59:32.211671-05	6	UserInfo object (6)	2	[{"changed": {"fields": ["phone", "numberRented"]}}]	11	2
+1254	2019-11-19 20:01:21.705989-05	18	khyatia	3		14	2
+1255	2019-11-20 17:03:37.639008-05	19	khyatia	3		14	2
+1256	2019-11-20 17:16:43.577208-05	2	Dress object (2)	2	[{"changed": {"fields": ["unavailableDates"]}}]	15	2
+1257	2019-11-20 17:18:09.151645-05	20	khyatia	3		14	2
+1258	2019-11-20 17:22:34.757475-05	21	khyatia	3		14	2
+1259	2019-11-20 20:22:45.75216-05	22	khyatia	3		14	2
+1260	2019-11-20 21:01:37.708756-05	23	khyatia	3		14	2
 \.
 
 
@@ -4581,6 +4622,28 @@ COPY public.django_cas_ng_sessionticket (id, session_key, ticket) FROM stdin;
 1622	bn5uf6pk3pgoitlggedzrodk6h3hsjiz	ST-793552-oed5BkiGAiR9oWsL5ScV-auth-a
 1623	x8s0d0z9fwaaruuwvqsi85vvqclwx4ic	ST-33339-AWctpFRWIeRkUNGj9z5D-auth-a
 1624	qw2tmgen236k5cb51zmwpe4pw5xyw43x	ST-174800-7ddajfd7UYGISLktBTij-auth-a
+1625	cfm9itka82fxk8lmbul8d58be7kjp0nz	ST-705834-e7XOylkZxXcQsJof1PWU-auth-a
+1626	0hz5zdtz3uxib3z0z7dkduxh0ol9x0wv	ST-706643-k0Dpxlx2R0Qx6cfWRWQj-auth-a
+1627	7uxuqox7b2ky1g9aaxsc0jftutry2ttm	ST-706702-7A75fYUJeCb20mmwHj9k-auth-a
+1628	fxv67rbybb9jk0zuvqjpxgsw972ag5lv	ST-708020-2X0fcaEDPYt6LBbbjb7e-auth-a
+1629	ap9rwhpa91ukxelnk346q8f3f74utxx3	ST-708087-bi4HbulEgFpOYBnPNKHl-auth-a
+1630	0if1ezio7iwu91chqet8f3zpszyt4df1	ST-708280-X72rbbJMbWhpaF2lgXgU-auth-a
+1631	jzhbgkwglxvbipe9gst20r2ija8g1w7t	ST-708538-pyWrZ9lnEPA4Jcaq6ef4-auth-a
+1632	puvrod0ekwro831qa3nmkn1is7xbb7ns	ST-758682-n6sSu6MasrEd60ItZ1LD-auth-a
+1633	5duw3iucalnt1r1h1rpolw2dcy12atlx	ST-759196-DixUEd2dhZgge9xj9Eyo-auth-a
+1634	ewf8qg0f83ptqtfym6k9i7kl31ai3plp	ST-759443-TXhdhkGljn7jng7qqBKm-auth-a
+1635	rndn67es05odgmruk5c93denosdc9mvw	ST-759974-M31eNzLniPDhu1rh6vnz-auth-a
+1636	5olyymumibzfl53rfrz04yh2fkm8m4qj	ST-760351-mmPIitRGlcPzZhi6e2ut-auth-a
+1637	yxm893dlrja2wqne0zvsqzv9wsmlez8z	ST-761725-W0SWOfAcafzJYq0RjZJK-auth-a
+1638	te8ys6cp9grps02q3taqfvhudg80qlni	ST-762063-eTTSiTdHdvzTAdVgmuN7-auth-a
+1639	3busojr2z0do19z4uzl8p7ueidfimlrz	ST-770740-aOiiXD7I232CJ1PiHRed-auth-a
+1640	sl91yy0auk1r83exgbbi79o2rd56mquc	ST-770925-fctKyciBsgMaURhFf9JQ-auth-a
+1641	ccpl12jxvispsxen4giui9dpee037dj9	ST-772971-JevzdNL7wapcVHRVsuKw-auth-a
+1642	bdmwnbx9dqijjrg5y49wtv1alrhey3lp	ST-772984-KDdhL5g1vNnt2WqXNqcu-auth-a
+1643	ijlnorm8ykhe2bhgn77jlj4umcna3lct	ST-773048-CKwT5hBV1kXNsAlu3FlB-auth-a
+1644	h50yjqwi34rmyn5qefhcuxh1qzjot4f0	ST-776507-rtvWy7MJv7Nkq2cHzPjt-auth-a
+1645	ujoqofj2mbet8e5mtyfeni2ra9fhcnsf	ST-788640-Yqtvo9qQlxf6fBdGx3eD-auth-a
+1646	ao8tar1oh7i2m9npvd7vkx5kzjp49i6z	ST-905641-GcRJSi3lORS6JRs4ueZz-auth-a
 \.
 
 
@@ -4650,6 +4713,14 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 36	tables	0003_auto_20191111_0006	2019-11-10 19:06:58.365225-05
 37	tables	0004_auto_20191111_0526	2019-11-11 00:26:20.752249-05
 38	tables	0005_userinfo_numberrented	2019-11-11 00:41:30.58816-05
+39	tables	0006_auto_20191115_2044	2019-11-15 15:44:28.689139-05
+40	tables	0007_auto_20191115_2048	2019-11-15 15:48:42.632349-05
+41	tables	0008_auto_20191117_0313	2019-11-19 16:55:09.160647-05
+42	tables	0009_auto_20191119_2154	2019-11-19 16:55:09.176772-05
+43	tables	0010_auto_20191119_2256	2019-11-19 17:56:21.69032-05
+44	tables	0011_auto_20191119_2257	2019-11-19 17:57:13.897069-05
+45	tables	0012_auto_20191119_2330	2019-11-19 18:30:27.477447-05
+46	tables	0013_alerts_eventid	2019-11-20 20:22:25.419918-05
 \.
 
 
@@ -5753,6 +5824,25 @@ zzgjymkyner4q7pjtqsplokng2706l1q	MTY1YjcwZTM1MDU3NjUxY2YyOTlkYzhhODY3YjZiMjQzZTQ
 zzmvjdxsp5a3981odj69ax8ijluiu0br	MzQzYmM5ZDU0MzY5YjIwNTA1M2RhYTRjZDBkOTJmMTlkZGNlMzM2YTp7Il9hdXRoX3VzZXJfaGFzaCI6IjA3MGYxYTI2Mjc4NDYzOTQ4MzRmNmZmOWE0ZDcxMWQ5ODFmNjc1OTgiLCJfYXV0aF91c2VyX2lkIjoiNTQ4IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIn0=	2018-05-18 14:23:29.387-04
 kxhzsvoswjc19mrgoypcezijd9nao0b0	MjgwYWJkNjY1M2EyOWU0YTM5NWE1Y2M3ZDQ2MWI4MDhiYjU4YTM0Yjp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlOTRmNzljODdlNjQxYjEwMDZmYmNmNmM2Yjg4NGVhNWJlMTk3YTQ1In0=	2019-11-25 15:57:15.84616-05
 v60780x4zi7evma0yf6ij89eod8hcmma	MjgwYWJkNjY1M2EyOWU0YTM5NWE1Y2M3ZDQ2MWI4MDhiYjU4YTM0Yjp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlOTRmNzljODdlNjQxYjEwMDZmYmNmNmM2Yjg4NGVhNWJlMTk3YTQ1In0=	2019-11-26 18:23:03.730517-05
+cfm9itka82fxk8lmbul8d58be7kjp0nz	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-27 18:49:08.637735-05
+0hz5zdtz3uxib3z0z7dkduxh0ol9x0wv	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-27 19:12:10.139857-05
+7uxuqox7b2ky1g9aaxsc0jftutry2ttm	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-27 19:14:30.40157-05
+fxv67rbybb9jk0zuvqjpxgsw972ag5lv	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-27 19:47:26.896302-05
+ap9rwhpa91ukxelnk346q8f3f74utxx3	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-27 19:50:24.582664-05
+puvrod0ekwro831qa3nmkn1is7xbb7ns	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-29 12:19:38.493752-05
+5duw3iucalnt1r1h1rpolw2dcy12atlx	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-29 12:37:34.009326-05
+ewf8qg0f83ptqtfym6k9i7kl31ai3plp	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-29 12:46:04.232324-05
+rndn67es05odgmruk5c93denosdc9mvw	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-29 13:03:34.409771-05
+yxm893dlrja2wqne0zvsqzv9wsmlez8z	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-29 13:53:16.52369-05
+te8ys6cp9grps02q3taqfvhudg80qlni	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-29 14:01:43.49384-05
+3busojr2z0do19z4uzl8p7ueidfimlrz	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-29 20:36:36.307712-05
+sl91yy0auk1r83exgbbi79o2rd56mquc	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-29 20:51:52.417484-05
+bdmwnbx9dqijjrg5y49wtv1alrhey3lp	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-30 01:27:37.864526-05
+ijlnorm8ykhe2bhgn77jlj4umcna3lct	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-30 01:46:50.363229-05
+h50yjqwi34rmyn5qefhcuxh1qzjot4f0	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-11-30 13:41:59.525761-05
+ujoqofj2mbet8e5mtyfeni2ra9fhcnsf	NTY0ZmI1MGI2OGViNGI1ZDcyNjg5MmIwNGUwYTYwMzRhZjY5YTEzNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-12-01 14:14:36.666637-05
+ekwelj67str1303o2a8r1s9hprozbz9v	MjgwYWJkNjY1M2EyOWU0YTM5NWE1Y2M3ZDQ2MWI4MDhiYjU4YTM0Yjp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlOTRmNzljODdlNjQxYjEwMDZmYmNmNmM2Yjg4NGVhNWJlMTk3YTQ1In0=	2019-12-04 21:01:31.171841-05
+ao8tar1oh7i2m9npvd7vkx5kzjp49i6z	OWYxMjliNzMyMjE5MTcyZWFkNzljNThhMzNjNzVmMGEzYTA0N2Y2Njp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvX2Nhc19uZy5iYWNrZW5kcy5DQVNCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiY2QwOTZkZGQ4ODk4NGE2MjRmNWZkZTk0ZWFiOWQyMmVhYmVlM2M5ZSJ9	2019-12-04 23:59:17.718298-05
 \.
 
 
@@ -5760,7 +5850,9 @@ v60780x4zi7evma0yf6ij89eod8hcmma	MjgwYWJkNjY1M2EyOWU0YTM5NWE1Y2M3ZDQ2MWI4MDhiYjU
 -- Data for Name: tables_alerts; Type: TABLE DATA; Schema: public; Owner: admin2
 --
 
-COPY public.tables_alerts (id, "trialDateAndTime", user_id) FROM stdin;
+COPY public.tables_alerts (id, "trialDateAndTime", user_id, "dateNeeded", "eventId") FROM stdin;
+30	11/21/19 03:30 PM	6	11/27/2019	b5gv4vdaalptke5n9vtlr6g7dk
+33	11/21/19 03:30 PM	9	11/26/2019	e8dclhljg570af5gu6qh0g7d0g
 \.
 
 
@@ -5769,6 +5861,8 @@ COPY public.tables_alerts (id, "trialDateAndTime", user_id) FROM stdin;
 --
 
 COPY public."tables_alerts_dressesSelected" (id, alerts_id, dress_id) FROM stdin;
+41	30	1
+45	33	2
 \.
 
 
@@ -5777,6 +5871,8 @@ COPY public."tables_alerts_dressesSelected" (id, alerts_id, dress_id) FROM stdin
 --
 
 COPY public.tables_carts (id, "dressAdded_id", user_id, "rentalHistory") FROM stdin;
+16	\N	6	
+17	\N	9	
 \.
 
 
@@ -5785,6 +5881,8 @@ COPY public.tables_carts (id, "dressAdded_id", user_id, "rentalHistory") FROM st
 --
 
 COPY public."tables_carts_dressesAdded" (id, carts_id, dress_id) FROM stdin;
+28	16	1
+31	17	1
 \.
 
 
@@ -5801,29 +5899,41 @@ COPY public."tables_carts_dressesLiked" (id, carts_id, dress_id) FROM stdin;
 --
 
 COPY public.tables_dress (id, view1, view2, view3, size, brand, occasions, price, title, description, "unavailableDates") FROM stdin;
+4	dresses/view1/004.jpg	dresses/view2/004.jpg	dresses/view3/004.jpg	S	Old Navy	lawnparties semi-formals	7	Casual Black Button Romper	Casual elegant black romper with button detailing and - pockets!	None
 101	dresses/view1/101.jpg	dresses/view2/101.jpg	dresses/view3/101.jpg	S M	Urban Outfitters	lawnparties semi-formals formals	7	Pink Empire-Waist Mini	Pink lace mini with an empire waist	None
 109	dresses/view1/109.jpg	dresses/view2/109.jpg	dresses/view3/109.jpg	S M	Uniqlo	interviews	7	Structured Black and White Midi	Structured black and white printed dress, perfect for interviews	None
+43	dresses/view1/043.jpg	dresses/view2/043.jpg	dresses/view3/043.jpg	M	Bailey Blue	lawnparties semi-formals formals	7	Pink Lace Dress	Pretty in pink lace knee-length dress	None
+30	dresses/view1/030.jpg	dresses/view2/030.jpg	dresses/view3/030.jpg	XS	Papaya	semi-formals formals	7	Striped A-Line Mini	Bold striped mini with an a-line skirt	None
+72	dresses/view1/072.jpg	dresses/view2/072.jpg	dresses/view3/072.jpg	XS	Mossimo	lawnparties	7	Blue and Pink Floral Dress	Summery blue floral dress with pink spots and slightly pleated detailing	None
+87	dresses/view1/087.jpg	dresses/view2/087.jpg	dresses/view3/087.jpg	S M	Kimchi Blue	formals semi-formals	7	Black Layered Tulle Mini	Black strapless mini with a sweetheart neckline and gorgeous skirt layering detail	None
+88	dresses/view1/088.jpg	dresses/view2/088.jpg	dresses/view3/088.jpg	M	H&M	formals semi-formals	7	Black Net Mini	LBD with net detailing	None
+89	dresses/view1/089.jpg	dresses/view2/089.jpg	dresses/view3/089.jpg	S	BCBGeneration	formals semi-formals	7	Pink Satin Mini	Pink satin mini with wrap detailing on the bodice and pockets	None
+92	dresses/view1/092.jpg	dresses/view2/092.jpg	dresses/view3/092.jpg	S	Shein	lawnparties	7	Vintage Floral Maxi	Classic white tie-waist maxi with floral detailing	None
+93	dresses/view1/093.jpg	dresses/view2/093.jpg	dresses/view3/093.jpg	L	Cynthia Rowley	semi-formals formals	7	Classic LBD	Simple and elegant black dress, perfect for semi-formals	None
+95	dresses/view1/095.jpg	dresses/view2/095.jpg	dresses/view3/095.jpg	S M	Robert Rodriguez	formals semi-formals	7	Black Lace Strapless Mini	Black lace strapless mini with intricate lace detailing overlayed on nude	None
+96	dresses/view1/096.jpg	dresses/view2/096.jpg	dresses/view3/096.jpg	M	And	semi-formals formals	7	Red Chiffon Maxi	Red chiffon sleeveless maxi with neckline mesh detailing	None
+98	dresses/view1/098.jpg	dresses/view2/098.jpg	dresses/view3/098.jpg	S M	Kimchi Blue	lawnparties semi-formals formals	7	Maroon Mini	Maroon mini with lace detailing	None
+99	dresses/view1/099.jpg	dresses/view2/099.jpg	dresses/view3/099.jpg	S M	Kimchi Blue	lawnparties semi-formals	7	Pink Lace Cut-Out Mini	Pink lace mini with intricate cut-out detailing	None
+111	dresses/view1/111.jpg	dresses/view2/111.jpg	dresses/view3/111.jpg	M	Pins and Needles	lawnparties semi-formals	7	Pink Chiffon Drape	Pink chiffon mini with smock-waist detailing and a draped skirt	None
+115	dresses/view1/115.jpg	dresses/view2/115.jpg	dresses/view3/115.jpg	M	CÖ for Urban Outfitt	semi-formals formals	7	Black Lace Bodycon	Black bodycon mini with lace detailing around the neckline	None
+116	dresses/view1/116.jpg	dresses/view2/116.jpg	dresses/view3/116.jpg	S M	Unknown	interviews	7	Formal Black Midi	A three-quarter sleeved midi perfect for interviews	None
+70	dresses/view1/070.jpg	dresses/view2/070.jpg	dresses/view3/070.jpg	M	Sparkle & Fade	semi-formals formals	7	Sexy Black Lace Mini	Black lace mini with a plunging v-neck and gorgeous skirt detailing	None
 119	dresses/view1/119.jpg	dresses/view2/119.jpg	dresses/view3/119.jpg	M L	Love Culture	interviews semi-formals	7	Bodycon Pink Mini	Pastel pink bodycon mini dress	None
 110	dresses/view1/110.jpg	dresses/view2/110.jpg	dresses/view3/110.jpg	S	Abercrombie & Fitch	lawnparties semi-formals formals	7	White Lace Sweetheart Mini	Precious white lace mini with a flared skirt and a sweetheart neckline	None
-0	dresses/view1/000.jpg	dresses/view2/000.jpg	dresses/view3/000.jpg	XS	By & By	lawnparties semi-formals formals	7	Flowy Blue Chiffon Dress	Flowy blue chiffon dress with a flattering hem	None
 8	dresses/view1/008.jpg	dresses/view2/008.jpg	dresses/view3/008.jpg	M	Forever21	semi-formals formals	7	Rose Gold Sequined Mini	Glamorous flapper rose-gold sequined mini	None
-27	dresses/view1/027.jpg	dresses/view2/027.jpg	dresses/view3/027.jpg	S	SLNY	semi-formals formals	7	Aqua Lace Halter Mini	Flapper-esque aqua/teal lace, with intricate fringe detail	None
 114	dresses/view1/114.jpg	dresses/view2/114.jpg	dresses/view3/114.jpg	XS	H&M	lawnparties semi-formals	7	Casual Striped Tank Dress	Fun and casual striped tank dress	None
 108	dresses/view1/108.jpg	dresses/view2/108.jpg	dresses/view3/108.jpg	S	Unknown	lawnparties	7	Tie-Dye Blue Dress	Flowy tie-dye blue dress with smock detailing	None
 113	dresses/view1/113.jpg	dresses/view2/113.jpg	dresses/view3/113.jpg	M	Old Navy	interviews theme-nights	7	Casual Plaid Long-Sleeved Dress	Casual black, red, and green plaid shirt-dress	None
 117	dresses/view1/117.jpg	dresses/view2/117.jpg	dresses/view3/117.jpg	XS	Neon Rose	lawnparties semi-formals formals	7	Flirty Chiffon Wrap	Fun and flirty red chiffon polka-dotted wrap dress with ties	None
 118	dresses/view1/118.jpg	dresses/view2/118.jpg	dresses/view3/118.jpg	S	zara	lawnparties	7	Maroon Floral Ruffled Dress	Maroon floral mini with ruffle sleeve detailing and floral embroidery	None
-1	dresses/view1/001.jpg	dresses/view2/001.jpg	dresses/view3/001.jpg	S	Tobi	semi-formals formals	7	Mauve Lace Mini	Delicate mauve mini with a deep v, long bell sleeves	None
-2	dresses/view1/002.jpg	dresses/view2/002.jpg	dresses/view3/002.jpg	S	Forever21	lawnparties semi-formals	7	White Printed Dress	Sleeveless silky white dress with printed trim	None
 3	dresses/view1/003.jpg	dresses/view2/003.jpg	dresses/view3/003.jpg	XS	Hollister	lawnparties semi-formals	7	Blue and White Striped Mini	Blue and white pinstripes on a flirty silhouette	None
-4	dresses/view1/004.jpg	dresses/view2/004.jpg	dresses/view3/004.jpg	S	Old Navy	lawnparties semi-formals	7	Casual Black Button Romper	Casual elegant black romper with button detailing and - pockets!	None
 5	dresses/view1/005.jpg	dresses/view2/005.jpg	dresses/view3/005.jpg	S	Unknown	semi-formals formals	7	White Tulip Chiffon	White flowy chiffon dress with a layered tulip skirt	None
 6	dresses/view1/006.jpg	dresses/view2/006.jpg	dresses/view3/006.jpg	M	Uniqlo	lawnparties	7	Blue Printed Flirty Dress	Blue printed knee-length dress perfect for a summer picnic	None
-7	dresses/view1/007.jpg	dresses/view2/007.jpg	dresses/view3/007.jpg	S	Adriana Papell	semi-formals formals	7	Sequined Light Turquoise Shift	Light turquoise shift dress with beautiful sequin detailing	None
 9	dresses/view1/009.jpg	dresses/view2/009.jpg	dresses/view3/009.jpg	S	Lily Rose	lawnparties semi-formals	7	Navy Denim Mini	Navy denim mini with ruffle detailing	None
 10	dresses/view1/010.jpg	dresses/view2/010.jpg	dresses/view3/010.jpg	S	Papaya	lawnparties semi-formals	7	Open-Shoulder Chiffon Mini	Flowy bohemian open-shoulder white sundress with lace detailing	None
 112	dresses/view1/012_SgEJjul.jpg	dresses/view2/012_5jlMBHV.jpg	dresses/view3/012_xrNnwMr.jpg	XS	One Clothing	lawnparties semi-formals	7	Green Tank Dress	Casual summery green tank dress	None
 13	dresses/view1/013.jpg	dresses/view2/013.jpg	dresses/view3/013.jpg	M L	Forever21	semi-formals formals	7	Black A-Line Mini	Black a-line silhouette with cut-out front detailing	None
+1	dresses/view1/001.jpg	dresses/view2/001.jpg	dresses/view3/001.jpg	S	Tobi	semi-formals formals	7	Mauve Lace Mini	Delicate mauve mini with a deep v, long bell sleeves	11/27/2019 
 14	dresses/view1/014.jpg	dresses/view2/014.jpg	dresses/view3/014.jpg	S M	Unknown	interviews semi-formals	7	Teal Knit Sweater Dress	Teal knit sweater dress with long sleeves and knitted pleats	None
 15	dresses/view1/015.jpg	dresses/view2/015.jpg	dresses/view3/015.jpg	S	Toska	semi-formals formals	7	Color-Block Strapless Maxi	Black and royal blue color-block strapless maxi with a gorgeous flowy skirt	None
 16	dresses/view1/016.jpg	dresses/view2/016.jpg	dresses/view3/016.jpg	S	Angie	lawnparties	7	Multicolored Printed Summer Dress	Multicolored kaleidoscope printed summer dress with a flared skirt	None
@@ -5834,11 +5944,12 @@ COPY public.tables_dress (id, view1, view2, view3, size, brand, occasions, price
 21	dresses/view1/021.jpg	dresses/view2/021.jpg	dresses/view3/021.jpg	S M	Ann Taylor	semi-formals interviews	7	Striped BodyCon Mini	Bodycon mini with intersecting stripes	None
 22	dresses/view1/022.jpg	dresses/view2/022.jpg	dresses/view3/022.jpg	S	Shein	lawnparties semi-formals formals	7	White Floral Open Maxi	Gorgeous halter neck white maxi with rose appliqué	None
 23	dresses/view1/023.jpg	dresses/view2/023.jpg	dresses/view3/023.jpg	S	H&M	semi-formals formals	7	Green Lace A-Line Dress	Emerald green lace dress with an A-Line Dress	None
-24	dresses/view1/024.jpg	dresses/view2/024.jpg	dresses/view3/024.jpg	S	City Studio	semi-formals formals	7	White Lace Halter Mini	White lace halter mini with embroidered hems and cut-out waist detailing	None
 26	dresses/view1/026.jpg	dresses/view2/026.jpg	dresses/view3/026.jpg	XS	Old Navy	lawnparties	7	Flirty Summer Floral	Flirty white floral summer dress with a flowy skirt	None
 94	dresses/view1/094.jpg	dresses/view2/094.jpg	dresses/view3/094.jpg	S	SLNY	semi-formals formals	7	Aqua Lace Halter Mini	Flapper-esque aqua/teal lace, with intricate fringe detail	None
+27	dresses/view1/027.jpg	dresses/view2/027.jpg	dresses/view3/027.jpg	S M	Express	semi-formals formals	7	Black Cutout Maxi	Sexy black maxi with cut out detailing and a subtle slit up the side	None
+24	dresses/view1/024.jpg	dresses/view2/024.jpg	dresses/view3/024.jpg	S	City Studio	semi-formals formals	7	White Lace Halter Mini	White lace halter mini with embroidered hems and cut-out waist detailing	None
+7	dresses/view1/007.jpg	dresses/view2/007.jpg	dresses/view3/007.jpg	S	Adriana Papell	semi-formals formals	7	Sequined Light Turquoise Shift	Light turquoise shift dress with beautiful sequin detailing	None
 28	dresses/view1/028.jpg	dresses/view2/028.jpg	dresses/view3/028.jpg	S	Forever21	lawnparties semi-formals formals	7	White Puff-Sleeved Mini	White puff-sleeved elegant mini	None
-30	dresses/view1/030.jpg	dresses/view2/030.jpg	dresses/view3/030.jpg	XS	Papaya	semi-formals formals	7	Striped A-Line Mini	Bold striped mini with an a-line skirt	None
 31	dresses/view1/031.jpg	dresses/view2/031.jpg	dresses/view3/031.jpg	S	Forever21	semi-formals formals	7	Red Lace Bodycon Mini	Red lace bodycon mini, perfect for a formal or semiformal	None
 32	dresses/view1/032.jpg	dresses/view2/032.jpg	dresses/view3/032.jpg	M	Unknown	semi-formals formals interviews	7	Navy Casual Dress	Casual navy dress with a flirty skirt and smock-waist detailing	None
 34	dresses/view1/034.jpg	dresses/view2/034.jpg	dresses/view3/034.jpg	XS	Design Lab	semi-formals formals	7	White Lace Bodycon	White bodycon dress with intricate black lace detailing around hem and neckline	None
@@ -5848,7 +5959,6 @@ COPY public.tables_dress (id, view1, view2, view3, size, brand, occasions, price
 39	dresses/view1/039.jpg	dresses/view2/039.jpg	dresses/view3/039.jpg	S	Forever21	lawnparties semi-formals formals	7	White Lace Mini	White halter-neck mini with a intricate lace detailing	None
 40	dresses/view1/040.jpg	dresses/view2/040.jpg	dresses/view3/040.jpg	S	Tobi	semi-formals formals	7	Glamorous Grey Mini	Glamorous knit multishade woolen grey mini with an assymetrical neckline	None
 41	dresses/view1/041.jpg	dresses/view2/041.jpg	dresses/view3/041.jpg	XS	H&M	lawnparties	7	Printed Tie-Waist Romper	Printed romper with an adjustable tie-waist	None
-43	dresses/view1/043.jpg	dresses/view2/043.jpg	dresses/view3/043.jpg	M	Bailey Blue	lawnparties semi-formals formals	7	Pink Lace Dress	Pretty in pink lace knee-length dress	None
 46	dresses/view1/046.jpg	dresses/view2/046.jpg	dresses/view3/046.jpg	S M	Land's End	semi-formals formals	7	Midnight Blue Velvet Midi	Gorgeous midnight blue velvet midi dress	None
 48	dresses/view1/048.jpg	dresses/view2/048.jpg	dresses/view3/048.jpg	XS	American Rag	semi-formals formals	7	Black Lace Cap Sleeve Mini	Black mini with stunning lace overlay	None
 50	dresses/view1/050.jpg	dresses/view2/050.jpg	dresses/view3/050.jpg	S	Ambiance	lawnparties semi-formals	7	Maroon Floral Romper	Flirty maroon romper with printed flower pattern and spaghetti straps	None
@@ -5873,7 +5983,6 @@ COPY public.tables_dress (id, view1, view2, view3, size, brand, occasions, price
 69	dresses/view1/069.jpg	dresses/view2/069.jpg	dresses/view3/069.jpg	S	Forever21	lawnparties semi-formals	7	Black Lace Romper	Black lace romper with subtle texture detailing	None
 103	dresses/view1/103.jpg	dresses/view2/103.jpg	dresses/view3/103.jpg	M	H&M	lawnparties semi-formals	7	Printed Black and White Flared Mini	Printed black and white flared mini, perfect for casual summer events	None
 71	dresses/view1/071.jpg	dresses/view2/071.jpg	dresses/view3/071.jpg	S	Monteau	semi-formals formals	7	Navy Lace Sleeveless Mini	Blue lace dress with tie-up detailing	None
-72	dresses/view1/072.jpg	dresses/view2/072.jpg	dresses/view3/072.jpg	XS	Mossimo	lawnparties	7	Blue and Pink Floral Dress	Summery blue floral dress with pink spots and slightly pleated detailing	None
 73	dresses/view1/073.jpg	dresses/view2/073.jpg	dresses/view3/073.jpg	S M	Bailey Blue	lawnparties semi-formals	7	Summery Ruffled Dress	Casual cute blue-green ruffled mini	None
 74	dresses/view1/074.jpg	dresses/view2/074.jpg	dresses/view3/074.jpg	S	Unknown	lawnparties semi-formals	7	White A-Line Floral Mini	Flirty white dress with an a-line skirt and floral pattern	None
 75	dresses/view1/075.jpg	dresses/view2/075.jpg	dresses/view3/075.jpg	S	Mossimo	lawnparties	7	Blue Floral Summer Dress	Blue and white floral summer dress with spaghetti straps and layered skirt	None
@@ -5890,7 +5999,6 @@ COPY public.tables_dress (id, view1, view2, view3, size, brand, occasions, price
 97	dresses/view1/097.jpg	dresses/view2/097.jpg	dresses/view3/097.jpg	XS	Planet Gold	lawnparties	7	Cold-Shouldered Printed Summer Dress	Summery cold-shouldered printed summer dress	None
 90	dresses/view1/090.jpg	dresses/view2/090.jpg	dresses/view3/090.jpg	S M	Unknown	interviews	7	Casual Gray T-Shirt Dress	Casual gray t-shirt dress, perfect for any occasion and dressing up or dressing down	None
 91	dresses/view1/091.jpg	dresses/view2/091.jpg	dresses/view3/091.jpg	S	Material Girl	semi-formals formals	7	Delicate Black Mini	Delicate black mini dress with an a-line skirt and a sweetheart neckline	None
-11	dresses/view1/011.jpg	dresses/view2/011.jpg	dresses/view3/011.jpg	M	Unknown	lawnparties interviews semis	7	Blue Striped Midi	Fun and comfy striped A-line dress	None
 25	dresses/view1/025.jpg	dresses/view2/025.jpg	dresses/view3/025.jpg	XL	Poetry	lawnparties semi-formals	7	Pinstriped Gray Button-Down Dress	Gray and white pinstriped dress with a sweetheart neckline and button detailing	None
 29	dresses/view1/029.jpg	dresses/view2/029.jpg	dresses/view3/029.jpg	M L	Ecote	semi-formals formals	7	Regal White Maxi	Stunning white maxi with layers of fabric and an open back	None
 33	dresses/view1/033.jpg	dresses/view2/033.jpg	dresses/view3/033.jpg	S M	H&M	semi-formals formals	7	Strapless Black and Gold Mini	Gorgeous strapless black and gold metallic mini	None
@@ -5905,22 +6013,12 @@ COPY public.tables_dress (id, view1, view2, view3, size, brand, occasions, price
 63	dresses/view1/063.jpg	dresses/view2/063.jpg	dresses/view3/063.jpg	M	Pins and Needles	semi-formals formals	7	Classic Lace Dress	White strappy lace dress for formals or semis	None
 65	dresses/view1/065.jpg	dresses/view2/065.jpg	dresses/view3/065.jpg	S	Xhileration	semi-formals formals	7	Black Strapless Jumpsuit	Elegant black strapless jumpsuit	None
 67	dresses/view1/067.jpg	dresses/view2/067.jpg	dresses/view3/067.jpg	S M	Cooperative	lawnparties semi-formals formals	7	Flared Yellow Mini	Fun flared Yellow Mini	None
-70	dresses/view1/070.jpg	dresses/view2/070.jpg	dresses/view3/070.jpg	M	Sparkle & Fade	semi-formals formals	7	Sexy Black Lace Mini	Black lace mini with a plunging v-neck and gorgeous skirt detailing	None
 78	dresses/view1/078.jpg	dresses/view2/078.jpg	dresses/view3/078.jpg	M	Urban Outfitters	semi-formals formals	7	Red Satin Maxi	Luxurious red satin maxi with a wrap tulip skirt	None
 80	dresses/view1/080.jpg	dresses/view2/080.jpg	dresses/view3/080.jpg	M	En Francais by Huey	formals semi-formals	7	Black Satin Flared Mini	Gorgeous satin mini with a flared, structured skirt and a square neckline	None
 82	dresses/view1/082.jpg	dresses/view2/082.jpg	dresses/view3/082.jpg	M L	ASOS	lawnparties semi-formals	7	Black Denim Button-Down	Cute and casual black denim button-down	None
-87	dresses/view1/087.jpg	dresses/view2/087.jpg	dresses/view3/087.jpg	S M	Kimchi Blue	formals semi-formals	7	Black Layered Tulle Mini	Black strapless mini with a sweetheart neckline and gorgeous skirt layering detail	None
-88	dresses/view1/088.jpg	dresses/view2/088.jpg	dresses/view3/088.jpg	M	H&M	formals semi-formals	7	Black Net Mini	LBD with net detailing	None
-89	dresses/view1/089.jpg	dresses/view2/089.jpg	dresses/view3/089.jpg	S	BCBGeneration	formals semi-formals	7	Pink Satin Mini	Pink satin mini with wrap detailing on the bodice and pockets	None
-92	dresses/view1/092.jpg	dresses/view2/092.jpg	dresses/view3/092.jpg	S	Shein	lawnparties	7	Vintage Floral Maxi	Classic white tie-waist maxi with floral detailing	None
-93	dresses/view1/093.jpg	dresses/view2/093.jpg	dresses/view3/093.jpg	L	Cynthia Rowley	semi-formals formals	7	Classic LBD	Simple and elegant black dress, perfect for semi-formals	None
-95	dresses/view1/095.jpg	dresses/view2/095.jpg	dresses/view3/095.jpg	S M	Robert Rodriguez	formals semi-formals	7	Black Lace Strapless Mini	Black lace strapless mini with intricate lace detailing overlayed on nude	None
-96	dresses/view1/096.jpg	dresses/view2/096.jpg	dresses/view3/096.jpg	M	And	semi-formals formals	7	Red Chiffon Maxi	Red chiffon sleeveless maxi with neckline mesh detailing	None
-98	dresses/view1/098.jpg	dresses/view2/098.jpg	dresses/view3/098.jpg	S M	Kimchi Blue	lawnparties semi-formals formals	7	Maroon Mini	Maroon mini with lace detailing	None
-99	dresses/view1/099.jpg	dresses/view2/099.jpg	dresses/view3/099.jpg	S M	Kimchi Blue	lawnparties semi-formals	7	Pink Lace Cut-Out Mini	Pink lace mini with intricate cut-out detailing	None
-111	dresses/view1/111.jpg	dresses/view2/111.jpg	dresses/view3/111.jpg	M	Pins and Needles	lawnparties semi-formals	7	Pink Chiffon Drape	Pink chiffon mini with smock-waist detailing and a draped skirt	None
-115	dresses/view1/115.jpg	dresses/view2/115.jpg	dresses/view3/115.jpg	M	CÖ for Urban Outfitt	semi-formals formals	7	Black Lace Bodycon	Black bodycon mini with lace detailing around the neckline	None
-116	dresses/view1/116.jpg	dresses/view2/116.jpg	dresses/view3/116.jpg	S M	Unknown	interviews	7	Formal Black Midi	A three-quarter sleeved midi perfect for interviews	None
+11	dresses/view1/011.jpg	dresses/view2/011.jpg	dresses/view3/011.jpg	M	Unknown	lawnparties interviews semis	7	Blue Striped Midi	Fun and comfy striped A-line dress	None
+0	dresses/view1/000.jpg	dresses/view2/000.jpg	dresses/view3/000.jpg	XS	By & By	lawnparties semi-formals formals	7	Flowy Blue Chiffon Dress	Flowy blue chiffon dress with a flattering hem	None
+2	dresses/view1/002.jpg	dresses/view2/002.jpg	dresses/view3/002.jpg	S	Forever21	lawnparties semi-formals	7	White Printed Dress	Sleeveless silky white dress with printed trim	11/26/2019
 \.
 
 
@@ -5930,7 +6028,6 @@ COPY public.tables_dress (id, view1, view2, view3, size, brand, occasions, price
 
 COPY public.tables_userinfo (id, username, size, gender, email, phone, "numberRented") FROM stdin;
 4	admin	['S', 'M']	admin	khyatia@princeton.edu	60986866966	0
-6	khyatia	['S', 'M']	F	khyatia@princeton.edu		0
 9	uuberoy	['XS', 'S']	F	uuberoy@princeton.edu	6093566458	0
 10	jorinak	['S', 'M']	Female	jorinak@princeton.edu	6094954533	0
 12	axue	['S', 'M']	Female	axue@princeton.edu	9143385195	0
@@ -6491,6 +6588,7 @@ COPY public.tables_userinfo (id, username, size, gender, email, phone, "numberRe
 569	maganh	S M 	Femail	mha169320@gmail.com		0
 570	gpgarcia	XS S 	Female	gpgarcia@princeton.edu	9259130638	0
 571	mneff	S 	Female	mneff@princeton.edu	7168012978	0
+6	khyatia	['S', 'M']	F	khyatia@princeton.edu	9737354069	0
 \.
 
 
@@ -6540,7 +6638,7 @@ SELECT pg_catalog.setval('public.auth_user_user_permissions_id_seq', 1, false);
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
-SELECT pg_catalog.setval('public.django_admin_log_id_seq', 1220, true);
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 1260, true);
 
 
 --
@@ -6554,7 +6652,7 @@ SELECT pg_catalog.setval('public.django_cas_ng_proxygrantingticket_id_seq', 1, f
 -- Name: django_cas_ng_sessionticket_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
-SELECT pg_catalog.setval('public.django_cas_ng_sessionticket_id_seq', 1624, true);
+SELECT pg_catalog.setval('public.django_cas_ng_sessionticket_id_seq', 1646, true);
 
 
 --
@@ -6568,42 +6666,42 @@ SELECT pg_catalog.setval('public.django_content_type_id_seq', 15, true);
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
-SELECT pg_catalog.setval('public.django_migrations_id_seq', 38, true);
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 46, true);
 
 
 --
 -- Name: tables_alerts_dressesSelected_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
-SELECT pg_catalog.setval('public."tables_alerts_dressesSelected_id_seq"', 1, false);
+SELECT pg_catalog.setval('public."tables_alerts_dressesSelected_id_seq"', 45, true);
 
 
 --
 -- Name: tables_alerts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
-SELECT pg_catalog.setval('public.tables_alerts_id_seq', 1, false);
+SELECT pg_catalog.setval('public.tables_alerts_id_seq', 33, true);
 
 
 --
 -- Name: tables_carts_dressesAdded_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
-SELECT pg_catalog.setval('public."tables_carts_dressesAdded_id_seq"', 1, false);
+SELECT pg_catalog.setval('public."tables_carts_dressesAdded_id_seq"', 33, true);
 
 
 --
 -- Name: tables_carts_dressesLiked_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
-SELECT pg_catalog.setval('public."tables_carts_dressesLiked_id_seq"', 1, false);
+SELECT pg_catalog.setval('public."tables_carts_dressesLiked_id_seq"', 1, true);
 
 
 --
 -- Name: tables_carts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
-SELECT pg_catalog.setval('public.tables_carts_id_seq', 1, false);
+SELECT pg_catalog.setval('public.tables_carts_id_seq', 17, true);
 
 
 --

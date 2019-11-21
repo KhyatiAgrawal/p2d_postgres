@@ -10,6 +10,10 @@ import Account from './pages/Account/Account'
 import Orders from './pages/Orders/Orders'
 import Cart from './pages/Cart/Cart'
 import Favorites from './pages/Favorites/Favorites'
+import Faq from './pages/Faq/faq'
+
+// var cors = require('cors');    
+// app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
@@ -26,6 +30,7 @@ ReactDOM.render(
 			<Route exact path="/feed" component={Feed} />
 			<Route exact path="/cart" component={Cart} />
 			<Route exact path="/favorites" component={Favorites} />
+			<Route exact path="/faq" component={Faq} />
 		</Switch>
   </BrowserRouter>
 , document.getElementById('root'));

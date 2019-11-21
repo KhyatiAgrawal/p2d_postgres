@@ -13,11 +13,34 @@ import black_heart from '../../styles/svgs/black-heart.svg'
 import left_arrow from '../../styles/svgs/left-arrow.svg'
 
 import axios from 'axios';
-const API_URL = 'http://127.0.0.1:8000';
+import Cookies from 'js-cookie';
+
+// Setting axios options
+
+// axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
+// axios.defaults.headers.post['Access-Control-Allow-Credentials'] = 'true';
+// axios.defaults.headers.post['Access-Control-Allow-Origin'] = 'https://localhost:8000';
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = "csrftoken"
+
+const API_URL = 'https://localhost:8000';
 const api_endpoint = new retrieveData();
 
-class Feed extends React.Component {
+// let _csrfToken = null;
 
+// async function getCsrfToken() {
+//   if (_csrfToken === null) {
+//     const response = await fetch(`${API_URL}/csrf/`, {
+//       credentials: 'include',
+//     });
+//     const data = await response.json();
+//     _csrfToken = data.csrfToken;
+//   }
+//   return _csrfToken;
+// }
+
+class Feed extends React.Component {
 	constructor(props) {
 		super(props)
 
@@ -26,7 +49,8 @@ class Feed extends React.Component {
 		this.state = {
 			dresses: [],
 			searchFilters: storedItems ? storedItems['searchFilters'] : [],
-			filters: storedItems ? storedItems['filters'] : [],
+			filters: [],
+			searchFilters: [],
 			activeFilters: storedItems ? storedItems['activeFilters'] : new Array(0).fill(false),
 			showSidebar: storedItems ? storedItems['showSidebar'] : true,
 			showFilters: {
@@ -43,7 +67,7 @@ class Feed extends React.Component {
 		let clusteredFilters = this.clusterFilters(filters)
 		let res;
 		if (filters && filters.length > 0) {
-			res = await axios.post(`${API_URL}/api/feed/`, clusteredFilters)
+			res = await axios({method: 'post', url: `${API_URL}/api/feed/`, data: clusteredFilters})
 		} else {
 			res = await axios.get(`${API_URL}/api/feed/`)
 		}
@@ -148,6 +172,7 @@ class Feed extends React.Component {
 	}
 
 	render() {
+		console.log(this.state.dresses)
 		localStorage.setItem('state', JSON.stringify(this.state))
 		return (
 			<div className="Feed">

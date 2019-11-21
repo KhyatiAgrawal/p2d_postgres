@@ -6,7 +6,10 @@ import plus_gray from '../../styles/svgs/plus-gray.svg';
 import heart_gray from '../../styles/svgs/black-heart.svg';
 
 import axios from 'axios';
-const API_URL = 'http://127.0.0.1:8000';
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = "csrftoken"
+const API_URL = 'https://localhost:8000';
 
 class Modal extends Component {
   constructor(props) {
@@ -37,11 +40,13 @@ class Modal extends Component {
   }
 
   addToCart = () => {
-    axios.put(`${API_URL}/api/cart/`, this.state.id)
+    console.log(`${API_URL}/api/cart/`)
+    // axios({method: 'PUT', url: `${API_URL}/api/cart/`, data: this.state.id})
+    axios.put(`${API_URL}/api/cart/`, {'dressToAdd': this.state.id})
   }
 
   addToFavorites = () => {
-    axios.put(`${API_URL}/api/favorites/`, this.state.id)
+    axios.put(`${API_URL}/api/favorites/`, {'dressToAdd': this.state.id})
   }
 
   render() {
