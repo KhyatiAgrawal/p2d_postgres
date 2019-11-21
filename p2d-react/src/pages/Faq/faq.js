@@ -79,7 +79,7 @@ class FAQ extends Component {
 					</div>
 
 					<div className="infoFAQ__container">
-						<div className="infoFAQ__text">{`We trust you to handle the dresses with care, because our team has worked hard to establish this service for you. You may incurr a fine of upto $10 for damages to the dresses`}</div>
+						<div className="infoFAQ__text">{`We trust you to handle the dresses with care, because our team has worked hard to establish this service for you. You may incur a fine of upto $10 for damages to the dresses`}</div>
 
 					</div>
 					<div className="faq-title__container">
@@ -112,7 +112,7 @@ class FAQ extends Component {
 					</div>
 
 					<div className="infoFAQ__container">
-						<div className="infoFAQ__text">{`Keep an eye-out for another "buy-from-students" email from us next semester. During our "buy-from-students" events we accept undamaged, one-pieces clothing items from Princeton studnets at a minimum rate of $5. `}</div>
+						<div className="infoFAQ__text">{`Keep an eye-out for another "buy-from-students" email from us next semester. During our "buy-from-students" events we accept undamaged, one-pieces clothing items from Princeton students at a minimum rate of $5. `}</div>
 
 					</div>
 					<div className="faq-title__container">
@@ -120,7 +120,7 @@ class FAQ extends Component {
 					</div>
 
 					<div className="infoFAQ__container">
-						<div className="infoFAQ__text">{`Awesome! Thanks for your interest. At the moment, we need administrative staff to scale our service. If you're able to commit 4 hours per week, please reach out to khyatia@princeton.edu or uuberoy@princeton.edu, and they would be glad to tell you more about our initiative and get you on board!`}</div>
+						<div className="infoFAQ__text">{`Awesome! Thanks for your interest. At the moment, we are looking for software engineers to scale our service. If you're able to commit 4 hours per week, please reach out to khyatia@princeton.edu or uuberoy@princeton.edu, and they would be glad to tell you more about our initiative and schedule an interview!`}</div>
 					</div>
 					<br />
 					<br />
