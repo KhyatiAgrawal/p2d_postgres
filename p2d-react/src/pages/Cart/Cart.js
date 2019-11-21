@@ -130,7 +130,7 @@ class Cart extends Component {
                 Check availability
             </div>
             <div style={this.state.pickedDate ? {display: "none"} : {display: "block"}} className="byline-cart-text">
-              *We only accept try-on requests that are a minimum of three days from the current date.
+              *We only accept rental requests that are a minimum of three days from the current date.
             </div>
             <div style={this.state.invalidTime ? {display: "block"} : {display: "none"}} className="byline-cart-text">
               You have already scheduled a trial with us!

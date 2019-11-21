@@ -131,34 +131,16 @@ def getAvailableForTrial(request):
         # Expire the trial if outdated
         if  dt.now() > date_obj:
             alreadyScheduled.delete()
-            return getAvailableForTrial(request)
+            tentative_Dresses = filterCart(uInfo, request.data['rentalDate'])
+            return Response({'valid': 'true', 'dresses': tentative_Dresses})
+            
         else:
             return Response({'valid': 'false'})
 
     # If the they haven't scheduled their trial yet
     # Show them the dresses they that are available at their specified date
     except Alerts.DoesNotExist:
-
-        # Get the three day window that they are trying to book
-        userRentalDate_obj = dt.strptime(request.data['rentalDate'], '%m/%d/%Y')
-        d1 = userRentalDate_obj.strftime('%m/%d/%Y')
-        d2 = (userRentalDate_obj + datetime.timedelta(days=1)).strftime('%m/%d/%Y')
-        d3 = (userRentalDate_obj + datetime.timedelta(days=-1)).strftime('%m/%d/%Y')
-        dateWindow = [d1, d2, d3]
-
-        # Get the dresses they are trying to book
-        tentative_Dresses = []
-        cart = Carts.objects.get(user=uInfo)
-        dresses = cart.dressesAdded.all()
-        for DressObj in dresses:
-            booked = DressObj.unavailableDates
-            if any(x in booked for x in dateWindow):
-                cart.dressesLiked.add(DressObj)
-                continue
-            serializer = DressSerializer(DressObj) 
-            tentative_Dresses.append(serializer.data)
-        cart.save()
-        
+        tentative_Dresses = filterCart(uInfo, request.data['rentalDate'])
         return Response({'valid': 'true', 'dresses': tentative_Dresses})
 
 @api_view((['GET']))
@@ -211,7 +193,7 @@ def getAvailableTimes(request):
         end_time_obj = dt.strptime(endString, '%Y-%m-%dT%H:%M:%S-05:00')
         now = dt.now().strftime("%Y-%m-%d %H:%M:%S")
         
-        if  start_time_obj <= (dt.now() + datetime.timedelta(days=7)) and eventType == "Incharge":
+        if start_time_obj <= (dt.now() + datetime.timedelta(days=7)) and eventType == "Incharge":
             slot = start_time_obj
             while slot < end_time_obj:
                 slots.append({"DateTime": slot, "PersonIncharge": eventInCharge})
@@ -357,7 +339,8 @@ def getRentalHistory(request):
     return Response({'trial': toSend0, 'pastHistory': toSend1, 'upcomingHistory': toSend2})
 
 
-# Internal use method
+#############################################################################################
+# Internal methods after this point
 def send_email_create(uname, userEmailId, trialObj, personIncharge):
     creds = None
     if os.path.exists('token.pickle'):
@@ -488,6 +471,26 @@ def send_email_delete(eid):
         return
 
 
+def filterCart(uInfo, dateNeeded):
+    # Get the three day window that they are trying to book
+    userRentalDate_obj = dt.strptime(dateNeeded, '%m/%d/%Y')
+    d1 = userRentalDate_obj.strftime('%m/%d/%Y')
+    d2 = (userRentalDate_obj + datetime.timedelta(days=1)).strftime('%m/%d/%Y')
+    d3 = (userRentalDate_obj + datetime.timedelta(days=-1)).strftime('%m/%d/%Y')
+    dateWindow = [d1, d2, d3]
+
+    tentative_Dresses = []
+    cart = Carts.objects.get(user=uInfo)
+    dresses = cart.dressesAdded.all()
+    for DressObj in dresses:
+        booked = DressObj.unavailableDates
+        if any(x in booked for x in dateWindow):
+            cart.dressesLiked.add(DressObj)
+            continue
+        serializer = DressSerializer(DressObj) 
+        tentative_Dresses.append(serializer.data)
+    cart.save()
+    return tentative_Dresses
 
 
     
