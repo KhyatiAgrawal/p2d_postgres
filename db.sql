@@ -5849,6 +5849,7 @@ ekwelj67str1303o2a8r1s9hprozbz9v	MjgwYWJkNjY1M2EyOWU0YTM5NWE1Y2M3ZDQ2MWI4MDhiYjU
 --
 
 COPY public.tables_alerts (id, "trialDateAndTime", user_id, "dateNeeded", "eventId") FROM stdin;
+30	11/21/19 03:30 PM	6	11/27/2019	b5gv4vdaalptke5n9vtlr6g7dk
 \.
 
 
@@ -5857,6 +5858,7 @@ COPY public.tables_alerts (id, "trialDateAndTime", user_id, "dateNeeded", "event
 --
 
 COPY public."tables_alerts_dressesSelected" (id, alerts_id, dress_id) FROM stdin;
+41	30	1
 \.
 
 
@@ -5874,7 +5876,7 @@ COPY public.tables_carts (id, "dressAdded_id", user_id, "rentalHistory") FROM st
 --
 
 COPY public."tables_carts_dressesAdded" (id, carts_id, dress_id) FROM stdin;
-25	16	43
+28	16	1
 \.
 
 
@@ -5894,6 +5896,7 @@ COPY public.tables_dress (id, view1, view2, view3, size, brand, occasions, price
 4	dresses/view1/004.jpg	dresses/view2/004.jpg	dresses/view3/004.jpg	S	Old Navy	lawnparties semi-formals	7	Casual Black Button Romper	Casual elegant black romper with button detailing and - pockets!	None
 101	dresses/view1/101.jpg	dresses/view2/101.jpg	dresses/view3/101.jpg	S M	Urban Outfitters	lawnparties semi-formals formals	7	Pink Empire-Waist Mini	Pink lace mini with an empire waist	None
 109	dresses/view1/109.jpg	dresses/view2/109.jpg	dresses/view3/109.jpg	S M	Uniqlo	interviews	7	Structured Black and White Midi	Structured black and white printed dress, perfect for interviews	None
+43	dresses/view1/043.jpg	dresses/view2/043.jpg	dresses/view3/043.jpg	M	Bailey Blue	lawnparties semi-formals formals	7	Pink Lace Dress	Pretty in pink lace knee-length dress	None
 30	dresses/view1/030.jpg	dresses/view2/030.jpg	dresses/view3/030.jpg	XS	Papaya	semi-formals formals	7	Striped A-Line Mini	Bold striped mini with an a-line skirt	None
 72	dresses/view1/072.jpg	dresses/view2/072.jpg	dresses/view3/072.jpg	XS	Mossimo	lawnparties	7	Blue and Pink Floral Dress	Summery blue floral dress with pink spots and slightly pleated detailing	None
 87	dresses/view1/087.jpg	dresses/view2/087.jpg	dresses/view3/087.jpg	S M	Kimchi Blue	formals semi-formals	7	Black Layered Tulle Mini	Black strapless mini with a sweetheart neckline and gorgeous skirt layering detail	None
@@ -5915,7 +5918,7 @@ COPY public.tables_dress (id, view1, view2, view3, size, brand, occasions, price
 8	dresses/view1/008.jpg	dresses/view2/008.jpg	dresses/view3/008.jpg	M	Forever21	semi-formals formals	7	Rose Gold Sequined Mini	Glamorous flapper rose-gold sequined mini	None
 114	dresses/view1/114.jpg	dresses/view2/114.jpg	dresses/view3/114.jpg	XS	H&M	lawnparties semi-formals	7	Casual Striped Tank Dress	Fun and casual striped tank dress	None
 108	dresses/view1/108.jpg	dresses/view2/108.jpg	dresses/view3/108.jpg	S	Unknown	lawnparties	7	Tie-Dye Blue Dress	Flowy tie-dye blue dress with smock detailing	None
-1	dresses/view1/001.jpg	dresses/view2/001.jpg	dresses/view3/001.jpg	S	Tobi	semi-formals formals	7	Mauve Lace Mini	Delicate mauve mini with a deep v, long bell sleeves	None
+1	dresses/view1/001.jpg	dresses/view2/001.jpg	dresses/view3/001.jpg	S	Tobi	semi-formals formals	7	Mauve Lace Mini	Delicate mauve mini with a deep v, long bell sleeves	11/27/2019
 113	dresses/view1/113.jpg	dresses/view2/113.jpg	dresses/view3/113.jpg	M	Old Navy	interviews theme-nights	7	Casual Plaid Long-Sleeved Dress	Casual black, red, and green plaid shirt-dress	None
 117	dresses/view1/117.jpg	dresses/view2/117.jpg	dresses/view3/117.jpg	XS	Neon Rose	lawnparties semi-formals formals	7	Flirty Chiffon Wrap	Fun and flirty red chiffon polka-dotted wrap dress with ties	None
 118	dresses/view1/118.jpg	dresses/view2/118.jpg	dresses/view3/118.jpg	S	zara	lawnparties	7	Maroon Floral Ruffled Dress	Maroon floral mini with ruffle sleeve detailing and floral embroidery	None
@@ -5952,7 +5955,6 @@ COPY public.tables_dress (id, view1, view2, view3, size, brand, occasions, price
 39	dresses/view1/039.jpg	dresses/view2/039.jpg	dresses/view3/039.jpg	S	Forever21	lawnparties semi-formals formals	7	White Lace Mini	White halter-neck mini with a intricate lace detailing	None
 40	dresses/view1/040.jpg	dresses/view2/040.jpg	dresses/view3/040.jpg	S	Tobi	semi-formals formals	7	Glamorous Grey Mini	Glamorous knit multishade woolen grey mini with an assymetrical neckline	None
 41	dresses/view1/041.jpg	dresses/view2/041.jpg	dresses/view3/041.jpg	XS	H&M	lawnparties	7	Printed Tie-Waist Romper	Printed romper with an adjustable tie-waist	None
-43	dresses/view1/043.jpg	dresses/view2/043.jpg	dresses/view3/043.jpg	M	Bailey Blue	lawnparties semi-formals formals	7	Pink Lace Dress	Pretty in pink lace knee-length dress	None
 46	dresses/view1/046.jpg	dresses/view2/046.jpg	dresses/view3/046.jpg	S M	Land's End	semi-formals formals	7	Midnight Blue Velvet Midi	Gorgeous midnight blue velvet midi dress	None
 48	dresses/view1/048.jpg	dresses/view2/048.jpg	dresses/view3/048.jpg	XS	American Rag	semi-formals formals	7	Black Lace Cap Sleeve Mini	Black mini with stunning lace overlay	None
 50	dresses/view1/050.jpg	dresses/view2/050.jpg	dresses/view3/050.jpg	S	Ambiance	lawnparties semi-formals	7	Maroon Floral Romper	Flirty maroon romper with printed flower pattern and spaghetti straps	None
@@ -6665,21 +6667,21 @@ SELECT pg_catalog.setval('public.django_migrations_id_seq', 46, true);
 -- Name: tables_alerts_dressesSelected_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
-SELECT pg_catalog.setval('public."tables_alerts_dressesSelected_id_seq"', 39, true);
+SELECT pg_catalog.setval('public."tables_alerts_dressesSelected_id_seq"', 41, true);
 
 
 --
 -- Name: tables_alerts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
-SELECT pg_catalog.setval('public.tables_alerts_id_seq', 28, true);
+SELECT pg_catalog.setval('public.tables_alerts_id_seq', 30, true);
 
 
 --
 -- Name: tables_carts_dressesAdded_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin2
 --
 
-SELECT pg_catalog.setval('public."tables_carts_dressesAdded_id_seq"', 26, true);
+SELECT pg_catalog.setval('public."tables_carts_dressesAdded_id_seq"', 28, true);
 
 
 --
