@@ -158,8 +158,7 @@ def getAvailableForTrial(request):
             serializer = DressSerializer(DressObj) 
             tentative_Dresses.append(serializer.data)
         
-        newDict.update({'valid': 'true', 'dresses': tentative_Dresses})
-        return Response(newDict)
+        return Response({'valid': 'true', 'dresses': tentative_Dresses})
 
 @api_view((['GET']))
 @login_required
