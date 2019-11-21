@@ -139,12 +139,11 @@ def getAvailableForTrial(request):
     # Show them the dresses they that are available at their specified date
     except Alerts.DoesNotExist:
 
-        
         # Get the three day window that they are trying to book
         userRentalDate_obj = dt.strptime(request.data['rentalDate'], '%m/%d/%Y')
-        d1 = userRentalDate_obj.strftime('%m/%d/%y')
-        d2 = (userRentalDate_obj + datetime.timedelta(days=1)).strftime('%m/%d/%y')
-        d3 = (userRentalDate_obj + datetime.timedelta(days=-1)).strftime('%m/%d/%y')
+        d1 = userRentalDate_obj.strftime('%m/%d/%Y')
+        d2 = (userRentalDate_obj + datetime.timedelta(days=1)).strftime('%m/%d/%Y')
+        d3 = (userRentalDate_obj + datetime.timedelta(days=-1)).strftime('%m/%d/%Y')
         dateWindow = [d1, d2, d3]
 
         # Get the dresses they are trying to book
@@ -154,9 +153,11 @@ def getAvailableForTrial(request):
         for DressObj in dresses:
             booked = DressObj.unavailableDates
             if any(x in booked for x in dateWindow):
+                cart.dressesLiked.add(DressObj)
                 continue
             serializer = DressSerializer(DressObj) 
             tentative_Dresses.append(serializer.data)
+        cart.save()
         
         return Response({'valid': 'true', 'dresses': tentative_Dresses})
 
