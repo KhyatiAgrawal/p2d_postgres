@@ -97,7 +97,7 @@ class Alerts(models.Model):
         for dressObj in dresses:
             dressObj.unavailableDates = dressObj.unavailableDates.replace(dateToDelete + " ","")
             dressObj.unavailableDates = dressObj.unavailableDates.replace(dateToDelete,"")
-            if dressObj.unavailableDates.isspace():
+            if dressObj.unavailableDates.isspace() or  dressObj.unavailableDates == "":
                 dressObj.unavailableDates = "None"
             dressObj.save()
         super(Alerts, self).delete(*args, **kwargs)

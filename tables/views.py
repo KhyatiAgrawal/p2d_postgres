@@ -233,7 +233,6 @@ def getOrUpdate_Alerts(request):
         except Alerts.DoesNotExist: 
             return Response({}, status=status.HTTP_204_NO_CONTENT)
 
-
     if request.method == 'PUT':
         try: 
             trial = Alerts.objects.get(user=uInfo)
@@ -268,10 +267,10 @@ def getOrUpdate_Alerts(request):
 
     if request.method == 'DELETE':
         try: 
-            trial = Alerts.objects.get(user=uname)
+            trial = Alerts.objects.get(user=uInfo)
         except:
             return Response({}, status=status.HTTP_400_BAD_REQUEST)
-        send_email_delete(trial)
+        send_email_delete(trial.eventId)
         trial.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -464,8 +463,7 @@ def getCart(uInfoObject):
 
 
 # Internal use method
-def send_email_delete(trialObj):
-    eid = trialObj.eventId
+def send_email_delete(eid):
     creds = None
     if os.path.exists('token.pickle'):
         with open('token.pickle', 'rb') as token:
@@ -483,8 +481,11 @@ def send_email_delete(trialObj):
             pickle.dump(creds, token)
 
     service = build('calendar', 'v3', credentials=creds)
-    service.events().delete(calendarId='primary', eventId='eventId', sendUpdates= "all").execute()
-    return
+    try:
+        service.events().delete(calendarId='primary', eventId=eid, sendUpdates= "all").execute()
+        return
+    except:
+        return
 
 
 
