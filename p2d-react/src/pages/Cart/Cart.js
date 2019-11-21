@@ -119,7 +119,9 @@ class Cart extends Component {
             <div className="cart-none__text">There are currently no items in your cart.</div>
         </div>
         <div className="cart-body">
-          <div className="cart-dresses"><DressDisplay cart={true} handleTotal={this.totalHandler} date_needed={this.state.date_needed} invalidTime={this.invalidTime}/></div>
+          <div className="cart-dresses">
+            <DressDisplay cart={true} handleTotal={this.totalHandler} date_needed={this.state.date_needed} invalidTime={this.invalidTime}/>
+          </div>
           <div className="cart-summary" style={{maxHeight: this.state.total * 30 + 195}}> 
           <div className="cart-summary__date" style={this.state.total === 0 ? {display: "none"} : {display: "block"}}>
             <div className="cart-summary__total" id="cart-date">When do you need these dresses?</div>
@@ -127,10 +129,10 @@ class Cart extends Component {
             <div className="cart-summary__submit" onClick={this.checkAvailability}>
                 Check availability
             </div>
-            <div style={this.state.pickedDate ? {display: "none"} : {display: "block"}}>
+            <div style={this.state.pickedDate ? {display: "none"} : {display: "block"}} className="byline-cart-text">
               *We only accept try-on requests that are a minimum of three days from the current date.
             </div>
-            <div style={this.state.invalidTime ? {display: "block"} : {display: "none"}}>
+            <div style={this.state.invalidTime ? {display: "block"} : {display: "none"}} className="byline-cart-text">
               You have already scheduled a trial with us!
             </div>
           </div>
@@ -146,14 +148,14 @@ class Cart extends Component {
                   </div>
                 ))}
               </div>
-              <div className="disclaimer">*If some dresses were removed from your cart, it means that they are already booked for your selected date. We have moved them over to your favorites!</div>
+              <div className="byline-cart-text disclaimer">*If some dresses were removed from your cart, it means that they are already booked for your selected date. We have moved them over to your favorites!</div>
               <div className="date-dropdown">
                 <Dropdown id="dropdown" options={this.state.available_times} placeholder="Select a try-on time" onChange={this._onSelect} value={defaultOption}/>
               </div>
               <div className="cart-summary__submit" onClick={this.toggleSubmitted} style={this.state.submitted ? {opacity: 0.7, pointer: 'default'} : {}}>
                 Submit try-on request!
               </div>
-              <div className="cart-summary__submitted" style={this.state.submitted ? {display: 'flex'} : {display: 'none'}}>
+              <div className="byline-cart-text cart-summary__submitted" style={this.state.submitted ? {display: 'flex'} : {display: 'none'}}>
                 Your request has been submitted! <br />Look out for a Google Calendar invite to your Princeton account with details about location and time. If you wish to cancel your request, please go to the Orders page!
               </div>
             </div>

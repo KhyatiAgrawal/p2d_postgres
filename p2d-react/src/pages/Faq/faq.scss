@@ -18,7 +18,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		margin-top: calc(5vw + 40px);
+		margin-top: calc(5vw + 45px);
 		width: 100%;
 	}
 
@@ -40,8 +40,8 @@
 	&__container {
 		display: flex;
 		width: 60%;
-		align-items: left;
-		justify-content: left;
+		align-items: flex-start;
+		justify-content: flex-start;
 		margin-top: 20px;
 	}
 
@@ -90,5 +90,13 @@
 	&__stat {
 		font-size: 5px;
 		color: $p2d-gray;
+	}
+}
+
+@media only screen and (max-width: 700px) {
+	.faq-title-top {
+		&__text {
+			font-size: 18px;
+		}
 	}
 }

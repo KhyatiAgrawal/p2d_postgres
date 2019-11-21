@@ -47,18 +47,18 @@
 	width: 100%
 }
 
-.cart-dresses {
-	width: 60%;
-}
+// .cart-dresses {
+// 	// width: 60%;
+// }
 
 .cart-summary {
 	color: $p2d-gray;
-
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	align-content: center;
-	width: 40%;
+	max-width: 40%;
+	margin-left: 50px;
 
 	&__date {
 		display: flex;
@@ -105,17 +105,15 @@
 	&__submit {
 		margin-top: 20px;
 		margin-bottom: 20px;
-		margin-left: auto;
-		margin-right: auto;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		background-color: $p2d-dark;
 		color: white;
 		height: 35px;
 		padding-left: 5px;
 		padding-right: 5px;
 		border-radius: 3px;
-
-		display: flex;
-		align-items: center;
 		cursor: pointer;
 
 		&:hover {
@@ -141,6 +139,11 @@
 	margin-top: 20px;
 }
 
+.byline-cart-text {
+	font-size: 14px;
+	color: $p2d-gray;
+}
+
 @media only screen and (max-width: 700px) {
 	.cart-title {
 		margin-top: calc(5vw + 60px);
@@ -153,6 +156,7 @@
 	.cart-summary {
 		font-size: 12px;
 		width: 50%;
+		margin-left: 0px;
 
 		&__items, &__total, &__submit, &__title {
 			margin-right: 0;
@@ -160,15 +164,16 @@
 		}
 
 		&__total {
-			max-width: 100px;
+			font-size: 12px;
 		}
 	}
 
-	.cart-dresses {
-		width: 30%;
+	.byline-cart-text {
+		font-size: 12px;
+		display: flex;
 	}
 
-	.cart-body {
-		justify-content: space-between;
-	}
+	// .cart-dresses {
+	// 	width: 30%;
+	// }
 }

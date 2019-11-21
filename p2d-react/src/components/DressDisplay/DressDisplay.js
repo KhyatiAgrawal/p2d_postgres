@@ -79,7 +79,7 @@ class DressDisplay extends Component {
         brand: res.data[i]["brand"],
         size: res.data[i]["size"],
         description: res.data[i]["description"],
-        occasion: res.data[i]["occasions"].split(/(\s+)/),
+        occasion: res.data[i]["occasions"],
         price: res.data[i]["price"],
         availability: res.data[i]["unavailableDates"],
         dateRented: res.data[i]['Date'] || null

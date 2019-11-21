@@ -82,8 +82,9 @@ class Orders extends Component {
 		return (
 			<div className="Orders">
 				<div><Navbar weight="heavy"/></div>
-				<div className="trials-container">
+				<div className="trials-container orders-title__text-container">
 					<div className="trials-container__text">Upcoming Trials ({this.state.total})</div>
+					<div style={this.state.total === 0 ? {display: "flex"} : {display: "none"}}>You have no upcoming trials!</div>
 					<div style={this.state.total === 0 ? {display: "none"} : {display: "flex"}} className="trials-container__subcontainer">
 						<div className="trials-container__subtext">Date: {this.state.date} | Time: {this.state.time}</div>
 						<div className="trials-summary__items">
@@ -99,7 +100,7 @@ class Orders extends Component {
 				</div>
 				<div className="orders-container">
 					<div className="orders-title__container">
-						<div>
+						<div className="orders-title__text-container">
 							<div className="orders-title__text">
 								Rental History ({this.state.total_oldRentals})
 							</div>
@@ -110,7 +111,7 @@ class Orders extends Component {
 							</div>
 							<DressDisplay old_orders={true} handleTotal={this.handleTotalOldRentals}/>
 						</div>
-						<div>
+						<div className="orders-title__text-container">
 							<div className="orders-title__text">
 								Upcoming Rentals ({this.state.total_upcomingRentals})
 							</div>

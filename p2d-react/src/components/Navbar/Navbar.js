@@ -102,9 +102,10 @@ class Navbar extends Component {
         <div className={"hamburger-content " + weight} style={!this.state.showHamburger ? {visibility: 'hidden'} : {visibility: 'visible', opacity: '1'}}>
           <a className="nav-link" href="/account"><div className="hamburger-content__item"><img src={this.state.icons[0]} className='hamburger-svg' /></div></a>
           <a className="nav-link" href="/feed"><div className="hamburger-content__item"><img src={this.state.icons[1]} className='hamburger-svg' /></div></a>
-          <a className="nav-link" href="/#"><div className="hamburger-content__item"><img src={this.state.icons[2]} className='hamburger-svg' /></div></a>
+          <a className="nav-link" href="/orders"><div className="hamburger-content__item"><img src={this.state.icons[2]} className='hamburger-svg' /></div></a>
           <a className="nav-link" href="/favorites"><div className="hamburger-content__item"><img src={this.state.icons[3]} className='hamburger-svg' /></div></a>
           <a className="nav-link" href="/cart"><div className="hamburger-content__item"><img src={this.state.icons[4]} className='hamburger-svg' /></div></a>
+          <a className="nav-link" href="/faq"><div className="hamburger-content__item"><img src={this.state.icons[5]} className='hamburger-svg' /></div></a>
         </div>
       </div>
     );
