@@ -21,6 +21,9 @@
 	align-content: center;
 	align-items: center;
 
+	&__subcontainer {
+		flex-direction: column;
+	}
 	&__text {
 		color: $p2d-gray;
 		font-size: 32px;
@@ -30,7 +33,20 @@
 	&__subtext {
 		margin-top: 20px;
 		color: $p2d-gray;
+		font-weight: bold;
 	}
+}
+
+.delete {
+	display: flex;
+	color: white;
+	height: 50px;
+	background-color: #d11a2a;
+	justify-content: center;
+	align-items: center;
+	border-radius: 5px;
+	margin-top: 20px;
+	cursor: pointer;
 }
 
 .trials-summary {
@@ -44,6 +60,7 @@
 
 	&__items {
 		font-family: "Roboto";
+		color: $p2d-gray;
 		padding-top: 20px;
 		margin-left: 40px;
 		margin-right: 40px;
