@@ -131,14 +131,34 @@ def getAvailableForTrial(request):
         # Expire the trial if outdated
         if  dt.now() > date_obj:
             alreadyScheduled.delete()
-            return getAvailableForTrial(request)
+            # Get the three day window that they are trying to book
+            userRentalDate_obj = dt.strptime(request.data['rentalDate'], '%m/%d/%Y')
+            d1 = userRentalDate_obj.strftime('%m/%d/%y')
+            d2 = (userRentalDate_obj + datetime.timedelta(days=1)).strftime('%m/%d/%y')
+            d3 = (userRentalDate_obj + datetime.timedelta(days=-1)).strftime('%m/%d/%y')
+            dateWindow = [d1, d2, d3]
+
+            # Get the dresses they are trying to book
+            tentative_Dresses = []
+            cart = Carts.objects.get(user=uInfo)
+            dresses = cart.dressesAdded.all()
+            for DressObj in dresses:
+                newDict = {}
+                booked = DressObj.unavailableDates
+                if any(x in booked for x in dateWindow):
+                    continue
+                serializer = DressSerializer(DressObj) 
+                newDict.update(serializer.data)
+                tentative_Dresses.append(newDict)
+            
+            newDict.update({'valid': 'true', 'dresses': tentative_Dresses})
+            return Response(newDict)
         else:
             return Response({'valid': 'false'})
 
     # If the they haven't scheduled their trial yet
     # Show them the dresses they that are available at their specified date
     except Alerts.DoesNotExist:
-
         
         # Get the three day window that they are trying to book
         userRentalDate_obj = dt.strptime(request.data['rentalDate'], '%m/%d/%Y')
