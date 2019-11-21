@@ -139,27 +139,29 @@ def getAvailableForTrial(request):
     # Show them the dresses they that are available at their specified date
     except Alerts.DoesNotExist:
 
+        
         # Get the three day window that they are trying to book
-        userRentalDate_obj = dt.strptime(request.data['rentalDate'], '%m/%d/%y')
+        userRentalDate_obj = dt.strptime(request.data['rentalDate'], '%m/%d/%Y')
         d1 = userRentalDate_obj.strftime('%m/%d/%y')
         d2 = (userRentalDate_obj + datetime.timedelta(days=1)).strftime('%m/%d/%y')
         d3 = (userRentalDate_obj + datetime.timedelta(days=-1)).strftime('%m/%d/%y')
         dateWindow = [d1, d2, d3]
 
         # Get the dresses they are trying to book
-        cart = Carts.objects.get(user=uname)
-        tentativeDresses = []
+        tentative_Dresses = []
+        cart = Carts.objects.get(user=uInfo)
         dresses = cart.dressesAdded.all()
         for DressObj in dresses:
+            newDict = {}
             booked = DressObj.unavailableDates
             if any(x in booked for x in dateWindow):
                 continue
-            tentativeDresses.append(DressObj)
-
-        # return the available dresses
-        serializer = DresSerializer(tentativeDresses, many=True) 
-        serializer.data.update({'valid': 'true'})
-        return Response(serializer.data)
+            serializer = DressSerializer(DressObj) 
+            newDict.update(serializer.data)
+            tentative_Dresses.append(newDict)
+        
+        newDict.update({'valid': 'true', 'dresses': tentative_Dresses})
+        return Response(newDict)
 
 @api_view((['GET']))
 @login_required
