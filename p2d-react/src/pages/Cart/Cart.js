@@ -147,13 +147,13 @@ class Cart extends Component {
                 ))}
               </div>
               <div className="date-dropdown">
-                <Dropdown id="dropdown" options={this.state.available_times} placeholder="Select a pickup time" onChange={this._onSelect} value={defaultOption}/>
+                <Dropdown id="dropdown" options={this.state.available_times} placeholder="Select a try-on time" onChange={this._onSelect} value={defaultOption}/>
               </div>
               <div className="cart-summary__submit" onClick={this.toggleSubmitted} style={this.state.submitted ? {opacity: 0.7, pointer: 'default'} : {}}>
                 Submit try-on request!
               </div>
               <div className="cart-summary__submitted" style={this.state.submitted ? {display: 'flex'} : {display: 'none'}}>
-                Your request has been submitted - <br />we'll confirm your appointment shortly!
+                Your request has been submitted! <br />Look out for a Google Calendar invite to your Princeton account with details about location and time. If you wish to cancel your request, please go to the Orders page!
               </div>
             </div>
             : <div />
