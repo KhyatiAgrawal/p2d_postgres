@@ -20,7 +20,8 @@ class Orders extends Component {
 		this.state = {
 			oldrequests: [],
 			newrequests: [],
-			trial_data: {}
+			trial_data: {},
+			total: 0,
 		}
 	}
 
@@ -36,6 +37,7 @@ class Orders extends Component {
 		let trial_data = {}
 		let date;
 		let time;
+		let total = 0;
 		for (let i in res.data) {
 			if (!date) date = res.data[i].date
 			if (!time) time = res.data[i].time
@@ -43,14 +45,20 @@ class Orders extends Component {
 				title: res.data[i].title,
 				price: res.data[i].price
 			}
+			total += 1;
 		}
 		if (this.mounted) {
 			this.setState({
 				date: date,
 				time: time, 
-				trial_data: trial_data
+				trial_data: trial_data,
+				total: total,
 			})
 		}
+	}
+
+	deleteRequest = async () => {
+		await axios.delete(`${API_URL}/api/alerts/`)
 	}
 
 	componentDidMount() {
@@ -68,14 +76,17 @@ class Orders extends Component {
 				<div><Navbar weight="heavy"/></div>
 				<div className="trials-container">
 					<div className="trials-container__text">Upcoming Trials</div>
-					<div className="trials-container__subtext">Date: {this.state.date} | Time: {this.state.time}</div>
-					<div className="trials-summary__items">
-						{Object.keys(this.state.trial_data).map((key, index) => (
-						<div className="trials-summary__item">
-							<div>{this.state.trial_data[index].title}</div>
-							<div>${this.state.trial_data[index].price}.00</div>
+					<div style={this.state.total === 0 ? {display: "none"} : {display: "flex"}} className="trials-container__subcontainer">
+						<div className="trials-container__subtext">Date: {this.state.date} | Time: {this.state.time}</div>
+						<div className="trials-summary__items">
+							{Object.keys(this.state.trial_data).map((key, index) => (
+							<div className="trials-summary__item">
+								<div>{this.state.trial_data[index].title}</div>
+								<div>${this.state.trial_data[index].price}.00</div>
+							</div>
+							))}
 						</div>
-						))}
+						<div className="delete" onClick={this.deleteRequest}>Cancel Try-On Request</div>
 					</div>
 				</div>
 				<div className="orders-container">
