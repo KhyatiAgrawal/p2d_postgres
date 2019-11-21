@@ -48,6 +48,8 @@ class DressDisplay extends Component {
       if (res.data['valid'] === "false") {
         this.props.invalidTime(true);
         return;
+      } else {
+        res.data = res.data.dresses
       }
     } else {
       if (stem === "old_orders") {
