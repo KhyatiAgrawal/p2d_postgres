@@ -233,7 +233,6 @@ def getOrUpdate_Alerts(request):
         except Alerts.DoesNotExist: 
             return Response({}, status=status.HTTP_204_NO_CONTENT)
 
-
     if request.method == 'PUT':
         try: 
             trial = Alerts.objects.get(user=uInfo)
@@ -268,9 +267,10 @@ def getOrUpdate_Alerts(request):
 
     if request.method == 'DELETE':
         try: 
-            trial = Alerts.objects.get(user=uname)
+            trial = Alerts.objects.get(user=uInfo)
         except:
             return Response({}, status=status.HTTP_400_BAD_REQUEST)
+        send_email_delete(trial.eventId)
         trial.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -359,15 +359,7 @@ def getRentalHistory(request):
 
 # Internal use method
 def send_email_create(uname, userEmailId, trialObj, personIncharge):
-    # This should create a markup of the trial event
-    # The trial event should include location, username
-    # time, dresses booked for trial
-    # This event should be pushed in the form of an invite.ics
-    # to the user's preferred email
     creds = None
-    # The file token.pickle stores the user's access and refresh tokens, and is
-    # created automatically when the authorization flow completes for the first
-    # time.
     if os.path.exists('token.pickle'):
         with open('token.pickle', 'rb') as token:
             creds = pickle.load(token)
@@ -396,7 +388,7 @@ def send_email_create(uname, userEmailId, trialObj, personIncharge):
     'summary': 'Press To Dress Trial for ' + str(uname),
     'location': '34 Chamber Street, Princeton, NJ, 08544',
     'description': 
-    'Your Press To Dress trial has been confirmed! Take a second to RSVP to this invite, so our team can assist you better. Happy Shopping!',
+    'Your Press To Dress trial has been confirmed! Take a second to RSVP to this invite, so our team can assist you better. Happy Shopping!\nIf you want to cancel this trial please click <a href="https://localhost:3000/orders">here</a>.',
     'start': {
     'dateTime': start_dateTime_str,
     'timeZone': 'America/New_York',
@@ -417,7 +409,9 @@ def send_email_create(uname, userEmailId, trialObj, personIncharge):
     ],
     },
     }
-    event = service.events().insert(calendarId='primary', body=event, sendNotifications= True).execute()
+    event = service.events().insert(calendarId='primary', body=event, sendUpdates= "all").execute()
+    trialObj.eventId = event['id']
+    trialObj.save()
     return
 
 # Custom Filter for dresses
@@ -467,6 +461,31 @@ def getCart(uInfoObject):
         cart.save()
     return cart
 
+
+# Internal use method
+def send_email_delete(eid):
+    creds = None
+    if os.path.exists('token.pickle'):
+        with open('token.pickle', 'rb') as token:
+            creds = pickle.load(token)
+    # If there are no (valid) credentials available, let the user log in.
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file(
+                'credentials.json', SCOPES)
+            creds = flow.run_local_server(port=0)
+        # Save the credentials for the next run
+        with open('token.pickle', 'wb') as token:
+            pickle.dump(creds, token)
+
+    service = build('calendar', 'v3', credentials=creds)
+    try:
+        service.events().delete(calendarId='primary', eventId=eid, sendUpdates= "all").execute()
+        return
+    except:
+        return
 
 
 

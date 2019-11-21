@@ -89,6 +89,7 @@ class Alerts(models.Model):
     dressesSelected = models.ManyToManyField(Dress)
     trialDateAndTime = models.CharField(max_length=20, null=True)
     dateNeeded = models.CharField(max_length=10, null=True)
+    eventId = models.CharField(max_length=200, null=True)
 
     def delete(self, *args, **kwargs):
         dresses = self.dressesSelected.all()
@@ -96,7 +97,7 @@ class Alerts(models.Model):
         for dressObj in dresses:
             dressObj.unavailableDates = dressObj.unavailableDates.replace(dateToDelete + " ","")
             dressObj.unavailableDates = dressObj.unavailableDates.replace(dateToDelete,"")
-            if dressObj.unavailableDates.isspace():
+            if dressObj.unavailableDates.isspace() or  dressObj.unavailableDates == "":
                 dressObj.unavailableDates = "None"
             dressObj.save()
         super(Alerts, self).delete(*args, **kwargs)
