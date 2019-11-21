@@ -22,12 +22,19 @@ class Orders extends Component {
 			newrequests: [],
 			trial_data: {},
 			total: 0,
+			total_oldRentals: 0,
+			total_upcomingRentals: 0,
 		}
 	}
 
-	handleTotal = (total) => {
+	handleTotalUpcomingRentals = (total) => {
 		if (this.mounted)
-			this.setState({total: total})
+			this.setState({total_upcomingRentals: total})
+	}
+
+	handleTotalOldRentals = (total) => {
+		if (this.mounted)
+			this.setState({total_oldRentals: total})
 	}
 
 	getTrials = async () => {
@@ -76,7 +83,7 @@ class Orders extends Component {
 			<div className="Orders">
 				<div><Navbar weight="heavy"/></div>
 				<div className="trials-container">
-					<div className="trials-container__text">Upcoming Trials</div>
+					<div className="trials-container__text">Upcoming Trials ({this.state.total})</div>
 					<div style={this.state.total === 0 ? {display: "none"} : {display: "flex"}} className="trials-container__subcontainer">
 						<div className="trials-container__subtext">Date: {this.state.date} | Time: {this.state.time}</div>
 						<div className="trials-summary__items">
@@ -94,25 +101,25 @@ class Orders extends Component {
 					<div className="orders-title__container">
 						<div>
 							<div className="orders-title__text">
-								Rental History ({this.state.total})
+								Rental History ({this.state.total_oldRentals})
 							</div>
 							<div>{this.state.oldrequests.length === 0
 								? "You have no past rentals" : this.state.oldrequests.map((item, index) => (
 									<div>Try Request {index}</div>
 								))}
 							</div>
-							<DressDisplay old_orders={true} handleTotal={this.handleTotal}/>
+							<DressDisplay old_orders={true} handleTotal={this.handleTotalOldRentals}/>
 						</div>
 						<div>
 							<div className="orders-title__text">
-								Upcoming Rentals ({this.state.total})
+								Upcoming Rentals ({this.state.total_upcomingRentals})
 							</div>
 							<div>{this.state.newrequests.length === 0
 								? "You have no upcoming events" : this.state.newrequests.map((item, index) => (
 									<div>Rental {index}</div>
 								))}
 							</div>
-							<DressDisplay upcoming_orders={true} handleTotal={this.handleTotal}/>
+							<DressDisplay upcoming_orders={true} handleTotal={this.handleTotalUpcomingRentals}/>
 						</div>
 					</div>
 					<div>
