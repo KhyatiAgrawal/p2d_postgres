@@ -59,6 +59,7 @@ class Orders extends Component {
 
 	deleteRequest = async () => {
 		await axios.delete(`${API_URL}/api/alerts/`)
+		this.getTrials();
 	}
 
 	componentDidMount() {
