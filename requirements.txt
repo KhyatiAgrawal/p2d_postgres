@@ -6,7 +6,7 @@ django-cas-ng==3.6.0
 django-cas-server==1.1.0
 django-cors-headers==3.1.1
 django-filter==2.1.0
-djangorestframework==3.10.3
+djangorestframework==3.11.2
 google-api-python-client==1.7.11
 google-auth==1.6.3
 google-auth-httplib2==0.0.3
